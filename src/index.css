@@ -1,0 +1,144 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Root CSS Variables - Light Theme */
+  :root {
+    /* Background Colors - Light Theme */
+    --bg-primary: 255, 255, 255; /* white */
+    --bg-secondary: 247, 248, 250; /* very light gray */
+    --bg-tertiary: 235, 237, 240; /* slightly darker for contrast */
+    --bg-elevated: 245, 246, 248; /* elevated elements */
+
+    /* Text Colors - Light Theme */
+    --text-primary: 17, 17, 17; /* strong dark */
+    --text-secondary: 64, 64, 70; /* readable secondary */
+    --text-tertiary: 107, 114, 128; /* muted */
+    --text-disabled: 156, 163, 175;
+    --text-inverse: 255, 255, 255;
+
+    /* Borders */
+    --border-primary: 230, 230, 235;
+    --border-secondary: 217, 220, 224;
+    --border-hover: 90, 90, 95;
+
+    /* Interactive */
+    --interactive-default: 34, 34, 34;
+    --interactive-hover: 20, 20, 20;
+    --interactive-active: 12, 12, 12;
+
+    /* shadow */
+    --shadow-color: 0, 0, 0;
+  }
+
+  /* Dark Theme Variables (neutral greys, no blue) */
+  .dark {
+    --bg-primary: 15, 17, 20; /* near-black */
+    --bg-secondary: 24, 26, 30; /* dark panel */
+    --bg-tertiary: 35, 38, 42; /* slightly lighter */
+    --bg-elevated: 45, 48, 53; /* elevated panels - lighter for contrast */
+
+    --text-primary: 245, 245, 247; /* near-white */
+    --text-secondary: 194, 198, 205;
+    --text-tertiary: 140, 145, 154;
+    --text-disabled: 100, 105, 115;
+    --text-inverse: 18, 20, 22;
+
+    --border-primary: 45, 48, 52;
+    --border-secondary: 65, 68, 72;
+    --border-hover: 130, 134, 140;
+
+    --interactive-default: 245, 245, 247;
+    --interactive-hover: 220, 220, 222;
+    --interactive-active: 200, 200, 204;
+
+    --shadow-color: 0, 0, 0;
+  }
+
+  /* Smooth transitions for theme switching */
+  *,
+  *::before,
+  *::after {
+    transition-property: background-color, border-color, color, fill, stroke,
+      box-shadow;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+  }
+
+  /* Remove transition from specific elements */
+  .no-transition,
+  .no-transition * {
+    transition: none !important;
+  }
+
+  /* Disable transitions for framer-motion animations */
+  motion,
+  [data-framer-component-type],
+  [data-framer-component-type] * {
+    transition: none !important;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply antialiased;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+      sans-serif;
+    background-color: rgb(var(--bg-primary));
+    color: rgb(var(--text-primary));
+  }
+
+  /* Smooth scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgb(var(--bg-secondary));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--border-hover));
+    border-radius: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--text-tertiary));
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .safe-area-pb {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+    --tw-ring-color: rgb(var(--interactive-default) / 0.5);
+  }
+
+  .bg-gradient-radial {
+    background-image: radial-gradient(circle, var(--tw-gradient-stops));
+  }
+
+  /* Lora font utility classes */
+  .font-lora {
+    font-family: "Lora", Georgia, serif;
+  }
+}
