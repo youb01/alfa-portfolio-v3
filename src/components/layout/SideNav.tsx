@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { X } from "lucide-react";
 import type { NavItem, SocialLink } from "../../types";
 import { SocialLinks } from "../ui/SocialLink";
@@ -23,12 +23,12 @@ export const SideNav = ({
   }>({});
   const [isCloseHovered, setIsCloseHovered] = useState(false);
 
-  const overlayVariants = {
+  const overlayVariants: Variants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
   };
 
-  const sideNavVariants = {
+  const sideNavVariants: Variants = {
     hidden: { x: "100%" },
     visible: {
       x: 0,
