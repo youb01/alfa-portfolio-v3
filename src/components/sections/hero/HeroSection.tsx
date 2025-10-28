@@ -85,7 +85,7 @@ export const Hero = ({ socialLinks }: HeroProps) => {
                 Biography
               </h3>
               <p className="text-sm text-[rgb(var(--text-secondary))] leading-relaxed max-w-[240px] font-serif">
-                I'm an 19-year-old guy from the Netherlands, currently studying
+                I'm an 21-year-old guy from the Netherlands, currently studying
                 Computer Science at the University of Applied Sciences in The
                 Hague.
               </p>
@@ -130,8 +130,8 @@ export const Hero = ({ socialLinks }: HeroProps) => {
                 <p>Portfolio v1 - 2022</p>
                 <p>Oak - 2022</p>
                 <p>Portfolio v2 - 2023</p>
-                <p>42 B.V - 2023</p>
                 <p>Stichting Accessibility - 2024</p>
+                <p>GetMore Systems (Internship) - 2024</p>
               </div>
             </motion.div>
           </div>
@@ -342,7 +342,7 @@ export const Hero = ({ socialLinks }: HeroProps) => {
                 Completed Projects
               </h3>
               <p className="text-5xl md:text-6xl lg:text-5xl font-black text-[rgb(var(--text-primary))] leading-none">
-                8+
+                10+
               </p>
             </motion.div>
 
@@ -357,7 +357,7 @@ export const Hero = ({ socialLinks }: HeroProps) => {
                 Companies Worked For
               </h3>
               <p className="text-5xl md:text-6xl lg:text-5xl font-black text-[rgb(var(--text-primary))] leading-none">
-                2
+                3
               </p>
             </motion.div>
           </div>
