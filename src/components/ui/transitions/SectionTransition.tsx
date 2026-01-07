@@ -51,6 +51,9 @@ export const SectionTransition = ({
 }: SectionTransitionProps) => {
   const isTop = position === "top";
   
+  // Generate unique ID for gradients to avoid collisions when multiple transitions exist
+  const uniqueId = `${type}-${position}-${Math.random().toString(36).substr(2, 9)}`;
+  
   // Gradient fade transition
   if (type === "gradient-fade") {
     return (
@@ -98,14 +101,14 @@ export const SectionTransition = ({
           <motion.path
             d="M0,60 C240,20 480,100 720,60 C960,20 1200,100 1440,60 L1440,120 L0,120 Z"
             fill={toColor}
-            initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 1 }}
-            transition={{ duration: durations.slowest, ease: easings.smooth }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: durations.slow, ease: easings.smooth }}
             viewport={{ once: true }}
           />
           {/* Gradient overlay for smooth blending */}
           <defs>
-            <linearGradient id={`wave-gradient-${position}`} x1="0%" y1="0%" x2="0%" y2="100%">
+            <linearGradient id={`wave-gradient-${uniqueId}`} x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor={toColor} stopOpacity="0" />
               <stop offset="100%" stopColor={toColor} stopOpacity="1" />
             </linearGradient>
@@ -113,7 +116,7 @@ export const SectionTransition = ({
           <rect
             width="1440"
             height="120"
-            fill={`url(#wave-gradient-${position})`}
+            fill={`url(#wave-gradient-${uniqueId})`}
             opacity="0.5"
           />
         </svg>
@@ -157,14 +160,14 @@ export const SectionTransition = ({
           
           {/* Subtle gradient overlay for depth */}
           <defs>
-            <linearGradient id={`curve-gradient-${position}`} x1="0%" y1="0%" x2="0%" y2="100%">
+            <linearGradient id={`curve-gradient-${uniqueId}`} x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor={fromColor} stopOpacity="0.3" />
               <stop offset="100%" stopColor={toColor} stopOpacity="1" />
             </linearGradient>
           </defs>
           <motion.path
             d="M0,120 L0,50 Q360,10 720,50 T1440,50 L1440,120 Z"
-            fill={`url(#curve-gradient-${position})`}
+            fill={`url(#curve-gradient-${uniqueId})`}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 0.6 }}
             transition={{ duration: durations.slower, delay: 0.2, ease: easings.smooth }}
