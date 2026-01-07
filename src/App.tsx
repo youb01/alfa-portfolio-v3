@@ -7,6 +7,7 @@ import { usePreloader } from "./hooks/usePreLoader";
 import type { NavItem, SocialLink } from "./types";
 import { AboutSection } from "./components/sections/about/AboutSection";
 import { CustomCursor } from "./components/ui/cursor/CustomCursor";
+import { BackgroundLines } from "./components/ui/backgrounds/BackgroundLines";
 
 const navItems: NavItem[] = [
   { label: "Home", href: "#home", number: "01" },
@@ -58,9 +59,12 @@ function App() {
             {/* Other sections */}
             <section
               id="skills"
-              className="min-h-screen flex items-center justify-center bg-[rgb(var(--bg-primary))]"
+              className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
             >
-              <div className="text-center px-4">
+              {/* Background lines for depth */}
+              <BackgroundLines />
+
+              <div className="relative z-10 text-center px-4">
                 <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
                   Skills
                 </h2>
@@ -72,9 +76,12 @@ function App() {
 
             <section
               id="qualifications"
-              className="min-h-screen flex items-center justify-center bg-[rgb(var(--bg-secondary))]"
+              className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
             >
-              <div className="text-center px-4">
+              {/* Background lines for depth */}
+              <BackgroundLines />
+
+              <div className="relative z-10 text-center px-4">
                 <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
                   Qualifications
                 </h2>
@@ -86,9 +93,12 @@ function App() {
 
             <section
               id="services"
-              className="min-h-screen flex items-center justify-center bg-[rgb(var(--bg-primary))]"
+              className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
             >
-              <div className="text-center px-4">
+              {/* Background lines for depth */}
+              <BackgroundLines />
+
+              <div className="relative z-10 text-center px-4">
                 <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
                   Services
                 </h2>
@@ -100,9 +110,12 @@ function App() {
 
             <section
               id="projects"
-              className="min-h-screen flex items-center justify-center bg-[rgb(var(--bg-secondary))]"
+              className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
             >
-              <div className="text-center px-4">
+              {/* Background lines for depth */}
+              <BackgroundLines />
+
+              <div className="relative z-10 text-center px-4">
                 <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
                   Projects
                 </h2>
@@ -114,9 +127,12 @@ function App() {
 
             <section
               id="contact"
-              className="min-h-screen flex items-center justify-center bg-[rgb(var(--bg-primary))]"
+              className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
             >
-              <div className="text-center px-4">
+              {/* Background lines for depth */}
+              <BackgroundLines />
+
+              <div className="relative z-10 text-center px-4">
                 <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
                   Contact Me
                 </h2>
