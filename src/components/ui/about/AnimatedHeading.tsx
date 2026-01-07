@@ -6,7 +6,7 @@ interface HeadingPart {
 }
 
 interface AnimatedHeadingProps {
-  parts: HeadingPart[];
+  parts: readonly HeadingPart[];
   className?: string;
 }
 

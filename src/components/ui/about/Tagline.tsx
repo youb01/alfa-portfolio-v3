@@ -7,7 +7,7 @@ interface TaglinePart {
 }
 
 interface TaglineProps {
-  parts: TaglinePart[];
+  parts: readonly TaglinePart[];
   className?: string;
 }
 
