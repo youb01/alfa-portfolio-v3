@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import type { SocialLink } from "../../../types";
 import { SectionTransition } from "../../ui/transitions/SectionTransition";
+import { SpaceBackground } from "../../ui/backgrounds/SpaceBackground";
 
 interface HeroProps {
   socialLinks: SocialLink[];
@@ -12,64 +13,8 @@ export const Hero = ({ socialLinks }: HeroProps) => {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] pt-32 md:pt-24"
     >
-      {/* Decorative wave patterns - Left
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, delay: 0.3 }}
-        className="absolute left-8 lg:left-16 xl:left-24 top-1/2 -translate-y-1/2 w-16 lg:w-20 opacity-10 z-0"
-      >
-        <svg
-          viewBox="0 0 80 200"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M 0,60 Q 10,50 20,60 T 40,60 T 60,60 T 80,60"
-            stroke="rgb(var(--text-tertiary))"
-            strokeWidth="1.5"
-            fill="none"
-          />
-          <path
-            d="M 0,80 Q 10,70 20,80 T 40,80 T 60,80 T 80,80"
-            stroke="rgb(var(--text-tertiary))"
-            strokeWidth="1.5"
-            fill="none"
-          />
-          <path
-            d="M 0,100 Q 10,90 20,100 T 40,100 T 60,100 T 80,100"
-            stroke="rgb(var(--text-tertiary))"
-            strokeWidth="1.5"
-            fill="none"
-          />
-        </svg>
-      </motion.div>
-
-      {/* Decorative dots pattern - Right */}
-      {/* <motion.div
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, delay: 0.4 }}
-        className="absolute right-8 lg:right-16 xl:right-24 top-1/2 -translate-y-1/2 w-16 lg:w-20 opacity-8 z-0"
-      >
-        <svg
-          viewBox="0 0 60 140"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          {[...Array(7)].map((_, row) =>
-            [...Array(4)].map((_, col) => (
-              <circle
-                key={`${row}-${col}`}
-                cx={8 + col * 16}
-                cy={8 + row * 20}
-                r="1.5"
-                fill="rgb(var(--text-tertiary))"
-              />
-            ))
-          )}
-        </svg> */}
-      {/* </motion.div> */}
+      {/* Space background with subtle intensity */}
+      <SpaceBackground intensity="subtle" particleCount={6} showGlows={true} showOrbits={true} />
 
       {/* Main content container */}
       <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
