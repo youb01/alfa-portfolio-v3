@@ -5,6 +5,8 @@ import { Linkedin, Github, Mail, Twitter } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePreloader } from "./hooks/usePreLoader";
 import type { NavItem, SocialLink } from "./types";
+import { AboutSection } from "./components/sections/about/AboutSection";
+import { CustomCursor } from "./components/ui/cursor/CustomCursor";
 
 const navItems: NavItem[] = [
   { label: "Home", href: "#home", number: "01" },
@@ -36,6 +38,7 @@ function App() {
   return (
     <>
       <Preloader isLoading={isLoading} onComplete={handleComplete} />
+      <CustomCursor />
 
       <AnimatePresence>
         {isComplete && (
@@ -49,6 +52,8 @@ function App() {
 
             {/* Hero Section */}
             <Hero socialLinks={socialLinks} />
+
+            <AboutSection />
 
             {/* Other sections */}
             <section
