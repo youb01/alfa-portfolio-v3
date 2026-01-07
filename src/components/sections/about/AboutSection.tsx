@@ -1,21 +1,21 @@
 import { motion } from "framer-motion";
 import { AnimatedHeading } from "../../ui/about/AnimatedHeading";
-import { BackgroundDecorations } from "../../ui/about/BackgroundDecorationsProps";
+import { BackgroundLines } from "../../ui/backgrounds/BackgroundLines";
 import { CTAButton } from "../../ui/about/CTAButton";
 import { HighlightCard } from "../../ui/about/HighlightCardProps";
 import { Tagline } from "../../ui/about/Tagline";
 import { aboutData } from "../data/AboutData";
 
 export const AboutSection = () => {
-  const { meta, content, highlights, cta, animation } = aboutData;
+  const { meta, content, highlights, cta } = aboutData;
 
   return (
     <section
       id={meta.id}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-24 md:py-32 lg:py-40"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
     >
-      {/* Enhanced background decorations */}
-      <BackgroundDecorations dotsCount={animation.floatingDotsCount} />
+      {/* Background lines for depth */}
+      <BackgroundLines />
 
       {/* Main content */}
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
