@@ -25,6 +25,9 @@ export const BackgroundLines = ({ className = "" }: BackgroundLinesProps) => {
     ],
   };
 
+  // Shared line styling
+  const lineClass = "absolute top-0 bottom-0 w-[1px] bg-[rgb(var(--text-tertiary))] opacity-10";
+
   return (
     <div className={`absolute inset-0 pointer-events-none overflow-hidden ${className}`}>
       {/* Desktop lines */}
@@ -33,13 +36,13 @@ export const BackgroundLines = ({ className = "" }: BackgroundLinesProps) => {
           <div key={`desktop-${i}`}>
             {/* Main line */}
             <div
-              className="absolute top-0 bottom-0 w-[1px] bg-[rgb(var(--text-tertiary))] opacity-10 dark:opacity-10"
+              className={lineClass}
               style={{ left: line.left }}
             />
             {/* Pair second line (if applicable) */}
             {line.isPair && (
               <div
-                className="absolute top-0 bottom-0 w-[1px] bg-[rgb(var(--text-tertiary))] opacity-10 dark:opacity-10"
+                className={lineClass}
                 style={{ left: `calc(${line.left} + 8px)` }}
               />
             )}
@@ -53,13 +56,13 @@ export const BackgroundLines = ({ className = "" }: BackgroundLinesProps) => {
           <div key={`mobile-${i}`}>
             {/* Main line */}
             <div
-              className="absolute top-0 bottom-0 w-[1px] bg-[rgb(var(--text-tertiary))] opacity-10 dark:opacity-10"
+              className={lineClass}
               style={{ left: line.left }}
             />
             {/* Pair second line (if applicable) */}
             {line.isPair && (
               <div
-                className="absolute top-0 bottom-0 w-[1px] bg-[rgb(var(--text-tertiary))] opacity-10 dark:opacity-10"
+                className={lineClass}
                 style={{ left: `calc(${line.left} + 6px)` }}
               />
             )}
