@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import type { SocialLink } from "../../../types";
+import { SectionTransition } from "../../ui/transitions/SectionTransition";
 
 interface HeroProps {
   socialLinks: SocialLink[];
@@ -9,7 +10,7 @@ export const Hero = ({ socialLinks }: HeroProps) => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] pt-32 md:pt-24 pb-16"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] pt-32 md:pt-24"
     >
       {/* Decorative wave patterns - Left
       <motion.div
@@ -363,6 +364,15 @@ export const Hero = ({ socialLinks }: HeroProps) => {
           </div>
         </div>
       </div>
+
+      {/* Smooth transition to next section */}
+      <SectionTransition
+        type="gradient-fade"
+        position="bottom"
+        fromColor="transparent"
+        toColor="rgb(var(--bg-primary))"
+        height={150}
+      />
     </section>
   );
 };

@@ -15,7 +15,7 @@ export const BackgroundDecorations = ({
       {/* Top left corner decoration */}
       <motion.div
         initial={{ opacity: 0, scale: 0 }}
-        whileInView={{ opacity: 0.08, scale: 1 }}
+        whileInView={{ opacity: 0.04, scale: 1 }}
         transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
         viewport={{ once: true }}
         className="absolute -top-32 -left-32 w-[600px] h-[600px] bg-[rgb(var(--text-primary))] rounded-full blur-3xl"
@@ -24,7 +24,7 @@ export const BackgroundDecorations = ({
       {/* Bottom right corner decoration */}
       <motion.div
         initial={{ opacity: 0, scale: 0 }}
-        whileInView={{ opacity: 0.05, scale: 1 }}
+        whileInView={{ opacity: 0.03, scale: 1 }}
         transition={{ duration: 1.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
         viewport={{ once: true }}
         className="absolute -bottom-32 -right-32 w-[700px] h-[700px] bg-[rgb(var(--text-primary))] rounded-full blur-3xl"
@@ -33,7 +33,7 @@ export const BackgroundDecorations = ({
       {/* Center subtle glow */}
       <motion.div
         initial={{ opacity: 0 }}
-        whileInView={{ opacity: 0.03 }}
+        whileInView={{ opacity: 0.02 }}
         transition={{ duration: 2, delay: 0.6, ease: "easeOut" }}
         viewport={{ once: true }}
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-gradient-radial from-[rgb(var(--text-primary))] to-transparent rounded-full blur-3xl"
@@ -58,7 +58,7 @@ export const BackgroundDecorations = ({
           <motion.div
             key={i}
             initial={{ opacity: 0, scale: 0 }}
-            whileInView={{ opacity: 0.4, scale: 1 }}
+            whileInView={{ opacity: 0.25, scale: 1 }}
             transition={{
               duration: 1,
               delay: 0.8 + i * 0.1,
@@ -74,7 +74,7 @@ export const BackgroundDecorations = ({
             <motion.div
               animate={{
                 y: [0, -20, 0],
-                opacity: [0.4, 0.7, 0.4],
+                opacity: [0.25, 0.45, 0.25],
                 scale: [1, 1.2, 1],
               }}
               transition={{
@@ -85,14 +85,14 @@ export const BackgroundDecorations = ({
               }}
               className="w-full h-full bg-[rgb(var(--text-secondary))] rounded-full"
               style={{
-                boxShadow: "0 0 12px rgb(var(--text-secondary) / 0.5)",
+                boxShadow: "0 0 8px rgb(var(--text-secondary) / 0.3)",
               }}
             >
               {/* Inner glow */}
               <motion.div
                 animate={{
                   scale: [1, 1.8, 1],
-                  opacity: [0.3, 0.6, 0.3],
+                  opacity: [0.15, 0.35, 0.15],
                 }}
                 transition={{
                   duration: 3,
@@ -108,7 +108,7 @@ export const BackgroundDecorations = ({
 
       {/* Animated decorative lines */}
       <svg
-        className="absolute inset-0 w-full h-full opacity-[0.03]"
+        className="absolute inset-0 w-full h-full opacity-[0.015]"
         xmlns="http://www.w3.org/2000/svg"
       >
         <motion.line
@@ -140,7 +140,7 @@ export const BackgroundDecorations = ({
       {/* Corner accents with smooth animation */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
-        whileInView={{ opacity: 0.2, scale: 1, rotate: 0 }}
+        whileInView={{ opacity: 0.12, scale: 1, rotate: 0 }}
         transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
         viewport={{ once: true }}
         className="absolute top-8 left-8 md:top-12 md:left-12"
@@ -150,7 +150,7 @@ export const BackgroundDecorations = ({
 
       <motion.div
         initial={{ opacity: 0, scale: 0.8, rotate: 10 }}
-        whileInView={{ opacity: 0.2, scale: 1, rotate: 0 }}
+        whileInView={{ opacity: 0.12, scale: 1, rotate: 0 }}
         transition={{ duration: 1, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
         viewport={{ once: true }}
         className="absolute bottom-8 right-8 md:bottom-12 md:right-12"
