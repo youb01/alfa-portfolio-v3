@@ -175,7 +175,7 @@ export const Hero = ({ socialLinks }: HeroProps) => {
               ))}
             </motion.div>
 
-            {/* Scroll indicator - FIXED: Always visible */}
+            {/* Scroll indicator - High z-index ensures visibility above background lines */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
