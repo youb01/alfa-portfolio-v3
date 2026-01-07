@@ -16,12 +16,12 @@ export const BackgroundLines = ({ className = "" }: BackgroundLinesProps) => {
     ],
     mobile: [
       { left: '8%', isPair: false },      // Single left
-      { left: '24%', isPair: true },      // Pair 1
-      { left: '40%', isPair: true },      // Pair 2
-      { left: '56%', isPair: true },      // Pair 3
-      { left: '72%', isPair: true },      // Pair 4
-      { left: '88%', isPair: true },      // Pair 5
-      { left: '92%', isPair: false },     // Single right
+      { left: '23%', isPair: true },      // Pair 1
+      { left: '38%', isPair: true },      // Pair 2
+      { left: '53%', isPair: true },      // Pair 3
+      { left: '68%', isPair: true },      // Pair 4
+      { left: '83%', isPair: true },      // Pair 5
+      { left: '90%', isPair: false },     // Single right
     ],
   };
 
