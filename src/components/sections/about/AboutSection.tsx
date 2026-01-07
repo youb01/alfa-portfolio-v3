@@ -23,8 +23,6 @@ export const AboutSection = () => {
         position="top"
       />
 
-      {/* Clean background - NO particles */}
-
       {/* Main content */}
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
         <div className="flex flex-col items-center">

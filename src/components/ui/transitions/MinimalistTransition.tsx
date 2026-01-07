@@ -22,7 +22,6 @@ interface MinimalistTransitionProps {
   /**
    * Height of the transition in pixels
    * Default: 200px
-   * Mobile: Automatically reduced by 20% for better mobile experience
    */
   height?: number;
   
@@ -79,15 +78,6 @@ export const MinimalistTransition = ({
       className={`absolute ${position === 'top' ? 'top-0' : 'bottom-0'} left-0 right-0 pointer-events-none ${className}`}
       style={gradientStyle}
       aria-hidden="true"
-    >
-      {/* Mobile-optimized gradient overlay */}
-      <div 
-        className="md:hidden absolute inset-0"
-        style={{
-          background: `linear-gradient(${gradientDirection}, ${fromColor}, ${toColor})`,
-          opacity: opacity * 0.8, // Slightly reduce opacity on mobile
-        }}
-      />
-    </div>
+    />
   );
 };

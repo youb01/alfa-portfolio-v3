@@ -12,7 +12,6 @@ export const Hero = ({ socialLinks }: HeroProps) => {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] pt-32 md:pt-24"
     >
-      {/* Clean background - NO particles */}
 
       {/* Main content container */}
       <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
