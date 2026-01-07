@@ -82,6 +82,23 @@
     transition: none !important;
   }
 
+  /* Hide default cursor on desktop */
+  @media (min-width: 768px) {
+    * {
+      cursor: none !important;
+    }
+
+    a,
+    button,
+    input,
+    textarea,
+    select,
+    [role="button"],
+    .cursor-hover {
+      cursor: none !important;
+    }
+  }
+
   html {
     scroll-behavior: smooth;
     color-scheme: light;
