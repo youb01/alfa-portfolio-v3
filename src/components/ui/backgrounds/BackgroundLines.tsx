@@ -32,8 +32,8 @@ export const BackgroundLines = ({ className = "" }: BackgroundLinesProps) => {
     <div className={`absolute inset-0 pointer-events-none overflow-hidden ${className}`}>
       {/* Desktop lines */}
       <div className="hidden md:block absolute inset-0">
-        {linePositions.desktop.map((line, i) => (
-          <div key={`desktop-${i}`}>
+        {linePositions.desktop.map((line) => (
+          <div key={`desktop-${line.left}`}>
             {/* Main line */}
             <div
               className={lineClass}
@@ -52,8 +52,8 @@ export const BackgroundLines = ({ className = "" }: BackgroundLinesProps) => {
 
       {/* Mobile lines (closer together) */}
       <div className="md:hidden absolute inset-0">
-        {linePositions.mobile.map((line, i) => (
-          <div key={`mobile-${i}`}>
+        {linePositions.mobile.map((line) => (
+          <div key={`mobile-${line.left}`}>
             {/* Main line */}
             <div
               className={lineClass}
