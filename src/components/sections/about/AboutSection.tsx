@@ -4,8 +4,7 @@ import { CTAButton } from "../../ui/about/CTAButton";
 import { HighlightCard } from "../../ui/about/HighlightCardProps";
 import { Tagline } from "../../ui/about/Tagline";
 import { aboutData } from "../data/AboutData";
-import { SectionTransition } from "../../ui/transitions/SectionTransition";
-import { SpaceBackground } from "../../ui/backgrounds/SpaceBackground";
+import { MinimalistTransition } from "../../ui/transitions/MinimalistTransition";
 
 export const AboutSection = () => {
   const { meta, content, highlights, cta } = aboutData;
@@ -13,19 +12,18 @@ export const AboutSection = () => {
   return (
     <section
       id={meta.id}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-secondary))] py-20 md:py-28 lg:py-36"
     >
-      {/* Smooth transition from previous section */}
-      <SectionTransition
-        type="gradient-fade"
-        position="top"
+      {/* Smooth gradient transition from Hero */}
+      <MinimalistTransition
         fromColor="rgb(var(--bg-primary))"
-        toColor="transparent"
-        height={150}
+        toColor="rgb(var(--bg-secondary))"
+        height={200}
+        intensity="medium"
+        position="top"
       />
 
-      {/* Space background with prominent intensity */}
-      <SpaceBackground intensity="prominent" particleCount={8} showGlows={true} showOrbits={true} />
+      {/* Clean background - NO particles */}
 
       {/* Main content */}
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
@@ -138,6 +136,15 @@ export const AboutSection = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* Smooth gradient transition to Skills */}
+      <MinimalistTransition
+        fromColor="rgb(var(--bg-secondary))"
+        toColor="rgb(var(--bg-primary))"
+        height={200}
+        intensity="medium"
+        position="bottom"
+      />
     </section>
   );
 };

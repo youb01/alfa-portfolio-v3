@@ -7,6 +7,7 @@ import { usePreloader } from "./hooks/usePreLoader";
 import type { NavItem, SocialLink } from "./types";
 import { AboutSection } from "./components/sections/about/AboutSection";
 import { CustomCursor } from "./components/ui/cursor/CustomCursor";
+import { MinimalistTransition } from "./components/ui/transitions/MinimalistTransition";
 
 const navItems: NavItem[] = [
   { label: "Home", href: "#home", number: "01" },
@@ -55,11 +56,20 @@ function App() {
 
             <AboutSection />
 
-            {/* Other sections */}
+            {/* Skills Section */}
             <section
               id="skills"
-              className="min-h-screen flex items-center justify-center bg-[rgb(var(--bg-primary))]"
+              className="relative min-h-screen flex items-center justify-center bg-[rgb(var(--bg-primary))]"
             >
+              {/* Gradient from About */}
+              <MinimalistTransition
+                fromColor="rgb(var(--bg-secondary))"
+                toColor="rgb(var(--bg-primary))"
+                height={200}
+                intensity="medium"
+                position="top"
+              />
+
               <div className="text-center px-4">
                 <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
                   Skills
@@ -68,12 +78,31 @@ function App() {
                   Expertise in modern web development
                 </p>
               </div>
+
+              {/* Gradient to Qualifications */}
+              <MinimalistTransition
+                fromColor="rgb(var(--bg-primary))"
+                toColor="rgb(var(--bg-secondary))"
+                height={200}
+                intensity="medium"
+                position="bottom"
+              />
             </section>
 
+            {/* Qualifications Section */}
             <section
               id="qualifications"
-              className="min-h-screen flex items-center justify-center bg-[rgb(var(--bg-secondary))]"
+              className="relative min-h-screen flex items-center justify-center bg-[rgb(var(--bg-secondary))]"
             >
+              {/* Gradient from Skills */}
+              <MinimalistTransition
+                fromColor="rgb(var(--bg-primary))"
+                toColor="rgb(var(--bg-secondary))"
+                height={200}
+                intensity="medium"
+                position="top"
+              />
+
               <div className="text-center px-4">
                 <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
                   Qualifications
@@ -82,12 +111,31 @@ function App() {
                   Professional certifications and education
                 </p>
               </div>
+
+              {/* Gradient to Services */}
+              <MinimalistTransition
+                fromColor="rgb(var(--bg-secondary))"
+                toColor="rgb(var(--bg-primary))"
+                height={200}
+                intensity="medium"
+                position="bottom"
+              />
             </section>
 
+            {/* Services Section */}
             <section
               id="services"
-              className="min-h-screen flex items-center justify-center bg-[rgb(var(--bg-primary))]"
+              className="relative min-h-screen flex items-center justify-center bg-[rgb(var(--bg-primary))]"
             >
+              {/* Gradient from Qualifications */}
+              <MinimalistTransition
+                fromColor="rgb(var(--bg-secondary))"
+                toColor="rgb(var(--bg-primary))"
+                height={200}
+                intensity="medium"
+                position="top"
+              />
+
               <div className="text-center px-4">
                 <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
                   Services
@@ -96,12 +144,31 @@ function App() {
                   Solutions tailored to your needs
                 </p>
               </div>
+
+              {/* Gradient to Projects */}
+              <MinimalistTransition
+                fromColor="rgb(var(--bg-primary))"
+                toColor="rgb(var(--bg-secondary))"
+                height={200}
+                intensity="medium"
+                position="bottom"
+              />
             </section>
 
+            {/* Projects Section */}
             <section
               id="projects"
-              className="min-h-screen flex items-center justify-center bg-[rgb(var(--bg-secondary))]"
+              className="relative min-h-screen flex items-center justify-center bg-[rgb(var(--bg-secondary))]"
             >
+              {/* Gradient from Services */}
+              <MinimalistTransition
+                fromColor="rgb(var(--bg-primary))"
+                toColor="rgb(var(--bg-secondary))"
+                height={200}
+                intensity="medium"
+                position="top"
+              />
+
               <div className="text-center px-4">
                 <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
                   Projects
@@ -110,12 +177,31 @@ function App() {
                   Featured work and case studies
                 </p>
               </div>
+
+              {/* Gradient to Contact */}
+              <MinimalistTransition
+                fromColor="rgb(var(--bg-secondary))"
+                toColor="rgb(var(--bg-primary))"
+                height={200}
+                intensity="medium"
+                position="bottom"
+              />
             </section>
 
+            {/* Contact Section */}
             <section
               id="contact"
-              className="min-h-screen flex items-center justify-center bg-[rgb(var(--bg-primary))]"
+              className="relative min-h-screen flex items-center justify-center bg-[rgb(var(--bg-primary))]"
             >
+              {/* Gradient from Projects */}
+              <MinimalistTransition
+                fromColor="rgb(var(--bg-secondary))"
+                toColor="rgb(var(--bg-primary))"
+                height={200}
+                intensity="medium"
+                position="top"
+              />
+
               <div className="text-center px-4">
                 <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
                   Contact Me

@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import type { SocialLink } from "../../../types";
-import { SectionTransition } from "../../ui/transitions/SectionTransition";
-import { SpaceBackground } from "../../ui/backgrounds/SpaceBackground";
+import { MinimalistTransition } from "../../ui/transitions/MinimalistTransition";
 
 interface HeroProps {
   socialLinks: SocialLink[];
@@ -13,8 +12,7 @@ export const Hero = ({ socialLinks }: HeroProps) => {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] pt-32 md:pt-24"
     >
-      {/* Space background with subtle intensity */}
-      <SpaceBackground intensity="subtle" particleCount={6} showGlows={true} showOrbits={true} />
+      {/* Clean background - NO particles */}
 
       {/* Main content container */}
       <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
@@ -310,13 +308,13 @@ export const Hero = ({ socialLinks }: HeroProps) => {
         </div>
       </div>
 
-      {/* Smooth transition to next section */}
-      <SectionTransition
-        type="gradient-fade"
+      {/* Smooth gradient transition to About section */}
+      <MinimalistTransition
+        fromColor="rgb(var(--bg-primary))"
+        toColor="rgb(var(--bg-secondary))"
+        height={200}
+        intensity="medium"
         position="bottom"
-        fromColor="transparent"
-        toColor="rgb(var(--bg-primary))"
-        height={150}
       />
     </section>
   );
