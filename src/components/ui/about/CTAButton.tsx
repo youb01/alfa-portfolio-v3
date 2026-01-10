@@ -17,9 +17,9 @@ export const CTAButton = ({ text, href, showArrow = true }: CTAButtonProps) => {
     >
       <motion.a
         href={href}
-        whileHover={{ scale: 1.05 }}
+        whileHover={{ scale: 1.05, y: -2 }}
         whileTap={{ scale: 0.95 }}
-        className="group relative inline-flex items-center justify-center px-8 md:px-10 py-4 md:py-5 text-base md:text-lg font-medium text-[rgb(var(--text-inverse))] bg-[rgb(var(--interactive-default))] hover:bg-[rgb(var(--interactive-hover))] rounded-full transition-all duration-300 overflow-hidden"
+        className="group relative inline-flex items-center justify-center px-8 md:px-10 py-4 md:py-5 text-base md:text-lg font-medium text-[rgb(var(--text-inverse))] bg-[rgb(var(--interactive-default))] hover:bg-[rgb(var(--interactive-hover))] rounded-full transition-all duration-300 overflow-hidden shadow-elevation-medium hover:shadow-elevation-high"
       >
         {/* Button glow effect */}
         <motion.div

@@ -66,14 +66,20 @@ function App() {
               {/* Background lines for depth */}
               <BackgroundLines />
 
-              <div className="relative z-10 text-center px-4">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                viewport={{ once: true, margin: "-100px" }}
+                className="relative z-10 text-center px-4"
+              >
                 <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
                   Skills
                 </h2>
                 <p className="text-[rgb(var(--text-secondary))] text-lg">
                   Expertise in modern web development
                 </p>
-              </div>
+              </motion.div>
             </section>
 
             <section
@@ -83,14 +89,20 @@ function App() {
               {/* Background lines for depth */}
               <BackgroundLines />
 
-              <div className="relative z-10 text-center px-4">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                viewport={{ once: true, margin: "-100px" }}
+                className="relative z-10 text-center px-4"
+              >
                 <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
                   Qualifications
                 </h2>
                 <p className="text-[rgb(var(--text-secondary))] text-lg">
                   Professional certifications and education
                 </p>
-              </div>
+              </motion.div>
             </section>
 
             <section
@@ -100,14 +112,20 @@ function App() {
               {/* Background lines for depth */}
               <BackgroundLines />
 
-              <div className="relative z-10 text-center px-4">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                viewport={{ once: true, margin: "-100px" }}
+                className="relative z-10 text-center px-4"
+              >
                 <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
                   Services
                 </h2>
                 <p className="text-[rgb(var(--text-secondary))] text-lg">
                   Solutions tailored to your needs
                 </p>
-              </div>
+              </motion.div>
             </section>
 
             <section
@@ -117,14 +135,20 @@ function App() {
               {/* Background lines for depth */}
               <BackgroundLines />
 
-              <div className="relative z-10 text-center px-4">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                viewport={{ once: true, margin: "-100px" }}
+                className="relative z-10 text-center px-4"
+              >
                 <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
                   Projects
                 </h2>
                 <p className="text-[rgb(var(--text-secondary))] text-lg">
                   Featured work and case studies
                 </p>
-              </div>
+              </motion.div>
             </section>
 
             <section
@@ -134,14 +158,20 @@ function App() {
               {/* Background lines for depth */}
               <BackgroundLines />
 
-              <div className="relative z-10 text-center px-4">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                viewport={{ once: true, margin: "-100px" }}
+                className="relative z-10 text-center px-4"
+              >
                 <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
                   Contact Me
                 </h2>
                 <p className="text-[rgb(var(--text-secondary))] text-lg">
                   Let's work together on your next project
                 </p>
-              </div>
+              </motion.div>
             </section>
           </motion.div>
         )}
