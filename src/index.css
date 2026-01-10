@@ -114,6 +114,7 @@
       sans-serif;
     background-color: rgb(var(--bg-primary));
     color: rgb(var(--text-primary));
+    overflow: hidden;
   }
 
   /* Smooth scrollbar */
@@ -157,5 +158,18 @@
   /* Lora font utility classes */
   .font-lora {
     font-family: "Lora", Georgia, serif;
+  }
+
+  /* Scroll snap utilities */
+  .snap-container {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100vh;
+    scroll-behavior: smooth;
+  }
+
+  .snap-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 }

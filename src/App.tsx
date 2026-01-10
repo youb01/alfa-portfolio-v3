@@ -47,7 +47,7 @@ function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="min-h-screen bg-[rgb(var(--bg-primary))]"
+            className="h-screen overflow-y-scroll snap-y snap-mandatory bg-[rgb(var(--bg-primary))]"
           >
             <Navbar navItems={navItems} socialLinks={socialLinks} />
 
@@ -59,7 +59,7 @@ function App() {
             {/* Other sections */}
             <section
               id="skills"
-              className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
+              className="relative h-screen snap-start snap-always flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))]"
             >
               {/* Background lines for depth */}
               <BackgroundLines />
@@ -76,7 +76,7 @@ function App() {
 
             <section
               id="qualifications"
-              className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
+              className="relative h-screen snap-start snap-always flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))]"
             >
               {/* Background lines for depth */}
               <BackgroundLines />
@@ -93,7 +93,7 @@ function App() {
 
             <section
               id="services"
-              className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
+              className="relative h-screen snap-start snap-always flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))]"
             >
               {/* Background lines for depth */}
               <BackgroundLines />
@@ -110,7 +110,7 @@ function App() {
 
             <section
               id="projects"
-              className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
+              className="relative h-screen snap-start snap-always flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))]"
             >
               {/* Background lines for depth */}
               <BackgroundLines />
@@ -127,7 +127,7 @@ function App() {
 
             <section
               id="contact"
-              className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
+              className="relative h-screen snap-start snap-always flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))]"
             >
               {/* Background lines for depth */}
               <BackgroundLines />

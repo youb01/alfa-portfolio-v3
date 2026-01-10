@@ -12,7 +12,7 @@ export const AboutSection = () => {
   return (
     <section
       id={meta.id}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
+      className="relative h-screen snap-start snap-always flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))]"
     >
       {/* Background lines for depth */}
       <BackgroundLines />
