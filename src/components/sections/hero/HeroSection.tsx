@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import type { SocialLink } from "../../../types";
+import { BackgroundLines } from "../../ui/backgrounds/BackgroundLines";
 
 interface HeroProps {
   socialLinks: SocialLink[];
@@ -9,66 +10,10 @@ export const Hero = ({ socialLinks }: HeroProps) => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] pt-32 md:pt-24 pb-16"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] pt-32 md:pt-24"
     >
-      {/* Decorative wave patterns - Left
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, delay: 0.3 }}
-        className="absolute left-8 lg:left-16 xl:left-24 top-1/2 -translate-y-1/2 w-16 lg:w-20 opacity-10 z-0"
-      >
-        <svg
-          viewBox="0 0 80 200"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M 0,60 Q 10,50 20,60 T 40,60 T 60,60 T 80,60"
-            stroke="rgb(var(--text-tertiary))"
-            strokeWidth="1.5"
-            fill="none"
-          />
-          <path
-            d="M 0,80 Q 10,70 20,80 T 40,80 T 60,80 T 80,80"
-            stroke="rgb(var(--text-tertiary))"
-            strokeWidth="1.5"
-            fill="none"
-          />
-          <path
-            d="M 0,100 Q 10,90 20,100 T 40,100 T 60,100 T 80,100"
-            stroke="rgb(var(--text-tertiary))"
-            strokeWidth="1.5"
-            fill="none"
-          />
-        </svg>
-      </motion.div>
-
-      {/* Decorative dots pattern - Right */}
-      {/* <motion.div
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, delay: 0.4 }}
-        className="absolute right-8 lg:right-16 xl:right-24 top-1/2 -translate-y-1/2 w-16 lg:w-20 opacity-8 z-0"
-      >
-        <svg
-          viewBox="0 0 60 140"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          {[...Array(7)].map((_, row) =>
-            [...Array(4)].map((_, col) => (
-              <circle
-                key={`${row}-${col}`}
-                cx={8 + col * 16}
-                cy={8 + row * 20}
-                r="1.5"
-                fill="rgb(var(--text-tertiary))"
-              />
-            ))
-          )}
-        </svg> */}
-      {/* </motion.div> */}
+      {/* Background lines for depth */}
+      <BackgroundLines />
 
       {/* Main content container */}
       <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
@@ -166,62 +111,6 @@ export const Hero = ({ socialLinks }: HeroProps) => {
               transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               className="relative w-full max-w-[300px] sm:max-w-[300px] md:max-w-[350px] lg:max-w-[350px] mb-10 md:mb-12"
             >
-              {/* Decorative wave pattern - Left side */}
-              <motion.div
-                animate={{
-                  y: [0, -8, 0],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="absolute -left-6 md:-left-10 top-[35%] w-12 md:w-16 opacity-20 z-10"
-              >
-                <svg viewBox="0 0 50 80" fill="none">
-                  <path
-                    d="M 0,20 Q 8,14 16,20 T 32,20 T 50,20"
-                    stroke="rgb(var(--text-tertiary))"
-                    strokeWidth="1.5"
-                    fill="none"
-                  />
-                  <path
-                    d="M 0,32 Q 8,26 16,32 T 32,32 T 50,32"
-                    stroke="rgb(var(--text-tertiary))"
-                    strokeWidth="1.5"
-                    fill="none"
-                  />
-                  <path
-                    d="M 0,44 Q 8,38 16,44 T 32,44 T 50,44"
-                    stroke="rgb(var(--text-tertiary))"
-                    strokeWidth="1.5"
-                    fill="none"
-                  />
-                </svg>
-              </motion.div>
-
-              {/* Decorative dots pattern - Right side */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className="absolute -right-6 md:-right-10 bottom-[20%] w-12 md:w-16 opacity-10 z-10"
-              >
-                <svg viewBox="0 0 50 80" fill="none">
-                  {[...Array(5)].map((_, row) =>
-                    [...Array(3)].map((_, col) => (
-                      <circle
-                        key={`${row}-${col}`}
-                        cx={8 + col * 16}
-                        cy={8 + row * 16}
-                        r="1.5"
-                        fill="rgb(var(--text-tertiary))"
-                      />
-                    ))
-                  )}
-                </svg>
-              </motion.div>
-
               {/* Oval frame */}
               <div className="relative aspect-[5/6] rounded-[50%] overflow-hidden border-[3px] border-[rgb(var(--border-primary))] bg-[rgb(var(--bg-secondary))] shadow-lg">
                 <div className="w-full h-full bg-gradient-to-br from-gray-600 via-gray-700 to-gray-800 dark:from-gray-800 dark:via-gray-900 dark:to-black flex items-center justify-center relative">
@@ -286,11 +175,12 @@ export const Hero = ({ socialLinks }: HeroProps) => {
               ))}
             </motion.div>
 
-            {/* Scroll indicator */}
+            {/* Scroll indicator - High z-index ensures visibility above background lines */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1, duration: 0.5 }}
+              className="relative z-20"
             >
               <motion.div
                 animate={{ y: [0, 8, 0] }}

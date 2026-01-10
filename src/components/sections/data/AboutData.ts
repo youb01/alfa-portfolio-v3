@@ -71,12 +71,6 @@ export const aboutData = {
     href: "#contact",
     showArrow: true,
   },
-
-  // Animation settings
-  animation: {
-    floatingDotsCount: 6,
-    staggerDelay: 0.1,
-  },
 } as const;
 
 // Type exports for better TypeScript support
