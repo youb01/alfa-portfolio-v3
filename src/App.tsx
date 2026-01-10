@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { usePreloader } from "./hooks/usePreLoader";
 import type { NavItem, SocialLink } from "./types";
 import { AboutSection } from "./components/sections/about/AboutSection";
+import { SkillsSection } from "./components/sections/skills/SkillsSection";
 import { CustomCursor } from "./components/ui/cursor/CustomCursor";
 import { BackgroundLines } from "./components/ui/backgrounds/BackgroundLines";
 
@@ -56,23 +57,10 @@ function App() {
 
             <AboutSection />
 
-            {/* Other sections */}
-            <section
-              id="skills"
-              className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
-            >
-              {/* Background lines for depth */}
-              <BackgroundLines />
+            {/* Skills Section */}
+            <SkillsSection />
 
-              <div className="relative z-10 text-center px-4">
-                <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
-                  Skills
-                </h2>
-                <p className="text-[rgb(var(--text-secondary))] text-lg">
-                  Expertise in modern web development
-                </p>
-              </div>
-            </section>
+            {/* Other sections */}
 
             <section
               id="qualifications"
