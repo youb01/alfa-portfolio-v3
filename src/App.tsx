@@ -8,6 +8,7 @@ import type { NavItem, SocialLink } from "./types";
 import { AboutSection } from "./components/sections/about/AboutSection";
 import { CustomCursor } from "./components/ui/cursor/CustomCursor";
 import { BackgroundLines } from "./components/ui/backgrounds/BackgroundLines";
+import { ScrollProgress } from "./components/ui/ScrollProgress";
 
 const navItems: NavItem[] = [
   { label: "Home", href: "#home", number: "01" },
@@ -40,6 +41,7 @@ function App() {
     <>
       <Preloader isLoading={isLoading} onComplete={handleComplete} />
       <CustomCursor />
+      <ScrollProgress />
 
       <AnimatePresence>
         {isComplete && (

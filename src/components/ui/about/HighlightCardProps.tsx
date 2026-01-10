@@ -69,7 +69,7 @@ export const HighlightCard = ({
     >
       {/* Card background */}
       <motion.div
-        className="relative h-full p-6 md:p-8 rounded-2xl bg-[rgb(var(--bg-secondary))] border border-[rgb(var(--border-primary))] overflow-hidden"
+        className="relative h-full p-6 md:p-8 rounded-2xl glass hover-glow border border-[rgb(var(--border-primary))] overflow-hidden shadow-elevation-low"
         whileHover={{
           borderColor: "rgb(var(--border-hover))",
           y: -8,

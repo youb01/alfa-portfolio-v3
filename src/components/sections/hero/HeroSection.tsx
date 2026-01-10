@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import type { SocialLink } from "../../../types";
 import { BackgroundLines } from "../../ui/backgrounds/BackgroundLines";
+import { AmbientOverlay } from "../../ui/backgrounds/AmbientOverlay";
 
 interface HeroProps {
   socialLinks: SocialLink[];
@@ -14,6 +15,7 @@ export const Hero = ({ socialLinks }: HeroProps) => {
     >
       {/* Background lines for depth */}
       <BackgroundLines />
+      <AmbientOverlay variant="hero" />
 
       {/* Main content container */}
       <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
@@ -165,9 +167,9 @@ export const Hero = ({ socialLinks }: HeroProps) => {
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.6 + index * 0.08, duration: 0.3 }}
-                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileHover={{ scale: 1.15, y: -3 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-12 h-12 flex items-center justify-center rounded-full bg-[rgb(var(--bg-tertiary))] hover:bg-[rgb(var(--bg-elevated))] text-[rgb(var(--text-secondary))] hover:text-[rgb(var(--text-primary))] border border-[rgb(var(--border-primary))] hover:border-[rgb(var(--border-hover))] transition-all duration-200"
+                  className="w-12 h-12 flex items-center justify-center rounded-full glass hover-glow text-[rgb(var(--text-secondary))] hover:text-[rgb(var(--text-primary))] border border-[rgb(var(--border-primary))] hover:border-[rgb(var(--border-hover))] transition-all duration-300"
                   aria-label={link.label}
                 >
                   <span className="w-5 h-5">{link.icon}</span>

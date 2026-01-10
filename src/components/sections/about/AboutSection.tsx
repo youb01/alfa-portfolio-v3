@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { AnimatedHeading } from "../../ui/about/AnimatedHeading";
 import { BackgroundLines } from "../../ui/backgrounds/BackgroundLines";
+import { AmbientOverlay } from "../../ui/backgrounds/AmbientOverlay";
 import { CTAButton } from "../../ui/about/CTAButton";
 import { HighlightCard } from "../../ui/about/HighlightCardProps";
 import { Tagline } from "../../ui/about/Tagline";
@@ -16,6 +17,7 @@ export const AboutSection = () => {
     >
       {/* Background lines for depth */}
       <BackgroundLines />
+      <AmbientOverlay variant="about" />
 
       {/* Main content */}
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
