@@ -5,6 +5,7 @@ import { useNavigation } from "../../hooks/useNavigation";
 import { ThemeToggle } from "../ui/ThemeToggle";
 import { motion } from "framer-motion";
 import type { NavItem, SocialLink } from "../../types";
+import { BackgroundLines } from "../ui/backgrounds/BackgroundLines";
 
 interface NavbarProps {
   navItems: NavItem[];
@@ -17,13 +18,15 @@ export const Navbar = ({ navItems, socialLinks }: NavbarProps) => {
 
   return (
     <>
+      <BackgroundLines />
+
       {/* Desktop Navbar - Shows initially, hides on scroll */}
       <DesktopNavbar isVisible={showDesktopNav} navItems={navItems} />
 
       {/* Mobile Header - Always visible on mobile */}
       <motion.div
         initial={{ y: 0, opacity: 1 }}
-        className="md:hidden fixed top-0 left-0 right-0 z-[1020] bg-[rgb(var(--bg-primary)/0.97)] backdrop-blur-xl border-b border-[rgb(var(--border-primary))]"
+        className="md:hidden fixed top-0 left-0 right-0 z-[1020] border-b border-[rgb(var(--border-primary))]"
       >
         <div className="flex items-center justify-between h-20 px-6">
           <motion.a

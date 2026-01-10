@@ -17,7 +17,7 @@ export const DesktopNavbar = ({ isVisible, navItems }: DesktopNavbarProps) => {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -100, opacity: 0 }}
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="hidden md:block fixed top-0 left-0 right-0 z-[1025] bg-[rgb(var(--bg-primary)/0.98)] backdrop-blur-xl border-b border-[rgb(var(--border-primary))] shadow-sm"
+          className="hidden md:block fixed top-0 left-0 right-0 z-[1025] shadow-sm"
         >
           <div className="max-w-[1600px] mx-auto px-8 lg:px-12 xl:px-16">
             <div className="flex items-center justify-between h-20">
