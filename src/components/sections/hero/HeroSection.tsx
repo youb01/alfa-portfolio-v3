@@ -10,14 +10,14 @@ export const Hero = ({ socialLinks }: HeroProps) => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] pt-32 md:pt-24"
+      className="relative h-screen snap-start snap-always flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] pt-16 md:pt-20"
     >
       {/* Background lines for depth */}
       <BackgroundLines />
 
       {/* Main content container */}
       <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-16 items-start lg:items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-12 items-start lg:items-center">
           {/* Left Column - Info (Desktop only) */}
           <div className="hidden lg:block lg:col-span-3 space-y-10">
             {/* Biography */}
@@ -88,18 +88,18 @@ export const Hero = ({ socialLinks }: HeroProps) => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="mb-10 md:mb-12"
+              className="mb-6 md:mb-8"
             >
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-serif text-[rgb(var(--text-primary))] leading-[1.15] tracking-tight mb-2">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-serif text-[rgb(var(--text-primary))] leading-[1.15] tracking-tight mb-2">
                 Hi, I'm A
               </h1>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-serif text-[rgb(var(--text-primary))] leading-[1.15] tracking-tight mb-2">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-serif text-[rgb(var(--text-primary))] leading-[1.15] tracking-tight mb-2">
                 Software Engineer
               </h2>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-serif text-[rgb(var(--text-primary))] leading-[1.15] tracking-tight mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-serif text-[rgb(var(--text-primary))] leading-[1.15] tracking-tight mb-4">
                 and Web developer
               </h2>
-              <p className="text-xl sm:text-2xl md:text-3xl font-normal font-serif text-[rgb(var(--text-secondary))] leading-relaxed">
+              <p className="text-lg sm:text-xl md:text-2xl font-normal font-serif text-[rgb(var(--text-secondary))] leading-relaxed">
                 Based in the Netherlands
               </p>
             </motion.div>
@@ -109,7 +109,7 @@ export const Hero = ({ socialLinks }: HeroProps) => {
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="relative w-full max-w-[300px] sm:max-w-[300px] md:max-w-[350px] lg:max-w-[350px] mb-10 md:mb-12"
+              className="relative w-full max-w-[220px] sm:max-w-[240px] md:max-w-[260px] lg:max-w-[280px] mb-6 md:mb-8"
             >
               {/* Oval frame */}
               <div className="relative aspect-[5/6] rounded-[50%] overflow-hidden border-[3px] border-[rgb(var(--border-primary))] bg-[rgb(var(--bg-secondary))] shadow-lg">
@@ -154,7 +154,7 @@ export const Hero = ({ socialLinks }: HeroProps) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex items-center justify-center gap-4 mb-8"
+              className="flex items-center justify-center gap-4 mb-6"
             >
               {socialLinks.map((link, index) => (
                 <motion.a
@@ -165,9 +165,9 @@ export const Hero = ({ socialLinks }: HeroProps) => {
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.6 + index * 0.08, duration: 0.3 }}
-                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileHover={{ scale: 1.15, y: -3 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-12 h-12 flex items-center justify-center rounded-full bg-[rgb(var(--bg-tertiary))] hover:bg-[rgb(var(--bg-elevated))] text-[rgb(var(--text-secondary))] hover:text-[rgb(var(--text-primary))] border border-[rgb(var(--border-primary))] hover:border-[rgb(var(--border-hover))] transition-all duration-200"
+                  className="w-12 h-12 flex items-center justify-center rounded-full glass hover-glow text-[rgb(var(--text-secondary))] hover:text-[rgb(var(--text-primary))] border border-[rgb(var(--border-primary))] hover:border-[rgb(var(--border-hover))] transition-all duration-300"
                   aria-label={link.label}
                 >
                   <span className="w-5 h-5">{link.icon}</span>
@@ -216,7 +216,7 @@ export const Hero = ({ socialLinks }: HeroProps) => {
               <h3 className="text-[10px] font-bold text-[rgb(var(--text-tertiary))] uppercase tracking-[0.15em] mb-2">
                 Graduating In
               </h3>
-              <p className="text-5xl md:text-6xl lg:text-5xl font-black text-[rgb(var(--text-primary))] leading-none">
+              <p className="text-4xl md:text-5xl lg:text-4xl font-black text-[rgb(var(--text-primary))] leading-none">
                 2026
               </p>
             </motion.div>
@@ -231,7 +231,7 @@ export const Hero = ({ socialLinks }: HeroProps) => {
               <h3 className="text-[10px] font-bold text-[rgb(var(--text-tertiary))] uppercase tracking-[0.15em] mb-2">
                 Completed Projects
               </h3>
-              <p className="text-5xl md:text-6xl lg:text-5xl font-black text-[rgb(var(--text-primary))] leading-none">
+              <p className="text-4xl md:text-5xl lg:text-4xl font-black text-[rgb(var(--text-primary))] leading-none">
                 10+
               </p>
             </motion.div>
@@ -246,7 +246,7 @@ export const Hero = ({ socialLinks }: HeroProps) => {
               <h3 className="text-[10px] font-bold text-[rgb(var(--text-tertiary))] uppercase tracking-[0.15em] mb-2">
                 Companies Worked For
               </h3>
-              <p className="text-5xl md:text-6xl lg:text-5xl font-black text-[rgb(var(--text-primary))] leading-none">
+              <p className="text-4xl md:text-5xl lg:text-4xl font-black text-[rgb(var(--text-primary))] leading-none">
                 3
               </p>
             </motion.div>
