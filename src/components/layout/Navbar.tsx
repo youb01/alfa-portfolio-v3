@@ -26,7 +26,7 @@ export const Navbar = ({ navItems, socialLinks }: NavbarProps) => {
       {/* Mobile Header - Always visible on mobile */}
       <motion.div
         initial={{ y: 0, opacity: 1 }}
-        className="md:hidden fixed top-0 left-0 right-0 z-[1020] border-b border-[rgb(var(--border-primary))]"
+        className="md:hidden fixed top-0 left-0 right-0 z-[1020]"
       >
         <div className="flex items-center justify-between h-20 px-6">
           <motion.a
