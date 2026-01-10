@@ -1,0 +1,106 @@
+import {
+  Code2,
+  Database,
+  Palette,
+  Smartphone,
+  Server,
+  GitBranch,
+  Cloud,
+  Terminal,
+} from "lucide-react";
+
+export const skillsData = {
+  meta: {
+    id: "skills",
+    label: "My Skills",
+    title: "Technical Expertise",
+    description: "Technologies and tools I work with",
+  },
+
+  // Skills categories with cards
+  skills: [
+    {
+      id: "frontend",
+      icon: Code2,
+      iconSize: 32,
+      title: "Frontend Development",
+      description: "Building responsive and interactive user interfaces",
+      technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+      color: "from-blue-500/10 to-cyan-500/10",
+      borderColor: "border-blue-500/20",
+    },
+    {
+      id: "backend",
+      icon: Server,
+      iconSize: 32,
+      title: "Backend Development",
+      description: "Creating robust server-side applications and APIs",
+      technologies: ["Node.js", "Express", "REST APIs", "Authentication"],
+      color: "from-green-500/10 to-emerald-500/10",
+      borderColor: "border-green-500/20",
+    },
+    {
+      id: "database",
+      icon: Database,
+      iconSize: 32,
+      title: "Database Management",
+      description: "Designing and managing efficient data structures",
+      technologies: ["MongoDB", "PostgreSQL", "MySQL", "Redis"],
+      color: "from-purple-500/10 to-pink-500/10",
+      borderColor: "border-purple-500/20",
+    },
+    {
+      id: "mobile",
+      icon: Smartphone,
+      iconSize: 32,
+      title: "Mobile Development",
+      description: "Creating cross-platform mobile applications",
+      technologies: ["React Native", "Responsive Design", "PWA", "Mobile UI"],
+      color: "from-orange-500/10 to-red-500/10",
+      borderColor: "border-orange-500/20",
+    },
+    {
+      id: "design",
+      icon: Palette,
+      iconSize: 32,
+      title: "UI/UX Design",
+      description: "Crafting beautiful and intuitive user experiences",
+      technologies: ["Figma", "Adobe XD", "Design Systems", "Prototyping"],
+      color: "from-pink-500/10 to-rose-500/10",
+      borderColor: "border-pink-500/20",
+    },
+    {
+      id: "version-control",
+      icon: GitBranch,
+      iconSize: 32,
+      title: "Version Control",
+      description: "Managing code and collaborating with teams",
+      technologies: ["Git", "GitHub", "GitLab", "CI/CD"],
+      color: "from-yellow-500/10 to-amber-500/10",
+      borderColor: "border-yellow-500/20",
+    },
+    {
+      id: "cloud",
+      icon: Cloud,
+      iconSize: 32,
+      title: "Cloud Services",
+      description: "Deploying and managing cloud infrastructure",
+      technologies: ["AWS", "Azure", "Vercel", "Docker"],
+      color: "from-indigo-500/10 to-blue-500/10",
+      borderColor: "border-indigo-500/20",
+    },
+    {
+      id: "tools",
+      icon: Terminal,
+      iconSize: 32,
+      title: "Development Tools",
+      description: "Utilizing modern development tools and workflows",
+      technologies: ["VS Code", "Vite", "Webpack", "ESLint"],
+      color: "from-teal-500/10 to-cyan-500/10",
+      borderColor: "border-teal-500/20",
+    },
+  ],
+} as const;
+
+// Type exports for better TypeScript support
+export type Skill = (typeof skillsData.skills)[number];
