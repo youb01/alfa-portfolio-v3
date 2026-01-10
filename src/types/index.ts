@@ -16,3 +16,16 @@ export interface ThemeContextType {
   theme: Theme;
   toggleTheme: () => void;
 }
+
+export interface SkillTag {
+  name: string;
+  color?: string;
+}
+
+export interface SkillCategory {
+  id: string;
+  number: string;
+  title: string;
+  description: string;
+  tags: SkillTag[];
+}
