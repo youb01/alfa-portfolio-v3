@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { usePreloader } from "./hooks/usePreLoader";
 import type { NavItem, SocialLink } from "./types";
 import { AboutSection } from "./components/sections/about/AboutSection";
+import { SkillsSection } from "./components/sections/skills/SkillsSection";
 import { CustomCursor } from "./components/ui/cursor/CustomCursor";
 import { BackgroundLines } from "./components/ui/backgrounds/BackgroundLines";
 
@@ -54,39 +55,24 @@ function App() {
             {/* Hero Section */}
             <Hero socialLinks={socialLinks} />
 
+            {/* About Section */}
             <AboutSection />
 
+            {/* Skills Section - NEW */}
+            <SkillsSection />
+
             {/* Other sections */}
-            <section
-              id="skills"
-              className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
-            >
-              {/* Background lines for depth */}
-              <BackgroundLines />
-
-              <div className="relative z-10 text-center px-4">
-                <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
-                  Skills
-                </h2>
-                <p className="text-[rgb(var(--text-secondary))] text-lg">
-                  Expertise in modern web development
-                </p>
-              </div>
-            </section>
-
             <section
               id="qualifications"
               className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
             >
-              {/* Background lines for depth */}
               <BackgroundLines />
-
               <div className="relative z-10 text-center px-4">
                 <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
                   Qualifications
                 </h2>
                 <p className="text-[rgb(var(--text-secondary))] text-lg">
-                  Professional certifications and education
+                  Education and experience
                 </p>
               </div>
             </section>
@@ -95,15 +81,13 @@ function App() {
               id="services"
               className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
             >
-              {/* Background lines for depth */}
               <BackgroundLines />
-
               <div className="relative z-10 text-center px-4">
                 <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
                   Services
                 </h2>
                 <p className="text-[rgb(var(--text-secondary))] text-lg">
-                  Solutions tailored to your needs
+                  What I can do for you
                 </p>
               </div>
             </section>
@@ -112,32 +96,28 @@ function App() {
               id="projects"
               className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
             >
-              {/* Background lines for depth */}
               <BackgroundLines />
-
               <div className="relative z-10 text-center px-4">
                 <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
                   Projects
                 </h2>
                 <p className="text-[rgb(var(--text-secondary))] text-lg">
-                  Featured work and case studies
+                  My latest work
                 </p>
               </div>
             </section>
 
             <section
               id="contact"
-              className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
+              className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg: py-36"
             >
-              {/* Background lines for depth */}
               <BackgroundLines />
-
               <div className="relative z-10 text-center px-4">
                 <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
-                  Contact Me
+                  Contact
                 </h2>
                 <p className="text-[rgb(var(--text-secondary))] text-lg">
-                  Let's work together on your next project
+                  Let's work together
                 </p>
               </div>
             </section>
