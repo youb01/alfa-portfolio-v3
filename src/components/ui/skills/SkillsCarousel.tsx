@@ -68,10 +68,13 @@ export const HorizontalScrollContainer: React.FC = () => {
     >
       {/* Sticky container */}
       <div className="sticky top-0 h-screen overflow-hidden flex items-center">
-        {/* Subtle animated background - monochrome */}
+        {/* Ambient background with purple/blue gradients */}
         <div className="absolute inset-0 opacity-20">
           <motion.div
-            className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[rgb(var(--text-primary))]/5 rounded-full blur-[100px]"
+            className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full blur-[100px]"
+            style={{
+              background: `radial-gradient(circle, rgba(var(--accent-purple-primary), 0.25), transparent)`,
+            }}
             animate={{
               scale: [1, 1.3, 1],
               opacity: [0.3, 0.6, 0.3],
@@ -83,7 +86,10 @@ export const HorizontalScrollContainer: React.FC = () => {
             }}
           />
           <motion.div
-            className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-[rgb(var(--text-secondary))]/5 rounded-full blur-[120px]"
+            className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] rounded-full blur-[120px]"
+            style={{
+              background: `radial-gradient(circle, rgba(var(--accent-blue-primary), 0.25), transparent)`,
+            }}
             animate={{
               scale: [1.3, 1, 1.3],
               opacity: [0.6, 0.3, 0.6],
@@ -97,11 +103,11 @@ export const HorizontalScrollContainer: React.FC = () => {
           />
         </div>
 
-        {/* Cards container */}
+        {/* Cards container - FIXED: Start at the edge with proper alignment */}
         <motion.div
           ref={trackRef}
           style={{ x }}
-          className="flex gap-8 lg:gap-12 px-12 lg:px-24 will-change-transform relative z-10"
+          className="flex gap-8 lg:gap-12 pl-6 md:pl-8 lg:pl-12 xl:pl-16 will-change-transform relative z-10"
         >
           {skillsData.map((skill, index) => (
             <SkillCard key={skill.id} skill={skill} index={index} />

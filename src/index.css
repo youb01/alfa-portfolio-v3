@@ -33,6 +33,25 @@
 
     /* shadow */
     --shadow-color: 0, 0, 0;
+
+    /* Accent Colors - Purple/Blue System */
+    --accent-purple-primary: 139, 92, 246; /* #8B5CF6 */
+    --accent-purple-secondary: 167, 139, 250; /* #A78BFA */
+    --accent-purple-dark: 124, 58, 237; /* #7C3AED */
+    --accent-purple-light: 196, 181, 253; /* #C4B5FD */
+
+    --accent-blue-primary: 59, 130, 246; /* #3B82F6 */
+    --accent-blue-secondary: 96, 165, 250; /* #60A5FA */
+    --accent-blue-dark: 37, 99, 235; /* #2563EB */
+    --accent-blue-light: 147, 197, 253; /* #93C5FD */
+
+    /* Glassmorphism - Light Theme */
+    --glass-bg-subtle: 255, 255, 255, 0.7;
+    --glass-bg-medium: 255, 255, 255, 0.8;
+    --glass-bg-strong: 255, 255, 255, 0.85;
+
+    --glass-border: 139, 92, 246, 0.1;
+    --glass-border-hover: 139, 92, 246, 0.2;
   }
 
   /* Dark Theme Variables (neutral greys, no blue) */
@@ -57,6 +76,25 @@
     --interactive-active: 200, 200, 204;
 
     --shadow-color: 0, 0, 0;
+
+    /* Accent Colors - Same for both themes */
+    --accent-purple-primary: 139, 92, 246;
+    --accent-purple-secondary: 167, 139, 250;
+    --accent-purple-dark: 124, 58, 237;
+    --accent-purple-light: 196, 181, 253;
+
+    --accent-blue-primary: 59, 130, 246;
+    --accent-blue-secondary: 96, 165, 250;
+    --accent-blue-dark: 37, 99, 235;
+    --accent-blue-light: 147, 197, 253;
+
+    /* Glassmorphism - Dark Theme */
+    --glass-bg-subtle: 15, 20, 25, 0.05;
+    --glass-bg-medium: 15, 20, 25, 0.08;
+    --glass-bg-strong: 15, 20, 25, 0.12;
+
+    --glass-border: 139, 92, 246, 0.15;
+    --glass-border-hover: 139, 92, 246, 0.25;
   }
 
   /* Smooth transitions for theme switching */
@@ -157,6 +195,42 @@
   /* Lora font utility classes */
   .font-lora {
     font-family: "Lora", Georgia, serif;
+  }
+
+  /* Glassmorphism utilities */
+  .glass-subtle {
+    background: rgba(var(--glass-bg-subtle));
+    backdrop-filter: blur(8px) saturate(130%);
+    border: 1px solid rgba(var(--glass-border));
+  }
+
+  .glass-medium {
+    background: rgba(var(--glass-bg-medium));
+    backdrop-filter: blur(12px) saturate(150%);
+    border: 1px solid rgba(var(--glass-border));
+  }
+
+  .glass-strong {
+    background: rgba(var(--glass-bg-strong));
+    backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(var(--glass-border));
+  }
+
+  /* Accent glow utilities */
+  .glow-purple {
+    box-shadow: 0 0 20px rgba(var(--accent-purple-primary), 0.3),
+      0 0 40px rgba(var(--accent-purple-primary), 0.15);
+  }
+
+  .glow-blue {
+    box-shadow: 0 0 20px rgba(var(--accent-blue-primary), 0.3),
+      0 0 40px rgba(var(--accent-blue-primary), 0.15);
+  }
+
+  .glow-purple-blue {
+    box-shadow: 0 0 20px rgba(var(--accent-purple-primary), 0.25),
+      0 0 30px rgba(var(--accent-blue-primary), 0.2),
+      0 0 40px rgba(var(--accent-purple-primary), 0.1);
   }
 }
 

@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useTransform } from "framer-motion";
-import React from "react";
+import React, { useState } from "react";
 import type { Skill } from "../../sections/data/SkillsData";
 import { Tag } from "./Tag";
 
@@ -8,50 +8,56 @@ interface SkillCardProps {
   index: number;
 }
 
-// Monochrome color schemes with subtle accents
+// Purple/Blue glassmorphism color schemes
 const getCardColors = (colorIndex: number, isDark: boolean) => {
   if (isDark) {
     const darkSchemes = [
       {
-        bg: "rgba(18, 18, 18, 0.8)",
-        border: "rgba(60, 60, 60, 0.5)",
-        glow: "rgba(255, 255, 255, 0.03)",
-        accent: "rgba(255, 255, 255, 0.1)",
+        bg: "rgba(15, 20, 25, 0.08)",
+        border: "rgba(139, 92, 246, 0.15)",
+        borderHover: "rgba(139, 92, 246, 0.3)",
+        glow: "rgba(139, 92, 246, 0.15)",
+        accent: "rgba(139, 92, 246, 0.1)",
         text: "rgb(255, 255, 255)",
       },
       {
-        bg: "rgba(22, 22, 22, 0.8)",
-        border: "rgba(70, 70, 70, 0.5)",
-        glow: "rgba(255, 255, 255, 0.04)",
-        accent: "rgba(255, 255, 255, 0.12)",
+        bg: "rgba(15, 20, 25, 0.08)",
+        border: "rgba(59, 130, 246, 0.15)",
+        borderHover: "rgba(59, 130, 246, 0.3)",
+        glow: "rgba(59, 130, 246, 0.15)",
+        accent: "rgba(59, 130, 246, 0.1)",
         text: "rgb(250, 250, 250)",
       },
       {
-        bg: "rgba(16, 16, 16, 0.8)",
-        border: "rgba(55, 55, 55, 0.5)",
-        glow: "rgba(255, 255, 255, 0.035)",
-        accent: "rgba(255, 255, 255, 0.08)",
+        bg: "rgba(15, 20, 25, 0.08)",
+        border: "rgba(167, 139, 250, 0.15)",
+        borderHover: "rgba(167, 139, 250, 0.3)",
+        glow: "rgba(167, 139, 250, 0.15)",
+        accent: "rgba(167, 139, 250, 0.1)",
         text: "rgb(245, 245, 245)",
       },
       {
-        bg: "rgba(20, 20, 20, 0.8)",
-        border: "rgba(65, 65, 65, 0.5)",
-        glow: "rgba(255, 255, 255, 0.045)",
-        accent: "rgba(255, 255, 255, 0.11)",
+        bg: "rgba(15, 20, 25, 0.08)",
+        border: "rgba(96, 165, 250, 0.15)",
+        borderHover: "rgba(96, 165, 250, 0.3)",
+        glow: "rgba(96, 165, 250, 0.15)",
+        accent: "rgba(96, 165, 250, 0.1)",
         text: "rgb(240, 240, 240)",
       },
       {
-        bg: "rgba(24, 24, 24, 0.8)",
-        border: "rgba(75, 75, 75, 0.5)",
-        glow: "rgba(255, 255, 255, 0.05)",
-        accent: "rgba(255, 255, 255, 0.13)",
+        bg: "rgba(15, 20, 25, 0.08)",
+        border: "rgba(124, 58, 237, 0.15)",
+        borderHover: "rgba(124, 58, 237, 0.3)",
+        glow: "rgba(124, 58, 237, 0.15)",
+        accent: "rgba(124, 58, 237, 0.1)",
         text: "rgb(235, 235, 235)",
       },
       {
-        bg: "rgba(14, 14, 14, 0.8)",
-        border: "rgba(50, 50, 50, 0.5)",
-        glow: "rgba(255, 255, 255, 0.025)",
-        accent: "rgba(255, 255, 255, 0.09)",
+        bg: "rgba(15, 20, 25, 0.08)",
+        border: "rgba(37, 99, 235, 0.15)",
+        borderHover: "rgba(37, 99, 235, 0.3)",
+        glow: "rgba(37, 99, 235, 0.15)",
+        accent: "rgba(37, 99, 235, 0.1)",
         text: "rgb(230, 230, 230)",
       },
     ];
@@ -60,44 +66,50 @@ const getCardColors = (colorIndex: number, isDark: boolean) => {
     const lightSchemes = [
       {
         bg: "rgba(255, 255, 255, 0.8)",
-        border: "rgba(0, 0, 0, 0.08)",
-        glow: "rgba(0, 0, 0, 0.03)",
-        accent: "rgba(0, 0, 0, 0.05)",
+        border: "rgba(139, 92, 246, 0.1)",
+        borderHover: "rgba(139, 92, 246, 0.25)",
+        glow: "rgba(139, 92, 246, 0.12)",
+        accent: "rgba(139, 92, 246, 0.05)",
         text: "rgb(17, 17, 17)",
       },
       {
-        bg: "rgba(252, 252, 252, 0.8)",
-        border: "rgba(0, 0, 0, 0.1)",
-        glow: "rgba(0, 0, 0, 0.04)",
-        accent: "rgba(0, 0, 0, 0.06)",
+        bg: "rgba(255, 255, 255, 0.8)",
+        border: "rgba(59, 130, 246, 0.1)",
+        borderHover: "rgba(59, 130, 246, 0.25)",
+        glow: "rgba(59, 130, 246, 0.12)",
+        accent: "rgba(59, 130, 246, 0.05)",
         text: "rgb(20, 20, 20)",
       },
       {
-        bg: "rgba(250, 250, 250, 0.8)",
-        border: "rgba(0, 0, 0, 0.07)",
-        glow: "rgba(0, 0, 0, 0.035)",
-        accent: "rgba(0, 0, 0, 0.045)",
+        bg: "rgba(255, 255, 255, 0.8)",
+        border: "rgba(167, 139, 250, 0.1)",
+        borderHover: "rgba(167, 139, 250, 0.25)",
+        glow: "rgba(167, 139, 250, 0.12)",
+        accent: "rgba(167, 139, 250, 0.05)",
         text: "rgb(25, 25, 25)",
       },
       {
-        bg: "rgba(248, 248, 248, 0.8)",
-        border: "rgba(0, 0, 0, 0.09)",
-        glow: "rgba(0, 0, 0, 0.045)",
-        accent: "rgba(0, 0, 0, 0.055)",
+        bg: "rgba(255, 255, 255, 0.8)",
+        border: "rgba(96, 165, 250, 0.1)",
+        borderHover: "rgba(96, 165, 250, 0.25)",
+        glow: "rgba(96, 165, 250, 0.12)",
+        accent: "rgba(96, 165, 250, 0.05)",
         text: "rgb(30, 30, 30)",
       },
       {
-        bg: "rgba(254, 254, 254, 0.8)",
-        border: "rgba(0, 0, 0, 0.11)",
-        glow: "rgba(0, 0, 0, 0.05)",
-        accent: "rgba(0, 0, 0, 0.065)",
+        bg: "rgba(255, 255, 255, 0.8)",
+        border: "rgba(124, 58, 237, 0.1)",
+        borderHover: "rgba(124, 58, 237, 0.25)",
+        glow: "rgba(124, 58, 237, 0.12)",
+        accent: "rgba(124, 58, 237, 0.05)",
         text: "rgb(35, 35, 35)",
       },
       {
-        bg: "rgba(246, 246, 246, 0.8)",
-        border: "rgba(0, 0, 0, 0.06)",
-        glow: "rgba(0, 0, 0, 0.025)",
-        accent: "rgba(0, 0, 0, 0.04)",
+        bg: "rgba(255, 255, 255, 0.8)",
+        border: "rgba(37, 99, 235, 0.1)",
+        borderHover: "rgba(37, 99, 235, 0.25)",
+        glow: "rgba(37, 99, 235, 0.12)",
+        accent: "rgba(37, 99, 235, 0.05)",
         text: "rgb(40, 40, 40)",
       },
     ];
@@ -109,6 +121,7 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
   const [isDark, setIsDark] = React.useState(
     document.documentElement.classList.contains("dark")
   );
+  const [isHovered, setIsHovered] = useState(false);
 
   // Mouse tracking for 3D tilt effect
   const mouseX = useMotionValue(0);
@@ -128,6 +141,11 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
   const handleMouseLeave = () => {
     mouseX.set(0);
     mouseY.set(0);
+    setIsHovered(false);
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
   };
 
   React.useEffect(() => {
@@ -158,13 +176,14 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
       viewport={{ once: true, margin: "-50px" }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onMouseEnter={handleMouseEnter}
       style={{
         rotateX,
         rotateY,
         transformStyle: "preserve-3d",
       }}
     >
-      {/* Subtle glow effect */}
+      {/* Glow effect with purple/blue tint */}
       <motion.div
         className="absolute -inset-2 rounded-3xl opacity-0 group-hover:opacity-100 blur-2xl transition-opacity duration-700"
         style={{ background: colors.glow }}
@@ -172,20 +191,54 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
 
       {/* Main card with glassmorphism */}
       <motion.div
-        className="relative w-full h-full flex flex-col p-10 lg:p-12 rounded-3xl overflow-hidden backdrop-blur-xl"
+        className="relative w-full h-full flex flex-col p-10 lg:p-12 rounded-3xl overflow-hidden"
         style={{
           background: colors.bg,
           color: colors.text,
           border: `1px solid ${colors.border}`,
+          backdropFilter: "blur(12px) saturate(150%)",
           boxShadow: isDark
-            ? "0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05)"
-            : "0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05)",
+            ? `0 8px 32px rgba(139, 92, 246, 0.25), 0 4px 16px rgba(59, 130, 246, 0.15), 0 0 0 1px rgba(139, 92, 246, 0.1)`
+            : `0 8px 32px rgba(139, 92, 246, 0.12), 0 4px 16px rgba(59, 130, 246, 0.08), 0 0 0 1px rgba(139, 92, 246, 0.05)`,
         }}
         whileHover={{
           scale: 1.02,
+          borderColor: colors.borderHover,
+          boxShadow: isDark
+            ? `0 20px 60px rgba(139, 92, 246, 0.4), 0 12px 32px rgba(59, 130, 246, 0.25), 0 0 0 1px rgba(139, 92, 246, 0.2)`
+            : `0 20px 60px rgba(139, 92, 246, 0.2), 0 12px 32px rgba(59, 130, 246, 0.15), 0 0 0 1px rgba(139, 92, 246, 0.1)`,
           transition: { duration: 0.3, ease: "easeOut" },
         }}
       >
+        {/* Hover image reveal effect */}
+        {skill.image && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{
+              opacity: isHovered ? 1 : 0,
+              scale: isHovered ? 1 : 0.95,
+            }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="absolute inset-0 z-0 rounded-3xl overflow-hidden"
+          >
+            <img
+              src={skill.image}
+              alt={skill.imageAlt}
+              className="w-full h-full object-cover"
+            />
+            {/* Glassmorphism overlay to maintain text readability */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background: isDark
+                  ? "linear-gradient(to top, rgba(15, 20, 25, 0.95) 0%, rgba(15, 20, 25, 0.75) 40%, rgba(15, 20, 25, 0.5) 70%, transparent 100%)"
+                  : "linear-gradient(to top, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.75) 40%, rgba(255, 255, 255, 0.5) 70%, transparent 100%)",
+                backdropFilter: "blur(4px)",
+              }}
+            />
+          </motion.div>
+        )}
+
         {/* Glass reflection effect */}
         <div
           className="absolute inset-0 bg-gradient-to-br opacity-40 pointer-events-none"
@@ -194,16 +247,17 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
           }}
         />
 
-        {/* Skill number badge - minimal */}
+        {/* Skill number badge with purple/blue gradient */}
         <motion.div
-          className="absolute -top-4 -right-4 w-16 h-16 rounded-full flex items-center justify-center font-black text-xl backdrop-blur-xl"
+          className="absolute -top-4 -right-4 w-16 h-16 rounded-full flex items-center justify-center font-black text-xl"
           style={{
-            background: colors.bg,
+            background: `linear-gradient(135deg, rgba(var(--accent-purple-primary), 0.15), rgba(var(--accent-blue-primary), 0.15))`,
             color: colors.text,
-            border: `1px solid ${colors.border}`,
+            border: `2px solid ${colors.border}`,
+            backdropFilter: "blur(12px)",
             boxShadow: isDark
-              ? "0 10px 30px rgba(0, 0, 0, 0.5)"
-              : "0 10px 30px rgba(0, 0, 0, 0.1)",
+              ? "0 10px 30px rgba(139, 92, 246, 0.3)"
+              : "0 10px 30px rgba(139, 92, 246, 0.15)",
           }}
           initial={{ rotate: -180, scale: 0 }}
           whileInView={{ rotate: 0, scale: 1 }}
@@ -245,10 +299,12 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
 
           {/* Title and Description */}
           <div className="relative space-y-6">
-            {/* Minimal decorative line */}
+            {/* Decorative line with purple/blue gradient */}
             <motion.div
               className="h-[2px] w-12 rounded-full"
-              style={{ background: colors.accent }}
+              style={{
+                background: `linear-gradient(to right, rgb(var(--accent-purple-primary)), rgb(var(--accent-blue-primary)))`,
+              }}
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               transition={{
@@ -291,7 +347,7 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
               {skill.description}
             </motion.p>
 
-            {/* Minimal decorative dots */}
+            {/* Decorative dots with purple/blue glow */}
             <motion.div
               className="flex gap-2 pt-4"
               initial={{ opacity: 0 }}
@@ -305,8 +361,15 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
               {[...Array(3)].map((_, i) => (
                 <motion.div
                   key={i}
-                  className="w-1. 5 h-1.5 rounded-full"
-                  style={{ background: colors.accent }}
+                  className="w-1.5 h-1.5 rounded-full"
+                  style={{
+                    background:
+                      i === 0
+                        ? "rgb(var(--accent-purple-primary))"
+                        : i === 1
+                        ? "rgb(var(--accent-blue-primary))"
+                        : "rgb(var(--accent-purple-secondary))",
+                  }}
                   animate={{
                     opacity: [0.3, 0.8, 0.3],
                   }}

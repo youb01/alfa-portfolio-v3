@@ -1,0 +1,248 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Root CSS Variables - Light Theme */
+  :root {
+    /* Background Colors */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f9fafb;
+    --bg-tertiary: #f3f4f6;
+    --bg-elevated: #ffffff;
+
+    /* Text Colors */
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --text-tertiary: #6b7280;
+    --text-disabled: #9ca3af;
+    --text-inverse: #ffffff;
+
+    /* Border Colors */
+    --border-primary: #e5e7eb;
+    --border-secondary: #d1d5db;
+    --border-hover: #9ca3af;
+
+    /* Interactive Colors */
+    --interactive-default: #111827;
+    --interactive-hover: #374151;
+    --interactive-active: #1f2937;
+
+    /* Accent Colors - Purple/Blue System */
+    --accent-purple-primary: #8b5cf6;
+    --accent-purple-secondary: #a78bfa;
+    --accent-purple-dark: #7c3aed;
+    --accent-purple-light: #c4b5fd;
+
+    --accent-blue-primary: #3b82f6;
+    --accent-blue-secondary: #60a5fa;
+    --accent-blue-dark: #2563eb;
+    --accent-blue-light: #93c5fd;
+
+    /* Glassmorphism - Light Theme */
+    --glass-bg-subtle: rgba(255, 255, 255, 0.7);
+    --glass-bg-medium: rgba(255, 255, 255, 0.8);
+    --glass-bg-strong: rgba(255, 255, 255, 0.85);
+
+    --glass-border: rgba(139, 92, 246, 0.1);
+    --glass-border-hover: rgba(139, 92, 246, 0.2);
+
+    /* Depth Shadows - Light Theme */
+    --shadow-depth-1: 0 2px 8px rgba(139, 92, 246, 0.08),
+      0 1px 4px rgba(59, 130, 246, 0.06);
+    --shadow-depth-2: 0 8px 32px rgba(139, 92, 246, 0.12),
+      0 4px 16px rgba(59, 130, 246, 0.08),
+      0 0 0 1px rgba(139, 92, 246, 0.05);
+    --shadow-depth-3: 0 16px 48px rgba(139, 92, 246, 0.15),
+      0 8px 24px rgba(59, 130, 246, 0.1), 0 0 0 1px rgba(139, 92, 246, 0.08);
+    --shadow-hover: 0 20px 60px rgba(139, 92, 246, 0.2),
+      0 12px 32px rgba(59, 130, 246, 0.15),
+      0 0 0 1px rgba(139, 92, 246, 0.1);
+  }
+
+  /* Dark Theme Variables */
+  .dark {
+    /* Background Colors */
+    --bg-primary: #0f1419;
+    --bg-secondary: #1a1f2e;
+    --bg-tertiary: #252b3d;
+    --bg-elevated: #2d3548;
+
+    /* Text Colors */
+    --text-primary: #ffffff;
+    --text-secondary: #d1d5db;
+    --text-tertiary: #9ca3af;
+    --text-disabled: #6b7280;
+    --text-inverse: #111827;
+
+    /* Border Colors */
+    --border-primary: #374151;
+    --border-secondary: #4b5563;
+    --border-hover: #6b7280;
+
+    /* Interactive Colors */
+    --interactive-default: #ffffff;
+    --interactive-hover: #e5e7eb;
+    --interactive-active: #d1d5db;
+
+    /* Accent Colors - Same for both themes */
+    --accent-purple-primary: #8b5cf6;
+    --accent-purple-secondary: #a78bfa;
+    --accent-purple-dark: #7c3aed;
+    --accent-purple-light: #c4b5fd;
+
+    --accent-blue-primary: #3b82f6;
+    --accent-blue-secondary: #60a5fa;
+    --accent-blue-dark: #2563eb;
+    --accent-blue-light: #93c5fd;
+
+    /* Glassmorphism - Dark Theme */
+    --glass-bg-subtle: rgba(15, 20, 25, 0.05);
+    --glass-bg-medium: rgba(15, 20, 25, 0.08);
+    --glass-bg-strong: rgba(15, 20, 25, 0.12);
+
+    --glass-border: rgba(139, 92, 246, 0.15);
+    --glass-border-hover: rgba(139, 92, 246, 0.25);
+
+    /* Depth Shadows - Dark Theme */
+    --shadow-depth-1: 0 2px 8px rgba(139, 92, 246, 0.15),
+      0 1px 4px rgba(59, 130, 246, 0.1);
+    --shadow-depth-2: 0 8px 32px rgba(139, 92, 246, 0.25),
+      0 4px 16px rgba(59, 130, 246, 0.15),
+      0 0 0 1px rgba(139, 92, 246, 0.1);
+    --shadow-depth-3: 0 16px 48px rgba(139, 92, 246, 0.35),
+      0 8px 24px rgba(59, 130, 246, 0.2), 0 0 0 1px rgba(139, 92, 246, 0.15);
+    --shadow-hover: 0 20px 60px rgba(139, 92, 246, 0.4),
+      0 12px 32px rgba(59, 130, 246, 0.25),
+      0 0 0 1px rgba(139, 92, 246, 0.2);
+  }
+
+  /* Base Styles */
+  * {
+    @apply border-border-primary;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply antialiased;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+      sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+      color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Smooth scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-hover);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--text-tertiary);
+  }
+}
+
+@layer utilities {
+  /* Text utilities */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Safe area for mobile devices */
+  .safe-area-pb {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Focus styles */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-900;
+  }
+
+  /* Gradient utilities */
+  .bg-gradient-radial {
+    background-image: radial-gradient(circle, var(--tw-gradient-stops));
+  }
+
+  /* Glassmorphism utilities */
+  .glass-subtle {
+    background: var(--glass-bg-subtle);
+    backdrop-filter: blur(8px) saturate(130%);
+    border: 1px solid var(--glass-border);
+  }
+
+  .glass-medium {
+    background: var(--glass-bg-medium);
+    backdrop-filter: blur(12px) saturate(150%);
+    border: 1px solid var(--glass-border);
+  }
+
+  .glass-strong {
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid var(--glass-border);
+  }
+
+  /* Depth shadow utilities */
+  .shadow-depth-1 {
+    box-shadow: var(--shadow-depth-1);
+  }
+
+  .shadow-depth-2 {
+    box-shadow: var(--shadow-depth-2);
+  }
+
+  .shadow-depth-3 {
+    box-shadow: var(--shadow-depth-3);
+  }
+
+  .shadow-hover {
+    box-shadow: var(--shadow-hover);
+  }
+
+  /* Gradient border utilities */
+  .border-gradient-purple-blue {
+    border-image: linear-gradient(
+        135deg,
+        var(--accent-purple-primary),
+        var(--accent-blue-primary)
+      )
+      1;
+  }
+
+  /* Accent glow utilities */
+  .glow-purple {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3),
+      0 0 40px rgba(139, 92, 246, 0.15);
+  }
+
+  .glow-blue {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3),
+      0 0 40px rgba(59, 130, 246, 0.15);
+  }
+
+  .glow-purple-blue {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.25),
+      0 0 30px rgba(59, 130, 246, 0.2), 0 0 40px rgba(139, 92, 246, 0.1);
+  }
+}

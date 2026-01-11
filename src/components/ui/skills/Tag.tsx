@@ -29,11 +29,11 @@ export const Tag: React.FC<TagProps> = ({ label, index }) => {
       className="relative px-4 py-2 text-xs font-semibold rounded-full overflow-hidden group cursor-default"
       style={{
         background: isDark
-          ? "rgba(255, 255, 255, 0.05)"
-          : "rgba(0, 0, 0, 0.04)",
+          ? "rgba(15, 20, 25, 0.08)"
+          : "rgba(255, 255, 255, 0.7)",
         border: isDark
-          ? "1px solid rgba(255, 255, 255, 0.08)"
-          : "1px solid rgba(0, 0, 0, 0.08)",
+          ? "1px solid rgba(139, 92, 246, 0.12)"
+          : "1px solid rgba(139, 92, 246, 0.08)",
         backdropFilter: "blur(10px)",
       }}
       initial={{ opacity: 0, scale: 0.8, y: -10 }}
@@ -47,13 +47,19 @@ export const Tag: React.FC<TagProps> = ({ label, index }) => {
       whileHover={{
         scale: 1.05,
         background: isDark
-          ? "rgba(255, 255, 255, 0.08)"
-          : "rgba(0, 0, 0, 0.06)",
+          ? "linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15))"
+          : "linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.12))",
+        borderColor: isDark
+          ? "rgba(139, 92, 246, 0.25)"
+          : "rgba(139, 92, 246, 0.15)",
       }}
     >
-      {/* Subtle shine effect */}
+      {/* Subtle shine effect with purple/blue gradient */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100"
+        className="absolute inset-0 opacity-0 group-hover:opacity-100"
+        style={{
+          background: `linear-gradient(to right, transparent, rgba(var(--accent-purple-primary), 0.1), rgba(var(--accent-blue-primary), 0.1), transparent)`,
+        }}
         initial={{ x: "-100%" }}
         whileHover={{ x: "100%" }}
         transition={{ duration: 0.6 }}
