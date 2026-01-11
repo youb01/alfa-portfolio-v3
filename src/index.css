@@ -159,3 +159,25 @@
     font-family: "Lora", Georgia, serif;
   }
 }
+
+/* Optimize horizontal scroll performance */
+.will-change-transform {
+  will-change: transform;
+}
+
+/* Hide scrollbar but keep functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Optimize rendering for horizontal scroll */
+@media (prefers-reduced-motion: no-preference) {
+  .horizontal-scroll-section {
+    scroll-behavior: smooth;
+  }
+}
