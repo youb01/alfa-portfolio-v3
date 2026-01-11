@@ -19,14 +19,33 @@ export const CTAButton = ({ text, href, showArrow = true }: CTAButtonProps) => {
         href={href}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="group relative inline-flex items-center justify-center px-8 md:px-10 py-4 md:py-5 text-base md:text-lg font-medium text-[rgb(var(--text-inverse))] bg-[rgb(var(--interactive-default))] hover:bg-[rgb(var(--interactive-hover))] rounded-full transition-all duration-300 overflow-hidden"
+        className="group relative inline-flex items-center justify-center px-8 md:px-10 py-4 md:py-5 text-base md:text-lg font-medium text-white rounded-full overflow-hidden"
+        style={{
+          background: `linear-gradient(135deg, rgb(var(--accent-purple-primary)), rgb(var(--accent-blue-primary)))`,
+          boxShadow:
+            "0 8px 32px rgba(139, 92, 246, 0.25), 0 4px 16px rgba(59, 130, 246, 0.15)",
+        }}
       >
-        {/* Button glow effect */}
+        {/* Glassmorphism overlay */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileHover={{ opacity: 1 }}
+          transition={{ duration: 0.4 }}
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(135deg, rgb(var(--accent-purple-dark)), rgb(var(--accent-blue-dark)))`,
+          }}
+        />
+
+        {/* Button glow effect with purple/blue */}
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
-          whileHover={{ scale: 1.5, opacity: 0.2 }}
+          whileHover={{ scale: 1.5, opacity: 0.3 }}
           transition={{ duration: 0.4 }}
-          className="absolute inset-0 bg-white rounded-full"
+          className="absolute inset-0 rounded-full"
+          style={{
+            background: `radial-gradient(circle, rgba(255, 255, 255, 0.5), transparent)`,
+          }}
         />
 
         <span className="relative z-10">{text}</span>

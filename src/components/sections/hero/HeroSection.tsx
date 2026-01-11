@@ -20,55 +20,100 @@ export const Hero = ({ socialLinks }: HeroProps) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-12 items-start lg:items-center">
           {/* Left Column - Info (Desktop only) */}
           <div className="hidden lg:block lg:col-span-3 space-y-10">
-            {/* Biography */}
+            {/* Biography Card with Glassmorphism */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{
+                y: -4,
+                boxShadow:
+                  "0 20px 60px rgba(139, 92, 246, 0.2), 0 12px 32px rgba(59, 130, 246, 0.15)",
+              }}
+              className="p-6 rounded-2xl"
+              style={{
+                background: "rgba(var(--glass-bg-medium))",
+                backdropFilter: "blur(12px) saturate(150%)",
+                border: "1px solid rgba(var(--glass-border))",
+                boxShadow:
+                  "0 8px 32px rgba(139, 92, 246, 0.12), 0 4px 16px rgba(59, 130, 246, 0.08)",
+              }}
             >
-              <h3 className="text-[10px] font-bold text-[rgb(var(--text-tertiary))] uppercase tracking-[0.15em] mb-3">
+              <h3
+                className="text-[10px] font-bold uppercase tracking-[0.15em] mb-3 bg-gradient-to-r from-[rgb(var(--accent-purple-primary))] to-[rgb(var(--accent-blue-primary))] bg-clip-text text-transparent"
+              >
                 Biography
               </h3>
-              <p className="text-sm text-[rgb(var(--text-secondary))] leading-relaxed max-w-[240px] font-serif">
+              <p className="text-sm text-[rgb(var(--text-secondary))] leading-relaxed font-serif">
                 I'm an 21-year-old guy from the Netherlands, currently studying
                 Computer Science at the University of Applied Sciences in The
                 Hague.
               </p>
             </motion.div>
 
-            {/* Contact */}
+            {/* Contact Card with Glassmorphism */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
+              whileHover={{
+                y: -4,
+                boxShadow:
+                  "0 20px 60px rgba(59, 130, 246, 0.2), 0 12px 32px rgba(139, 92, 246, 0.15)",
+              }}
+              className="p-6 rounded-2xl"
+              style={{
+                background: "rgba(var(--glass-bg-medium))",
+                backdropFilter: "blur(12px) saturate(150%)",
+                border: "1px solid rgba(var(--glass-border))",
+                boxShadow:
+                  "0 8px 32px rgba(59, 130, 246, 0.12), 0 4px 16px rgba(139, 92, 246, 0.08)",
+              }}
             >
-              <h3 className="text-[10px] font-bold text-[rgb(var(--text-tertiary))] uppercase tracking-[0.15em] mb-3">
+              <h3
+                className="text-[10px] font-bold uppercase tracking-[0.15em] mb-3 bg-gradient-to-r from-[rgb(var(--accent-blue-primary))] to-[rgb(var(--accent-purple-secondary))] bg-clip-text text-transparent"
+              >
                 Contact
               </h3>
               <div className="space-y-1 text-sm text-[rgb(var(--text-secondary))] font-serif">
                 <p>Leiden, the Netherlands</p>
                 <a
                   href="mailto:alfa@gmail.com"
-                  className="block hover:text-[rgb(var(--text-primary))] transition-colors"
+                  className="block hover:text-[rgb(var(--accent-purple-primary))] transition-colors"
                 >
                   alfa@gmail.com
                 </a>
                 <a
                   href="tel:+31612345678"
-                  className="block hover:text-[rgb(var(--text-primary))] transition-colors"
+                  className="block hover:text-[rgb(var(--accent-blue-primary))] transition-colors"
                 >
                   +31612345678
                 </a>
               </div>
             </motion.div>
 
-            {/* Projects */}
+            {/* Projects Card with Glassmorphism */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
+              whileHover={{
+                y: -4,
+                boxShadow:
+                  "0 20px 60px rgba(167, 139, 250, 0.2), 0 12px 32px rgba(96, 165, 250, 0.15)",
+              }}
+              className="p-6 rounded-2xl"
+              style={{
+                background: "rgba(var(--glass-bg-medium))",
+                backdropFilter: "blur(12px) saturate(150%)",
+                border: "1px solid rgba(var(--glass-border))",
+                boxShadow:
+                  "0 8px 32px rgba(167, 139, 250, 0.12), 0 4px 16px rgba(96, 165, 250, 0.08)",
+              }}
             >
-              <h3 className="text-[10px] font-bold text-[rgb(var(--text-tertiary))] uppercase tracking-[0.15em] mb-3">
+              <h3
+                className="text-[10px] font-bold uppercase tracking-[0.15em] mb-3 bg-gradient-to-r from-[rgb(var(--accent-purple-secondary))] to-[rgb(var(--accent-blue-secondary))] bg-clip-text text-transparent"
+              >
                 Projects
               </h3>
               <div className="space-y-1 text-sm text-[rgb(var(--text-secondary))] font-serif">
@@ -104,15 +149,30 @@ export const Hero = ({ socialLinks }: HeroProps) => {
               </p>
             </motion.div>
 
-            {/* Image with oval frame */}
+            {/* Image with oval frame and glassmorphism */}
             <motion.div
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{
+                scale: 1.05,
+                boxShadow:
+                  "0 20px 60px rgba(139, 92, 246, 0.25), 0 12px 32px rgba(59, 130, 246, 0.2)",
+              }}
               className="relative w-full max-w-[220px] sm:max-w-[240px] md:max-w-[260px] lg:max-w-[280px] mb-6 md:mb-8"
             >
-              {/* Oval frame */}
-              <div className="relative aspect-[5/6] rounded-[50%] overflow-hidden border-[3px] border-[rgb(var(--border-primary))] bg-[rgb(var(--bg-secondary))] shadow-lg">
+              {/* Oval frame with purple/blue gradient border */}
+              <div
+                className="relative aspect-[5/6] rounded-[50%] overflow-hidden bg-[rgb(var(--bg-secondary))]"
+                style={{
+                  border: "3px solid transparent",
+                  backgroundImage: `linear-gradient(rgb(var(--bg-secondary)), rgb(var(--bg-secondary))), linear-gradient(135deg, rgb(var(--accent-purple-primary)), rgb(var(--accent-blue-primary)))`,
+                  backgroundOrigin: "border-box",
+                  backgroundClip: "padding-box, border-box",
+                  boxShadow:
+                    "0 8px 32px rgba(139, 92, 246, 0.15), 0 4px 16px rgba(59, 130, 246, 0.1)",
+                }}
+              >
                 <div className="w-full h-full bg-gradient-to-br from-gray-600 via-gray-700 to-gray-800 dark:from-gray-800 dark:via-gray-900 dark:to-black flex items-center justify-center relative">
                   {/* Grid pattern overlay */}
                   <div className="absolute inset-0 opacity-5">
@@ -204,16 +264,30 @@ export const Hero = ({ socialLinks }: HeroProps) => {
             </motion.div>
           </div>
 
-          {/* Right Column - Stats */}
+          {/* Right Column - Stats with Glassmorphism */}
           <div className="lg:col-span-3 grid grid-cols-3 lg:grid-cols-1 gap-8 lg:gap-12">
             {/* Graduating In */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="text-center lg:text-left"
+              whileHover={{
+                y: -4,
+                boxShadow:
+                  "0 20px 60px rgba(139, 92, 246, 0.25), 0 12px 32px rgba(59, 130, 246, 0.15)",
+              }}
+              className="text-center lg:text-left p-4 lg:p-6 rounded-2xl"
+              style={{
+                background: "rgba(var(--glass-bg-medium))",
+                backdropFilter: "blur(12px) saturate(150%)",
+                border: "1px solid rgba(var(--glass-border))",
+                boxShadow:
+                  "0 8px 32px rgba(139, 92, 246, 0.12), 0 4px 16px rgba(59, 130, 246, 0.08)",
+              }}
             >
-              <h3 className="text-[10px] font-bold text-[rgb(var(--text-tertiary))] uppercase tracking-[0.15em] mb-2">
+              <h3
+                className="text-[10px] font-bold uppercase tracking-[0.15em] mb-2 bg-gradient-to-r from-[rgb(var(--accent-purple-primary))] to-[rgb(var(--accent-blue-primary))] bg-clip-text text-transparent"
+              >
                 Graduating In
               </h3>
               <p className="text-4xl md:text-5xl lg:text-4xl font-black text-[rgb(var(--text-primary))] leading-none">
@@ -226,9 +300,23 @@ export const Hero = ({ socialLinks }: HeroProps) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.7 }}
-              className="text-center lg:text-left"
+              whileHover={{
+                y: -4,
+                boxShadow:
+                  "0 20px 60px rgba(59, 130, 246, 0.25), 0 12px 32px rgba(139, 92, 246, 0.15)",
+              }}
+              className="text-center lg:text-left p-4 lg:p-6 rounded-2xl"
+              style={{
+                background: "rgba(var(--glass-bg-medium))",
+                backdropFilter: "blur(12px) saturate(150%)",
+                border: "1px solid rgba(var(--glass-border))",
+                boxShadow:
+                  "0 8px 32px rgba(59, 130, 246, 0.12), 0 4px 16px rgba(139, 92, 246, 0.08)",
+              }}
             >
-              <h3 className="text-[10px] font-bold text-[rgb(var(--text-tertiary))] uppercase tracking-[0.15em] mb-2">
+              <h3
+                className="text-[10px] font-bold uppercase tracking-[0.15em] mb-2 bg-gradient-to-r from-[rgb(var(--accent-blue-primary))] to-[rgb(var(--accent-purple-secondary))] bg-clip-text text-transparent"
+              >
                 Completed Projects
               </h3>
               <p className="text-4xl md:text-5xl lg:text-4xl font-black text-[rgb(var(--text-primary))] leading-none">
@@ -241,9 +329,23 @@ export const Hero = ({ socialLinks }: HeroProps) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="text-center lg:text-left"
+              whileHover={{
+                y: -4,
+                boxShadow:
+                  "0 20px 60px rgba(167, 139, 250, 0.25), 0 12px 32px rgba(96, 165, 250, 0.15)",
+              }}
+              className="text-center lg:text-left p-4 lg:p-6 rounded-2xl"
+              style={{
+                background: "rgba(var(--glass-bg-medium))",
+                backdropFilter: "blur(12px) saturate(150%)",
+                border: "1px solid rgba(var(--glass-border))",
+                boxShadow:
+                  "0 8px 32px rgba(167, 139, 250, 0.12), 0 4px 16px rgba(96, 165, 250, 0.08)",
+              }}
             >
-              <h3 className="text-[10px] font-bold text-[rgb(var(--text-tertiary))] uppercase tracking-[0.15em] mb-2">
+              <h3
+                className="text-[10px] font-bold uppercase tracking-[0.15em] mb-2 bg-gradient-to-r from-[rgb(var(--accent-purple-secondary))] to-[rgb(var(--accent-blue-secondary))] bg-clip-text text-transparent"
+              >
                 Companies Worked For
               </h3>
               <p className="text-4xl md:text-5xl lg:text-4xl font-black text-[rgb(var(--text-primary))] leading-none">
