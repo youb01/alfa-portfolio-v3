@@ -28,6 +28,15 @@ export const designSystem = {
         hover: "#374151",
         active: "#1F2937",
       },
+      // Accent Colors - Purple/Blue System
+      accent: {
+        purplePrimary: "#8B5CF6",
+        purpleSecondary: "#A78BFA",
+        bluePrimary: "#3B82F6",
+        blueSecondary: "#60A5FA",
+        gradientFrom: "#8B5CF6",
+        gradientTo: "#3B82F6",
+      },
     },
     dark: {
       // Backgrounds
@@ -57,6 +66,63 @@ export const designSystem = {
         hover: "#E5E7EB",
         active: "#D1D5DB",
       },
+      // Accent Colors - Purple/Blue System (same as light)
+      accent: {
+        purplePrimary: "#8B5CF6",
+        purpleSecondary: "#A78BFA",
+        bluePrimary: "#3B82F6",
+        blueSecondary: "#60A5FA",
+        gradientFrom: "#8B5CF6",
+        gradientTo: "#3B82F6",
+      },
+    },
+  },
+
+  // Glassmorphism Effects
+  glassmorphism: {
+    light: {
+      background: "rgba(255, 255, 255, 0.7)",
+      backgroundMedium: "rgba(255, 255, 255, 0.8)",
+      backgroundHeavy: "rgba(255, 255, 255, 0.85)",
+      border: "rgba(255, 255, 255, 0.1)",
+      borderMedium: "rgba(255, 255, 255, 0.15)",
+      borderHeavy: "rgba(255, 255, 255, 0.2)",
+      blur: "blur(12px)",
+      blurMedium: "blur(16px)",
+      blurHeavy: "blur(20px)",
+      saturate: "saturate(150%)",
+      saturateMedium: "saturate(160%)",
+      saturateHeavy: "saturate(170%)",
+    },
+    dark: {
+      background: "rgba(15, 17, 20, 0.7)",
+      backgroundMedium: "rgba(15, 17, 20, 0.8)",
+      backgroundHeavy: "rgba(15, 17, 20, 0.85)",
+      border: "rgba(255, 255, 255, 0.1)",
+      borderMedium: "rgba(255, 255, 255, 0.15)",
+      borderHeavy: "rgba(255, 255, 255, 0.2)",
+      blur: "blur(12px)",
+      blurMedium: "blur(16px)",
+      blurHeavy: "blur(20px)",
+      saturate: "saturate(150%)",
+      saturateMedium: "saturate(160%)",
+      saturateHeavy: "saturate(170%)",
+    },
+  },
+
+  // Depth/Elevation System
+  depth: {
+    level1: {
+      shadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
+      accentShadow: "0 0 0 1px rgba(139, 92, 246, 0.05)",
+    },
+    level2: {
+      shadow: "0 8px 16px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)",
+      accentShadow: "0 0 0 1px rgba(139, 92, 246, 0.08)",
+    },
+    level3: {
+      shadow: "0 20px 40px rgba(0, 0, 0, 0.15), 0 8px 16px rgba(0, 0, 0, 0.1)",
+      accentShadow: "0 0 0 1px rgba(59, 130, 246, 0.1)",
     },
   },
 

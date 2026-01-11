@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import React from "react";
+import { ACCENT_COLORS, ANIMATION_TIMINGS } from "../../../constants/design_system";
 
 interface TagProps {
   label: string;
@@ -34,26 +35,35 @@ export const Tag: React.FC<TagProps> = ({ label, index }) => {
         border: isDark
           ? "1px solid rgba(255, 255, 255, 0.08)"
           : "1px solid rgba(0, 0, 0, 0.08)",
-        backdropFilter: "blur(10px)",
+        backdropFilter: "blur(10px) saturate(150%)",
       }}
       initial={{ opacity: 0, scale: 0.8, y: -10 }}
       whileInView={{ opacity: 1, scale: 1, y: 0 }}
       transition={{
         delay: index * 0.05,
         duration: 0.4,
-        ease: [0.22, 1, 0.36, 1],
+        ease: ANIMATION_TIMINGS.custom,
       }}
       viewport={{ once: true }}
       whileHover={{
         scale: 1.05,
-        background: isDark
-          ? "rgba(255, 255, 255, 0.08)"
-          : "rgba(0, 0, 0, 0.06)",
+        transition: { duration: ANIMATION_TIMINGS.fast },
       }}
     >
-      {/* Subtle shine effect */}
+      {/* Purple/Blue gradient glow on hover */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100"
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{
+          background: ACCENT_COLORS.gradient.purpleToBlueSoft,
+        }}
+      />
+
+      {/* Shimmer effect */}
+      <motion.div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100"
+        style={{
+          background: `linear-gradient(90deg, transparent, ${ACCENT_COLORS.purple.primaryRgba(0.3)}, ${ACCENT_COLORS.blue.primaryRgba(0.3)}, transparent)`,
+        }}
         initial={{ x: "-100%" }}
         whileHover={{ x: "100%" }}
         transition={{ duration: 0.6 }}

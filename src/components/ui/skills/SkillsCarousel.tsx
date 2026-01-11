@@ -2,6 +2,7 @@ import React, { useRef, useLayoutEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { skillsData } from "../../sections/data/SkillsData";
 import { SkillCard } from "./SkillCard";
+import { ACCENT_COLORS } from "../../../constants/design_system";
 
 export const HorizontalScrollContainer: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -46,11 +47,42 @@ export const HorizontalScrollContainer: React.FC = () => {
 
   const x = useTransform(scrollYProgress, [0, 1], [0, -scrollLength]);
 
-  // Mobile:  vertical scroll
+  // Mobile: vertical scroll
   if (isMobile) {
     return (
       <section className="relative py-12 px-6">
-        <div className="flex flex-col gap-8 max-w-2xl mx-auto">
+        {/* Purple/Blue ambient gradient background for mobile */}
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
+          <motion.div
+            className="absolute top-1/4 left-1/4 w-[400px] h-[400px] rounded-full blur-[100px]"
+            style={{ background: ACCENT_COLORS.purple.primaryRgba(0.3) }}
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            transition={{
+              duration: 12,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full blur-[120px]"
+            style={{ background: ACCENT_COLORS.blue.primaryRgba(0.3) }}
+            animate={{
+              scale: [1.3, 1, 1.3],
+              opacity: [0.6, 0.3, 0.6],
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2,
+            }}
+          />
+        </div>
+
+        <div className="flex flex-col gap-8 max-w-2xl mx-auto relative z-10">
           {skillsData.map((skill, index) => (
             <SkillCard key={skill.id} skill={skill} index={index} />
           ))}
@@ -68,13 +100,16 @@ export const HorizontalScrollContainer: React.FC = () => {
     >
       {/* Sticky container */}
       <div className="sticky top-0 h-screen overflow-hidden flex items-center">
-        {/* Subtle animated background - monochrome */}
+        {/* Purple/Blue animated background gradients */}
         <div className="absolute inset-0 opacity-20">
           <motion.div
-            className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[rgb(var(--text-primary))]/5 rounded-full blur-[100px]"
+            className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full blur-[120px]"
+            style={{ background: ACCENT_COLORS.purple.primaryRgba(0.4) }}
             animate={{
               scale: [1, 1.3, 1],
               opacity: [0.3, 0.6, 0.3],
+              x: [0, 100, 0],
+              y: [0, -50, 0],
             }}
             transition={{
               duration: 12,
@@ -83,16 +118,36 @@ export const HorizontalScrollContainer: React.FC = () => {
             }}
           />
           <motion.div
-            className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-[rgb(var(--text-secondary))]/5 rounded-full blur-[120px]"
+            className="absolute bottom-1/4 right-1/4 w-[700px] h-[700px] rounded-full blur-[140px]"
+            style={{ background: ACCENT_COLORS.blue.primaryRgba(0.4) }}
             animate={{
               scale: [1.3, 1, 1.3],
               opacity: [0.6, 0.3, 0.6],
+              x: [0, -100, 0],
+              y: [0, 50, 0],
             }}
             transition={{
               duration: 15,
               repeat: Infinity,
               ease: "easeInOut",
               delay: 2,
+            }}
+          />
+          <motion.div
+            className="absolute top-1/2 left-1/2 w-[500px] h-[500px] rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2"
+            style={{
+              background: `linear-gradient(135deg, ${ACCENT_COLORS.purple.secondaryRgba(0.3)}, ${ACCENT_COLORS.blue.secondaryRgba(0.3)})`,
+            }}
+            animate={{
+              scale: [1.2, 0.8, 1.2],
+              opacity: [0.4, 0.7, 0.4],
+              rotate: [0, 180, 360],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 4,
             }}
           />
         </div>
