@@ -43,6 +43,13 @@ function App() {
       <Preloader isLoading={isLoading} onComplete={handleComplete} />
       <CustomCursor />
 
+      {/* Navbar lives outside the animated wrapper so its fixed elements
+          are positioned relative to the true viewport, not a framer-motion
+          transformed containing block. */}
+      {isComplete && (
+        <Navbar navItems={navItems} socialLinks={socialLinks} />
+      )}
+
       <AnimatePresence>
         {isComplete && (
           <motion.div
@@ -51,7 +58,6 @@ function App() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="min-h-screen bg-[rgb(var(--bg-primary))]"
           >
-            <Navbar navItems={navItems} socialLinks={socialLinks} />
 
             {/* Hero Section */}
             <Hero socialLinks={socialLinks} />
