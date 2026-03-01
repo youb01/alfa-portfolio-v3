@@ -7,6 +7,7 @@ import { usePreloader } from "./hooks/usePreLoader";
 import type { NavItem, SocialLink } from "./types";
 import { AboutSection } from "./components/sections/about/AboutSection";
 import { SkillsSection } from "./components/sections/skills/SkillsSection";
+import { ProjectsSection } from "./components/sections/projects/ProjectsSection";
 import { CustomCursor } from "./components/ui/cursor/CustomCursor";
 import { BackgroundLines } from "./components/ui/backgrounds/BackgroundLines";
 
@@ -92,20 +93,8 @@ function App() {
               </div>
             </section>
 
-            <section
-              id="projects"
-              className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
-            >
-              <BackgroundLines />
-              <div className="relative z-10 text-center px-4">
-                <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
-                  Projects
-                </h2>
-                <p className="text-[rgb(var(--text-secondary))] text-lg">
-                  My latest work
-                </p>
-              </div>
-            </section>
+            {/* Projects Section */}
+            <ProjectsSection />
 
             <section
               id="contact"
