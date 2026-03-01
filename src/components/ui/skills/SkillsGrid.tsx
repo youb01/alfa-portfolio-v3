@@ -1,176 +1,144 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { skillsData } from "../../sections/data/SkillsData";
-import type { SkillCategory } from "../../sections/data/SkillsData";
-import { SkillCard } from "./SkillCard";
-
-type FilterTab = "all" | SkillCategory;
-
-interface Tab {
-  id: FilterTab;
-  label: string;
-}
-
-const TABS: Tab[] = [
-  { id: "all", label: "All" },
-  { id: "design", label: "Design" },
-  { id: "development", label: "Development" },
-  { id: "soft", label: "Soft Skills" },
-];
-
-const getCategoryCount = (cat: FilterTab): number =>
-  cat === "all"
-    ? skillsData.length
-    : skillsData.filter((s) => s.category === cat).length;
+import React from "react";
+import { motion } from "framer-motion";
+import { skillRows } from "../../sections/data/SkillsData";
+import { getTechIcon } from "./techIconMap";
 
 export const SkillsGrid: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<FilterTab>("all");
+  const [isDark, setIsDark] = React.useState(
+    document.documentElement.classList.contains("dark")
+  );
 
-  const filteredSkills =
-    activeTab === "all"
-      ? skillsData
-      : skillsData.filter((s) => s.category === activeTab);
+  React.useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains("dark"));
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  const sep = isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)";
 
   return (
-    <div className="pb-24 lg:pb-40 relative">
-      {/* Subtle depth orbs */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <motion.div
-          className="absolute top-1/3 left-[10%] w-[500px] h-[500px] rounded-full blur-[130px]"
-          style={{ background: "rgb(var(--text-primary) / 0.022)" }}
-          animate={{ scale: [1, 1.25, 1], opacity: [0.6, 1, 0.6] }}
-          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-1/3 right-[10%] w-[420px] h-[420px] rounded-full blur-[110px]"
-          style={{ background: "rgb(var(--text-secondary) / 0.018)" }}
-          animate={{ scale: [1.25, 1, 1.25], opacity: [1, 0.5, 1] }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 4,
-          }}
-        />
-      </div>
+    <div className="pb-24 lg:pb-40 max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
+      {skillRows.map((row, i) => (
+        <React.Fragment key={row.id}>
+          {/* Animated separator */}
+          <motion.div
+            className="h-[1px] origin-left"
+            style={{ background: sep }}
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{
+              duration: 0.9,
+              delay: 0.05,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          />
 
-      {/* ── Filter tabs ────────────────────────────────────────────────── */}
-      <div className="max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16 mb-12 md:mb-16">
-        <div
-          className="inline-flex items-center gap-1.5 p-1.5 rounded-full"
-          style={{
-            background: "rgb(var(--bg-tertiary))",
-            border: "1px solid rgb(var(--border-primary))",
-          }}
-          role="tablist"
-          aria-label="Filter skills by category"
-        >
-          {TABS.map((tab) => {
-            const isActive = activeTab === tab.id;
-            const count = getCategoryCount(tab.id);
-
-            return (
-              <button
-                key={tab.id}
-                role="tab"
-                aria-selected={isActive}
-                onClick={() => setActiveTab(tab.id)}
-                className="relative flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold tracking-wide transition-colors duration-200 outline-none"
-              >
-                {/* Sliding active pill */}
-                {isActive && (
-                  <motion.div
-                    layoutId="activeSkillTab"
-                    className="absolute inset-0 rounded-full"
-                    style={{ background: "rgb(var(--text-primary))" }}
-                    transition={{
-                      type: "spring",
-                      bounce: 0.18,
-                      duration: 0.48,
-                    }}
-                  />
-                )}
-
-                <span
-                  className="relative z-10 transition-colors duration-200 whitespace-nowrap"
-                  style={{
-                    color: isActive
-                      ? "rgb(var(--bg-primary))"
-                      : "rgb(var(--text-secondary))",
-                  }}
-                >
-                  {tab.label}
-                </span>
-
-                {/* Count badge */}
-                <span
-                  className="relative z-10 flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full text-xs font-bold"
-                  style={{
-                    background: isActive
-                      ? "rgb(var(--bg-primary) / 0.2)"
-                      : "rgb(var(--bg-elevated))",
-                    color: isActive
-                      ? "rgb(var(--bg-primary))"
-                      : "rgb(var(--text-tertiary))",
-                  }}
-                >
-                  {count}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Result count */}
-        <AnimatePresence mode="wait">
-          <motion.p
-            key={activeTab}
-            className="mt-5 text-sm font-medium"
-            style={{ color: "rgb(var(--text-tertiary))" }}
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.2 }}
-          >
-            {filteredSkills.length === skillsData.length
-              ? `Showing all ${filteredSkills.length} skills`
-              : `${filteredSkills.length} skill${filteredSkills.length !== 1 ? "s" : ""} in this category`}
-          </motion.p>
-        </AnimatePresence>
-      </div>
-
-      {/* ── Cards grid ─────────────────────────────────────────────────── */}
-      <div className="max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
-        <motion.div
-          layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-7"
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredSkills.map((skill, index) => (
-              <motion.div
-                key={skill.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9, y: 24 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.88, y: -10 }}
-                transition={{
-                  duration: 0.38,
-                  delay: index * 0.05,
-                  ease: [0.22, 1, 0.36, 1] as [
-                    number,
-                    number,
-                    number,
-                    number,
-                  ],
+          {/* Row */}
+          <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-8 md:gap-16 py-10 md:py-14">
+            {/* Left: number · category · tagline */}
+            <motion.div
+              className="flex flex-col gap-1.5"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{
+                duration: 0.65,
+                delay: 0.1,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              <span
+                className="text-[10px] font-black uppercase tracking-[0.35em]"
+                style={{
+                  color: isDark ? "rgba(255,255,255,0.18)" : "rgba(0,0,0,0.18)",
                 }}
-                className="min-h-[460px] lg:min-h-[500px]"
               >
-                <SkillCard skill={skill} index={index} />
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
-      </div>
+                {row.number}
+              </span>
+              <h3
+                className="text-3xl md:text-4xl font-extrabold tracking-tight leading-none mt-1"
+                style={{
+                  color: isDark ? "rgba(255,255,255,0.92)" : "rgba(0,0,0,0.88)",
+                }}
+              >
+                {row.category}
+              </h3>
+              <p
+                className="text-sm leading-relaxed mt-2"
+                style={{
+                  color: isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.38)",
+                }}
+              >
+                {row.tagline}
+              </p>
+            </motion.div>
+
+            {/* Right: tool badges */}
+            <div className="flex flex-wrap content-center gap-2">
+              {row.tools.map((tool, j) => {
+                const IconComp = getTechIcon(tool);
+                return (
+                  <motion.span
+                    key={tool}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] font-semibold tracking-wide cursor-default"
+                    style={{
+                      color: isDark
+                        ? "rgba(255,255,255,0.6)"
+                        : "rgba(0,0,0,0.58)",
+                      background: isDark
+                        ? "rgba(255,255,255,0.04)"
+                        : "rgba(0,0,0,0.03)",
+                      border: `1px solid ${
+                        isDark ? "rgba(255,255,255,0.09)" : "rgba(0,0,0,0.08)"
+                      }`,
+                    }}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{
+                      duration: 0.45,
+                      delay: 0.15 + j * 0.05,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    whileHover={{
+                      background: isDark
+                        ? "rgba(255,255,255,0.09)"
+                        : "rgba(0,0,0,0.07)",
+                      color: isDark
+                        ? "rgba(255,255,255,0.88)"
+                        : "rgba(0,0,0,0.8)",
+                    }}
+                  >
+                    {IconComp && (
+                      <IconComp
+                        size={11}
+                        style={{ flexShrink: 0, opacity: 0.7 }}
+                      />
+                    )}
+                    {tool}
+                  </motion.span>
+                );
+              })}
+            </div>
+          </div>
+        </React.Fragment>
+      ))}
+
+      {/* Bottom separator */}
+      <motion.div
+        className="h-[1px] origin-left"
+        style={{ background: sep }}
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+      />
     </div>
   );
 };
