@@ -3,35 +3,36 @@ import React, { useRef } from "react";
 import { timelineEvents } from "../data/QualificationsData";
 import { SectionHeader } from "../../ui/SectionHeader";
 import { TimelineItem } from "../../ui/timeline/TimelineItem";
+import { BackgroundLines } from "../../ui/backgrounds/BackgroundLines";
 
 export const QualificationsSection: React.FC = () => {
+  /*
+   * Two separate refs:
+   *   sectionRef → the <section> element (for the id anchor)
+   *   trackRef   → only the items container (for accurate scroll progress)
+   *
+   * Using trackRef means progress = 0 when the first dot reaches the
+   * viewport centre, and 1 when the last dot does — not when the section
+   * header first enters the viewport.
+   */
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
-  /*
-   * Scroll progress scoped to this section.
-   * offset[0] = "section top at 90 % of viewport" → user is just arriving
-   * offset[1] = "section bottom at 10 % of viewport" → user has scrolled through
-   */
   const { scrollYProgress: rawProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start 0.9", "end 0.1"],
+    target: trackRef,
+    // "start center" → track top aligns with viewport centre (first dot visible)
+    // "end center"   → track bottom aligns with viewport centre (last dot visible)
+    offset: ["start center", "end center"],
   });
 
-  /*
-   * Light spring smoothing — removes jitter on fast scrolls while staying
-   * very responsive. stiffness/damping tuned for near-instant response.
-   */
+  // Tight spring so the bar feels snappy but never jittery
   const progress = useSpring(rawProgress, {
-    stiffness: 280,
-    damping: 40,
+    stiffness: 320,
+    damping: 45,
     restDelta: 0.001,
   });
 
-  /*
-   * Map progress [0→1] to scaleY [0→1].
-   * The fill bar uses transformOrigin "center top" so it grows downward.
-   */
+  // scaleY [0 → 1] with transformOrigin "center top" grows the bar downward
   const trackFill = useTransform(progress, [0, 1], [0, 1]);
 
   return (
@@ -40,8 +41,10 @@ export const QualificationsSection: React.FC = () => {
       id="qualifications"
       className="relative bg-[rgb(var(--bg-primary))] overflow-hidden"
     >
+      <BackgroundLines />
+
       {/* ── Section header ─────────────────────────────────────────────── */}
-      <div className="pt-20 md:pt-28 lg:pt-36 pb-16 md:pb-20">
+      <div className="relative z-10 pt-20 md:pt-28 lg:pt-36 pb-16 md:pb-20">
         <div className="max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
           <SectionHeader
             number="03"
@@ -53,42 +56,41 @@ export const QualificationsSection: React.FC = () => {
       </div>
 
       {/* ── Timeline ───────────────────────────────────────────────────── */}
-      <div className="pb-28 lg:pb-40">
+      <div className="relative z-10 pb-28 lg:pb-40">
         <div className="max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
           {/*
-           * Outer relative container: the scroll-driven track is positioned
-           * absolutely inside here, spanning the full height of the items.
+           * trackRef lives here — this is the scroll-progress target.
+           * The absolute track line is positioned inside this container.
+           *
+           * Mobile  : line at left-[10px]  (centre of the 20 px dot lane)
+           * Desktop : line at left-1/2     (centre of the 80 px dot column)
            */}
           <div ref={trackRef} className="relative">
-            {/* ── Center track ─────────────────────────────────────────── */}
-            {/*
-             * Mobile  : left-[10px]  — aligned with the 20 px dot-lane centre
-             * Desktop : left-1/2     — aligned with the 80 px dot-column centre
-             *
-             * top-6 / bottom-6 keeps the line from overshooting the first/last dot.
-             */}
+            {/* ── Vertical track ───────────────────────────────────────── */}
             <div
+              aria-hidden
               className="
-                absolute top-6 bottom-6 w-[1px]
+                absolute top-[56px] bottom-[56px] w-[1px]
                 left-[10px]
                 md:left-1/2 md:-translate-x-px
                 pointer-events-none
               "
               style={{ background: "rgb(var(--border-primary))" }}
             >
-              {/* Scroll-driven fill */}
+              {/* Filled portion grows downward as user scrolls */}
               <motion.div
-                className="absolute top-0 left-0 right-0 bottom-0"
+                className="absolute inset-x-0 top-0"
                 style={{
                   scaleY: trackFill,
                   transformOrigin: "center top",
+                  height: "100%",
                   background: "rgb(var(--text-primary))",
-                  opacity: 0.7,
+                  opacity: 0.65,
                 }}
               />
             </div>
 
-            {/* ── Timeline items ───────────────────────────────────────── */}
+            {/* ── Items ────────────────────────────────────────────────── */}
             {timelineEvents.map((event, i) => (
               <TimelineItem key={event.id} event={event} index={i} />
             ))}
