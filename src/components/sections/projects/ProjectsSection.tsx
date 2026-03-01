@@ -46,7 +46,7 @@ export const ProjectsSection: React.FC = () => {
   return (
     <section
       id="projects"
-      className="relative bg-[rgb(var(--bg-primary))]"
+      className="relative overflow-hidden bg-[rgb(var(--bg-primary))]"
     >
       <BackgroundLines />
 
