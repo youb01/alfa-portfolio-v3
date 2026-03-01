@@ -4,9 +4,10 @@ import React from "react";
 interface TagProps {
   label: string;
   index: number;
+  icon?: React.ReactNode;
 }
 
-export const Tag: React.FC<TagProps> = ({ label, index }) => {
+export const Tag: React.FC<TagProps> = ({ label, index, icon }) => {
   const [isDark, setIsDark] = React.useState(
     document.documentElement.classList.contains("dark")
   );
@@ -59,7 +60,10 @@ export const Tag: React.FC<TagProps> = ({ label, index }) => {
         transition={{ duration: 0.6 }}
       />
 
-      <span className="relative z-10">{label}</span>
+      <span className="relative z-10 flex items-center gap-1.5">
+        {icon}
+        {label}
+      </span>
     </motion.span>
   );
 };
