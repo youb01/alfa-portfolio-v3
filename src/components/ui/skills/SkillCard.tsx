@@ -2,6 +2,7 @@ import { motion, useMotionValue, useTransform } from "framer-motion";
 import React from "react";
 import type { Skill } from "../../sections/data/SkillsData";
 import { Tag } from "./Tag";
+import { getTechIcon } from "./techIconMap";
 
 interface SkillCardProps {
   skill: Skill;
@@ -211,9 +212,24 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
 
         {/* Tags — top area, right-padded to clear the badge */}
         <div className="relative z-10 flex flex-wrap gap-2 mb-auto pr-14">
-          {skill.tags.map((tag, tagIndex) => (
-            <Tag key={tag} label={tag} index={tagIndex} />
-          ))}
+          {skill.tags.map((tag, tagIndex) => {
+            const IconComp = getTechIcon(tag);
+            return (
+              <Tag
+                key={tag}
+                label={tag}
+                index={tagIndex}
+                icon={
+                  IconComp ? (
+                    <IconComp
+                      size={11}
+                      style={{ flexShrink: 0, opacity: 0.75 }}
+                    />
+                  ) : undefined
+                }
+              />
+            );
+          })}
         </div>
 
         {/* Large decorative number — very subtle, clipped by overflow-hidden */}
