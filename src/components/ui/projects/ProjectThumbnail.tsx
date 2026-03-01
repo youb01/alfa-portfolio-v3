@@ -124,11 +124,7 @@ const PortfolioEvolutionThumbnail: React.FC<ThumbnailProps> = ({ isDark }) => (
               x={win.x + 8}
               y={win.y + 24 + line * 14}
               width={
-                line === 0
-                  ? win.w - 40
-                  : line === 2
-                    ? win.w - 20
-                    : win.w - 55
+                line === 0 ? win.w - 40 : line === 2 ? win.w - 20 : win.w - 55
               }
               height={line === 0 ? 5 : 3}
               rx="2"
@@ -236,12 +232,8 @@ const DashboardThumbnail: React.FC<ThumbnailProps> = ({ isDark }) => (
             width={card.w}
             height={card.h}
             rx="4"
-            fill={
-              isDark ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.85)"
-            }
-            stroke={
-              isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"
-            }
+            fill={isDark ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.85)"}
+            stroke={isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}
             strokeWidth="0.8"
           />
           {/* Stat line */}
@@ -251,9 +243,7 @@ const DashboardThumbnail: React.FC<ThumbnailProps> = ({ isDark }) => (
             width={card.w * 0.5}
             height="3"
             rx="1.5"
-            fill={
-              isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.12)"
-            }
+            fill={isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.12)"}
           />
           <rect
             x={card.x + 8}
@@ -261,9 +251,7 @@ const DashboardThumbnail: React.FC<ThumbnailProps> = ({ isDark }) => (
             width={card.w * 0.3}
             height="2"
             rx="1"
-            fill={
-              isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)"
-            }
+            fill={isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)"}
           />
         </g>
       ))}
@@ -324,7 +312,7 @@ const AccessibilityThumbnail: React.FC<ThumbnailProps> = ({ isDark }) => (
             r="1"
             fill={isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)"}
           />
-        ))
+        )),
       )}
 
       {/* Concentric ripple rings */}
@@ -439,7 +427,7 @@ const DesignThumbnail: React.FC<ThumbnailProps> = ({ isDark }) => (
             r="1"
             fill={isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.07)"}
           />
-        ))
+        )),
       )}
 
       {/* Abstract brand shapes */}
@@ -500,45 +488,41 @@ const DesignThumbnail: React.FC<ThumbnailProps> = ({ isDark }) => (
           stroke={isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}
           strokeWidth="0.5"
         />
-        {["Frame", "Logo", "Typography", "Colours", "Grid"].map(
-          (layer, i) => (
-            <g key={layer} transform={`translate(0, ${24 + i * 20})`}>
-              <rect
-                x="4"
-                y="0"
-                width="87"
-                height="14"
-                rx="2"
-                fill={
-                  i === 1
-                    ? isDark
-                      ? "rgba(255,255,255,0.08)"
-                      : "rgba(0,0,0,0.06)"
-                    : "transparent"
-                }
-              />
-              <rect
-                x="8"
-                y="4"
-                width="5"
-                height="5"
-                rx="1"
-                fill={isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.18)"}
-              />
-              <text
-                x="18"
-                y="11"
-                fontSize="7"
-                fontFamily="sans-serif"
-                fill={
-                  isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.35)"
-                }
-              >
-                {layer}
-              </text>
-            </g>
-          )
-        )}
+        {["Frame", "Logo", "Typography", "Colours", "Grid"].map((layer, i) => (
+          <g key={layer} transform={`translate(0, ${24 + i * 20})`}>
+            <rect
+              x="4"
+              y="0"
+              width="87"
+              height="14"
+              rx="2"
+              fill={
+                i === 1
+                  ? isDark
+                    ? "rgba(255,255,255,0.08)"
+                    : "rgba(0,0,0,0.06)"
+                  : "transparent"
+              }
+            />
+            <rect
+              x="8"
+              y="4"
+              width="5"
+              height="5"
+              rx="1"
+              fill={isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.18)"}
+            />
+            <text
+              x="18"
+              y="11"
+              fontSize="7"
+              fontFamily="sans-serif"
+              fill={isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.35)"}
+            >
+              {layer}
+            </text>
+          </g>
+        ))}
       </g>
 
       {/* Color palette swatches bottom right */}
