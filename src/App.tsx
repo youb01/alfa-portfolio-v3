@@ -44,12 +44,7 @@ function App() {
       <Preloader isLoading={isLoading} onComplete={handleComplete} />
       <CustomCursor />
 
-      {/* Navbar lives outside the animated wrapper so its fixed elements
-          are positioned relative to the true viewport, not a framer-motion
-          transformed containing block. */}
-      {isComplete && (
-        <Navbar navItems={navItems} socialLinks={socialLinks} />
-      )}
+      {isComplete && <Navbar navItems={navItems} socialLinks={socialLinks} />}
 
       <AnimatePresence>
         {isComplete && (
@@ -59,33 +54,17 @@ function App() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="min-h-screen bg-[rgb(var(--bg-primary))]"
           >
-
             {/* Hero Section */}
             <Hero socialLinks={socialLinks} />
 
             {/* About Section */}
             <AboutSection />
 
-            {/* Skills Section - NEW */}
+            {/* Skills Section */}
             <SkillsSection />
 
             {/* Qualifications Section */}
             <QualificationsSection />
-
-            <section
-              id="services"
-              className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
-            >
-              <BackgroundLines />
-              <div className="relative z-10 text-center px-4">
-                <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
-                  Services
-                </h2>
-                <p className="text-[rgb(var(--text-secondary))] text-lg">
-                  What I can do for you
-                </p>
-              </div>
-            </section>
 
             {/* Projects Section */}
             <ProjectsSection />
