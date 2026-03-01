@@ -70,9 +70,9 @@ export const QualificationsSection: React.FC = () => {
             <div
               aria-hidden
               className="
-                absolute top-[56px] bottom-[56px] w-[1px]
+                absolute top-[56px] bottom-[56px] w-[6px]
                 left-[10px]
-                md:left-1/2 md:-translate-x-px
+                md:left-1/2 md:-translate-x-1/2
                 pointer-events-none
               "
               style={{ background: "rgb(var(--border-primary))" }}

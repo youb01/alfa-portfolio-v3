@@ -61,8 +61,9 @@ function TimelineDot({ animKey }: { animKey: AnimKey }) {
         className="absolute rounded-full"
         style={{ width: 22, height: 22 }}
         animate={{
-          borderColor:
-            isActive ? "rgb(var(--border-hover))" : "rgb(var(--border-primary))",
+          borderColor: isActive
+            ? "rgb(var(--border-hover))"
+            : "rgb(var(--border-primary))",
           borderWidth: 1,
           borderStyle: "solid",
           opacity: isActive ? 0.6 : 0.25,
@@ -219,7 +220,7 @@ function Connector({
   return (
     <motion.div
       aria-hidden
-      className={`absolute top-14 h-[1px] w-10 ${
+      className={`absolute top-14 h-[8px] w-10 ${
         side === "left" ? "right-0" : "left-0"
       }`}
       style={{
@@ -252,7 +253,11 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({ event, index }) => {
     if (isInView && !hasBeenSeen) setHasBeenSeen(true);
   }, [isInView, hasBeenSeen]);
 
-  const animKey: AnimKey = isInView ? "active" : hasBeenSeen ? "past" : "future";
+  const animKey: AnimKey = isInView
+    ? "active"
+    : hasBeenSeen
+      ? "past"
+      : "future";
 
   return (
     <div ref={ref}>
