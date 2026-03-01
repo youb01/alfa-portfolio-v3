@@ -4,7 +4,7 @@ import { HorizontalScrollContainer } from "../../ui/skills/SkillsCarousel";
 
 export const SkillsSection: React.FC = () => {
   return (
-    <section id="skills" className="relative bg-[rgb(var(--bg-primary))]">
+    <section id="skills" className="relative bg-[rgb(var(--bg-primary))]" style={{ overflowX: "clip" }}>
       {/* Section Header - Fixed */}
       <div className="relative z-20 bg-[rgb(var(--bg-primary))] pt-20 md:pt-28 lg:pt-36 pb-12 md:pb-16">
         <div className="max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
