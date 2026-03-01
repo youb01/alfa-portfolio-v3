@@ -87,7 +87,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
 
   return (
     <motion.div
-      className="relative group cursor-pointer"
+      className="relative group cursor-pointer h-full"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{
@@ -115,7 +115,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
 
       {/* Card */}
       <motion.div
-        className="relative flex flex-col rounded-2xl overflow-hidden backdrop-blur-xl"
+        className="relative flex flex-col h-full rounded-2xl overflow-hidden backdrop-blur-xl"
         style={{
           background: cardBg,
           border: `1px solid ${cardBorder}`,
