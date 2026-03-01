@@ -7,11 +7,11 @@ import { BackgroundLines } from "../../ui/backgrounds/BackgroundLines";
 
 type FilterOption = "All" | ProjectCategory;
 
+// Automatically derived from projectsData — add new projects and categories
+// will appear in the filter tabs without any changes here.
 const filterOptions: FilterOption[] = [
   "All",
-  "Frontend",
-  "Fullstack",
-  "UI/UX Design",
+  ...Array.from(new Set(projectsData.map((p) => p.category))),
 ];
 
 export const ProjectsSection: React.FC = () => {
