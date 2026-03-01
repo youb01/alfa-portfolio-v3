@@ -102,6 +102,7 @@
   html {
     scroll-behavior: smooth;
     color-scheme: light;
+    overflow-x: hidden;
   }
 
   html.dark {
@@ -114,6 +115,7 @@
       sans-serif;
     background-color: rgb(var(--bg-primary));
     color: rgb(var(--text-primary));
+    overflow-x: hidden;
   }
 
   /* Smooth scrollbar */
