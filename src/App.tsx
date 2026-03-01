@@ -5,7 +5,7 @@ import { ProjectDetailPage } from "./pages/ProjectDetailPage";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/alfa-portfolio-v3">
       <CustomCursor />
       <Routes>
         <Route path="/" element={<HomePage />} />
