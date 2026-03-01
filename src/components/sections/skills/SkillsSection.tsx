@@ -18,15 +18,6 @@ export const SkillsSection: React.FC = () => {
             titleMuted="and Experience"
             subtitle="Technical expertise meets human-centred thinking — from pixels to production, and everything in between."
           />
-
-          {/* Divider */}
-          <div
-            className="h-[1px] max-w-3xl mt-2"
-            style={{
-              background:
-                "linear-gradient(to right, rgb(var(--border-primary)), rgb(var(--border-hover)), transparent)",
-            }}
-          />
         </div>
       </div>
 
