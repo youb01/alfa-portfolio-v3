@@ -8,6 +8,7 @@ import type { NavItem, SocialLink } from "./types";
 import { AboutSection } from "./components/sections/about/AboutSection";
 import { SkillsSection } from "./components/sections/skills/SkillsSection";
 import { ProjectsSection } from "./components/sections/projects/ProjectsSection";
+import { QualificationsSection } from "./components/sections/qualifications/QualificationsSection";
 import { CustomCursor } from "./components/ui/cursor/CustomCursor";
 import { BackgroundLines } from "./components/ui/backgrounds/BackgroundLines";
 
@@ -68,21 +69,8 @@ function App() {
             {/* Skills Section - NEW */}
             <SkillsSection />
 
-            {/* Other sections */}
-            <section
-              id="qualifications"
-              className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
-            >
-              <BackgroundLines />
-              <div className="relative z-10 text-center px-4">
-                <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
-                  Qualifications
-                </h2>
-                <p className="text-[rgb(var(--text-secondary))] text-lg">
-                  Education and experience
-                </p>
-              </div>
-            </section>
+            {/* Qualifications Section */}
+            <QualificationsSection />
 
             <section
               id="services"
