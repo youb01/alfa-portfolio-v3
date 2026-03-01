@@ -46,7 +46,7 @@ export const projectsData: Project[] = [
     title: "GetMore Systems",
     subtitle: "Internship Project",
     description:
-      "Built internal tooling and responsive dashboards during a professional internship. Developed scalable APIs and interfaces that streamlined company workflows.",
+      "Worked as a software developer intern at GetMore Systems, a company specializing in software solutions for the financial industry. Contributed to the development of a client dashboard application using Angular and .NET, improving user experience and functionality. Collaborated with a team of 3 to implement new features, fix bugs, and optimize performance, gaining valuable hands-on experience in a professional software development environment.",
     techStack: [
       "Angular",
       ".NET",
@@ -69,7 +69,7 @@ export const projectsData: Project[] = [
     title: "Stichting Accessibility",
     subtitle: "Nonprofit Web Platform",
     description:
-      "Designed and built an inclusive web platform for a nonprofit, ensuring WCAG compliance and a seamless experience for users of all abilities.",
+      "Designed and built an inclusive web platform for a nonprofit, ensuring WCAG compliance and a seamless experience for users of all abilities. We implemented features within the web platform to provide a way for users to get in contact with companies that are searching for accessibility consultants. The project involved setting up a .NET backend with ASP.NET Core, creating a responsive frontend with React and TypeScript, and deploying the application on Azure.",
     techStack: [
       "React",
       "Javascript",
@@ -79,26 +79,13 @@ export const projectsData: Project[] = [
       "Azure",
       "SQL Server",
     ],
-    category: "Frontend",
+    category: "Fullstack",
     year: "2024",
     featured: false,
     thumbnailVariant: 2,
   },
   {
     id: "project-04",
-    number: "04",
-    title: "Oak",
-    subtitle: "Brand & UX Design",
-    description:
-      "Designed the complete visual identity and user experience for Oak — from brand strategy to high-fidelity prototypes, crafting a cohesive and elegant product ecosystem.",
-    techStack: ["Figma", "Framer", "Notion", "Midjourney"],
-    category: "UI/UX Design",
-    year: "2022",
-    featured: false,
-    thumbnailVariant: 3,
-  },
-  {
-    id: "project-05",
     number: "05",
     title: "Minecraft Portfolio Website",
     subtitle: "Creative Coding & 3D Design",
