@@ -1,0 +1,98 @@
+import { Navbar } from "../components/layout/Navbar";
+import { Preloader } from "../components/ui/preLoader/PreLoader";
+import { Hero } from "../components/sections/hero/HeroSection";
+import { Linkedin, Github, Mail, Twitter } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { usePreloader } from "../hooks/usePreLoader";
+import type { NavItem, SocialLink } from "../types";
+import { AboutSection } from "../components/sections/about/AboutSection";
+import { SkillsSection } from "../components/sections/skills/SkillsSection";
+import { ProjectsSection } from "../components/sections/projects/ProjectsSection";
+import { QualificationsSection } from "../components/sections/qualifications/QualificationsSection";
+import { BackgroundLines } from "../components/ui/backgrounds/BackgroundLines";
+
+const navItems: NavItem[] = [
+  { label: "Home", href: "#home", number: "01" },
+  { label: "Skills", href: "#skills", number: "02" },
+  { label: "Qualifications", href: "#qualifications", number: "03" },
+  { label: "Services", href: "#services", number: "04" },
+  { label: "Projects", href: "#projects", number: "05" },
+  { label: "Contact Me", href: "#contact", number: "06" },
+];
+
+const socialLinks: SocialLink[] = [
+  {
+    label: "LinkedIn",
+    href: "https://linkedin.com",
+    icon: <Linkedin size={20} />,
+  },
+  { label: "GitHub", href: "https://github.com", icon: <Github size={20} /> },
+  { label: "Email", href: "mailto:alfa@gmail.com", icon: <Mail size={20} /> },
+  {
+    label: "Twitter",
+    href: "https://twitter.com",
+    icon: <Twitter size={20} />,
+  },
+];
+
+export const HomePage: React.FC = () => {
+  const { isLoading, isComplete, handleComplete } = usePreloader();
+
+  return (
+    <>
+      <Preloader isLoading={isLoading} onComplete={handleComplete} />
+
+      {isComplete && (
+        <Navbar navItems={navItems} socialLinks={socialLinks} />
+      )}
+
+      <AnimatePresence>
+        {isComplete && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="min-h-screen bg-[rgb(var(--bg-primary))]"
+          >
+            <Hero socialLinks={socialLinks} />
+            <AboutSection />
+            <SkillsSection />
+            <QualificationsSection />
+
+            <section
+              id="services"
+              className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
+            >
+              <BackgroundLines />
+              <div className="relative z-10 text-center px-4">
+                <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
+                  Services
+                </h2>
+                <p className="text-[rgb(var(--text-secondary))] text-lg">
+                  What I can do for you
+                </p>
+              </div>
+            </section>
+
+            <ProjectsSection />
+
+            <section
+              id="contact"
+              className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
+            >
+              <BackgroundLines />
+              <div className="relative z-10 text-center px-4">
+                <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
+                  Contact
+                </h2>
+                <p className="text-[rgb(var(--text-secondary))] text-lg">
+                  Let's work together
+                </p>
+              </div>
+            </section>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};

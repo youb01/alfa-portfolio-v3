@@ -6,6 +6,7 @@ export type ProjectCategory =
 
 export interface Project {
   id: string;
+  slug: string;
   number: string;
   title: string;
   subtitle: string;
@@ -20,6 +21,7 @@ export interface Project {
 export const projectsData: Project[] = [
   {
     id: "project-01",
+    slug: "portfolio-evolution",
     number: "01",
     title: "Portfolio — Evolution",
     subtitle: "v1 · v2 · v3",
@@ -42,6 +44,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "project-02",
+    slug: "getmore-systems",
     number: "02",
     title: "GetMore Systems",
     subtitle: "Internship Project",
@@ -65,6 +68,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "project-03",
+    slug: "stichting-accessibility",
     number: "03",
     title: "Stichting Accessibility",
     subtitle: "Nonprofit Web Platform",
@@ -86,6 +90,21 @@ export const projectsData: Project[] = [
   },
   {
     id: "project-04",
+    slug: "oak",
+    number: "04",
+    title: "Oak",
+    subtitle: "Brand & UX Design",
+    description:
+      "Designed the complete visual identity and user experience for Oak — from brand strategy to high-fidelity prototypes, crafting a cohesive and elegant product ecosystem.",
+    techStack: ["Figma", "Framer", "Notion", "Midjourney"],
+    category: "UI/UX Design",
+    year: "2022",
+    featured: false,
+    thumbnailVariant: 3,
+  },
+  {
+    id: "project-05",
+    slug: "minecraft-portfolio",
     number: "05",
     title: "Minecraft Portfolio Website",
     subtitle: "Creative Coding & 3D Design",
