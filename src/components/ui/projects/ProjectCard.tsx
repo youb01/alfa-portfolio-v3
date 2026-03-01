@@ -6,6 +6,7 @@ import {
 } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import React from "react";
+import { Link } from "react-router-dom";
 import type { Project } from "../../sections/data/ProjectsData";
 import { Tag } from "../skills/Tag";
 import { ProjectThumbnail } from "./ProjectThumbnail";
@@ -86,6 +87,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
     categoryColors[project.category] ?? categoryColors["Frontend"];
 
   return (
+    <Link
+      to={`/projects/${project.slug}`}
+      className="block h-full"
+      style={{ textDecoration: "none", color: "inherit" }}
+    >
     <motion.div
       className="relative group cursor-pointer h-full"
       initial={{ opacity: 0, y: 40 }}
@@ -301,5 +307,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
         />
       </motion.div>
     </motion.div>
+    </Link>
   );
 };
