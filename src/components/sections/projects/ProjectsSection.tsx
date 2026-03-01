@@ -4,6 +4,7 @@ import { projectsData, type ProjectCategory } from "../data/ProjectsData";
 import { FeaturedProjectCard } from "../../ui/projects/FeaturedProjectCard";
 import { ProjectCard } from "../../ui/projects/ProjectCard";
 import { BackgroundLines } from "../../ui/backgrounds/BackgroundLines";
+import { SectionHeader } from "../../ui/SectionHeader";
 
 type FilterOption = "All" | ProjectCategory;
 
@@ -53,40 +54,7 @@ export const ProjectsSection: React.FC = () => {
       {/* ── Section Header ── */}
       <div className="relative z-10 pt-20 md:pt-28 lg:pt-36 pb-12 md:pb-16">
         <div className="max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="mb-8"
-          >
-            {/* Section label */}
-            <div className="flex items-center gap-4 mb-8">
-              <motion.div
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                viewport={{ once: true }}
-                className="h-[2px] w-12 bg-gradient-to-r from-transparent to-[rgb(var(--border-hover))] origin-right"
-              />
-              <span className="text-xs md:text-sm font-bold text-[rgb(var(--text-tertiary))] uppercase tracking-[0.3em]">
-                05
-              </span>
-              <motion.div
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                viewport={{ once: true }}
-                className="h-[2px] w-12 bg-gradient-to-l from-transparent to-[rgb(var(--border-hover))] origin-left"
-              />
-            </div>
-
-            {/* Main heading */}
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight">
-              <span className="text-[rgb(var(--text-primary))]">Projects </span>
-              <span className="text-[rgb(var(--text-tertiary))]">and Work</span>
-            </h2>
-          </motion.div>
+          <SectionHeader number="05" title="Projects" titleMuted="and Work" />
 
           {/* Divider */}
           <motion.div
@@ -94,7 +62,11 @@ export const ProjectsSection: React.FC = () => {
             whileInView={{ scaleX: 1 }}
             transition={{ delay: 0.4, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             viewport={{ once: true }}
-            className="h-[1px] bg-gradient-to-r from-border-primary via-border-hover to-transparent origin-left max-w-3xl mb-10"
+            className="h-[1px] origin-left max-w-3xl mb-10"
+            style={{
+              background:
+                "linear-gradient(to right, rgb(var(--border-primary)), rgb(var(--border-hover)), transparent)",
+            }}
           />
 
           {/* ── Filter Tabs ── */}
