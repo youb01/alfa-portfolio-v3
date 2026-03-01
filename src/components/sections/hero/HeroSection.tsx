@@ -12,7 +12,6 @@ export const Hero = ({ socialLinks }: HeroProps) => {
       id="home"
       className="relative h-screen snap-start snap-always flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] pt-16 md:pt-20"
     >
-      {/* Background lines for depth */}
       <BackgroundLines />
 
       {/* Main content container */}
@@ -31,8 +30,8 @@ export const Hero = ({ socialLinks }: HeroProps) => {
               </h3>
               <p className="text-sm text-[rgb(var(--text-secondary))] leading-relaxed max-w-[240px] font-serif">
                 I'm an 21-year-old guy from the Netherlands, currently studying
-                Computer Science at the University of Applied Sciences in The
-                Hague.
+                Software Engineering at the University of Applied Sciences in
+                The Hague.
               </p>
             </motion.div>
 
@@ -51,13 +50,13 @@ export const Hero = ({ socialLinks }: HeroProps) => {
                   href="mailto:alfa@gmail.com"
                   className="block hover:text-[rgb(var(--text-primary))] transition-colors"
                 >
-                  alfa@gmail.com
+                  lfatmi.ayoub@gmail.com
                 </a>
                 <a
                   href="tel:+31612345678"
                   className="block hover:text-[rgb(var(--text-primary))] transition-colors"
                 >
-                  +31612345678
+                  +31 6 44 45 95 21
                 </a>
               </div>
             </motion.div>
@@ -72,11 +71,11 @@ export const Hero = ({ socialLinks }: HeroProps) => {
                 Projects
               </h3>
               <div className="space-y-1 text-sm text-[rgb(var(--text-secondary))] font-serif">
-                <p>Portfolio v1 - 2022</p>
-                <p>Oak - 2022</p>
-                <p>Portfolio v2 - 2023</p>
-                <p>Stichting Accessibility - 2024</p>
-                <p>GetMore Systems (Internship) - 2024</p>
+                <p>Portfolio v1/3 | 2022-2025</p>
+                <p>Oak | 2022</p>
+                <p>Stichting Accessibility | 2024</p>
+                <p>GetMore Systems (Internship) | 2024</p>
+                <p>Minecraft Portfolio Project | 2025</p>
               </div>
             </motion.div>
           </div>

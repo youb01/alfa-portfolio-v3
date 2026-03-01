@@ -16,19 +16,23 @@ import {
   SiSpringboot,
   SiWordpress,
   SiWebflow,
-  SiJava,
   SiVite,
   SiNextdotjs,
   SiPostgresql,
   SiAdobexd,
   SiHotjar,
   SiOpenai,
+  SiGit,
+  SiGithub,
+  SiDocker,
+  SiBootstrap,
 } from "react-icons/si";
-
-// Maps a tech/tool name to a react-icons/si component.
-// Icons are rendered with currentColor so they inherit the parent's
-// monochromatic text colour — no extra filtering needed.
-const iconMap: Record<string, React.ComponentType<{ size?: number; style?: React.CSSProperties }>> = {
+import { VscAzureDevops } from "react-icons/vsc";
+import { DiJava, DiSqllite } from "react-icons/di";
+const iconMap: Record<
+  string,
+  React.ComponentType<{ size?: number; style?: React.CSSProperties }>
+> = {
   Figma: SiFigma,
   "Adobe XD": SiAdobexd,
   Framer: SiFramer,
@@ -46,16 +50,22 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; style?: React
   Python: SiPython,
   ".NET": SiDotnet,
   "Spring Boot": SiSpringboot,
-  Java: SiJava,
   WordPress: SiWordpress,
   Webflow: SiWebflow,
   Vite: SiVite,
   "Next.js": SiNextdotjs,
   "Framer Motion": SiFramer,
   PostgreSQL: SiPostgresql,
+  "Azure DevOps": VscAzureDevops,
+  Git: SiGit,
+  GitHub: SiGithub,
+  Docker: SiDocker,
+  Java: DiJava,
+  SQL: DiSqllite,
+  Bootstrap: SiBootstrap,
 };
 
 export const getTechIcon = (
-  name: string
+  name: string,
 ): React.ComponentType<{ size?: number; style?: React.CSSProperties }> | null =>
   iconMap[name] ?? null;
