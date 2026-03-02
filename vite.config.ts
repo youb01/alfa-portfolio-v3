@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
 
   // IMPORTANT: Set base to your repository name
-  base: "/alfa-portfolio-v3/",
+  base: "/",
 
   build: {
     outDir: "dist",
