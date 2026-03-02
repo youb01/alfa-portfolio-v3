@@ -9,8 +9,7 @@ import { AboutSection } from "../components/sections/about/AboutSection";
 import { SkillsSection } from "../components/sections/skills/SkillsSection";
 import { ProjectsSection } from "../components/sections/projects/ProjectsSection";
 import { QualificationsSection } from "../components/sections/qualifications/QualificationsSection";
-import { BackgroundLines } from "../components/ui/backgrounds/BackgroundLines";
-
+import { ContactSection } from "../components/sections/contact/ContactSection";
 const navItems: NavItem[] = [
   { label: "Home", href: "#home", number: "01" },
   { label: "Skills", href: "#skills", number: "02" },
@@ -23,15 +22,23 @@ const navItems: NavItem[] = [
 const socialLinks: SocialLink[] = [
   {
     label: "LinkedIn",
-    href: "https://linkedin.com",
-    icon: <Linkedin size={20} />,
+    href: "https://www.linkedin.com/in/ayoub-l-b93bb8255/",
+    icon: <Linkedin size={20} strokeWidth={1.5} />,
   },
-  { label: "GitHub", href: "https://github.com", icon: <Github size={20} /> },
-  { label: "Email", href: "mailto:alfa@gmail.com", icon: <Mail size={20} /> },
+  {
+    label: "GitHub",
+    href: "https://github.com/youb01",
+    icon: <Github size={20} strokeWidth={1.5} />,
+  },
+  {
+    label: "Email",
+    href: "mailto:lfatmi.ayoub@gmail.com",
+    icon: <Mail size={20} strokeWidth={1.5} />,
+  },
   {
     label: "Twitter",
-    href: "https://twitter.com",
-    icon: <Twitter size={20} />,
+    href: "https://twitter.com/",
+    icon: <Twitter size={20} strokeWidth={1.5} />,
   },
 ];
 
@@ -42,9 +49,7 @@ export const HomePage: React.FC = () => {
     <>
       <Preloader isLoading={isLoading} onComplete={handleComplete} />
 
-      {isComplete && (
-        <Navbar navItems={navItems} socialLinks={socialLinks} />
-      )}
+      {isComplete && <Navbar navItems={navItems} socialLinks={socialLinks} />}
 
       <AnimatePresence>
         {isComplete && (
@@ -59,37 +64,8 @@ export const HomePage: React.FC = () => {
             <SkillsSection />
             <QualificationsSection />
 
-            <section
-              id="services"
-              className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
-            >
-              <BackgroundLines />
-              <div className="relative z-10 text-center px-4">
-                <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
-                  Services
-                </h2>
-                <p className="text-[rgb(var(--text-secondary))] text-lg">
-                  What I can do for you
-                </p>
-              </div>
-            </section>
-
             <ProjectsSection />
-
-            <section
-              id="contact"
-              className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
-            >
-              <BackgroundLines />
-              <div className="relative z-10 text-center px-4">
-                <h2 className="text-5xl font-extrabold text-[rgb(var(--text-primary))] mb-4">
-                  Contact
-                </h2>
-                <p className="text-[rgb(var(--text-secondary))] text-lg">
-                  Let's work together
-                </p>
-              </div>
-            </section>
+            <ContactSection />
           </motion.div>
         )}
       </AnimatePresence>

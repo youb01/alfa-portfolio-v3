@@ -39,7 +39,7 @@ export const ToolBadge: React.FC<ToolBadgeProps> = ({ tool, index }) => {
       }}
     >
       {IconComp && (
-        <IconComp size={16} style={{ flexShrink: 0, opacity: 0.7 }} />
+        <IconComp size={20} style={{ flexShrink: 0, opacity: 0.7 }} />
       )}
       {tool}
     </motion.span>
