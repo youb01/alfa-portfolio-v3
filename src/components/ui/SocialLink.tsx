@@ -25,7 +25,6 @@ export const SocialLinks = ({ links }: SocialLinksProps) => {
             className="relative w-12 h-12 md:w-14 md:h-14 flex items-center justify-center text-text-secondary hover:text-text-primary transition-all duration-200 group"
             aria-label={link.label}
           >
-            {/* Background circle on hover */}
             <motion.div
               className="absolute inset-0 rounded-full bg-bg-tertiary"
               initial={{ scale: 0, opacity: 0 }}
@@ -36,7 +35,6 @@ export const SocialLinks = ({ links }: SocialLinksProps) => {
               transition={{ duration: 0.2 }}
             />
 
-            {/* Outer circle border */}
             <motion.div
               className="absolute inset-0 rounded-full border-2 border-border-primary"
               animate={{
