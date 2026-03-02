@@ -1,0 +1,91 @@
+import { Mail, MapPin, Phone, Linkedin, Github, Twitter } from "lucide-react";
+
+export interface ContactMethod {
+  id: string;
+  icon: React.ComponentType<{ size: number; strokeWidth?: number }>;
+  label: string;
+  value: string;
+  href: string;
+  type: "email" | "phone" | "location" | "social";
+}
+
+export interface ContactLink {
+  id: string;
+  label: string;
+  href: string;
+  icon:
+    | React.ReactNode
+    | React.ComponentType<{ size?: number; strokeWidth?: number }>;
+}
+
+export interface SocialLink {
+  id: string;
+  label: string;
+  href: string;
+  icon: React.ReactNode;
+}
+
+export const contactMethods: ContactMethod[] = [
+  {
+    id: "email",
+    icon: Mail,
+    label: "Email",
+    value: "lfatmi.ayoub@gmail.com",
+    href: "mailto:lfatmi.ayoub@gmail.com",
+    type: "email",
+  },
+  {
+    id: "phone",
+    icon: Phone,
+    label: "Phone",
+    value: "+31 6 44 45 95 21",
+    href: "tel:+31644459521",
+    type: "phone",
+  },
+  {
+    id: "location",
+    icon: MapPin,
+    label: "Location",
+    value: "Leiden, Netherlands",
+    href: "#",
+    type: "location",
+  },
+];
+
+export const socialLinks: SocialLink[] = [
+  {
+    id: "linkedin",
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/ayoub-l-b93bb8255/",
+    icon: <Linkedin size={20} strokeWidth={1.5} />,
+  },
+  {
+    id: "github",
+    label: "GitHub",
+    href: "https://github.com/youb01",
+    icon: <Github size={20} strokeWidth={1.5} />,
+  },
+  {
+    id: "twitter",
+    label: "Twitter",
+    href: "https://twitter.com/",
+    icon: <Twitter size={20} strokeWidth={1.5} />,
+  },
+];
+
+export const contactContent = {
+  meta: {
+    id: "contact",
+    label: "Get in Touch",
+  },
+  heading: {
+    title: "Let's",
+    titleMuted: "Work Together",
+  },
+  subtitle:
+    "I'm always interested in hearing about new projects and opportunities. Whether you have a question or just want to say hi, feel free to get in touch!",
+  cta: {
+    text: "Send me an email",
+    href: "mailto:lfatmi.ayoub@gmail.com",
+  },
+};
