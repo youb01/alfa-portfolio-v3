@@ -12,21 +12,6 @@ import { BackgroundLines } from "../../ui/backgrounds/BackgroundLines";
 import { SectionHeader } from "../../ui/SectionHeader";
 
 export const ContactSection: React.FC = () => {
-  const [isDark, setIsDark] = React.useState(
-    document.documentElement.classList.contains("dark"),
-  );
-
-  React.useEffect(() => {
-    const observer = new MutationObserver(() => {
-      setIsDark(document.documentElement.classList.contains("dark"));
-    });
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section
       id={contactContent.meta.id}
@@ -53,7 +38,7 @@ export const ContactSection: React.FC = () => {
             </div>
 
             {/* right: form */}
-            <ContactForm isDark={isDark} />
+            <ContactForm />
           </div>
 
           {/* social links */}
