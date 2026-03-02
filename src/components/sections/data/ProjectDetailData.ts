@@ -28,6 +28,12 @@ export interface ProjectDetail {
     /** 3–4 vertical gallery images — ideally 4:3 or portrait */
     images: string[];
   };
+  /** Key metrics / outcomes displayed in the stats strip */
+  outcomes?: {
+    value: string;
+    label: string;
+    description?: string;
+  }[];
 }
 
 export const projectDetails: Record<string, ProjectDetail> = {
@@ -55,6 +61,12 @@ export const projectDetails: Record<string, ProjectDetail> = {
         "https://images.unsplash.com/photo-1547658719-da2b51169166?w=900&auto=format&fit=crop&q=80",
       ],
     },
+    outcomes: [
+      { value: "3", label: "Versions Built", description: "Each a complete rebuild" },
+      { value: "3 yrs", label: "In Development", description: "2022 – 2025" },
+      { value: "8+", label: "Technologies", description: "Across all versions" },
+      { value: "100", label: "Lighthouse Score", description: "Performance & accessibility" },
+    ],
   },
 
   "project-02": {
@@ -80,6 +92,12 @@ export const projectDetails: Record<string, ProjectDetail> = {
         "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=900&auto=format&fit=crop&q=80",
       ],
     },
+    outcomes: [
+      { value: "~40%", label: "Faster Response", description: "After data-layer rebuild" },
+      { value: "4", label: "Team Members", description: "Including intern" },
+      { value: "6 mo.", label: "Internship", description: "Full-time engagement" },
+      { value: "9", label: "Technologies", description: "Production stack" },
+    ],
   },
 
   "project-03": {
@@ -106,6 +124,12 @@ export const projectDetails: Record<string, ProjectDetail> = {
         "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&auto=format&fit=crop&q=80",
       ],
     },
+    outcomes: [
+      { value: "AA", label: "WCAG Standard", description: "Full compliance achieved" },
+      { value: "3", label: "Assistive Tech", description: "NVDA, VoiceOver, JAWS" },
+      { value: "7", label: "Technologies", description: "Full-stack implementation" },
+      { value: "4", label: "Team Members", description: "Cross-functional" },
+    ],
   },
 
   "project-04": {
@@ -132,5 +156,11 @@ export const projectDetails: Record<string, ProjectDetail> = {
         "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=900&auto=format&fit=crop&q=80",
       ],
     },
+    outcomes: [
+      { value: "3+", label: "Typefaces Explored", description: "Before landing on the final pair" },
+      { value: "1", label: "Accent Colour", description: "Restrained, intentional palette" },
+      { value: "2 wks", label: "Brand Strategy", description: "Writing before Figma" },
+      { value: "Hi-Fi", label: "Prototype", description: "Built in Framer" },
+    ],
   },
 };
