@@ -90,20 +90,6 @@ export const projectsData: Project[] = [
   },
   {
     id: "project-04",
-    slug: "oak",
-    number: "04",
-    title: "Oak",
-    subtitle: "Brand & UX Design",
-    description:
-      "Designed the complete visual identity and user experience for Oak — from brand strategy to high-fidelity prototypes, crafting a cohesive and elegant product ecosystem.",
-    techStack: ["Figma", "Framer", "Notion", "Midjourney"],
-    category: "UI/UX Design",
-    year: "2022",
-    featured: false,
-    thumbnailVariant: 3,
-  },
-  {
-    id: "project-05",
     slug: "minecraft-portfolio",
     number: "05",
     title: "Minecraft Portfolio Website",
