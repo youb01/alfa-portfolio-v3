@@ -27,6 +27,8 @@ export const skillRows: SkillRow[] = [
       "Angular",
       "Framer Motion",
       "Three.js",
+      "HTML",
+      "CSS",
     ],
   },
   {

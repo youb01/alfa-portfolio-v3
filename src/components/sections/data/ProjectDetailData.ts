@@ -8,6 +8,8 @@
  *   3. Swap placeholder image URLs for real screenshots when ready.
  */
 
+import project02Hero from "../../../assets/project-media/project-02/project-02-hero.png";
+
 export interface ProjectDetail {
   /** Links to Project.id in ProjectsData */
   projectId: string;
@@ -59,8 +61,7 @@ export const projectDetails: Record<string, ProjectDetail> = {
     projectId: "project-02",
     client: "GetMore Systems",
     service: "Frontend Engineering",
-    heroImage:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&auto=format&fit=crop&q=80",
+    heroImage: project02Hero,
     introduction:
       "An internship that felt like a masterclass in production software. I joined a small engineering team building internal tooling for a growing operations business and shipped real features from week one — in a live TypeScript and React codebase.",
     wideImage:

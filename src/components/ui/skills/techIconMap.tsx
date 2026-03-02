@@ -26,9 +26,10 @@ import {
   SiGithub,
   SiDocker,
   SiBootstrap,
+  SiMiro,
 } from "react-icons/si";
 import { VscAzureDevops } from "react-icons/vsc";
-import { DiJava, DiSqllite } from "react-icons/di";
+import { DiJava, DiSqllite, DiHtml5, DiCss3, DiScrum } from "react-icons/di";
 const iconMap: Record<
   string,
   React.ComponentType<{ size?: number; style?: React.CSSProperties }>
@@ -63,6 +64,10 @@ const iconMap: Record<
   Java: DiJava,
   SQL: DiSqllite,
   Bootstrap: SiBootstrap,
+  html: DiHtml5,
+  css: DiCss3,
+  Miro: SiMiro,
+  "Agile methodologies": DiScrum,
 };
 
 export const getTechIcon = (
