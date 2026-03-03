@@ -19,11 +19,9 @@ export const ContactCard: React.FC<ContactCardProps> = ({ method }) => {
       }`}
       onClick={(e) => !isClickable && e.preventDefault()}
     >
-      <Icon
-        size={24}
-        strokeWidth={2}
-        className="flex-shrink-0 text-[rgb(var(--text-secondary))] group-hover:text-[rgb(var(--text-primary))] transition-colors"
-      />
+      <span className="flex-shrink-0 text-[rgb(var(--text-secondary))] group-hover:text-[rgb(var(--text-primary))] transition-colors">
+        <Icon size={24} strokeWidth={2} />
+      </span>
       <div>
         <p className="text-sm font-semibold text-[rgb(var(--text-secondary))]">
           {method.label}
