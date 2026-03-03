@@ -19,10 +19,9 @@ export const OtherProjects: React.FC<OtherProjectsProps> = ({
 }) => {
   // Only surface projects that have a detail page
   const available = projectsData.filter(
-    (p) => p.slug !== currentSlug && !!projectDetails[p.id]
+    (p) => p.slug !== currentSlug && !!projectDetails[p.id],
   );
 
-  // Show up to 2, prefer the ones closest in the list
   const picks = available.slice(0, 2);
 
   if (picks.length === 0) return null;

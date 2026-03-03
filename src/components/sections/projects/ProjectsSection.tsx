@@ -18,11 +18,7 @@ const filterOptions: FilterOption[] = [
 export const ProjectsSection: React.FC = () => {
   const [activeFilter, setActiveFilter] = React.useState<FilterOption>("All");
   const [isDark, setIsDark] = React.useState(
-<<<<<<< HEAD
     document.documentElement.classList.contains("dark"),
-=======
-    document.documentElement.classList.contains("dark")
->>>>>>> claude/add-project-section-YzCbV
   );
 
   React.useEffect(() => {
@@ -119,15 +115,11 @@ export const ProjectsSection: React.FC = () => {
                           ? "rgba(255,255,255,0.06)"
                           : "rgba(0,0,0,0.05)",
                       }}
-<<<<<<< HEAD
                       transition={{
                         type: "spring",
                         duration: 0.4,
                         bounce: 0.15,
                       }}
-=======
-                      transition={{ type: "spring", duration: 0.4, bounce: 0.15 }}
->>>>>>> claude/add-project-section-YzCbV
                     />
                   )}
                   <span className="relative z-10">{filter}</span>
