@@ -9,7 +9,7 @@ interface TagProps {
 
 export const Tag: React.FC<TagProps> = ({ label, index, icon }) => {
   const [isDark, setIsDark] = React.useState(
-    document.documentElement.classList.contains("dark")
+    document.documentElement.classList.contains("dark"),
   );
 
   React.useEffect(() => {
@@ -52,7 +52,6 @@ export const Tag: React.FC<TagProps> = ({ label, index, icon }) => {
           : "rgba(0, 0, 0, 0.06)",
       }}
     >
-      {/* Subtle shine effect */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100"
         initial={{ x: "-100%" }}

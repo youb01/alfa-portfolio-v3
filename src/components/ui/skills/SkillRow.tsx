@@ -15,7 +15,6 @@ export const SkillRow: React.FC<SkillRowProps> = ({ row }) => {
      *   right — flexible: wrapping ToolBadge pills
      */
     <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-6 md:gap-16 py-10 md:py-14">
-      {/* ── Left: meta ─────────────────────────────────────────────────── */}
       <motion.div
         className="flex flex-col gap-1"
         initial={{ opacity: 0, x: -16 }}
@@ -36,7 +35,6 @@ export const SkillRow: React.FC<SkillRowProps> = ({ row }) => {
         </p>
       </motion.div>
 
-      {/* ── Right: tool badges ──────────────────────────────────────────── */}
       <div className="flex flex-wrap content-center gap-2.5">
         {row.tools.map((tool, j) => (
           <ToolBadge key={tool} tool={tool} index={j} />
