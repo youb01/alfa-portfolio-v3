@@ -10,16 +10,11 @@ interface FormData {
   message: string;
 }
 
-interface ContactFormProps {
-  isDark: boolean;
-}
-
 const EMAILJS_SERVICE_ID = "service_your_service_id";
 const EMAILJS_TEMPLATE_ID = "template_your_template_id";
 const EMAILJS_PUBLIC_KEY = "your_public_key";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const ContactForm: React.FC<ContactFormProps> = ({ isDark: _isDark }) => {
+export const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",

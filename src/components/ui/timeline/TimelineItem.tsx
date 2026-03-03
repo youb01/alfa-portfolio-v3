@@ -305,18 +305,10 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({ event, index }) => {
           )}
         </div>
 
-<<<<<<< HEAD
-=======
-        {/* Center dot column */}
->>>>>>> claude/add-project-section-YzCbV
         <div className="flex justify-center">
           <TimelineDot animKey={animKey} />
         </div>
 
-<<<<<<< HEAD
-=======
-        {/* Right slot */}
->>>>>>> claude/add-project-section-YzCbV
         <div className="relative pl-10 flex items-start">
           {!isLeft && (
             <>

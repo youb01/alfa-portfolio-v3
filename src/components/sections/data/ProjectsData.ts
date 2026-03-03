@@ -91,7 +91,7 @@ export const projectsData: Project[] = [
   {
     id: "project-04",
     slug: "minecraft-portfolio",
-    number: "04",
+    number: "05",
     title: "Minecraft Portfolio Website",
     subtitle: "Creative Coding & 3D Design",
     description:
