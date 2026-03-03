@@ -13,12 +13,10 @@ export const ProjectDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
 
-  // ── Sticky case-study scroll state ─────────────────────────────────────
+  // Ref targets the DESKTOP sticky section only.
+  // On mobile it's display:none so useScroll is a no-op there.
   const caseStudyRef = useRef<HTMLElement>(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  const [isDesktop, setIsDesktop] = useState(
-    () => typeof window !== "undefined" && window.innerWidth >= 1024
-  );
 
   const { scrollYProgress } = useScroll({
     target: caseStudyRef,
@@ -30,18 +28,12 @@ export const ProjectDetailPage: React.FC = () => {
     setActiveImageIndex(0);
   }, [slug]);
 
-  useEffect(() => {
-    const check = () => setIsDesktop(window.innerWidth >= 1024);
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
-
   const project = projectsData.find((p) => p.slug === slug);
   const detail = project ? projectDetails[project.id] : null;
   const imageCount = detail?.caseStudy.images.length ?? 0;
 
   useMotionValueEvent(scrollYProgress, "change", (v) => {
-    if (!isDesktop || imageCount === 0) return;
+    if (imageCount === 0) return;
     setActiveImageIndex(Math.min(Math.floor(v * imageCount), imageCount - 1));
   });
 
@@ -63,14 +55,13 @@ export const ProjectDetailPage: React.FC = () => {
     );
   }
 
-  // Which body paragraph is "active" — clamp to body array length
+  // Active body paragraph — clamp to body array length
   const activeBodyIndex = Math.min(
     activeImageIndex,
     detail.caseStudy.body.length - 1
   );
 
-  const px = "px-6 md:px-8 lg:px-12 xl:px-16";
-  const maxW = "max-w-[1400px] mx-auto";
+  const border = "1px solid rgb(var(--border-primary))";
 
   return (
     <div className="min-h-screen bg-[rgb(var(--bg-primary))]">
@@ -78,12 +69,13 @@ export const ProjectDetailPage: React.FC = () => {
 
       {/* ── Fixed nav ──────────────────────────────────────────────────────── */}
       <nav
-        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-[rgb(var(--border-primary))]"
-        style={{ background: "rgba(var(--bg-primary), 0.85)" }}
+        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl"
+        style={{
+          background: "rgba(var(--bg-primary), 0.85)",
+          borderBottom: border,
+        }}
       >
-        <div
-          className={`${maxW} ${px} h-16 flex items-center justify-between gap-4`}
-        >
+        <div className="max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16 h-16 flex items-center justify-between gap-4">
           <motion.button
             onClick={() => navigate(-1)}
             className="flex items-center gap-1.5 text-sm font-semibold text-[rgb(var(--text-secondary))] hover:text-[rgb(var(--text-primary))] transition-colors shrink-0"
@@ -106,8 +98,8 @@ export const ProjectDetailPage: React.FC = () => {
       <section className="pt-16 relative overflow-hidden">
         <BackgroundLines />
 
-        {/* Title area */}
-        <div className={`relative z-10 ${maxW} ${px} pt-16 md:pt-24 pb-10`}>
+        {/* Title — stays inside padded container */}
+        <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16 pt-16 md:pt-24 pb-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -144,15 +136,19 @@ export const ProjectDetailPage: React.FC = () => {
           </motion.p>
         </div>
 
-        {/* Hero image + meta bar — same container = identical width */}
+        {/*
+          Full-bleed block: hero image + meta bar.
+          Both are w-full with no horizontal container padding,
+          so the meta bar is exactly as wide as the image.
+        */}
         <motion.div
-          className={`relative z-10 ${maxW} ${px}`}
+          className="relative z-10 w-full"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* Image */}
-          <div className="w-full aspect-[16/9] overflow-hidden rounded-t-2xl">
+          {/* Hero image — edge to edge */}
+          <div className="w-full overflow-hidden" style={{ aspectRatio: "16/9" }}>
             <img
               src={detail.heroImage}
               alt={project.title}
@@ -160,8 +156,11 @@ export const ProjectDetailPage: React.FC = () => {
             />
           </div>
 
-          {/* Meta bar — flush below image, full image width */}
-          <div className="grid grid-cols-3 rounded-b-2xl overflow-hidden border border-t-0 border-[rgb(var(--border-primary))]">
+          {/* Meta bar — full width of the image */}
+          <div
+            className="w-full grid grid-cols-3"
+            style={{ borderTop: border, borderBottom: border }}
+          >
             {[
               { label: "Client", value: detail.client },
               { label: "Service", value: detail.service },
@@ -169,14 +168,13 @@ export const ProjectDetailPage: React.FC = () => {
             ].map((item, i) => (
               <div
                 key={item.label}
-                className={`px-6 py-5 ${
-                  i < 2 ? "border-r border-[rgb(var(--border-primary))]" : ""
-                }`}
+                className="px-6 sm:px-10 md:px-14 lg:px-16 xl:px-20 py-5 md:py-6"
+                style={{ borderRight: i < 2 ? border : undefined }}
               >
                 <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--text-tertiary))] mb-1.5">
                   {item.label}
                 </p>
-                <p className="text-sm font-semibold text-[rgb(var(--text-primary))]">
+                <p className="text-sm font-semibold text-[rgb(var(--text-primary))] truncate">
                   {item.value}
                 </p>
               </div>
@@ -224,48 +222,61 @@ export const ProjectDetailPage: React.FC = () => {
         />
       </motion.div>
 
-      {/* ── Case study ─────────────────────────────────────────────────────── */}
-      {/*
-        Desktop: sticky-scroll depth effect.
-          - Section is tall (imageCount × 100 vh) so the sticky inner panel
-            stays pinned while the user scrolls through all images.
-        Mobile: normal stacked layout.
-      */}
+      {/* ═══════════════════════════════════════════════════════════════════
+          Case study — DESKTOP
+          Uses CSS `hidden lg:block` so this section has real layout
+          dimensions on desktop. The sticky inner panel pins to the
+          viewport while the outer section's extra height provides
+          scroll "room" for each image to become active.
+      ═══════════════════════════════════════════════════════════════════ */}
       <section
         ref={caseStudyRef}
-        className="relative border-t border-[rgb(var(--border-primary))]"
-        style={isDesktop ? { height: `${imageCount * 100}vh` } : undefined}
+        className="hidden lg:block relative"
+        style={{ height: `${imageCount * 100}vh`, borderTop: border }}
       >
-        {isDesktop ? (
-          /* ── Desktop: pinned panel ── */
-          <div
-            className="sticky top-0 h-screen flex items-center overflow-hidden"
-            style={{ background: "rgb(var(--bg-primary))" }}
-          >
-            <div className={`w-full ${maxW} ${px}`}>
-              <div className="grid grid-cols-2 gap-16 xl:gap-24 items-center">
+        <div
+          className="sticky top-0 h-screen overflow-hidden flex items-center"
+          style={{ background: "rgb(var(--bg-primary))" }}
+        >
+          <div className="w-full max-w-[1400px] mx-auto px-12 xl:px-16">
+            {/* 5 : 7 split — text left, image right */}
+            <div className="grid grid-cols-[5fr_7fr] gap-16 xl:gap-20 items-center">
 
-                {/* Left: text */}
-                <div>
+              {/* ── Left: text + progress line ── */}
+              <div className="flex items-start gap-7">
+
+                {/* Vertical fill line */}
+                <div
+                  className="relative shrink-0 mt-1 rounded-full overflow-hidden"
+                  style={{ width: 1, height: 200, background: "rgb(var(--border-primary))" }}
+                >
+                  <motion.div
+                    className="absolute top-0 left-0 w-full rounded-full"
+                    style={{ background: "rgb(var(--text-primary))" }}
+                    animate={{
+                      height: `${((activeImageIndex + 1) / imageCount) * 100}%`,
+                    }}
+                    transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                </div>
+
+                <div className="flex-1 min-w-0">
                   <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--text-tertiary))] mb-5">
                     Case Study
                   </span>
-                  <h2 className="text-3xl md:text-4xl font-extrabold leading-tight mb-8 text-[rgb(var(--text-primary))]">
+                  <h2 className="text-3xl xl:text-4xl font-extrabold leading-tight mb-8 text-[rgb(var(--text-primary))]">
                     {detail.caseStudy.title}
                   </h2>
 
+                  {/* Body paragraphs — active one highlights */}
                   <div className="space-y-4">
                     {detail.caseStudy.body.map((para, i) => (
                       <motion.p
                         key={i}
-                        className="text-base leading-relaxed"
+                        className="text-base leading-relaxed text-[rgb(var(--text-secondary))]"
                         animate={{
                           opacity: i === activeBodyIndex ? 1 : 0.2,
-                          x: i === activeBodyIndex ? 0 : 6,
-                          color:
-                            i === activeBodyIndex
-                              ? "rgb(var(--text-secondary))"
-                              : "rgb(var(--text-tertiary))",
+                          x: i === activeBodyIndex ? 0 : 5,
                         }}
                         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                       >
@@ -274,7 +285,7 @@ export const ProjectDetailPage: React.FC = () => {
                     ))}
                   </div>
 
-                  {/* Progress bar + counter */}
+                  {/* Progress pills + counter */}
                   <div className="flex items-center gap-3 mt-10">
                     <div className="flex gap-1.5 items-center">
                       {detail.caseStudy.images.map((_, i) => (
@@ -298,114 +309,132 @@ export const ProjectDetailPage: React.FC = () => {
                     </span>
                   </div>
                 </div>
+              </div>
 
-                {/* Right: cross-fading images */}
-                <div className="relative h-[68vh] overflow-hidden rounded-2xl">
-                  {detail.caseStudy.images.map((src, i) => (
-                    <motion.div
-                      key={src}
-                      className="absolute inset-0"
-                      animate={{
-                        opacity: i === activeImageIndex ? 1 : 0,
-                        scale: i === activeImageIndex ? 1 : 1.04,
-                      }}
-                      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                    >
-                      <img
-                        src={src}
-                        alt={`${project.title} — image ${i + 1}`}
-                        className="w-full h-full object-cover"
-                      />
-                    </motion.div>
-                  ))}
-                  {/* Depth gradient */}
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      background:
-                        "linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.15) 100%)",
+              {/* ── Right: cross-fading images ── */}
+              <div
+                className="relative overflow-hidden rounded-2xl"
+                style={{ height: "72vh" }}
+              >
+                {detail.caseStudy.images.map((src, i) => (
+                  <motion.div
+                    key={src}
+                    className="absolute inset-0"
+                    animate={{
+                      opacity: i === activeImageIndex ? 1 : 0,
+                      scale: i === activeImageIndex ? 1 : 1.05,
+                      // outgoing images slide up slightly; incoming start from below
+                      y:
+                        i < activeImageIndex
+                          ? -24
+                          : i > activeImageIndex
+                          ? 20
+                          : 0,
                     }}
-                  />
-                </div>
+                    transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <img
+                      src={src}
+                      alt={`${project.title} — image ${i + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+                ))}
+
+                {/* Depth gradient */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.14) 100%)",
+                  }}
+                />
               </div>
             </div>
+          </div>
 
-            {/* Scroll hint — fades out on last image */}
+          {/* Scroll hint — fades out after last image */}
+          <motion.div
+            className="absolute bottom-8 right-8 flex flex-col items-center gap-2"
+            animate={{ opacity: activeImageIndex === imageCount - 1 ? 0 : 0.4 }}
+            transition={{ duration: 0.4 }}
+          >
             <motion.div
-              className="absolute bottom-8 right-8 flex flex-col items-center gap-2"
-              animate={{ opacity: activeImageIndex === imageCount - 1 ? 0 : 0.4 }}
-              transition={{ duration: 0.4 }}
+              animate={{ y: [0, 5, 0] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
             >
-              <motion.div
-                animate={{ y: [0, 5, 0] }}
-                transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+              <ArrowDown
+                size={14}
+                style={{ color: "rgb(var(--text-tertiary))" }}
+              />
+            </motion.div>
+            <span
+              className="text-[9px] font-bold uppercase tracking-[0.2em]"
+              style={{
+                color: "rgb(var(--text-tertiary))",
+                writingMode: "vertical-rl",
+              }}
+            >
+              Scroll
+            </span>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════
+          Case study — MOBILE (stacked, no sticky scroll)
+      ═══════════════════════════════════════════════════════════════════ */}
+      <section
+        className="lg:hidden py-24"
+        style={{ borderTop: border }}
+      >
+        <div className="max-w-[1400px] mx-auto px-6 md:px-8">
+          <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--text-tertiary))] mb-5">
+            Case Study
+          </span>
+          <h2 className="text-3xl font-extrabold leading-tight mb-6 text-[rgb(var(--text-primary))]">
+            {detail.caseStudy.title}
+          </h2>
+          <div className="space-y-4 mb-10">
+            {detail.caseStudy.body.map((para, i) => (
+              <p
+                key={i}
+                className="text-base leading-relaxed text-[rgb(var(--text-secondary))]"
               >
-                <ArrowDown
-                  size={14}
-                  style={{ color: "rgb(var(--text-tertiary))" }}
+                {para}
+              </p>
+            ))}
+          </div>
+          <div className="space-y-4">
+            {detail.caseStudy.images.map((src, i) => (
+              <motion.div
+                key={src}
+                className="w-full overflow-hidden rounded-xl"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: i * 0.08,
+                  duration: 0.7,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                viewport={{ once: true, margin: "-60px" }}
+              >
+                <img
+                  src={src}
+                  alt={`${project.title} — image ${i + 1}`}
+                  className="w-full object-cover"
+                  style={{ aspectRatio: "4/3" }}
                 />
               </motion.div>
-              <span
-                className="text-[9px] font-bold uppercase tracking-[0.2em]"
-                style={{
-                  color: "rgb(var(--text-tertiary))",
-                  writingMode: "vertical-rl",
-                }}
-              >
-                Scroll
-              </span>
-            </motion.div>
+            ))}
           </div>
-        ) : (
-          /* ── Mobile: stacked layout ── */
-          <div className={`py-24 ${maxW} ${px}`}>
-            <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--text-tertiary))] mb-5">
-              Case Study
-            </span>
-            <h2 className="text-3xl font-extrabold leading-tight mb-6 text-[rgb(var(--text-primary))]">
-              {detail.caseStudy.title}
-            </h2>
-            <div className="space-y-4 mb-10">
-              {detail.caseStudy.body.map((para, i) => (
-                <p
-                  key={i}
-                  className="text-base leading-relaxed text-[rgb(var(--text-secondary))]"
-                >
-                  {para}
-                </p>
-              ))}
-            </div>
-            <div className="space-y-4">
-              {detail.caseStudy.images.map((src, i) => (
-                <motion.div
-                  key={src}
-                  className="w-full overflow-hidden rounded-xl"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{
-                    delay: i * 0.08,
-                    duration: 0.7,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  viewport={{ once: true, margin: "-60px" }}
-                >
-                  <img
-                    src={src}
-                    alt={`${project.title} — image ${i + 1}`}
-                    className="w-full object-cover"
-                    style={{ aspectRatio: "4/3" }}
-                  />
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        )}
+        </div>
       </section>
 
       {/* ── Outcomes ───────────────────────────────────────────────────────── */}
       {detail.outcomes && detail.outcomes.length > 0 && (
-        <section className="py-24 md:py-32 border-t border-[rgb(var(--border-primary))]">
-          <div className={`${maxW} ${px}`}>
+        <section className="py-24 md:py-32" style={{ borderTop: border }}>
+          <div className="max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
             <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-12 lg:gap-20 items-start">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -421,7 +450,7 @@ export const ProjectDetailPage: React.FC = () => {
                 </h2>
               </motion.div>
 
-              <ul className="space-y-0 divide-y divide-[rgb(var(--border-primary))]">
+              <ul className="divide-y divide-[rgb(var(--border-primary))]">
                 {detail.outcomes.map((outcome, i) => (
                   <motion.li
                     key={i}
@@ -451,9 +480,8 @@ export const ProjectDetailPage: React.FC = () => {
 
       {/* ── Stats ──────────────────────────────────────────────────────────── */}
       {detail.stats && detail.stats.length > 0 && (
-        <section className="py-16 md:py-20 border-t border-[rgb(var(--border-primary))]">
-          <div className={`${maxW} ${px}`}>
-            {/* Gap-px + bg-border trick gives clean 1 px separators */}
+        <section className="py-16 md:py-20" style={{ borderTop: border }}>
+          <div className="max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
             <div
               className="grid grid-cols-2 md:grid-cols-4 gap-px rounded-2xl overflow-hidden"
               style={{ background: "rgb(var(--border-primary))" }}
@@ -481,9 +509,9 @@ export const ProjectDetailPage: React.FC = () => {
         </section>
       )}
 
-      {/* ── Tech stack (enhanced) ──────────────────────────────────────────── */}
-      <section className="py-24 md:py-32 border-t border-[rgb(var(--border-primary))]">
-        <div className={`${maxW} ${px}`}>
+      {/* ── Tech stack ─────────────────────────────────────────────────────── */}
+      <section className="py-24 md:py-32" style={{ borderTop: border }}>
+        <div className="max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-12 lg:gap-20 items-start">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
