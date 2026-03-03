@@ -132,35 +132,35 @@ export const projectDetails: Record<string, ProjectDetail> = {
     ],
   },
 
-  "project-04": {
+"project-04": {
     projectId: "project-04",
-    client: "Oak (Personal project)",
-    service: "Brand Strategy & UX Design",
+    client: "Minor Visual Design",
+    service: "Creative Coding & 3D Web Development",
     heroImage:
-      "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=1600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1600&auto=format&fit=crop&q=80",
     introduction:
-      "Oak started as a brief in a notebook: a product brand that felt grounded and honest, not loud. The project became a deep exploration of visual identity — from naming and typography to a high-fidelity prototype of the product experience.",
+      "A portfolio where browsing becomes gameplay. Built for the HvA Minor in Visual Design and Web Development, this Minecraft-themed site places each project inside a hand-crafted 3D world — navigate the blocks, discover the work.",
     wideImage:
-      "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1920&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=1920&auto=format&fit=crop&q=80",
     caseStudy: {
-      title: "Crafting a brand identity from first principles",
+      title: "Turning a portfolio into an experience",
       body: [
-        "The process started with words, not visuals. Before opening Figma I spent a week writing: what does this brand believe, who is it for, and what does it refuse to be? The answers — grounded, understated, built to last — became the creative brief that every visual decision was tested against.",
-        "Typography was the first design decision. I landed on a geometric sans-serif for interface copy and a high-contrast serif for headlines: the combination gives the brand a quiet confidence. The colour palette is monochromatic with a single warm accent — restrained enough to feel premium, flexible enough to work across print and screen.",
-        "The Framer prototype brought everything together. Micro-interactions were designed with the same care as the static brand: hover states, transitions, and loading patterns all reflect the same character. The goal was a brand that felt like it had always existed — inevitable rather than designed.",
+        "The brief asked for a portfolio — we turned it into a game. The concept was simple: what if every project lived inside a Minecraft world you could actually explore? The technical challenge was building a 3D environment that ran smoothly in the browser without a game engine.",
+        "React Three Fiber gave us a declarative way to write Three.js inside React. Every building, path, and sign was modelled in Blender and exported as GLTF, then loaded and animated at runtime. Optimising draw calls and asset sizes was critical — we needed the world to load fast on a standard laptop.",
+        "The interaction design was the hardest part. First-person controls feel natural in a game engine but need careful calibration in a browser. We tuned movement speed, added pointer-lock controls, and built a minimal HUD to guide users — all without making it feel like a tutorial.",
       ],
       images: [
-        "https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=900&auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1541462608143-67571c6738dd?w=900&auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1449247709967-d4461a6a6103?w=900&auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=900&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1614624532983-4ce03382d63d?w=900&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=900&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1535223289429-462dc99e1e7a?w=900&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1556438064-2d7646166914?w=900&auto=format&fit=crop&q=80",
       ],
     },
     outcomes: [
-      { value: "3+", label: "Typefaces Explored", description: "Before landing on the final pair" },
-      { value: "1", label: "Accent Colour", description: "Restrained, intentional palette" },
-      { value: "2 wks", label: "Brand Strategy", description: "Writing before Figma" },
-      { value: "Hi-Fi", label: "Prototype", description: "Built in Framer" },
+      { value: "60", label: "FPS", description: "Interactive 3D portfolio running stably in Chrome and Firefox" },
+      { value: "<4 MB", label: "Total Assets", description: "All 3D assets optimised for fast initial load" },
+      { value: "Yes", label: "Full Navigation", description: "Mouse-driven navigation with pointer-lock controls" },
+      { value: "8.5", label: "Grade", description: "Both students and instructors where very impressed with the final result" },
     ],
   },
 };
