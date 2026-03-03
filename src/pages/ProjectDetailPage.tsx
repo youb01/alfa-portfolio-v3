@@ -232,18 +232,19 @@ export const ProjectDetailPage: React.FC = () => {
       <section
         ref={caseStudyRef}
         className="hidden lg:block relative"
-        style={{ height: `${imageCount * 100}vh`, borderTop: border }}
+        style={{ height: `${(imageCount + 1) * 100}vh`, borderTop: border }}
       >
         <div
-          className="sticky top-0 h-screen overflow-hidden flex items-center"
+          className="sticky top-0 h-screen overflow-hidden"
           style={{ background: "rgb(var(--bg-primary))" }}
         >
-          <div className="w-full max-w-[1400px] mx-auto px-12 xl:px-16">
-            {/* 5 : 7 split — text left, image right */}
-            <div className="grid grid-cols-[5fr_7fr] gap-16 xl:gap-20 items-center">
+          {/* pt-16 clears the fixed 64px nav; pb-8 adds breathing room at bottom */}
+          <div className="h-full pt-16 pb-8 max-w-[1400px] mx-auto px-12 xl:px-16">
+            {/* 5 : 7 split — text left, image right; h-full makes image fill the panel */}
+            <div className="grid grid-cols-[5fr_7fr] gap-16 xl:gap-20 h-full">
 
-              {/* ── Left: text + progress line ── */}
-              <div className="flex items-start gap-7">
+              {/* ── Left: text + progress line — self-center keeps it vertically centred ── */}
+              <div className="flex items-start gap-7 self-center">
 
                 {/* Vertical fill line */}
                 <div
@@ -311,11 +312,8 @@ export const ProjectDetailPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* ── Right: cross-fading images ── */}
-              <div
-                className="relative overflow-hidden rounded-2xl"
-                style={{ height: "72vh" }}
-              >
+              {/* ── Right: cross-fading images — h-full fills the panel height ── */}
+              <div className="relative overflow-hidden rounded-2xl h-full">
                 {detail.caseStudy.images.map((src, i) => (
                   <motion.div
                     key={src}
