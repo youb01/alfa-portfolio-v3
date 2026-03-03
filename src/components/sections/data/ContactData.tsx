@@ -2,11 +2,7 @@ import { Mail, MapPin, Phone, Linkedin, Github, Twitter } from "lucide-react";
 
 export interface ContactMethod {
   id: string;
-  icon: React.ComponentType<{
-    size?: number;
-    strokeWidth?: number;
-    className?: string;
-  }>;
+  icon: React.ComponentType<{ size: number; strokeWidth?: number }>;
   label: string;
   value: string;
   href: string;

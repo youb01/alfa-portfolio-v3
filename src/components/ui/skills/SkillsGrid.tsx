@@ -3,6 +3,11 @@ import React from "react";
 import { skillRows } from "../../sections/data/SkillsData";
 import { SkillRow } from "./SkillRow";
 
+/**
+ * Renders the editorial table of skill rows.
+ * Sole responsibility: separator lines + looping over SkillRow.
+ * All row layout lives in SkillRow; all badge logic lives in ToolBadge.
+ */
 export const SkillsGrid: React.FC = () => {
   return (
     <div className="pb-24 lg:pb-40 max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
@@ -17,6 +22,7 @@ export const SkillsGrid: React.FC = () => {
   );
 };
 
+/** Animated 1 px horizontal rule — scales in from the left on scroll */
 const Separator: React.FC = () => (
   <motion.div
     className="h-[1px] origin-left bg-[rgb(var(--border-primary))]"

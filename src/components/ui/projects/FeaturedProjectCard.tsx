@@ -13,7 +13,7 @@ export const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({
   project,
 }) => {
   const [isDark, setIsDark] = React.useState(
-    document.documentElement.classList.contains("dark"),
+    document.documentElement.classList.contains("dark")
   );
   const [isHovered, setIsHovered] = React.useState(false);
 
@@ -28,8 +28,17 @@ export const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({
     return () => observer.disconnect();
   }, []);
 
+<<<<<<< HEAD
   const cardBg = isDark ? "rgba(18, 18, 18, 0.85)" : "rgba(255, 255, 255, 0.9)";
   const cardBorder = isDark ? "rgba(60, 60, 60, 0.5)" : "rgba(0, 0, 0, 0.08)";
+=======
+  const cardBg = isDark
+    ? "rgba(18, 18, 18, 0.85)"
+    : "rgba(255, 255, 255, 0.9)";
+  const cardBorder = isDark
+    ? "rgba(60, 60, 60, 0.5)"
+    : "rgba(0, 0, 0, 0.08)";
+>>>>>>> claude/add-project-section-YzCbV
   const cardShadow = isDark
     ? "0 30px 80px -20px rgba(0,0,0,0.75), 0 0 0 1px rgba(255,255,255,0.05)"
     : "0 30px 80px -20px rgba(0,0,0,0.14), 0 0 0 1px rgba(0,0,0,0.04)";
@@ -53,7 +62,13 @@ export const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({
         animate={{ opacity: isHovered ? 1 : 0 }}
         transition={{ duration: 0.5 }}
         style={{
+<<<<<<< HEAD
           background: isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.03)",
+=======
+          background: isDark
+            ? "rgba(255,255,255,0.03)"
+            : "rgba(0,0,0,0.03)",
+>>>>>>> claude/add-project-section-YzCbV
         }}
       />
 
@@ -152,7 +167,13 @@ export const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({
                     ? "rgba(255,255,255,0.06)"
                     : "rgba(0,0,0,0.05)",
                   border: `1px solid ${isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
+<<<<<<< HEAD
                   color: isDark ? "rgba(255,255,255,0.65)" : "rgba(0,0,0,0.55)",
+=======
+                  color: isDark
+                    ? "rgba(255,255,255,0.65)"
+                    : "rgba(0,0,0,0.55)",
+>>>>>>> claude/add-project-section-YzCbV
                 }}
               >
                 {project.category}
@@ -160,7 +181,13 @@ export const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({
               <span
                 className="text-[10px] font-medium"
                 style={{
+<<<<<<< HEAD
                   color: isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)",
+=======
+                  color: isDark
+                    ? "rgba(255,255,255,0.3)"
+                    : "rgba(0,0,0,0.3)",
+>>>>>>> claude/add-project-section-YzCbV
                 }}
               >
                 {project.year}
@@ -217,11 +244,15 @@ export const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({
               className="h-[2px] w-10 mb-6 rounded-full"
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
+<<<<<<< HEAD
               transition={{
                 delay: 0.2,
                 duration: 0.7,
                 ease: [0.22, 1, 0.36, 1],
               }}
+=======
+              transition={{ delay: 0.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+>>>>>>> claude/add-project-section-YzCbV
               viewport={{ once: true }}
               style={{
                 background: isDark
@@ -236,6 +267,7 @@ export const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({
               className="text-3xl sm:text-4xl font-black leading-tight tracking-tight mb-2"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+<<<<<<< HEAD
               transition={{
                 delay: 0.15,
                 duration: 0.7,
@@ -244,6 +276,14 @@ export const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({
               viewport={{ once: true }}
               style={{
                 color: isDark ? "rgba(255,255,255,0.95)" : "rgba(0,0,0,0.88)",
+=======
+              transition={{ delay: 0.15, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              viewport={{ once: true }}
+              style={{
+                color: isDark
+                  ? "rgba(255,255,255,0.95)"
+                  : "rgba(0,0,0,0.88)",
+>>>>>>> claude/add-project-section-YzCbV
               }}
             >
               {project.title}
@@ -257,7 +297,13 @@ export const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({
               transition={{ delay: 0.2, duration: 0.6 }}
               viewport={{ once: true }}
               style={{
+<<<<<<< HEAD
                 color: isDark ? "rgba(255,255,255,0.28)" : "rgba(0,0,0,0.28)",
+=======
+                color: isDark
+                  ? "rgba(255,255,255,0.28)"
+                  : "rgba(0,0,0,0.28)",
+>>>>>>> claude/add-project-section-YzCbV
               }}
             >
               {project.subtitle}
@@ -268,6 +314,7 @@ export const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({
               className="text-sm sm:text-base leading-relaxed mb-7"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
+<<<<<<< HEAD
               transition={{
                 delay: 0.25,
                 duration: 0.7,
@@ -276,6 +323,14 @@ export const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({
               viewport={{ once: true }}
               style={{
                 color: isDark ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0.55)",
+=======
+              transition={{ delay: 0.25, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              viewport={{ once: true }}
+              style={{
+                color: isDark
+                  ? "rgba(255,255,255,0.55)"
+                  : "rgba(0,0,0,0.55)",
+>>>>>>> claude/add-project-section-YzCbV
               }}
             >
               {project.description}
@@ -330,7 +385,13 @@ export const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({
         <div
           className="absolute bottom-5 right-6 text-[6rem] font-black leading-none select-none pointer-events-none"
           style={{
+<<<<<<< HEAD
             color: isDark ? "rgba(255,255,255,0.015)" : "rgba(0,0,0,0.012)",
+=======
+            color: isDark
+              ? "rgba(255,255,255,0.015)"
+              : "rgba(0,0,0,0.012)",
+>>>>>>> claude/add-project-section-YzCbV
           }}
         >
           {project.number}
