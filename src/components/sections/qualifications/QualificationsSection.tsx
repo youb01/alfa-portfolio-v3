@@ -58,7 +58,15 @@ export const QualificationsSection: React.FC = () => {
       {/* ── Timeline ───────────────────────────────────────────────────── */}
       <div className="relative z-10 pb-28 lg:pb-40">
         <div className="max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
+          {/*
+           * trackRef lives here — this is the scroll-progress target.
+           * The absolute track line is positioned inside this container.
+           *
+           * Mobile  : line at left-[10px]  (centre of the 20 px dot lane)
+           * Desktop : line at left-1/2     (centre of the 80 px dot column)
+           */}
           <div ref={trackRef} className="relative">
+            {/* ── Vertical track ───────────────────────────────────────── */}
             <div
               aria-hidden
               className="
@@ -69,6 +77,7 @@ export const QualificationsSection: React.FC = () => {
               "
               style={{ background: "rgb(var(--border-primary))" }}
             >
+              {/* Filled portion grows downward as user scrolls */}
               <motion.div
                 className="absolute inset-x-0 top-0"
                 style={{
@@ -81,6 +90,7 @@ export const QualificationsSection: React.FC = () => {
               />
             </div>
 
+            {/* ── Items ────────────────────────────────────────────────── */}
             {timelineEvents.map((event, i) => (
               <TimelineItem key={event.id} event={event} index={i} />
             ))}

@@ -5,6 +5,10 @@ import { getTechIcon } from "./techIconMap";
 
 interface ToolBadgeProps {
   tool: string;
+<<<<<<< HEAD
+=======
+  /** Stagger index — drives the entrance delay */
+>>>>>>> claude/add-project-section-YzCbV
   index: number;
 }
 
