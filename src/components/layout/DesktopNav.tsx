@@ -34,7 +34,7 @@ export const DesktopNavbar = ({ isVisible, navItems }: DesktopNavbarProps) => {
 
               {/* Desktop Navigation */}
               <div className="flex items-center gap-10">
-                {navItems.slice(0, 3).map((item) => (
+                {navItems.slice(1, 5).map((item) => (
                   <motion.a
                     key={item.href}
                     href={item.href}
