@@ -13,20 +13,36 @@ interface NavbarProps {
 }
 
 export const Navbar = ({ navItems, socialLinks }: NavbarProps) => {
-  const { isMenuOpen, setIsMenuOpen, showMenuButton, showDesktopNav } =
-    useNavigation();
+  const {
+    isMenuOpen,
+    setIsMenuOpen,
+    showMenuButton,
+    showDesktopNav,
+    isScrolled,
+  } = useNavigation();
+
+  const isMobileNavElevated = isScrolled || isMenuOpen;
 
   return (
     <>
       <BackgroundLines />
 
-      {/* Desktop Navbar - Shows initially, hides on scroll */}
       <DesktopNavbar isVisible={showDesktopNav} navItems={navItems} />
 
-      {/* Mobile Header - Always visible on mobile */}
       <motion.div
         initial={{ y: 0, opacity: 1 }}
-        className="md:hidden fixed top-0 left-0 right-0 z-[1020]"
+        className="md:hidden fixed top-0 left-0 right-0 z-[1020] transition-all duration-300"
+        style={
+          isMobileNavElevated
+            ? {
+                background: "rgba(var(--bg-primary), 0.72)",
+                backdropFilter: "blur(14px)",
+                WebkitBackdropFilter: "blur(14px)",
+                borderBottom: "1px solid rgb(var(--border-primary))",
+                boxShadow: "0 8px 24px rgba(var(--shadow-color), 0.12)",
+              }
+            : undefined
+        }
       >
         <div className="flex items-center justify-between h-20 px-6">
           <motion.a
@@ -40,7 +56,6 @@ export const Navbar = ({ navItems, socialLinks }: NavbarProps) => {
         </div>
       </motion.div>
 
-      {/* Menu Toggle Button - Shows on scroll for both mobile and desktop */}
       {!isMenuOpen && (
         <MenuToggle
           isVisible={showMenuButton}
@@ -48,7 +63,6 @@ export const Navbar = ({ navItems, socialLinks }: NavbarProps) => {
         />
       )}
 
-      {/* Side Navigation - Works for both mobile and desktop */}
       <SideNav
         isOpen={isMenuOpen}
         onClose={() => setIsMenuOpen(false)}

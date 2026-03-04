@@ -4,6 +4,7 @@ export const useNavigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showMenuButton, setShowMenuButton] = useState(false);
   const [showDesktopNav, setShowDesktopNav] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     let ticking = false;
@@ -12,7 +13,9 @@ export const useNavigation = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const currentScrollY = window.scrollY;
-          const SCROLL_THRESHOLD = 40; // Trigger earlier - after just 40px
+          const SCROLL_THRESHOLD = 40;
+
+          setIsScrolled(currentScrollY > 0);
 
           if (currentScrollY > SCROLL_THRESHOLD) {
             setShowMenuButton(true);
@@ -20,7 +23,7 @@ export const useNavigation = () => {
           } else {
             setShowMenuButton(false);
             setShowDesktopNav(true);
-            setIsMenuOpen(false); // Close menu when back at top
+            setIsMenuOpen(false);
           }
 
           ticking = false;
@@ -30,16 +33,12 @@ export const useNavigation = () => {
       }
     };
 
-    // Add scroll listener with passive flag for better performance
     window.addEventListener("scroll", handleScroll, { passive: true });
-
-    // Check initial scroll position
     handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Prevent body scroll when menu is open
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -57,5 +56,6 @@ export const useNavigation = () => {
     setIsMenuOpen,
     showMenuButton,
     showDesktopNav,
+    isScrolled,
   };
 };
