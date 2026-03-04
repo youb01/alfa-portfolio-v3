@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -13,35 +13,35 @@ export const ProjectDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
 
+  // Desktop: driven by scroll progress inside the tall sticky section
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  // One ref slot per gallery image — used by IntersectionObserver below
-  const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
+  // Mobile: driven by tap/swipe on the carousel
+  const [mobilePage, setMobilePage] = useState(0);
+
+  const caseStudySectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     setActiveImageIndex(0);
+    setMobilePage(0);
   }, [slug]);
 
   const project = projectsData.find((p) => p.slug === slug);
   const detail = project ? projectDetails[project.id] : null;
   const imageCount = detail?.caseStudy.images.length ?? 0;
 
-  // Track which gallery image is scrolled into view (desktop stacked layout)
-  useEffect(() => {
+  // Map scroll progress [0 → 1] inside the tall desktop section to an image index.
+  // The section has (imageCount + 1) * 100 vh of height, so each "screen" of scroll
+  // corresponds to one image transition.
+  const { scrollYProgress } = useScroll({
+    target: caseStudySectionRef,
+    offset: ["start start", "end end"],
+  });
+
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
     if (imageCount === 0) return;
-    const observers = imageRefs.current.map((ref, i) => {
-      if (!ref) return null;
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveImageIndex(i);
-        },
-        { threshold: 0.5, rootMargin: "-15% 0px -15% 0px" },
-      );
-      obs.observe(ref);
-      return obs;
-    });
-    return () => observers.forEach((o) => o?.disconnect());
-  }, [imageCount, slug]);
+    setActiveImageIndex(Math.min(Math.floor(v * imageCount), imageCount - 1));
+  });
 
   if (!project || !detail) {
     return (
@@ -61,7 +61,7 @@ export const ProjectDetailPage: React.FC = () => {
     );
   }
 
-  // Active body paragraph — clamp to body array length
+  // Clamp paragraph highlight to the number of body entries
   const activeBodyIndex = Math.min(
     activeImageIndex,
     detail.caseStudy.body.length - 1,
@@ -104,7 +104,6 @@ export const ProjectDetailPage: React.FC = () => {
       <section className="pt-16 relative overflow-hidden">
         <BackgroundLines />
 
-        {/* Title — stays inside padded container */}
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16 pt-16 md:pt-24 pb-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -150,18 +149,12 @@ export const ProjectDetailPage: React.FC = () => {
           </motion.p>
         </div>
 
-        {/*
-          Full-bleed block: hero image + meta bar.
-          Both are w-full with no horizontal container padding,
-          so the meta bar is exactly as wide as the image.
-        */}
         <motion.div
           className="relative z-10 w-full"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* Hero image — edge to edge */}
           <div
             className="w-full overflow-hidden"
             style={{ aspectRatio: "16/9" }}
@@ -173,7 +166,6 @@ export const ProjectDetailPage: React.FC = () => {
             />
           </div>
 
-          {/* Meta bar — full width of the image */}
           <div
             className="w-full grid grid-cols-3"
             style={{ borderTop: border, borderBottom: border }}
@@ -244,147 +236,145 @@ export const ProjectDetailPage: React.FC = () => {
       </motion.div>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          Case study — DESKTOP
-          Images stacked on the left (always visible, scroll-driven via
-          IntersectionObserver). Text panel on the right is sticky with a
-          fixed column width so proportions hold regardless of how many
-          images or paragraphs exist.
+          Case study — DESKTOP  (lg+)
+
+          Outer section is (imageCount + 1) × 100 vh tall — the extra
+          height is the scroll "budget" that gets consumed while the inner
+          panel stays pinned to the viewport.  Images cross-fade on the
+          LEFT as you scroll; the text panel on the RIGHT is always in
+          view.  Once you've scrolled through every image the section
+          releases and the rest of the page continues normally.
       ═══════════════════════════════════════════════════════════════════ */}
-      <section className="hidden lg:block py-24 md:py-32" style={{ borderTop: border }}>
-        <div className="max-w-[1400px] mx-auto px-12 xl:px-16">
+      <section
+        ref={caseStudySectionRef}
+        className="hidden lg:block relative"
+        style={{
+          borderTop: border,
+          height: `${(imageCount + 1) * 100}vh`,
+        }}
+      >
+        {/* Sticky inner panel — fills exactly one viewport */}
+        <div
+          className="sticky top-0 h-screen flex flex-col overflow-hidden"
+          style={{ background: "rgb(var(--bg-primary))" }}
+        >
+          {/* Spacer that clears the 64 px fixed nav */}
+          <div className="h-16 shrink-0" />
 
-          {/* Section header row */}
-          <motion.div
-            className="flex items-center gap-8 mb-16"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            viewport={{ once: true, margin: "-60px" }}
-          >
-            <span className="shrink-0 text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--text-tertiary))]">
-              Case Study
-            </span>
-            <div
-              className="flex-1 h-[1px]"
-              style={{ background: "rgb(var(--border-primary))" }}
-            />
-            <span className="shrink-0 text-[10px] font-bold tabular-nums text-[rgb(var(--text-tertiary))]">
-              {String(imageCount).padStart(2, "0")} Images
-            </span>
-          </motion.div>
+          {/* Main two-column layout */}
+          <div className="flex-1 min-h-0 pb-8 px-12 xl:px-16">
+            <div className="h-full max-w-[1400px] mx-auto grid grid-cols-[1fr_400px] xl:grid-cols-[1fr_440px] gap-10 xl:gap-14">
 
-          {/* Two-column grid — images left, sticky text right */}
-          <div className="grid grid-cols-[1fr_400px] xl:grid-cols-[1fr_440px] gap-16 xl:gap-24 items-start">
-
-            {/* ── LEFT: stacked image gallery ── */}
-            <div className="space-y-5">
-              {detail.caseStudy.images.map((src, i) => (
-                <motion.div
-                  key={src}
-                  ref={(el) => { imageRefs.current[i] = el; }}
-                  className="relative w-full overflow-hidden rounded-2xl group cursor-default"
-                  initial={{ opacity: 0, y: 48 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{
-                    delay: i * 0.07,
-                    duration: 0.9,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  viewport={{ once: true, margin: "-80px" }}
-                >
-                  <div
-                    className="overflow-hidden"
-                    style={{ aspectRatio: "16/10" }}
+              {/* ── LEFT: cross-fading gallery — fills the grid cell height ── */}
+              <div className="relative overflow-hidden rounded-2xl">
+                {detail.caseStudy.images.map((src, i) => (
+                  <motion.div
+                    key={src}
+                    className="absolute inset-0"
+                    animate={{
+                      opacity: i === activeImageIndex ? 1 : 0,
+                      scale: i === activeImageIndex ? 1 : 1.04,
+                      y:
+                        i < activeImageIndex
+                          ? "-2%"
+                          : i > activeImageIndex
+                            ? "2%"
+                            : "0%",
+                    }}
+                    transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <img
                       src={src}
                       alt={`${project.title} — image ${i + 1}`}
-                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                      className="w-full h-full object-cover"
                     />
-                  </div>
+                  </motion.div>
+                ))}
 
-                  {/* Subtle bottom gradient overlay */}
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      background:
-                        "linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.18) 100%)",
-                    }}
-                  />
-
-                  {/* Image number badge */}
-                  <div
-                    className="absolute bottom-4 right-4 w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md"
-                    style={{
-                      background: "rgba(var(--bg-primary), 0.72)",
-                      border: "1px solid rgba(var(--border-primary), 0.5)",
-                    }}
-                  >
-                    <span className="text-[9px] font-bold tabular-nums text-[rgb(var(--text-primary))]">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* ── RIGHT: sticky text panel (fixed column width keeps proportions) ── */}
-            <motion.div
-              className="sticky top-24 flex flex-col"
-              initial={{ opacity: 0, x: 24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              viewport={{ once: true, margin: "-60px" }}
-            >
-              <h2 className="text-3xl xl:text-[2.1rem] font-extrabold leading-tight mb-10 text-[rgb(var(--text-primary))]">
-                {detail.caseStudy.title}
-              </h2>
-
-              {/* Vertical progress line + paragraphs side-by-side */}
-              <div className="flex gap-6 mb-10">
-                {/* Animated fill line */}
+                {/* Bottom vignette */}
                 <div
-                  className="relative shrink-0 self-stretch rounded-full overflow-hidden"
+                  className="absolute inset-0 pointer-events-none"
                   style={{
-                    width: 1,
-                    background: "rgb(var(--border-primary))",
-                    minHeight: 40,
+                    background:
+                      "linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.22) 100%)",
                   }}
-                >
-                  <motion.div
-                    className="absolute top-0 left-0 w-full rounded-full"
-                    style={{ background: "rgb(var(--text-primary))" }}
-                    animate={{
-                      height: `${((activeImageIndex + 1) / imageCount) * 100}%`,
-                    }}
-                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                  />
-                </div>
+                />
 
-                {/* Body paragraphs — active one is full opacity */}
-                <div className="space-y-5 flex-1 min-w-0">
-                  {detail.caseStudy.body.map((para, i) => (
-                    <motion.p
-                      key={i}
-                      className="text-[0.93rem] leading-relaxed"
-                      animate={{
-                        opacity: i === activeBodyIndex ? 1 : 0.28,
-                        color:
-                          i === activeBodyIndex
-                            ? "rgb(var(--text-primary))"
-                            : "rgb(var(--text-secondary))",
-                      }}
-                      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                    >
-                      {para}
-                    </motion.p>
-                  ))}
+                {/* Image counter badge */}
+                <div className="absolute bottom-5 left-6 flex items-center gap-2">
+                  <span className="text-[12px] font-bold tabular-nums text-white drop-shadow">
+                    {String(activeImageIndex + 1).padStart(2, "0")}
+                  </span>
+                  <div className="w-px h-3.5 bg-white/40" />
+                  <span className="text-[12px] font-medium tabular-nums text-white/55 drop-shadow">
+                    {String(imageCount).padStart(2, "0")}
+                  </span>
                 </div>
               </div>
 
-              {/* Progress pills + image counter */}
-              <div className="flex items-center gap-3">
-                <div className="flex gap-1.5 items-center">
+              {/* ── RIGHT: text panel — vertically centred in its grid cell ── */}
+              <div className="flex flex-col justify-center py-2">
+
+                {/* Section label + rule */}
+                <div className="flex items-center gap-5 mb-8">
+                  <span className="shrink-0 text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--text-tertiary))]">
+                    Case Study
+                  </span>
+                  <div
+                    className="flex-1 h-[1px]"
+                    style={{ background: "rgb(var(--border-primary))" }}
+                  />
+                </div>
+
+                {/* Title */}
+                <h2 className="text-[1.75rem] xl:text-[2rem] font-extrabold leading-tight mb-8 text-[rgb(var(--text-primary))]">
+                  {detail.caseStudy.title}
+                </h2>
+
+                {/* Vertical progress fill line + body paragraphs */}
+                <div className="flex gap-5 mb-9">
+                  {/* Thin line — fills proportionally as images advance */}
+                  <div
+                    className="relative shrink-0 self-stretch rounded-full overflow-hidden"
+                    style={{
+                      width: 1,
+                      background: "rgb(var(--border-primary))",
+                      minHeight: 24,
+                    }}
+                  >
+                    <motion.div
+                      className="absolute top-0 left-0 w-full"
+                      style={{ background: "rgb(var(--text-primary))" }}
+                      animate={{
+                        height: `${((activeImageIndex + 1) / imageCount) * 100}%`,
+                      }}
+                      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                    />
+                  </div>
+
+                  {/* Paragraphs — active one at full opacity, rest dimmed */}
+                  <div className="space-y-4 flex-1 min-w-0">
+                    {detail.caseStudy.body.map((para, i) => (
+                      <motion.p
+                        key={i}
+                        className="text-[0.88rem] leading-relaxed"
+                        animate={{
+                          opacity: i === activeBodyIndex ? 1 : 0.2,
+                          color:
+                            i === activeBodyIndex
+                              ? "rgb(var(--text-primary))"
+                              : "rgb(var(--text-secondary))",
+                        }}
+                        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        {para}
+                      </motion.p>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Progress pills */}
+                <div className="flex items-center gap-2.5">
                   {detail.caseStudy.images.map((_, i) => (
                     <motion.div
                       key={i}
@@ -396,57 +386,103 @@ export const ProjectDetailPage: React.FC = () => {
                             ? "rgb(var(--text-primary))"
                             : "rgb(var(--border-primary))",
                       }}
-                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     />
                   ))}
                 </div>
-                <span className="text-[10px] font-bold tabular-nums text-[rgb(var(--text-tertiary))]">
-                  {String(activeImageIndex + 1).padStart(2, "0")} /{" "}
-                  {String(imageCount).padStart(2, "0")}
-                </span>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════
           Case study — MOBILE / TABLET  (< lg)
-          Images first (grab attention), then all body text below.
-      ═══════════════════════════════════════════════════════════════════ */}
-      <section className="lg:hidden py-20" style={{ borderTop: border }}>
-        <div className="max-w-[1400px] mx-auto px-6 md:px-8">
 
+          Tap-driven image carousel above the body text.  No scroll-
+          trapping — touch users navigate with taps on the image or the
+          dot controls below it.
+      ═══════════════════════════════════════════════════════════════════ */}
+      <section className="lg:hidden py-16 sm:py-20" style={{ borderTop: border }}>
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8">
+
+          {/* Header */}
           <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--text-tertiary))] mb-4">
             Case Study
           </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold leading-tight mb-8 text-[rgb(var(--text-primary))]">
+          <h2 className="text-2xl sm:text-3xl font-extrabold leading-tight mb-7 text-[rgb(var(--text-primary))]">
             {detail.caseStudy.title}
           </h2>
 
-          {/* Images stacked */}
-          <div className="space-y-4 mb-10">
+          {/* Tap-to-advance image carousel */}
+          <div
+            className="relative overflow-hidden rounded-xl mb-5"
+            style={{ aspectRatio: "16/10" }}
+          >
             {detail.caseStudy.images.map((src, i) => (
               <motion.div
                 key={src}
-                className="w-full overflow-hidden rounded-xl"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{
-                  delay: i * 0.07,
-                  duration: 0.75,
-                  ease: [0.22, 1, 0.36, 1],
+                className="absolute inset-0"
+                animate={{
+                  opacity: i === mobilePage ? 1 : 0,
+                  scale: i === mobilePage ? 1 : 1.03,
+                  x:
+                    i < mobilePage
+                      ? "-4%"
+                      : i > mobilePage
+                        ? "4%"
+                        : "0%",
                 }}
-                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               >
                 <img
                   src={src}
                   alt={`${project.title} — image ${i + 1}`}
-                  className="w-full object-cover"
-                  style={{ aspectRatio: "16/10" }}
+                  className="w-full h-full object-cover"
                 />
               </motion.div>
             ))}
+
+            {/* Tap left = previous */}
+            <button
+              className="absolute left-0 top-0 bottom-0 w-1/2 cursor-w-resize"
+              onClick={() => setMobilePage((p) => Math.max(0, p - 1))}
+              aria-label="Previous image"
+            />
+            {/* Tap right = next */}
+            <button
+              className="absolute right-0 top-0 bottom-0 w-1/2 cursor-e-resize"
+              onClick={() =>
+                setMobilePage((p) => Math.min(imageCount - 1, p + 1))
+              }
+              aria-label="Next image"
+            />
+          </div>
+
+          {/* Dot + counter navigation */}
+          <div className="flex items-center gap-2 mb-8">
+            <div className="flex gap-1.5 items-center">
+              {detail.caseStudy.images.map((_, i) => (
+                <motion.button
+                  key={i}
+                  className="h-[2px] rounded-full"
+                  animate={{
+                    width: i === mobilePage ? 24 : 8,
+                    backgroundColor:
+                      i === mobilePage
+                        ? "rgb(var(--text-primary))"
+                        : "rgb(var(--border-primary))",
+                  }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  onClick={() => setMobilePage(i)}
+                  aria-label={`Image ${i + 1}`}
+                />
+              ))}
+            </div>
+            <span className="ml-3 text-[10px] font-bold tabular-nums text-[rgb(var(--text-tertiary))]">
+              {String(mobilePage + 1).padStart(2, "0")} /{" "}
+              {String(imageCount).padStart(2, "0")}
+            </span>
           </div>
 
           {/* Body text */}
