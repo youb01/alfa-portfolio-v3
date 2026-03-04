@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { projectDetails } from "../components/sections/data/ProjectDetailData";
 import { projectsData } from "../components/sections/data/ProjectsData";
 import { BackgroundLines } from "../components/ui/backgrounds/BackgroundLines";
+import { Footer } from "../components/layout/Footer";
 import { OtherProjects } from "../components/ui/projects/OtherProjects";
 import { ScrollProgressBar } from "../components/ui/ScrollProgressBar";
 import { ThemeToggle } from "../components/ui/ThemeToggle";
@@ -557,6 +558,8 @@ export const ProjectDetailPage: React.FC = () => {
 
       {/* ── Other projects ──────────────────────────────────────────────────── */}
       <OtherProjects currentSlug={slug!} />
+
+      <Footer />
     </div>
   );
 };

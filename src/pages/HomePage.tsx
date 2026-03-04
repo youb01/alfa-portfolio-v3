@@ -10,6 +10,7 @@ import { SkillsSection } from "../components/sections/skills/SkillsSection";
 import { ProjectsSection } from "../components/sections/projects/ProjectsSection";
 import { QualificationsSection } from "../components/sections/qualifications/QualificationsSection";
 import { ContactSection } from "../components/sections/contact/ContactSection";
+import { Footer } from "../components/layout/Footer";
 const navItems: NavItem[] = [
   { label: "Home", href: "#home", number: "01" },
   { label: "Skills", href: "#skills", number: "02" },
@@ -66,6 +67,7 @@ export const HomePage: React.FC = () => {
 
             <ProjectsSection />
             <ContactSection />
+            <Footer />
           </motion.div>
         )}
       </AnimatePresence>
