@@ -30,7 +30,7 @@ export const MenuToggle = ({ isVisible, onClick }: MenuToggleProps) => {
           whileTap={{ scale: 0.95 }}
           aria-label="Open menu"
           className="
-            fixed top-6 right-6 md:top-8 md:right-8 z-[1030]
+            fixed top-[calc(env(safe-area-inset-top)+5.25rem)] right-6 md:top-8 md:right-8 z-[1030]
             w-14 h-14 md:w-16 md:h-16 rounded-full 
             bg-[rgb(var(--bg-elevated))]
             hover:bg-[rgb(var(--bg-tertiary))]
@@ -49,14 +49,8 @@ export const MenuToggle = ({ isVisible, onClick }: MenuToggleProps) => {
           "
         >
           <motion.div
-            animate={{
-              rotate: isHovered ? 90 : 0,
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 200,
-              damping: 15,
-            }}
+            animate={{ rotate: isHovered ? 90 : 0 }}
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
           >
             <Menu className="w-6 h-6 md:w-7 md:h-7" strokeWidth={2.5} />
           </motion.div>
