@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -10,15 +10,19 @@ import { OtherProjects } from "../components/ui/projects/OtherProjects";
 import { ScrollProgressBar } from "../components/ui/ScrollProgressBar";
 import { ThemeToggle } from "../components/ui/ThemeToggle";
 
-// ─── Entrance presets ────────────────────────────────────────────────────────
+const EASE_SMOOTH: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
   show: (delay = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.85, delay, ease: [0.22, 1, 0.36, 1] },
+    transition: {
+      duration: 0.85,
+      delay,
+      ease: EASE_SMOOTH,
+    },
   }),
-};
+} satisfies Variants;
 
 export const ProjectDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -61,7 +65,10 @@ export const ProjectDetailPage: React.FC = () => {
       {/* ── Nav ─────────────────────────────────────────────────────────────── */}
       <nav
         className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl"
-        style={{ background: "rgba(var(--bg-primary), 0.85)", borderBottom: border }}
+        style={{
+          background: "rgba(var(--bg-primary), 0.85)",
+          borderBottom: border,
+        }}
       >
         <div className="max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16 h-16 flex items-center justify-between gap-4">
           <motion.button
@@ -100,7 +107,11 @@ export const ProjectDetailPage: React.FC = () => {
               style={{ background: "rgb(var(--border-primary))" }}
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
-              transition={{ duration: 1.1, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 1.1,
+                delay: 0.1,
+                ease: [0.22, 1, 0.36, 1],
+              }}
             />
           </motion.div>
 
@@ -117,7 +128,11 @@ export const ProjectDetailPage: React.FC = () => {
             className="text-sm font-medium text-[rgb(var(--text-tertiary))]"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            transition={{
+              delay: 0.15,
+              duration: 0.7,
+              ease: [0.22, 1, 0.36, 1],
+            }}
           >
             {project.subtitle}
           </motion.p>
@@ -129,7 +144,10 @@ export const ProjectDetailPage: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="w-full overflow-hidden" style={{ aspectRatio: "16/9" }}>
+          <div
+            className="w-full overflow-hidden"
+            style={{ aspectRatio: "16/9" }}
+          >
             <img
               src={detail.heroImage}
               alt={project.title}
@@ -178,7 +196,11 @@ export const ProjectDetailPage: React.FC = () => {
             className="text-xl md:text-2xl lg:text-[1.65rem] font-light leading-[1.65] text-[rgb(var(--text-primary))]"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            transition={{
+              delay: 0.15,
+              duration: 0.9,
+              ease: [0.22, 1, 0.36, 1],
+            }}
             viewport={{ once: true, margin: "-80px" }}
           >
             {detail.introduction}
@@ -218,7 +240,6 @@ export const ProjectDetailPage: React.FC = () => {
       ═══════════════════════════════════════════════════════════════════ */}
       <section className="py-20 md:py-28" style={{ borderTop: border }}>
         <div className="max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
-
           {/* ── Section header ── */}
           <motion.div
             className="mb-16 md:mb-24"
@@ -227,7 +248,11 @@ export const ProjectDetailPage: React.FC = () => {
             viewport={{ once: true, margin: "-60px" }}
             variants={{
               hidden: { opacity: 0, y: 28 },
-              show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
+              show: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+              },
             }}
           >
             {/* Label row */}
@@ -265,7 +290,6 @@ export const ProjectDetailPage: React.FC = () => {
 
               return (
                 <div key={i} className="py-14 md:py-20 lg:py-24">
-
                   {/* ── Chapter with both image + text: alternating split ── */}
                   {hasBoth && (
                     <div
@@ -310,7 +334,8 @@ export const ProjectDetailPage: React.FC = () => {
                           className="absolute bottom-4 right-4 h-7 px-3 flex items-center rounded-full backdrop-blur-md"
                           style={{
                             background: "rgba(var(--bg-primary), 0.76)",
-                            border: "1px solid rgba(var(--border-primary), 0.55)",
+                            border:
+                              "1px solid rgba(var(--border-primary), 0.55)",
                           }}
                         >
                           <span className="text-[9px] font-bold tabular-nums text-[rgb(var(--text-primary))]">

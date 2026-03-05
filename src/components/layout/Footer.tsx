@@ -39,7 +39,7 @@ export const Footer: React.FC = () => {
           {/* ── Brand mark (center) ── */}
           <motion.a
             href="/"
-            className="order-1 sm:order-2 text-[13px] font-extrabold tracking-[0.28em] uppercase text-[rgb(var(--text-primary))]"
+            className="order-1 sm:order-2 text-[13px] font-bold font-serif tracking-[0.28em] uppercase text-[rgb(var(--text-primary))]"
             whileHover={{ opacity: 0.5 }}
             transition={{ duration: 0.18 }}
             aria-label="Back to home"
