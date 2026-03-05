@@ -1,41 +1,39 @@
-import { motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { ArrowDown, ChevronLeft } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
+import { motion, type Variants } from "framer-motion";
+import { ChevronLeft } from "lucide-react";
+import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { projectDetails } from "../components/sections/data/ProjectDetailData";
 import { projectsData } from "../components/sections/data/ProjectsData";
 import { BackgroundLines } from "../components/ui/backgrounds/BackgroundLines";
+import { Footer } from "../components/layout/Footer";
 import { OtherProjects } from "../components/ui/projects/OtherProjects";
 import { ScrollProgressBar } from "../components/ui/ScrollProgressBar";
 import { ThemeToggle } from "../components/ui/ThemeToggle";
+
+const EASE_SMOOTH: [number, number, number, number] = [0.22, 1, 0.36, 1];
+const fadeUp = {
+  hidden: { opacity: 0, y: 32 },
+  show: (delay = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.85,
+      delay,
+      ease: EASE_SMOOTH,
+    },
+  }),
+} satisfies Variants;
 
 export const ProjectDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
 
-  // Ref targets the DESKTOP sticky section only.
-  // On mobile it's display:none so useScroll is a no-op there.
-  const caseStudyRef = useRef<HTMLElement>(null);
-  const [activeImageIndex, setActiveImageIndex] = useState(0);
-
-  const { scrollYProgress } = useScroll({
-    target: caseStudyRef,
-    offset: ["start start", "end end"],
-  });
-
   useEffect(() => {
     window.scrollTo(0, 0);
-    setActiveImageIndex(0);
   }, [slug]);
 
   const project = projectsData.find((p) => p.slug === slug);
   const detail = project ? projectDetails[project.id] : null;
-  const imageCount = detail?.caseStudy.images.length ?? 0;
-
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    if (imageCount === 0) return;
-    setActiveImageIndex(Math.min(Math.floor(v * imageCount), imageCount - 1));
-  });
 
   if (!project || !detail) {
     return (
@@ -55,19 +53,16 @@ export const ProjectDetailPage: React.FC = () => {
     );
   }
 
-  // Active body paragraph — clamp to body array length
-  const activeBodyIndex = Math.min(
-    activeImageIndex,
-    detail.caseStudy.body.length - 1,
-  );
-
+  const imageCount = detail.caseStudy.images.length;
+  const bodyCount = detail.caseStudy.body.length;
+  const chapterCount = Math.max(imageCount, bodyCount);
   const border = "1px solid rgb(var(--border-primary))";
 
   return (
     <div className="min-h-screen bg-[rgb(var(--bg-primary))]">
       <ScrollProgressBar />
 
-      {/* ── Fixed nav ──────────────────────────────────────────────────────── */}
+      {/* ── Nav ─────────────────────────────────────────────────────────────── */}
       <nav
         className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl"
         style={{
@@ -94,11 +89,10 @@ export const ProjectDetailPage: React.FC = () => {
         </div>
       </nav>
 
-      {/* ── Hero ───────────────────────────────────────────────────────────── */}
+      {/* ── Hero ────────────────────────────────────────────────────────────── */}
       <section className="pt-16 relative overflow-hidden">
         <BackgroundLines />
 
-        {/* Title — stays inside padded container */}
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16 pt-16 md:pt-24 pb-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -144,18 +138,12 @@ export const ProjectDetailPage: React.FC = () => {
           </motion.p>
         </div>
 
-        {/*
-          Full-bleed block: hero image + meta bar.
-          Both are w-full with no horizontal container padding,
-          so the meta bar is exactly as wide as the image.
-        */}
         <motion.div
           className="relative z-10 w-full"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* Hero image — edge to edge */}
           <div
             className="w-full overflow-hidden"
             style={{ aspectRatio: "16/9" }}
@@ -167,7 +155,6 @@ export const ProjectDetailPage: React.FC = () => {
             />
           </div>
 
-          {/* Meta bar — full width of the image */}
           <div
             className="w-full grid grid-cols-3"
             style={{ borderTop: border, borderBottom: border }}
@@ -194,7 +181,7 @@ export const ProjectDetailPage: React.FC = () => {
         </motion.div>
       </section>
 
-      {/* ── Introduction ───────────────────────────────────────────────────── */}
+      {/* ── Introduction ────────────────────────────────────────────────────── */}
       <section className="py-24 md:py-32">
         <div className="max-w-[760px] mx-auto px-6 md:px-8 text-center">
           <motion.div
@@ -221,7 +208,7 @@ export const ProjectDetailPage: React.FC = () => {
         </div>
       </section>
 
-      {/* ── Wide image ─────────────────────────────────────────────────────── */}
+      {/* ── Wide image ──────────────────────────────────────────────────────── */}
       <motion.div
         className="w-full overflow-hidden"
         initial={{ opacity: 0 }}
@@ -238,219 +225,237 @@ export const ProjectDetailPage: React.FC = () => {
       </motion.div>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          Case study — DESKTOP
-          Uses CSS `hidden lg:block` so this section has real layout
-          dimensions on desktop. The sticky inner panel pins to the
-          viewport while the outer section's extra height provides
-          scroll "room" for each image to become active.
+          Case Study — Alternating editorial chapters
+
+          Each chapter pairs one image with one paragraph. Chapters
+          alternate between image-left (7fr) and image-right (5fr:7fr)
+          for a magazine-style visual rhythm.
+
+          If imageCount > bodyCount the final "orphan" image renders
+          as a full-width cinematic frame (16/9) so proportion is
+          always correct regardless of content length.
+
+          Single responsive section — no scroll-trapping, no state.
+          Mobile: grid stacks naturally (image above text).
       ═══════════════════════════════════════════════════════════════════ */}
-      <section
-        ref={caseStudyRef}
-        className="hidden lg:block relative"
-        style={{ height: `${(imageCount + 1) * 100}vh`, borderTop: border }}
-      >
-        <div
-          className="sticky top-0 h-screen overflow-hidden"
-          style={{ background: "rgb(var(--bg-primary))" }}
-        >
-          {/* pt-16 clears the fixed 64px nav; pb-8 adds breathing room at bottom */}
-          <div className="h-full pt-16 pb-8 max-w-[1400px] mx-auto px-12 xl:px-16">
-            {/* 5 : 7 split — text left, image right; h-full makes image fill the panel */}
-            <div className="grid grid-cols-[5fr_7fr] gap-16 xl:gap-20 h-full">
-              {/* ── Left: text + progress line — self-center keeps it vertically centred ── */}
-              <div className="flex items-start gap-7 self-center">
-                {/* Vertical fill line */}
-                <div
-                  className="relative shrink-0 mt-1 rounded-full overflow-hidden"
-                  style={{
-                    width: 1,
-                    height: 200,
-                    background: "rgb(var(--border-primary))",
-                  }}
-                >
-                  <motion.div
-                    className="absolute top-0 left-0 w-full rounded-full"
-                    style={{ background: "rgb(var(--text-primary))" }}
-                    animate={{
-                      height: `${((activeImageIndex + 1) / imageCount) * 100}%`,
-                    }}
-                    transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                  />
-                </div>
+      <section className="py-20 md:py-28" style={{ borderTop: border }}>
+        <div className="max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
+          {/* ── Section header ── */}
+          <motion.div
+            className="mb-16 md:mb-24"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-60px" }}
+            variants={{
+              hidden: { opacity: 0, y: 28 },
+              show: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+              },
+            }}
+          >
+            {/* Label row */}
+            <div className="flex items-center gap-6 mb-8 md:mb-10">
+              <span className="shrink-0 text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--text-tertiary))]">
+                Case Study
+              </span>
+              <div
+                className="flex-1 h-[1px]"
+                style={{ background: "rgb(var(--border-primary))" }}
+              />
+              <span className="shrink-0 text-[10px] font-bold tabular-nums text-[rgb(var(--text-tertiary))]">
+                {String(chapterCount).padStart(2, "0")}{" "}
+                {chapterCount === 1 ? "Chapter" : "Chapters"}
+              </span>
+            </div>
 
-                <div className="flex-1 min-w-0">
-                  <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--text-tertiary))] mb-5">
-                    Case Study
-                  </span>
-                  <h2 className="text-3xl xl:text-4xl font-extrabold leading-tight mb-8 text-[rgb(var(--text-primary))]">
-                    {detail.caseStudy.title}
-                  </h2>
+            {/* Large section title */}
+            <h2
+              className="text-4xl sm:text-5xl lg:text-[3.25rem] xl:text-[3.75rem] font-extrabold leading-[1.06] tracking-tight text-[rgb(var(--text-primary))]"
+              style={{ maxWidth: "22ch" }}
+            >
+              {detail.caseStudy.title}
+            </h2>
+          </motion.div>
 
-                  {/* Body paragraphs — active one highlights */}
-                  <div className="space-y-4">
-                    {detail.caseStudy.body.map((para, i) => (
-                      <motion.p
-                        key={i}
-                        className="text-base leading-relaxed text-[rgb(var(--text-secondary))]"
-                        animate={{
-                          opacity: i === activeBodyIndex ? 1 : 0.2,
-                          x: i === activeBodyIndex ? 0 : 5,
-                        }}
-                        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          {/* ── Chapter list ── */}
+          <div className="divide-y divide-[rgb(var(--border-primary))]">
+            {Array.from({ length: chapterCount }).map((_, i) => {
+              const src = detail.caseStudy.images[i];
+              const para = detail.caseStudy.body[i];
+              const imageLeft = i % 2 === 0;
+              const hasBoth = !!src && !!para;
+              const imageOnly = !!src && !para;
+
+              return (
+                <div key={i} className="py-14 md:py-20 lg:py-24">
+                  {/* ── Chapter with both image + text: alternating split ── */}
+                  {hasBoth && (
+                    <div
+                      className={`grid grid-cols-1 items-center gap-8 md:gap-12 lg:gap-16 xl:gap-20 ${
+                        imageLeft
+                          ? "lg:grid-cols-[7fr_5fr]"
+                          : "lg:grid-cols-[5fr_7fr]"
+                      }`}
+                    >
+                      {/* Image */}
+                      <motion.div
+                        className={`relative overflow-hidden rounded-2xl group ${
+                          imageLeft ? "lg:order-1" : "lg:order-2"
+                        }`}
+                        initial={{ opacity: 0, y: 48, scale: 0.96 }}
+                        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                        transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
+                        viewport={{ once: true, margin: "-80px" }}
                       >
-                        {para}
-                      </motion.p>
-                    ))}
-                  </div>
+                        <div
+                          className="overflow-hidden"
+                          style={{ aspectRatio: "4/3" }}
+                        >
+                          <img
+                            src={src}
+                            alt={`${project.title} — chapter ${i + 1}`}
+                            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                          />
+                        </div>
 
-                  {/* Progress pills + counter */}
-                  <div className="flex items-center gap-3 mt-10">
-                    <div className="flex gap-1.5 items-center">
-                      {detail.caseStudy.images.map((_, i) => (
-                        <motion.div
-                          key={i}
-                          className="h-[2px] rounded-full"
-                          animate={{
-                            width: i === activeImageIndex ? 28 : 8,
-                            backgroundColor:
-                              i === activeImageIndex
-                                ? "rgb(var(--text-primary))"
-                                : "rgb(var(--border-primary))",
-                          }}
-                          transition={{
-                            duration: 0.35,
-                            ease: [0.22, 1, 0.36, 1],
+                        {/* Bottom vignette */}
+                        <div
+                          className="absolute inset-0 pointer-events-none"
+                          style={{
+                            background:
+                              "linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.16) 100%)",
                           }}
                         />
-                      ))}
+
+                        {/* Chapter number badge */}
+                        <div
+                          className="absolute bottom-4 right-4 h-7 px-3 flex items-center rounded-full backdrop-blur-md"
+                          style={{
+                            background: "rgba(var(--bg-primary), 0.76)",
+                            border:
+                              "1px solid rgba(var(--border-primary), 0.55)",
+                          }}
+                        >
+                          <span className="text-[9px] font-bold tabular-nums text-[rgb(var(--text-primary))]">
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                        </div>
+                      </motion.div>
+
+                      {/* Text */}
+                      <motion.div
+                        className={`flex flex-col ${
+                          imageLeft ? "lg:order-2" : "lg:order-1"
+                        }`}
+                        initial={{
+                          opacity: 0,
+                          x: imageLeft ? 28 : -28,
+                        }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{
+                          delay: 0.14,
+                          duration: 0.85,
+                          ease: [0.22, 1, 0.36, 1],
+                        }}
+                        viewport={{ once: true, margin: "-80px" }}
+                      >
+                        {/* Chapter label */}
+                        <div className="flex items-center gap-4 mb-7">
+                          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[rgb(var(--text-tertiary))]">
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                          <div
+                            className="w-8 h-[1px]"
+                            style={{ background: "rgb(var(--border-primary))" }}
+                          />
+                        </div>
+
+                        {/* Paragraph — Lora serif for a premium editorial feel */}
+                        <p className="font-lora text-[1.05rem] md:text-[1.1rem] lg:text-[1.15rem] leading-[1.85] text-[rgb(var(--text-secondary))]">
+                          {para}
+                        </p>
+                      </motion.div>
                     </div>
-                    <span className="text-[10px] font-bold tabular-nums text-[rgb(var(--text-tertiary))]">
-                      {String(activeImageIndex + 1).padStart(2, "0")} /{" "}
-                      {String(imageCount).padStart(2, "0")}
-                    </span>
-                  </div>
+                  )}
+
+                  {/* ── Orphan image (no matching paragraph): cinematic full-width frame ── */}
+                  {imageOnly && (
+                    <motion.div
+                      className="relative overflow-hidden rounded-2xl group"
+                      initial={{ opacity: 0, y: 48, scale: 0.97 }}
+                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
+                      viewport={{ once: true, margin: "-80px" }}
+                    >
+                      <div
+                        className="overflow-hidden"
+                        style={{ aspectRatio: "21/9" }}
+                      >
+                        <img
+                          src={src}
+                          alt={`${project.title} — chapter ${i + 1}`}
+                          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                        />
+                      </div>
+
+                      {/* Vignette */}
+                      <div
+                        className="absolute inset-0 pointer-events-none"
+                        style={{
+                          background:
+                            "linear-gradient(to bottom, transparent 45%, rgba(0,0,0,0.2) 100%)",
+                        }}
+                      />
+
+                      {/* Chapter badge */}
+                      <div
+                        className="absolute bottom-5 right-6 h-7 px-3 flex items-center rounded-full backdrop-blur-md"
+                        style={{
+                          background: "rgba(var(--bg-primary), 0.76)",
+                          border: "1px solid rgba(var(--border-primary), 0.55)",
+                        }}
+                      >
+                        <span className="text-[9px] font-bold tabular-nums text-[rgb(var(--text-primary))]">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* ── Orphan paragraph (no matching image): full-width prose ── */}
+                  {!src && !!para && (
+                    <motion.div
+                      className="max-w-[60ch]"
+                      variants={fadeUp}
+                      initial="hidden"
+                      whileInView="show"
+                      custom={0}
+                      viewport={{ once: true, margin: "-60px" }}
+                    >
+                      <div className="flex items-center gap-4 mb-7">
+                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[rgb(var(--text-tertiary))]">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <div
+                          className="w-8 h-[1px]"
+                          style={{ background: "rgb(var(--border-primary))" }}
+                        />
+                      </div>
+                      <p className="font-lora text-[1.05rem] md:text-[1.1rem] leading-[1.85] text-[rgb(var(--text-secondary))]">
+                        {para}
+                      </p>
+                    </motion.div>
+                  )}
                 </div>
-              </div>
-
-              {/* ── Right: cross-fading images — h-full fills the panel height ── */}
-              <div className="relative overflow-hidden rounded-2xl h-full">
-                {detail.caseStudy.images.map((src, i) => (
-                  <motion.div
-                    key={src}
-                    className="absolute inset-0"
-                    animate={{
-                      opacity: i === activeImageIndex ? 1 : 0,
-                      scale: i === activeImageIndex ? 1 : 1.05,
-                      // outgoing images slide up slightly; incoming start from below
-                      y:
-                        i < activeImageIndex
-                          ? -24
-                          : i > activeImageIndex
-                            ? 20
-                            : 0,
-                    }}
-                    transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    <img
-                      src={src}
-                      alt={`${project.title} — image ${i + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </motion.div>
-                ))}
-
-                {/* Depth gradient */}
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.14) 100%)",
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Scroll hint — fades out after last image */}
-          <motion.div
-            className="absolute bottom-8 right-8 flex flex-col items-center gap-2"
-            animate={{ opacity: activeImageIndex === imageCount - 1 ? 0 : 0.4 }}
-            transition={{ duration: 0.4 }}
-          >
-            <motion.div
-              animate={{ y: [0, 5, 0] }}
-              transition={{
-                duration: 1.6,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              <ArrowDown
-                size={14}
-                style={{ color: "rgb(var(--text-tertiary))" }}
-              />
-            </motion.div>
-            <span
-              className="text-[9px] font-bold uppercase tracking-[0.2em]"
-              style={{
-                color: "rgb(var(--text-tertiary))",
-                writingMode: "vertical-rl",
-              }}
-            >
-              Scroll
-            </span>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════════
-          Case study — MOBILE (stacked, no sticky scroll)
-      ═══════════════════════════════════════════════════════════════════ */}
-      <section className="lg:hidden py-24" style={{ borderTop: border }}>
-        <div className="max-w-[1400px] mx-auto px-6 md:px-8">
-          <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--text-tertiary))] mb-5">
-            Case Study
-          </span>
-          <h2 className="text-3xl font-extrabold leading-tight mb-6 text-[rgb(var(--text-primary))]">
-            {detail.caseStudy.title}
-          </h2>
-          <div className="space-y-4 mb-10">
-            {detail.caseStudy.body.map((para, i) => (
-              <p
-                key={i}
-                className="text-base leading-relaxed text-[rgb(var(--text-secondary))]"
-              >
-                {para}
-              </p>
-            ))}
-          </div>
-          <div className="space-y-4">
-            {detail.caseStudy.images.map((src, i) => (
-              <motion.div
-                key={src}
-                className="w-full overflow-hidden rounded-xl"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{
-                  delay: i * 0.08,
-                  duration: 0.7,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                viewport={{ once: true, margin: "-60px" }}
-              >
-                <img
-                  src={src}
-                  alt={`${project.title} — image ${i + 1}`}
-                  className="w-full object-cover"
-                  style={{ aspectRatio: "4/3" }}
-                />
-              </motion.div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* ── Outcomes ───────────────────────────────────────────────────────── */}
+      {/* ── Outcomes ────────────────────────────────────────────────────────── */}
       {detail.outcomes && detail.outcomes.length > 0 && (
         <section className="py-24 md:py-32" style={{ borderTop: border }}>
           <div className="max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
@@ -497,7 +502,7 @@ export const ProjectDetailPage: React.FC = () => {
         </section>
       )}
 
-      {/* ── Stats ──────────────────────────────────────────────────────────── */}
+      {/* ── Stats ───────────────────────────────────────────────────────────── */}
       {detail.stats && detail.stats.length > 0 && (
         <section className="py-16 md:py-20" style={{ borderTop: border }}>
           <div className="max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
@@ -528,7 +533,7 @@ export const ProjectDetailPage: React.FC = () => {
         </section>
       )}
 
-      {/* ── Tech stack ─────────────────────────────────────────────────────── */}
+      {/* ── Tech stack ──────────────────────────────────────────────────────── */}
       <section className="py-24 md:py-32" style={{ borderTop: border }}>
         <div className="max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-12 lg:gap-20 items-start">
@@ -576,8 +581,10 @@ export const ProjectDetailPage: React.FC = () => {
         </div>
       </section>
 
-      {/* ── Other projects ─────────────────────────────────────────────────── */}
+      {/* ── Other projects ──────────────────────────────────────────────────── */}
       <OtherProjects currentSlug={slug!} />
+
+      <Footer />
     </div>
   );
 };
