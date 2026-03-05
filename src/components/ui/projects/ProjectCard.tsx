@@ -7,6 +7,7 @@ import {
 import { ArrowUpRight } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import type { Project } from "../../sections/data/ProjectsData";
 import { Tag } from "../skills/Tag";
 import { ProjectThumbnail } from "./ProjectThumbnail";
@@ -40,6 +41,7 @@ const getCategoryColors = (isDark: boolean) => ({
 });
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
+  const { t } = useTranslation();
   const [isDark, setIsDark] = React.useState(
     document.documentElement.classList.contains("dark"),
   );
@@ -213,7 +215,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
                   color: isDark ? "rgba(255,255,255,0.95)" : "rgba(0,0,0,0.88)",
                 }}
               >
-                {project.title}
+                {t(`projects.items.${project.id}.title`)}
               </h3>
               <p
                 className="text-[11px] font-semibold uppercase tracking-[0.15em]"
@@ -221,7 +223,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
                   color: isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)",
                 }}
               >
-                {project.subtitle}
+                {t(`projects.items.${project.id}.subtitle`)}
               </p>
             </div>
 
@@ -232,7 +234,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
                 color: isDark ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0.55)",
               }}
             >
-              {project.description}
+              {t(`projects.items.${project.id}.description`)}
             </p>
 
             {/* Tech stack */}
@@ -271,7 +273,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
                     exit={{ opacity: 0, x: -6 }}
                     transition={{ duration: 0.2 }}
                   >
-                    View Details
+                    {t("projects.viewDetails")}
                   </motion.span>
                 )}
               </AnimatePresence>

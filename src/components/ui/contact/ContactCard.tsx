@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import type { ContactMethod } from "../../sections/data/ContactData";
 
 interface ContactCardProps {
@@ -6,8 +7,15 @@ interface ContactCardProps {
 }
 
 export const ContactCard: React.FC<ContactCardProps> = ({ method }) => {
+  const { t } = useTranslation();
   const Icon = method.icon;
   const isClickable = method.type !== "location";
+
+  const label = t(`contact.methodLabels.${method.id}`, { defaultValue: method.id });
+  const displayValue =
+    method.type === "location"
+      ? t("contact.methodLabels.locationValue")
+      : method.value;
 
   return (
     <a
@@ -26,10 +34,10 @@ export const ContactCard: React.FC<ContactCardProps> = ({ method }) => {
       />
       <div>
         <p className="text-sm font-semibold text-[rgb(var(--text-secondary))]">
-          {method.label}
+          {label}
         </p>
         <p className="text-base font-medium text-[rgb(var(--text-primary))] break-all">
-          {method.value}
+          {displayValue}
         </p>
       </div>
     </a>

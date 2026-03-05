@@ -3,6 +3,7 @@ import { SideNav } from "./SideNav";
 import { MenuToggle } from "../ui/menu/MenuToggle";
 import { useNavigation } from "../../hooks/useNavigation";
 import { ThemeToggle } from "../ui/ThemeToggle";
+import { LanguageToggle } from "../ui/LanguageToggle";
 import { motion } from "framer-motion";
 import type { NavItem, SocialLink } from "../../types";
 import { BackgroundLines } from "../ui/backgrounds/BackgroundLines";
@@ -52,7 +53,10 @@ export const Navbar = ({ navItems, socialLinks }: NavbarProps) => {
           >
             ALFA
           </motion.a>
-          <ThemeToggle />
+          <div className="flex items-center gap-2">
+            <LanguageToggle />
+            <ThemeToggle />
+          </div>
         </div>
       </motion.div>
 

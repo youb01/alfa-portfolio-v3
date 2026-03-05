@@ -1,38 +1,27 @@
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import React, { useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { timelineEvents } from "../data/QualificationsData";
 import { SectionHeader } from "../../ui/SectionHeader";
 import { TimelineItem } from "../../ui/timeline/TimelineItem";
 import { BackgroundLines } from "../../ui/backgrounds/BackgroundLines";
 
 export const QualificationsSection: React.FC = () => {
-  /*
-   * Two separate refs:
-   *   sectionRef → the <section> element (for the id anchor)
-   *   trackRef   → only the items container (for accurate scroll progress)
-   *
-   * Using trackRef means progress = 0 when the first dot reaches the
-   * viewport centre, and 1 when the last dot does — not when the section
-   * header first enters the viewport.
-   */
+  const { t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress: rawProgress } = useScroll({
     target: trackRef,
-    // "start center" → track top aligns with viewport centre (first dot visible)
-    // "end center"   → track bottom aligns with viewport centre (last dot visible)
     offset: ["start center", "end center"],
   });
 
-  // Tight spring so the bar feels snappy but never jittery
   const progress = useSpring(rawProgress, {
     stiffness: 320,
     damping: 45,
     restDelta: 0.001,
   });
 
-  // scaleY [0 → 1] with transformOrigin "center top" grows the bar downward
   const trackFill = useTransform(progress, [0, 1], [0, 1]);
 
   return (
@@ -48,9 +37,9 @@ export const QualificationsSection: React.FC = () => {
         <div className="max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
           <SectionHeader
             number="03"
-            title="Qualifications"
-            titleMuted="and Education"
-            subtitle="A timeline of study, work, and the things that shaped how I build."
+            title={t("qualifications.sectionTitle")}
+            titleMuted={t("qualifications.sectionTitleMuted")}
+            subtitle={t("qualifications.subtitle")}
           />
         </div>
       </div>

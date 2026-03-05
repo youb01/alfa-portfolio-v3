@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { Send } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import emailjs from "@emailjs/browser";
 
 interface FormData {
@@ -15,6 +16,7 @@ const EMAILJS_TEMPLATE_ID = "template_your_template_id";
 const EMAILJS_PUBLIC_KEY = "your_public_key";
 
 export const ContactForm: React.FC = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -52,7 +54,7 @@ export const ContactForm: React.FC = () => {
       setTimeout(() => setIsSubmitted(false), 5000);
     } catch (err) {
       console.error(err);
-      setError("Something went wrong. Please try again later.");
+      setError(t("contact.form.errorMessage"));
     } finally {
       setIsLoading(false);
     }
@@ -74,7 +76,7 @@ export const ContactForm: React.FC = () => {
         <input
           type="text"
           name="name"
-          placeholder="Your name"
+          placeholder={t("contact.form.namePlaceholder")}
           required
           value={formData.name}
           onChange={handleChange}
@@ -83,7 +85,7 @@ export const ContactForm: React.FC = () => {
         <input
           type="email"
           name="email"
-          placeholder="Your email"
+          placeholder={t("contact.form.emailPlaceholder")}
           required
           value={formData.email}
           onChange={handleChange}
@@ -94,7 +96,7 @@ export const ContactForm: React.FC = () => {
       <input
         type="text"
         name="subject"
-        placeholder="Subject"
+        placeholder={t("contact.form.subjectPlaceholder")}
         required
         value={formData.subject}
         onChange={handleChange}
@@ -103,7 +105,7 @@ export const ContactForm: React.FC = () => {
 
       <textarea
         name="message"
-        placeholder="Message"
+        placeholder={t("contact.form.messagePlaceholder")}
         rows={5}
         required
         value={formData.message}
@@ -129,13 +131,17 @@ export const ContactForm: React.FC = () => {
           <Send size={16} strokeWidth={2} />
         </motion.div>
         <span>
-          {isSubmitted ? "Sent" : isLoading ? "Sending..." : "Send Message"}
+          {isSubmitted
+            ? t("contact.form.sent")
+            : isLoading
+              ? t("contact.form.sending")
+              : t("contact.form.send")}
         </span>
       </motion.button>
 
       {isSubmitted && (
         <p className="text-center text-sm text-green-600">
-          Thanks for your message!
+          {t("contact.form.successMessage")}
         </p>
       )}
     </motion.form>

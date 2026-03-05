@@ -1,3 +1,9 @@
+/**
+ * Non-translatable project metadata.
+ * User-visible strings (title, subtitle, description) live in
+ * src/i18n/locales/{lang}/translation.json under projects.items.{id}.
+ */
+
 export type ProjectCategory =
   | "Frontend"
   | "Backend"
@@ -8,9 +14,6 @@ export interface Project {
   id: string;
   slug: string;
   number: string;
-  title: string;
-  subtitle: string;
-  description: string;
   techStack: string[];
   category: ProjectCategory;
   year: string;
@@ -23,10 +26,6 @@ export const projectsData: Project[] = [
     id: "project-01",
     slug: "portfolio-evolution",
     number: "01",
-    title: "Portfolio — Evolution",
-    subtitle: "v1 · v2 · v3",
-    description:
-      "Three generations of personal portfolio, each built as I deepened my expertise in design and frontend engineering. From plain HTML/CSS to React and finally a fully animated TypeScript system — a live document of continuous growth.",
     techStack: [
       "React",
       "TypeScript",
@@ -46,10 +45,6 @@ export const projectsData: Project[] = [
     id: "project-02",
     slug: "getmore-systems",
     number: "02",
-    title: "GetMore Systems",
-    subtitle: "Internship Project",
-    description:
-      "Worked as a software developer intern at GetMore Systems, a company specializing in software solutions for the financial industry. Contributed to the development of a client dashboard application using Angular and .NET, improving user experience and functionality. Collaborated with a team of 3 to implement new features, fix bugs, and optimize performance, gaining valuable hands-on experience in a professional software development environment.",
     techStack: [
       "Angular",
       ".NET",
@@ -70,10 +65,6 @@ export const projectsData: Project[] = [
     id: "project-03",
     slug: "stichting-accessibility",
     number: "03",
-    title: "Stichting Accessibility",
-    subtitle: "Nonprofit Web Platform",
-    description:
-      "Designed and built an inclusive web platform for a nonprofit, ensuring WCAG compliance and a seamless experience for users of all abilities. We implemented features within the web platform to provide a way for users to get in contact with companies that are searching for accessibility consultants. The project involved setting up a .NET backend with ASP.NET Core, creating a responsive frontend with React and TypeScript, and deploying the application on Azure.",
     techStack: [
       "React",
       "Javascript",
@@ -92,10 +83,6 @@ export const projectsData: Project[] = [
     id: "project-04",
     slug: "minecraft-portfolio",
     number: "05",
-    title: "Minecraft Portfolio Website",
-    subtitle: "Creative Coding & 3D Design",
-    description:
-      "A unique Minecraft-themed portfolio website built using React Thee Fiber, Three.js and Blender. Showcasing our projects, for the Minor Visual Design and Web Development, in an interactive 3D environment inspired by the iconic blocky world of Minecraft.",
     techStack: [
       "React Three Fiber",
       "Three.js",

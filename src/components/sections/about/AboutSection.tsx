@@ -1,42 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { BackgroundLines } from "../../ui/backgrounds/BackgroundLines";
-
-// ─── Content ──────────────────────────────────────────────────────────────────
-
-const BIO_PARAGRAPHS = [
-  "I'm an eager Software Engineering student with a genuine passion for building effective solutions. What drives me isn't just writing code — it's understanding a problem deeply and crafting something that actually works and fits the needs. During my internship at GetMore Systems I developed features independently inside a professional Agile Scrum team, shipping real work in a live TypeScript and .NET codebase.",
-  "Outside of university I spend a lot of time in the gym, doing powerlifting and weightlifting. That same discipline and focus carries directly into how I work. I love tinkering with small projects too, whether it's a home IT setup, a practical fix around the house, or a side idea I want to build out. And when I'm not doing any of that, I'm catching up with friends.",
-];
-
-const FACTS = [
-  { label: "Degree", value: "BSc Software Engineering" },
-  { label: "School", value: "The Hague University" },
-  { label: "Based in", value: "Leiden, Netherlands" },
-  { label: "Experience", value: "GetMore Systems · Oadsy" },
-];
-
-const INTERESTS = [
-  "Powerlifting & weightlifting",
-  "Home IT tinkering",
-  "Personal side projects",
-  "Time with friends",
-];
-
-const PILLARS = [
-  {
-    label: "How I engineer",
-    text: "I care about understanding problems before writing a single line of code. Clean, purposeful solutions over clever ones — maintainable always wins.",
-  },
-  {
-    label: "How I work",
-    text: "Self-directed and team-oriented. I've worked on different projects and I know that good code review and honest communication matter as much as the code or product itself.",
-  },
-  {
-    label: "How I stay sharp",
-    text: "Discipline and focus translates into everything. Whether it's a workout, a project, or a hard problem — I show up consistently and push through.",
-  },
-];
 
 // ─── Animation helpers ────────────────────────────────────────────────────────
 
@@ -50,6 +15,22 @@ const fadeUp = (delay = 0) => ({
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export const AboutSection = () => {
+  const { t } = useTranslation();
+
+  const bio = t("about.bio", { returnObjects: true }) as string[];
+  const interests = t("about.interests", { returnObjects: true }) as string[];
+  const pillars = t("about.pillars", { returnObjects: true }) as {
+    label: string;
+    text: string;
+  }[];
+
+  const facts = [
+    t("about.facts.degree", { returnObjects: true }) as { label: string; value: string },
+    t("about.facts.school", { returnObjects: true }) as { label: string; value: string },
+    t("about.facts.basedIn", { returnObjects: true }) as { label: string; value: string },
+    t("about.facts.experience", { returnObjects: true }) as { label: string; value: string },
+  ];
+
   return (
     <section
       id="about"
@@ -64,7 +45,7 @@ export const AboutSection = () => {
           {...fadeUp()}
         >
           <span className="shrink-0 text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--text-tertiary))]">
-            About Me
+            {t("about.sectionLabel")}
           </span>
           <div
             className="flex-1 h-[1px]"
@@ -79,14 +60,14 @@ export const AboutSection = () => {
               style={{ maxWidth: "18ch" }}
               {...fadeUp(0)}
             >
-              Disciplined engineer,{" "}
+              {t("about.headline")}{" "}
               <span className="text-[rgb(var(--text-tertiary))] font-light">
-                curious by nature.
+                {t("about.headlineMuted")}
               </span>
             </motion.h2>
 
             <div className="space-y-5 max-w-[62ch]">
-              {BIO_PARAGRAPHS.map((para, i) => (
+              {bio.map((para, i) => (
                 <motion.p
                   key={i}
                   className="font-lora text-[1.05rem] leading-[1.85] text-[rgb(var(--text-secondary))]"
@@ -101,10 +82,10 @@ export const AboutSection = () => {
           <motion.div className="flex flex-col gap-9 lg:pt-2" {...fadeUp(0.18)}>
             <div>
               <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--text-tertiary))] mb-5">
-                Currently
+                {t("about.currently")}
               </span>
               <ul className="space-y-3.5">
-                {FACTS.map(({ label, value }) => (
+                {facts.map(({ label, value }) => (
                   <li
                     key={label}
                     className="grid items-baseline gap-x-4 gap-y-0.5"
@@ -128,10 +109,10 @@ export const AboutSection = () => {
 
             <div>
               <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--text-tertiary))] mb-5">
-                Beyond the code
+                {t("about.beyondCode")}
               </span>
               <ul className="space-y-2.5">
-                {INTERESTS.map((item) => (
+                {interests.map((item) => (
                   <li key={item} className="flex items-center gap-3">
                     <div
                       className="w-1 h-1 rounded-full shrink-0"
@@ -156,7 +137,7 @@ export const AboutSection = () => {
               whileHover={{ x: 3 }}
               transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
             >
-              Get in touch
+              {t("about.getInTouch")}
               <ArrowRight size={14} strokeWidth={2.5} />
             </motion.a>
           </motion.div>
@@ -167,7 +148,7 @@ export const AboutSection = () => {
           style={{ background: "rgb(var(--border-primary))" }}
           {...fadeUp(0.1)}
         >
-          {PILLARS.map(({ label, text }, i) => (
+          {pillars.map(({ label, text }, i) => (
             <motion.div
               key={label}
               className="flex flex-col gap-4 px-7 py-9 md:px-8 md:py-10"

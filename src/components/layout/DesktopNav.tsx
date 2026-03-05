@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "../ui/ThemeToggle";
+import { LanguageToggle } from "../ui/LanguageToggle";
 import type { NavItem } from "../../types";
 
 interface DesktopNavbarProps {
@@ -47,6 +48,7 @@ export const DesktopNavbar = ({ isVisible, navItems }: DesktopNavbarProps) => {
                     <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[rgb(var(--text-primary))] origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
                   </motion.a>
                 ))}
+                <LanguageToggle />
                 <ThemeToggle />
               </div>
             </div>

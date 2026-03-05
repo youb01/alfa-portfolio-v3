@@ -2,6 +2,7 @@ import { motion, type Variants } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { projectDetails } from "../components/sections/data/ProjectDetailData";
 import { projectsData } from "../components/sections/data/ProjectsData";
 import { BackgroundLines } from "../components/ui/backgrounds/BackgroundLines";
@@ -9,6 +10,7 @@ import { Footer } from "../components/layout/Footer";
 import { OtherProjects } from "../components/ui/projects/OtherProjects";
 import { ScrollProgressBar } from "../components/ui/ScrollProgressBar";
 import { ThemeToggle } from "../components/ui/ThemeToggle";
+import { LanguageToggle } from "../components/ui/LanguageToggle";
 
 const EASE_SMOOTH: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const fadeUp = {
@@ -27,6 +29,7 @@ const fadeUp = {
 export const ProjectDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -40,21 +43,39 @@ export const ProjectDetailPage: React.FC = () => {
       <div className="min-h-screen flex items-center justify-center bg-[rgb(var(--bg-primary))]">
         <div className="text-center">
           <p className="text-[rgb(var(--text-secondary))] mb-6">
-            Project not found.
+            {t("projectDetail.notFound")}
           </p>
           <button
             onClick={() => navigate("/")}
             className="text-sm font-semibold text-[rgb(var(--text-primary))] underline underline-offset-4"
           >
-            Go home
+            {t("projectDetail.goHome")}
           </button>
         </div>
       </div>
     );
   }
 
-  const imageCount = detail.caseStudy.images.length;
-  const bodyCount = detail.caseStudy.body.length;
+  // Pull all translatable strings from i18n
+  const pid = project.id;
+  const client = t(`projectDetail.items.${pid}.client`);
+  const service = t(`projectDetail.items.${pid}.service`);
+  const introduction = t(`projectDetail.items.${pid}.introduction`);
+  const caseStudyTitle = t(`projectDetail.items.${pid}.caseStudyTitle`);
+  const caseStudyBody = t(`projectDetail.items.${pid}.caseStudyBody`, {
+    returnObjects: true,
+  }) as string[];
+  const outcomes = t(`projectDetail.items.${pid}.outcomes`, {
+    returnObjects: true,
+  }) as string[];
+  const statsLabels = t(`projectDetail.items.${pid}.statsLabels`, {
+    returnObjects: true,
+  }) as string[];
+  const projectTitle = t(`projects.items.${pid}.title`);
+
+  const images = detail.caseStudy.images;
+  const imageCount = images.length;
+  const bodyCount = caseStudyBody.length;
   const chapterCount = Math.max(imageCount, bodyCount);
   const border = "1px solid rgb(var(--border-primary))";
 
@@ -78,14 +99,17 @@ export const ProjectDetailPage: React.FC = () => {
             transition={{ duration: 0.15 }}
           >
             <ChevronLeft size={16} strokeWidth={2.5} />
-            Back
+            {t("projectDetail.back")}
           </motion.button>
 
           <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--text-tertiary))] truncate hidden sm:block">
-            {project.number} — {project.title}
+            {project.number} — {projectTitle}
           </span>
 
-          <ThemeToggle />
+          <div className="flex items-center gap-2">
+            <LanguageToggle />
+            <ThemeToggle />
+          </div>
         </div>
       </nav>
 
@@ -121,7 +145,7 @@ export const ProjectDetailPage: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            {project.title}
+            {projectTitle}
           </motion.h1>
 
           <motion.p
@@ -134,7 +158,7 @@ export const ProjectDetailPage: React.FC = () => {
               ease: [0.22, 1, 0.36, 1],
             }}
           >
-            {project.subtitle}
+            {t(`projects.items.${pid}.subtitle`)}
           </motion.p>
         </div>
 
@@ -150,7 +174,7 @@ export const ProjectDetailPage: React.FC = () => {
           >
             <img
               src={detail.heroImage}
-              alt={project.title}
+              alt={projectTitle}
               className="w-full h-full object-cover"
             />
           </div>
@@ -160,9 +184,9 @@ export const ProjectDetailPage: React.FC = () => {
             style={{ borderTop: border, borderBottom: border }}
           >
             {[
-              { label: "Client", value: detail.client },
-              { label: "Service", value: detail.service },
-              { label: "Year", value: project.year },
+              { label: t("projectDetail.clientLabel"), value: client },
+              { label: t("projectDetail.serviceLabel"), value: service },
+              { label: t("projectDetail.yearLabel"), value: project.year },
             ].map((item, i) => (
               <div
                 key={item.label}
@@ -203,7 +227,7 @@ export const ProjectDetailPage: React.FC = () => {
             }}
             viewport={{ once: true, margin: "-80px" }}
           >
-            {detail.introduction}
+            {introduction}
           </motion.p>
         </div>
       </section>
@@ -224,20 +248,7 @@ export const ProjectDetailPage: React.FC = () => {
         />
       </motion.div>
 
-      {/* ═══════════════════════════════════════════════════════════════════
-          Case Study — Alternating editorial chapters
-
-          Each chapter pairs one image with one paragraph. Chapters
-          alternate between image-left (7fr) and image-right (5fr:7fr)
-          for a magazine-style visual rhythm.
-
-          If imageCount > bodyCount the final "orphan" image renders
-          as a full-width cinematic frame (16/9) so proportion is
-          always correct regardless of content length.
-
-          Single responsive section — no scroll-trapping, no state.
-          Mobile: grid stacks naturally (image above text).
-      ═══════════════════════════════════════════════════════════════════ */}
+      {/* ── Case Study ──────────────────────────────────────────────────────── */}
       <section className="py-20 md:py-28" style={{ borderTop: border }}>
         <div className="max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
           {/* ── Section header ── */}
@@ -258,7 +269,7 @@ export const ProjectDetailPage: React.FC = () => {
             {/* Label row */}
             <div className="flex items-center gap-6 mb-8 md:mb-10">
               <span className="shrink-0 text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--text-tertiary))]">
-                Case Study
+                {t("projectDetail.caseStudyLabel")}
               </span>
               <div
                 className="flex-1 h-[1px]"
@@ -266,7 +277,9 @@ export const ProjectDetailPage: React.FC = () => {
               />
               <span className="shrink-0 text-[10px] font-bold tabular-nums text-[rgb(var(--text-tertiary))]">
                 {String(chapterCount).padStart(2, "0")}{" "}
-                {chapterCount === 1 ? "Chapter" : "Chapters"}
+                {chapterCount === 1
+                  ? t("projectDetail.chapter")
+                  : t("projectDetail.chapters")}
               </span>
             </div>
 
@@ -275,15 +288,15 @@ export const ProjectDetailPage: React.FC = () => {
               className="text-4xl sm:text-5xl lg:text-[3.25rem] xl:text-[3.75rem] font-extrabold leading-[1.06] tracking-tight text-[rgb(var(--text-primary))]"
               style={{ maxWidth: "22ch" }}
             >
-              {detail.caseStudy.title}
+              {caseStudyTitle}
             </h2>
           </motion.div>
 
           {/* ── Chapter list ── */}
           <div className="divide-y divide-[rgb(var(--border-primary))]">
             {Array.from({ length: chapterCount }).map((_, i) => {
-              const src = detail.caseStudy.images[i];
-              const para = detail.caseStudy.body[i];
+              const src = images[i];
+              const para = caseStudyBody[i];
               const imageLeft = i % 2 === 0;
               const hasBoth = !!src && !!para;
               const imageOnly = !!src && !para;
@@ -315,7 +328,7 @@ export const ProjectDetailPage: React.FC = () => {
                         >
                           <img
                             src={src}
-                            alt={`${project.title} — chapter ${i + 1}`}
+                            alt={`${projectTitle} — chapter ${i + 1}`}
                             className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                           />
                         </div>
@@ -372,7 +385,6 @@ export const ProjectDetailPage: React.FC = () => {
                           />
                         </div>
 
-                        {/* Paragraph — Lora serif for a premium editorial feel */}
                         <p className="font-lora text-[1.05rem] md:text-[1.1rem] lg:text-[1.15rem] leading-[1.85] text-[rgb(var(--text-secondary))]">
                           {para}
                         </p>
@@ -380,7 +392,7 @@ export const ProjectDetailPage: React.FC = () => {
                     </div>
                   )}
 
-                  {/* ── Orphan image (no matching paragraph): cinematic full-width frame ── */}
+                  {/* ── Orphan image ── */}
                   {imageOnly && (
                     <motion.div
                       className="relative overflow-hidden rounded-2xl group"
@@ -395,12 +407,11 @@ export const ProjectDetailPage: React.FC = () => {
                       >
                         <img
                           src={src}
-                          alt={`${project.title} — chapter ${i + 1}`}
+                          alt={`${projectTitle} — chapter ${i + 1}`}
                           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                         />
                       </div>
 
-                      {/* Vignette */}
                       <div
                         className="absolute inset-0 pointer-events-none"
                         style={{
@@ -409,7 +420,6 @@ export const ProjectDetailPage: React.FC = () => {
                         }}
                       />
 
-                      {/* Chapter badge */}
                       <div
                         className="absolute bottom-5 right-6 h-7 px-3 flex items-center rounded-full backdrop-blur-md"
                         style={{
@@ -424,7 +434,7 @@ export const ProjectDetailPage: React.FC = () => {
                     </motion.div>
                   )}
 
-                  {/* ── Orphan paragraph (no matching image): full-width prose ── */}
+                  {/* ── Orphan paragraph ── */}
                   {!src && !!para && (
                     <motion.div
                       className="max-w-[60ch]"
@@ -456,7 +466,7 @@ export const ProjectDetailPage: React.FC = () => {
       </section>
 
       {/* ── Outcomes ────────────────────────────────────────────────────────── */}
-      {detail.outcomes && detail.outcomes.length > 0 && (
+      {outcomes && outcomes.length > 0 && (
         <section className="py-24 md:py-32" style={{ borderTop: border }}>
           <div className="max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
             <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-12 lg:gap-20 items-start">
@@ -467,15 +477,15 @@ export const ProjectDetailPage: React.FC = () => {
                 viewport={{ once: true, margin: "-60px" }}
               >
                 <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--text-tertiary))] mb-4">
-                  Outcomes
+                  {t("projectDetail.outcomesLabel")}
                 </span>
                 <h2 className="text-3xl md:text-4xl font-extrabold leading-tight text-[rgb(var(--text-primary))]">
-                  What was achieved
+                  {t("projectDetail.whatWasAchieved")}
                 </h2>
               </motion.div>
 
               <ul className="divide-y divide-[rgb(var(--border-primary))]">
-                {detail.outcomes.map((outcome, i) => (
+                {outcomes.map((outcome, i) => (
                   <motion.li
                     key={i}
                     className="flex items-start gap-6 py-5 first:pt-0"
@@ -524,7 +534,7 @@ export const ProjectDetailPage: React.FC = () => {
                     {stat.value}
                   </p>
                   <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[rgb(var(--text-tertiary))]">
-                    {stat.label}
+                    {statsLabels[i]}
                   </p>
                 </motion.div>
               ))}
@@ -544,11 +554,13 @@ export const ProjectDetailPage: React.FC = () => {
               viewport={{ once: true, margin: "-60px" }}
             >
               <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--text-tertiary))] mb-4">
-                Built With
+                {t("projectDetail.builtWithLabel")}
               </span>
               <h2 className="text-3xl md:text-4xl font-extrabold leading-tight text-[rgb(var(--text-primary))]">
                 {project.techStack.length}{" "}
-                {project.techStack.length === 1 ? "Technology" : "Technologies"}
+                {project.techStack.length === 1
+                  ? t("projectDetail.technology")
+                  : t("projectDetail.technologies")}
               </h2>
             </motion.div>
 

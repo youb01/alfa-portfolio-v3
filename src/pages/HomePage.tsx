@@ -3,6 +3,7 @@ import { Preloader } from "../components/ui/preLoader/PreLoader";
 import { Hero } from "../components/sections/hero/HeroSection";
 import { Linkedin, Github, Mail, Twitter } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { usePreloader } from "../hooks/usePreLoader";
 import type { NavItem, SocialLink } from "../types";
 import { AboutSection } from "../components/sections/about/AboutSection";
@@ -11,13 +12,6 @@ import { ProjectsSection } from "../components/sections/projects/ProjectsSection
 import { QualificationsSection } from "../components/sections/qualifications/QualificationsSection";
 import { ContactSection } from "../components/sections/contact/ContactSection";
 import { Footer } from "../components/layout/Footer";
-const navItems: NavItem[] = [
-  { label: "Home", href: "#home", number: "01" },
-  { label: "Skills", href: "#skills", number: "02" },
-  { label: "Qualifications", href: "#qualifications", number: "03" },
-  { label: "Projects", href: "#projects", number: "05" },
-  { label: "Contact Me", href: "#contact", number: "06" },
-];
 
 const socialLinks: SocialLink[] = [
   {
@@ -43,7 +37,16 @@ const socialLinks: SocialLink[] = [
 ];
 
 export const HomePage: React.FC = () => {
+  const { t } = useTranslation();
   const { isLoading, isComplete, handleComplete } = usePreloader();
+
+  const navItems: NavItem[] = [
+    { label: t("nav.home"), href: "#home", number: "01" },
+    { label: t("nav.skills"), href: "#skills", number: "02" },
+    { label: t("nav.qualifications"), href: "#qualifications", number: "03" },
+    { label: t("nav.projects"), href: "#projects", number: "05" },
+    { label: t("nav.contactMe"), href: "#contact", number: "06" },
+  ];
 
   return (
     <>
@@ -63,7 +66,6 @@ export const HomePage: React.FC = () => {
             <AboutSection />
             <SkillsSection />
             <QualificationsSection />
-
             <ProjectsSection />
             <ContactSection />
             <Footer />

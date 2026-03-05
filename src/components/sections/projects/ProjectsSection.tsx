@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { projectsData, type ProjectCategory } from "../data/ProjectsData";
 import { FeaturedProjectCard } from "../../ui/projects/FeaturedProjectCard";
 import { ProjectCard } from "../../ui/projects/ProjectCard";
@@ -16,6 +17,7 @@ const filterOptions: FilterOption[] = [
 ];
 
 export const ProjectsSection: React.FC = () => {
+  const { t } = useTranslation();
   const [activeFilter, setActiveFilter] = React.useState<FilterOption>("All");
   const [isDark, setIsDark] = React.useState(
     document.documentElement.classList.contains("dark"),
@@ -54,7 +56,11 @@ export const ProjectsSection: React.FC = () => {
       {/* ── Section Header ── */}
       <div className="relative z-10 pt-20 md:pt-28 lg:pt-36 pb-12 md:pb-16">
         <div className="max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
-          <SectionHeader number="05" title="Projects" titleMuted="and Work" />
+          <SectionHeader
+            number="05"
+            title={t("projects.sectionTitle")}
+            titleMuted={t("projects.sectionTitleMuted")}
+          />
 
           {/* Divider */}
           <motion.div
@@ -122,7 +128,9 @@ export const ProjectsSection: React.FC = () => {
                       }}
                     />
                   )}
-                  <span className="relative z-10">{filter}</span>
+                  <span className="relative z-10">
+                    {filter === "All" ? t("projects.filterAll") : filter}
+                  </span>
                 </button>
               );
             })}
@@ -172,7 +180,7 @@ export const ProjectsSection: React.FC = () => {
                         : "rgba(0,0,0,0.2)",
                     }}
                   >
-                    No projects in this category yet
+                    {t("projects.noProjects")}
                   </p>
                 </motion.div>
               )}
