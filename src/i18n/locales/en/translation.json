@@ -1,0 +1,289 @@
+{
+  "nav": {
+    "home": "Home",
+    "skills": "Skills",
+    "qualifications": "Qualifications",
+    "projects": "Projects",
+    "contactMe": "Contact Me",
+    "navigation": "Navigation"
+  },
+
+  "hero": {
+    "biographyLabel": "Biography",
+    "biographyText": "I'm a 21-year-old guy from the Netherlands, currently studying Software Engineering at the University of Applied Sciences in The Hague.",
+    "contactLabel": "Contact",
+    "projectsLabel": "Projects",
+    "projectsList": [
+      "Portfolio v1/3 | 2022-2025",
+      "Oak | 2022",
+      "Stichting Accessibility | 2024",
+      "GetMore Systems (Internship) | 2024",
+      "Minecraft Portfolio Project | 2025"
+    ],
+    "graduatingIn": "Graduating In",
+    "completedProjects": "Completed Projects",
+    "companiesWorkedFor": "Companies Worked For",
+    "headline1": "Hi, I'm A",
+    "headline2": "Software Engineer",
+    "headline3": "and Web developer",
+    "location": "Based in the Netherlands"
+  },
+
+  "about": {
+    "sectionLabel": "About Me",
+    "headline": "Disciplined engineer,",
+    "headlineMuted": "curious by nature.",
+    "currently": "Currently",
+    "beyondCode": "Beyond the code",
+    "getInTouch": "Get in touch",
+    "facts": {
+      "degree": { "label": "Degree", "value": "BSc Software Engineering" },
+      "school": { "label": "School", "value": "The Hague University" },
+      "basedIn": { "label": "Based in", "value": "Leiden, Netherlands" },
+      "experience": { "label": "Experience", "value": "GetMore Systems · Oadsy" }
+    },
+    "interests": [
+      "Powerlifting & weightlifting",
+      "Home IT tinkering",
+      "Personal side projects",
+      "Time with friends"
+    ],
+    "bio": [
+      "I'm an eager Software Engineering student with a genuine passion for building effective solutions. What drives me isn't just writing code — it's understanding a problem deeply and crafting something that actually works and fits the needs. During my internship at GetMore Systems I developed features independently inside a professional Agile Scrum team, shipping real work in a live TypeScript and .NET codebase.",
+      "Outside of university I spend a lot of time in the gym, doing powerlifting and weightlifting. That same discipline and focus carries directly into how I work. I love tinkering with small projects too, whether it's a home IT setup, a practical fix around the house, or a side idea I want to build out. And when I'm not doing any of that, I'm catching up with friends."
+    ],
+    "pillars": [
+      {
+        "label": "How I engineer",
+        "text": "I care about understanding problems before writing a single line of code. Clean, purposeful solutions over clever ones — maintainable always wins."
+      },
+      {
+        "label": "How I work",
+        "text": "Self-directed and team-oriented. I've worked on different projects and I know that good code review and honest communication matter as much as the code or product itself."
+      },
+      {
+        "label": "How I stay sharp",
+        "text": "Discipline and focus translates into everything. Whether it's a workout, a project, or a hard problem — I show up consistently and push through."
+      }
+    ]
+  },
+
+  "qualifications": {
+    "sectionTitle": "Qualifications",
+    "sectionTitleMuted": "and Education",
+    "subtitle": "A timeline of study, work, and the things that shaped how I build.",
+    "educationBadge": "Education",
+    "workBadge": "Work",
+    "present": "Present",
+    "events": {
+      "01": {
+        "title": "Secondary Education",
+        "description": "Completed secondary education with a focus on beta relevant subjects like mathematics, physics, science and biology. Developed a strong foundation in problem-solving and analytical thinking, which sparked my interest in software development."
+      },
+      "02": {
+        "title": "BSc Computer Science",
+        "description": "Studying computer science with a specialisation in software engineering. Coursework spans algorithms, data structures, software architecture, and cloud development. The program emphasizes practical, project-based learning, allowing me to apply theoretical concepts to real-world software development challenges."
+      },
+      "03": {
+        "title": "Software Developer — Internship",
+        "description": "Worked as a software developer intern at GetMore Systems, a company specializing in software solutions for the financial industry. Contributed to the development of a client dashboard application using Angular and .NET, improving user experience and functionality. Collaborated with a team of 3 to implement new features, fix bugs, and optimize performance, gaining valuable hands-on experience in a professional software development environment."
+      },
+      "04": {
+        "title": "Web Developer — Part-time",
+        "description": "Currently working as a part-time web developer for Oadsy, a startup focused on selling car parfums online. Responsible for maintaining and enhancing the company's e-commerce website built on Shopify, including implementing custom features using Liquid and JavaScript. Collaborate with the owner to optimize the user interface and improve conversion rates, while also ensuring the website's performance and security are up to industry standards."
+      }
+    }
+  },
+
+  "projects": {
+    "sectionTitle": "Projects",
+    "sectionTitleMuted": "and Work",
+    "filterAll": "All",
+    "noProjects": "No projects in this category yet",
+    "viewDetails": "View Details",
+    "featuredLabel": "Featured",
+    "items": {
+      "project-01": {
+        "title": "Portfolio — Evolution",
+        "subtitle": "v1 · v2 · v3",
+        "description": "Three generations of personal portfolio, each built as I deepened my expertise in design and frontend engineering. From plain HTML/CSS to React and finally a fully animated TypeScript system — a live document of continuous growth."
+      },
+      "project-02": {
+        "title": "GetMore Systems",
+        "subtitle": "Internship Project",
+        "description": "Worked as a software developer intern at GetMore Systems, a company specializing in software solutions for the financial industry. Contributed to the development of a client dashboard application using Angular and .NET, improving user experience and functionality. Collaborated with a team of 3 to implement new features, fix bugs, and optimize performance, gaining valuable hands-on experience in a professional software development environment."
+      },
+      "project-03": {
+        "title": "Stichting Accessibility",
+        "subtitle": "Nonprofit Web Platform",
+        "description": "Designed and built an inclusive web platform for a nonprofit, ensuring WCAG compliance and a seamless experience for users of all abilities. We implemented features within the web platform to provide a way for users to get in contact with companies that are searching for accessibility consultants. The project involved setting up a .NET backend with ASP.NET Core, creating a responsive frontend with React and TypeScript, and deploying the application on Azure."
+      },
+      "project-04": {
+        "title": "Minecraft Portfolio Website",
+        "subtitle": "Creative Coding & 3D Design",
+        "description": "A unique Minecraft-themed portfolio website built using React Three Fiber, Three.js and Blender. Showcasing our projects, for the Minor Visual Design and Web Development, in an interactive 3D environment inspired by the iconic blocky world of Minecraft."
+      }
+    }
+  },
+
+  "projectDetail": {
+    "back": "Back",
+    "notFound": "Project not found.",
+    "goHome": "Go home",
+    "caseStudyLabel": "Case Study",
+    "chapter": "Chapter",
+    "chapters": "Chapters",
+    "outcomesLabel": "Outcomes",
+    "whatWasAchieved": "What was achieved",
+    "builtWithLabel": "Built With",
+    "technology": "Technology",
+    "technologies": "Technologies",
+    "clientLabel": "Client",
+    "serviceLabel": "Service",
+    "yearLabel": "Year",
+    "items": {
+      "project-01": {
+        "client": "Personal",
+        "service": "Design & Frontend Engineering",
+        "introduction": "Three iterations of the same idea — each built as my understanding of design and engineering deepened. The portfolio became a living document of growth: from static HTML to a fully animated, TypeScript-first system with a custom design language.",
+        "caseStudyTitle": "Designing in public, building in real time",
+        "caseStudyBody": [
+          "Version one was a lesson in restraint. Built with plain HTML and CSS, it forced me to understand the fundamentals before reaching for a framework. Every layout decision was deliberate — there were no shortcuts.",
+          "Version two introduced React and a design system I built from scratch. I spent weeks on type scales, spacing rhythms, and interaction patterns before writing a single component. The result felt more intentional, but the codebase was brittle.",
+          "Version three — this one — is the synthesis. TypeScript throughout, Framer Motion for orchestrated animation, and a component architecture that scales. Every section was designed to feel editorial: generous whitespace, typographic hierarchy, and motion that adds meaning rather than noise."
+        ],
+        "outcomes": [
+          "Three complete redesigns shipped across three years of continuous growth",
+          "Achieved a Lighthouse performance score of 98 / 100 on desktop",
+          "Component architecture adopted across subsequent client projects",
+          "Open-sourced on GitHub as a reference for other developers"
+        ],
+        "statsLabels": ["Versions", "Years active", "Components", "Perf. score"]
+      },
+      "project-02": {
+        "client": "GetMore Systems",
+        "service": "Frontend Engineering",
+        "introduction": "An internship that felt like a masterclass in production software. I joined a small engineering team building internal tooling for a growing operations business and shipped real features from week one — in a live TypeScript and React codebase.",
+        "caseStudyTitle": "Enterprise tooling for a growing operations team",
+        "caseStudyBody": [
+          "The core challenge was scale. The existing dashboards worked for a small team but weren't holding up as the company grew. My first task was auditing the frontend for bottlenecks — we found unnecessary re-renders, missing memoisation, and a data-fetching layer that hammered the API on every interaction.",
+          "I rebuilt the data layer around a shared cache, added optimistic UI for the most-used interactions, and introduced a component library that the rest of the team could extend. Response times dropped measurably and the team started shipping faster because the building blocks were consistent.",
+          "The internship also gave me a first-hand view of how good teams work: daily standups, code reviews, sprint retrospectives. Learning to write code that someone else can understand and build on was the most valuable thing I took away."
+        ],
+        "outcomes": [
+          "Rebuilt the data-fetching layer, reducing unnecessary API calls significantly",
+          "Introduced a shared component library adopted by the full engineering team",
+          "Dashboard response times improved measurably after cache implementation",
+          "First professional experience with sprint ceremonies and peer code review"
+        ],
+        "statsLabels": ["Team size", "Duration", "Components", "Technologies"]
+      },
+      "project-03": {
+        "client": "Stichting Accessibility NL",
+        "service": "Web Design & Frontend Development",
+        "introduction": "Accessibility is not a feature — it is a baseline. This project was an opportunity to build something that genuinely works for everyone, applying WCAG 2.1 AA standards from the first wireframe rather than retrofitting them at the end.",
+        "caseStudyTitle": "Inclusive by design — not as an afterthought",
+        "caseStudyBody": [
+          "The brief was straightforward: a public-facing web platform for a nonprofit focused on digital inclusion. The catch was that the primary users included people with visual impairments, motor difficulties, and cognitive differences. Every component had to be audited against real-world assistive technology.",
+          "I built the platform on Next.js with a semantic HTML-first approach. Colour contrast ratios were validated against WCAG AA (and AA+ where possible). All interactive elements are keyboard-navigable, focus states are visible and styled consistently, and every image has meaningful alt text. The site was tested with NVDA and VoiceOver across multiple browsers.",
+          "The design system was also built to be maintainable by a non-technical team. Content editable via a headless CMS, clear documentation, and a component library that enforces accessible patterns by default — not by accident."
+        ],
+        "outcomes": [
+          "WCAG 2.1 AA compliance verified across every page and component",
+          "Full keyboard navigation with visible, consistently styled focus states",
+          "Tested against NVDA and VoiceOver on Chrome, Firefox, and Safari",
+          "Headless CMS integration enabling a non-technical team to manage content"
+        ],
+        "statsLabels": ["WCAG level", "Team", "Duration", "Technologies"]
+      },
+      "project-04": {
+        "client": "Oak (Personal project)",
+        "service": "Brand Strategy & UX Design",
+        "introduction": "Oak started as a brief in a notebook: a product brand that felt grounded and honest, not loud. The project became a deep exploration of visual identity — from naming and typography to a high-fidelity prototype of the product experience.",
+        "caseStudyTitle": "Crafting a brand identity from first principles",
+        "caseStudyBody": [
+          "The process started with words, not visuals. Before opening Figma I spent a week writing: what does this brand believe, who is it for, and what does it refuse to be? The answers — grounded, understated, built to last — became the creative brief that every visual decision was tested against.",
+          "Typography was the first design decision. I landed on a geometric sans-serif for interface copy and a high-contrast serif for headlines: the combination gives the brand a quiet confidence. The colour palette is monochromatic with a single warm accent — restrained enough to feel premium, flexible enough to work across print and screen.",
+          "The Framer prototype brought everything together. Micro-interactions were designed with the same care as the static brand: hover states, transitions, and loading patterns all reflect the same character. The goal was a brand that felt like it had always existed — inevitable rather than designed."
+        ],
+        "outcomes": [
+          "Complete visual identity delivered — naming, typography, colour, and tone of voice",
+          "High-fidelity Framer prototype with designed micro-interactions throughout",
+          "Monochromatic colour system with a single warm accent, documented for scale",
+          "Full brand guidelines and component documentation written in Notion"
+        ],
+        "statsLabels": ["Duration", "Screens", "Typefaces", "Palette"]
+      },
+      "project-05": {
+        "client": "HvA – Minor Visual Design",
+        "service": "Creative Coding & 3D Web Development",
+        "introduction": "A portfolio where browsing becomes gameplay. Built for the HvA Minor in Visual Design and Web Development, this Minecraft-themed site places each project inside a hand-crafted 3D world — navigate the blocks, discover the work.",
+        "caseStudyTitle": "Turning a portfolio into an experience",
+        "caseStudyBody": [
+          "The brief asked for a portfolio — we turned it into a game. The concept was simple: what if every project lived inside a Minecraft world you could actually explore? The technical challenge was building a 3D environment that ran smoothly in the browser without a game engine.",
+          "React Three Fiber gave us a declarative way to write Three.js inside React. Every building, path, and sign was modelled in Blender and exported as GLTF, then loaded and animated at runtime. Optimising draw calls and asset sizes was critical — we needed the world to load fast on a standard laptop.",
+          "The interaction design was the hardest part. First-person controls feel natural in a game engine but need careful calibration in a browser. We tuned movement speed, added pointer-lock controls, and built a minimal HUD to guide users — all without making it feel like a tutorial."
+        ],
+        "outcomes": [
+          "Interactive 3D portfolio running at a stable 60 fps in Chrome and Firefox",
+          "All 3D assets optimised below 4 MB total for fast initial load",
+          "First-person navigation with keyboard movement and pointer-lock controls",
+          "Awarded highest grade in the HvA Minor end-of-year presentation"
+        ],
+        "statsLabels": ["Team", "3D assets", "FPS target", "Load time"]
+      }
+    }
+  },
+
+  "contact": {
+    "metaLabel": "Get in Touch",
+    "headingTitle": "Let's",
+    "headingTitleMuted": "Work Together",
+    "subtitle": "I'm always interested in hearing about new projects and opportunities. Whether you have a question or just want to say hi, feel free to get in touch!",
+    "ctaText": "Send me an email",
+    "methodLabels": {
+      "email": "Email",
+      "phone": "Phone",
+      "location": "Location",
+      "locationValue": "Leiden, Netherlands"
+    },
+    "form": {
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "Your email",
+      "subjectPlaceholder": "Subject",
+      "messagePlaceholder": "Message",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "sent": "Sent",
+      "successMessage": "Thanks for your message!",
+      "errorMessage": "Something went wrong. Please try again later."
+    }
+  },
+
+  "otherProjects": {
+    "continueExploring": "Continue exploring",
+    "findAnother": "Find another project"
+  },
+
+  "footer": {
+    "links": {
+      "home": "Home",
+      "projects": "Projects",
+      "contact": "Contact"
+    }
+  },
+
+  "preloader": {
+    "loading": "Loading",
+    "initializing": "Initializing",
+    "loadingAssets": "Loading Assets",
+    "almostReady": "Almost Ready",
+    "complete": "Complete"
+  },
+
+  "language": {
+    "switchToNl": "NL",
+    "switchToEn": "EN",
+    "toggleLabel": "Switch language"
+  }
+}

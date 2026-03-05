@@ -1,0 +1,289 @@
+{
+  "nav": {
+    "home": "Home",
+    "skills": "Vaardigheden",
+    "qualifications": "Kwalificaties",
+    "projects": "Projecten",
+    "contactMe": "Neem contact op",
+    "navigation": "Navigatie"
+  },
+
+  "hero": {
+    "biographyLabel": "Biografie",
+    "biographyText": "Ik ben een 21-jarige man uit Nederland, momenteel bezig met de studie Software Engineering aan de Haagse Hogeschool in Den Haag.",
+    "contactLabel": "Contact",
+    "projectsLabel": "Projecten",
+    "projectsList": [
+      "Portfolio v1/3 | 2022-2025",
+      "Oak | 2022",
+      "Stichting Accessibility | 2024",
+      "GetMore Systems (Stage) | 2024",
+      "Minecraft Portfolio Project | 2025"
+    ],
+    "graduatingIn": "Afstuderen in",
+    "completedProjects": "Afgeronde projecten",
+    "companiesWorkedFor": "Bedrijven gewerkt voor",
+    "headline1": "Hoi, ik ben A",
+    "headline2": "Software-ingenieur",
+    "headline3": "en webontwikkelaar",
+    "location": "Gevestigd in Nederland"
+  },
+
+  "about": {
+    "sectionLabel": "Over mij",
+    "headline": "Gedisciplineerde ingenieur,",
+    "headlineMuted": "van nature nieuwsgierig.",
+    "currently": "Momenteel",
+    "beyondCode": "Buiten de code",
+    "getInTouch": "Neem contact op",
+    "facts": {
+      "degree": { "label": "Opleiding", "value": "BSc Software Engineering" },
+      "school": { "label": "School", "value": "De Haagse Hogeschool" },
+      "basedIn": { "label": "Woonplaats", "value": "Leiden, Nederland" },
+      "experience": { "label": "Ervaring", "value": "GetMore Systems · Oadsy" }
+    },
+    "interests": [
+      "Powerliften & gewichtheffen",
+      "Home IT-tinkering",
+      "Persoonlijke zijprojecten",
+      "Tijd doorbrengen met vrienden"
+    ],
+    "bio": [
+      "Ik ben een enthousiaste Software Engineering student met een oprechte passie voor het bouwen van effectieve oplossingen. Wat mij drijft is niet alleen het schrijven van code — het is het diepgaand begrijpen van een probleem en het maken van iets dat echt werkt en past bij de behoefte. Tijdens mijn stage bij GetMore Systems heb ik zelfstandig features ontwikkeld binnen een professioneel Agile Scrum-team en echte producten opgeleverd in een live TypeScript en .NET codebase.",
+      "Buiten de universiteit besteed ik veel tijd in de sportschool, met powerliften en gewichtheffen. Diezelfde discipline en focus neem ik direct mee naar hoe ik werk. Ik vind het ook leuk om te knutselen aan kleine projecten, of het nu een home IT-setup is, een praktische oplossing in huis, of een zijproject dat ik wil uitwerken. En als ik dat allemaal niet doe, hang ik bij vrienden."
+    ],
+    "pillars": [
+      {
+        "label": "Hoe ik engineer",
+        "text": "Ik hecht belang aan het begrijpen van problemen voordat ik een regel code schrijf. Schone, doelgerichte oplossingen boven slimme — onderhoudbaarheid wint altijd."
+      },
+      {
+        "label": "Hoe ik werk",
+        "text": "Zelfstandig en teamgericht. Ik heb aan verschillende projecten gewerkt en weet dat goede codereviews en eerlijke communicatie net zo belangrijk zijn als de code of het product zelf."
+      },
+      {
+        "label": "Hoe ik scherp blijf",
+        "text": "Discipline en focus zijn overal op van toepassing. Of het nu een training, een project of een lastig probleem is — ik toon me consequent en zet door."
+      }
+    ]
+  },
+
+  "qualifications": {
+    "sectionTitle": "Kwalificaties",
+    "sectionTitleMuted": "en Opleiding",
+    "subtitle": "Een tijdlijn van studie, werk en de dingen die bepaalden hoe ik bouw.",
+    "educationBadge": "Opleiding",
+    "workBadge": "Werk",
+    "present": "Heden",
+    "events": {
+      "01": {
+        "title": "Middelbaar Onderwijs",
+        "description": "Havo afgerond met focus op bètavakken zoals wiskunde, natuurkunde, scheikunde en biologie. Ontwikkelde een sterke basis in probleemoplossen en analytisch denken, wat mijn interesse in softwareontwikkeling aanwakkerde."
+      },
+      "02": {
+        "title": "BSc Informatica",
+        "description": "Informatica studeren met een specialisatie in software engineering. Vakken omvatten algoritmen, datastructuren, software-architectuur en cloudontwikkeling. Het programma legt nadruk op praktisch, projectgericht leren, waardoor ik theoretische concepten kan toepassen op echte softwareontwikkelingsuitdagingen."
+      },
+      "03": {
+        "title": "Software Developer — Stage",
+        "description": "Gewerkt als software developer stagiair bij GetMore Systems, een bedrijf gespecialiseerd in softwareoplossingen voor de financiële industrie. Bijgedragen aan de ontwikkeling van een klantdashboardapplicatie met Angular en .NET, waardoor de gebruikerservaring en functionaliteit verbeterden. Samengewerkt met een team van 3 om nieuwe features te implementeren, bugs op te lossen en de prestaties te optimaliseren, wat waardevolle praktijkervaring opleverde in een professionele softwareontwikkelomgeving."
+      },
+      "04": {
+        "title": "Webontwikkelaar — Parttime",
+        "description": "Momenteel werkzaam als parttime webontwikkelaar voor Oadsy, een startup gericht op de verkoop van autoparfums online. Verantwoordelijk voor het onderhouden en verbeteren van de e-commercewebsite gebouwd op Shopify, inclusief het implementeren van aangepaste features met Liquid en JavaScript. Werk samen met de eigenaar om de gebruikersinterface te optimaliseren en conversieratio's te verbeteren, terwijl ook de prestaties en beveiliging van de website op industriestandaard worden gehouden."
+      }
+    }
+  },
+
+  "projects": {
+    "sectionTitle": "Projecten",
+    "sectionTitleMuted": "en Werk",
+    "filterAll": "Alles",
+    "noProjects": "Nog geen projecten in deze categorie",
+    "viewDetails": "Bekijk details",
+    "featuredLabel": "Uitgelicht",
+    "items": {
+      "project-01": {
+        "title": "Portfolio — Evolutie",
+        "subtitle": "v1 · v2 · v3",
+        "description": "Drie generaties persoonlijk portfolio, elk gebouwd naarmate mijn expertise in design en frontend engineering groeide. Van plain HTML/CSS naar React en uiteindelijk een volledig geanimeerd TypeScript-systeem — een levend document van voortdurende groei."
+      },
+      "project-02": {
+        "title": "GetMore Systems",
+        "subtitle": "Stageproject",
+        "description": "Gewerkt als software developer stagiair bij GetMore Systems, een bedrijf gespecialiseerd in softwareoplossingen voor de financiële industrie. Bijgedragen aan de ontwikkeling van een klantdashboardapplicatie met Angular en .NET. Samengewerkt met een team van 3 om nieuwe features te implementeren, bugs op te lossen en de prestaties te optimaliseren, met waardevolle praktijkervaring in een professionele omgeving als resultaat."
+      },
+      "project-03": {
+        "title": "Stichting Accessibility",
+        "subtitle": "Non-profit webplatform",
+        "description": "Ontworpen en gebouwd een inclusief webplatform voor een non-profit, waarbij WCAG-naleving en een naadloze ervaring voor gebruikers van alle vermogens werd gegarandeerd. Geïmplementeerde features stellen gebruikers in staat in contact te komen met bedrijven die op zoek zijn naar toegankelijkheidsadviseurs. Het project omvatte het opzetten van een .NET-backend met ASP.NET Core, een responsieve frontend met React en TypeScript, en implementatie op Azure."
+      },
+      "project-04": {
+        "title": "Minecraft Portfolio Website",
+        "subtitle": "Creatief coderen & 3D-design",
+        "description": "Een unieke Minecraft-thematische portfoliowebsite gebouwd met React Three Fiber, Three.js en Blender. Presenteert projecten voor de Minor Visual Design en Webontwikkeling in een interactieve 3D-omgeving geïnspireerd op de iconische blokachtige wereld van Minecraft."
+      }
+    }
+  },
+
+  "projectDetail": {
+    "back": "Terug",
+    "notFound": "Project niet gevonden.",
+    "goHome": "Naar home",
+    "caseStudyLabel": "Case Study",
+    "chapter": "Hoofdstuk",
+    "chapters": "Hoofdstukken",
+    "outcomesLabel": "Resultaten",
+    "whatWasAchieved": "Wat er bereikt is",
+    "builtWithLabel": "Gebouwd met",
+    "technology": "Technologie",
+    "technologies": "Technologieën",
+    "clientLabel": "Klant",
+    "serviceLabel": "Dienst",
+    "yearLabel": "Jaar",
+    "items": {
+      "project-01": {
+        "client": "Persoonlijk",
+        "service": "Design & Frontend Engineering",
+        "introduction": "Drie iteraties van hetzelfde idee — elk gebouwd naarmate mijn begrip van design en engineering verdiepte. Het portfolio werd een levend document van groei: van statische HTML naar een volledig geanimeerd, TypeScript-first systeem met een eigen design language.",
+        "caseStudyTitle": "Ontwerpen in het publiek, bouwen in realtime",
+        "caseStudyBody": [
+          "Versie één was een les in terughoudendheid. Gebouwd met plain HTML en CSS, dwong het mij de fundamenten te begrijpen voordat ik naar een framework greep. Elke lay-outbeslissing was weloverwogen — er waren geen shortcuts.",
+          "Versie twee introduceerde React en een designsysteem dat ik van scratch bouwde. Ik besteedde weken aan typeschalen, spacing-ritmes en interactiepatronen voordat ik één component schreef. Het resultaat voelde intentioneler, maar de codebase was broos.",
+          "Versie drie — deze — is de synthese. TypeScript door en door, Framer Motion voor georchestreerde animatie en een componentarchitectuur die schaalt. Elke sectie is ontworpen om redactioneel aan te voelen: royale whitespace, typografische hiërarchie en beweging die betekenis toevoegt in plaats van ruis."
+        ],
+        "outcomes": [
+          "Drie complete herontwerpen opgeleverd over drie jaar van continue groei",
+          "Lighthouse-prestatiescore van 98/100 op desktop behaald",
+          "Componentarchitectuur overgenomen in volgende clientprojecten",
+          "Open-source gezet op GitHub als referentie voor andere ontwikkelaars"
+        ],
+        "statsLabels": ["Versies", "Jaren actief", "Componenten", "Prestatie"]
+      },
+      "project-02": {
+        "client": "GetMore Systems",
+        "service": "Frontend Engineering",
+        "introduction": "Een stage die aanvoelde als een meesterklasse in productiesoftware. Ik voegde me bij een klein engineeringteam dat interne tooling bouwde voor een groeiend operationeel bedrijf en leverde echte features af vanaf week één — in een live TypeScript en React codebase.",
+        "caseStudyTitle": "Enterprise tooling voor een groeiend operationeel team",
+        "caseStudyBody": [
+          "De kernuitdaging was schaal. De bestaande dashboards werkten voor een klein team maar hielden het niet bij naarmate het bedrijf groeide. Mijn eerste taak was het auditen van de frontend op knelpunten — we vonden onnodige re-renders, ontbrekende memoïsatie en een data-fetchinglaag die de API bij elke interactie bombardeerde.",
+          "Ik herbouwde de datalaag rondom een gedeelde cache, voegde optimistische UI toe voor de meest gebruikte interacties en introduceerde een componentbibliotheek die de rest van het team kon uitbreiden. Responstijden daalden meetbaar en het team begon sneller op te leveren omdat de bouwstenen consistent waren.",
+          "De stage gaf me ook een eerstehands blik op hoe goede teams werken: dagelijkse stand-ups, codereviews, sprint-retrospectives. Leren code te schrijven die iemand anders kan begrijpen en op voortbouwen was het meest waardevolle dat ik meenam."
+        ],
+        "outcomes": [
+          "De data-fetchinglaag herbouwd, onnodige API-aanroepen significant verminderd",
+          "Een gedeelde componentbibliotheek geïntroduceerd die het volledige engineeringteam overnam",
+          "Dashboard-responstijden meetbaar verbeterd na cache-implementatie",
+          "Eerste professionele ervaring met sprint-ceremonies en peer-codereview"
+        ],
+        "statsLabels": ["Teamgrootte", "Duur", "Componenten", "Technologieën"]
+      },
+      "project-03": {
+        "client": "Stichting Accessibility NL",
+        "service": "Webdesign & Frontend Development",
+        "introduction": "Toegankelijkheid is geen feature — het is een baseline. Dit project was een kans om iets te bouwen dat echt voor iedereen werkt, WCAG 2.1 AA-standaarden toepassend vanaf de eerste wireframe in plaats van ze achteraf toe te voegen.",
+        "caseStudyTitle": "Inclusief by design — niet als bijgedachte",
+        "caseStudyBody": [
+          "De opdracht was rechtlijnig: een publiek webplatform voor een non-profit gericht op digitale inclusie. De uitdaging was dat de primaire gebruikers mensen met visuele beperkingen, motorische moeilijkheden en cognitieve verschillen omvatten. Elk component moest worden geauditeerd tegen echte ondersteunende technologie.",
+          "Ik bouwde het platform op Next.js met een semantisch HTML-first aanpak. Kleurcontrastverhoudings werden gevalideerd tegen WCAG AA (en AA+ waar mogelijk). Alle interactieve elementen zijn via toetsenbord navigeerbaar, focusstatussen zijn zichtbaar en consistent gestijld, en elke afbeelding heeft betekenisvolle alt-tekst. De site werd getest met NVDA en VoiceOver in meerdere browsers.",
+          "Het designsysteem was ook gebouwd om onderhoudbaar te zijn door een niet-technisch team. Content bewerkbaar via een headless CMS, duidelijke documentatie en een componentbibliotheek die standaard toegankelijke patronen afdwingt — niet per ongeluk."
+        ],
+        "outcomes": [
+          "WCAG 2.1 AA-naleving geverifieerd op elke pagina en elk component",
+          "Volledige toetsenbordnavigatie met zichtbare, consistent gestijlde focusstatussen",
+          "Getest met NVDA en VoiceOver in Chrome, Firefox en Safari",
+          "Headless CMS-integratie die een niet-technisch team in staat stelt content te beheren"
+        ],
+        "statsLabels": ["WCAG-niveau", "Team", "Duur", "Technologieën"]
+      },
+      "project-04": {
+        "client": "Oak (Persoonlijk project)",
+        "service": "Merkstrategie & UX-design",
+        "introduction": "Oak begon als een briefing in een notitieboek: een productmerk dat geaard en eerlijk aanvoelde, niet luid. Het project werd een diepgaande verkenning van visuele identiteit — van naamgeving en typografie tot een high-fidelity prototype van de productervaring.",
+        "caseStudyTitle": "Een merkidentiteit opbouwen vanuit eerste principes",
+        "caseStudyBody": [
+          "Het proces begon met woorden, niet visuals. Voordat ik Figma opende, besteedde ik een week aan schrijven: wat gelooft dit merk, voor wie is het en wat weigert het te zijn? De antwoorden — geaard, ingetogen, gebouwd om te duren — werden de creatieve briefing waaraan elke visuele beslissing werd getoetst.",
+          "Typografie was de eerste ontwerpbeslissing. Ik koos voor een geometrisch schreefloos lettertype voor interface-tekst en een hoog-contrast serif voor koppen: de combinatie geeft het merk een stille zelfverzekerdheid. Het kleurenpalet is monochromatisch met één warm accent — ingetogen genoeg om premium aan te voelen, flexibel genoeg om te werken over print en scherm.",
+          "Het Framer-prototype bracht alles samen. Micro-interacties werden met dezelfde zorg ontworpen als het statische merk: hover-states, overgangen en laadpatronen weerspiegelen allemaal hetzelfde karakter. Het doel was een merk dat aanvoelt alsof het er altijd al was — onvermijdelijk in plaats van ontworpen."
+        ],
+        "outcomes": [
+          "Volledige visuele identiteit opgeleverd — naamgeving, typografie, kleur en tone of voice",
+          "High-fidelity Framer-prototype met ontworpen micro-interacties door het geheel",
+          "Monochromatisch kleurensysteem met één warm accent, gedocumenteerd voor schaal",
+          "Volledige merkrichtlijnen en componentdocumentatie geschreven in Notion"
+        ],
+        "statsLabels": ["Duur", "Schermen", "Lettertypen", "Palet"]
+      },
+      "project-05": {
+        "client": "HvA – Minor Visual Design",
+        "service": "Creatief coderen & 3D-webontwikkeling",
+        "introduction": "Een portfolio waarbij browsen gameplay wordt. Gebouwd voor de HvA Minor in Visual Design en Webontwikkeling, plaatst deze Minecraft-thematische site elk project in een handgemaakte 3D-wereld — navigeer de blokken, ontdek het werk.",
+        "caseStudyTitle": "Een portfolio omzetten in een ervaring",
+        "caseStudyBody": [
+          "De opdracht vroeg om een portfolio — wij maakten er een spel van. Het concept was eenvoudig: wat als elk project in een Minecraft-wereld leefde die je echt kon verkennen? De technische uitdaging was het bouwen van een 3D-omgeving die soepel draaide in de browser zonder een game-engine.",
+          "React Three Fiber bood ons een declaratieve manier om Three.js in React te schrijven. Elk gebouw, pad en bord werd gemodelleerd in Blender en geëxporteerd als GLTF, vervolgens geladen en geanimeerd tijdens runtime. Het optimaliseren van draw calls en asset-groottes was cruciaal — we hadden de wereld snel nodig op een standaardlaptop.",
+          "Het interactiedesign was het moeilijkste onderdeel. First-person controls voelen natuurlijk aan in een game-engine maar hebben zorgvuldige kalibratie nodig in een browser. We stemden bewegingssnelheid af, voegden pointer-lock-controls toe en bouwden een minimale HUD om gebruikers te begeleiden — allemaal zonder dat het aanvoelt als een tutorial."
+        ],
+        "outcomes": [
+          "Interactief 3D-portfolio draaiend op stabiele 60 fps in Chrome en Firefox",
+          "Alle 3D-assets geoptimaliseerd tot onder 4 MB totaal voor snelle initiële laadtijd",
+          "First-person navigatie met toetsenbordbeweging en pointer-lock-controls",
+          "Hoogste cijfer ontvangen bij de HvA Minor eindejaarpresentatie"
+        ],
+        "statsLabels": ["Team", "3D-assets", "FPS-doel", "Laadtijd"]
+      }
+    }
+  },
+
+  "contact": {
+    "metaLabel": "Neem contact op",
+    "headingTitle": "Laten we",
+    "headingTitleMuted": "samenwerken",
+    "subtitle": "Ik sta altijd open voor nieuwe projecten en kansen. Of je nu een vraag hebt of gewoon gedag wilt zeggen — neem gerust contact op!",
+    "ctaText": "Stuur mij een e-mail",
+    "methodLabels": {
+      "email": "E-mail",
+      "phone": "Telefoon",
+      "location": "Locatie",
+      "locationValue": "Leiden, Nederland"
+    },
+    "form": {
+      "namePlaceholder": "Jouw naam",
+      "emailPlaceholder": "Jouw e-mail",
+      "subjectPlaceholder": "Onderwerp",
+      "messagePlaceholder": "Bericht",
+      "send": "Bericht versturen",
+      "sending": "Versturen...",
+      "sent": "Verzonden",
+      "successMessage": "Bedankt voor je bericht!",
+      "errorMessage": "Er is iets misgegaan. Probeer het later opnieuw."
+    }
+  },
+
+  "otherProjects": {
+    "continueExploring": "Verder verkennen",
+    "findAnother": "Bekijk een ander project"
+  },
+
+  "footer": {
+    "links": {
+      "home": "Home",
+      "projects": "Projecten",
+      "contact": "Contact"
+    }
+  },
+
+  "preloader": {
+    "loading": "Laden",
+    "initializing": "Initialiseren",
+    "loadingAssets": "Bestanden laden",
+    "almostReady": "Bijna klaar",
+    "complete": "Gereed"
+  },
+
+  "language": {
+    "switchToNl": "NL",
+    "switchToEn": "EN",
+    "toggleLabel": "Taal wisselen"
+  }
+}

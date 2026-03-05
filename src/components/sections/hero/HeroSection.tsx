@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import type { SocialLink } from "../../../types";
 import { BackgroundLines } from "../../ui/backgrounds/BackgroundLines";
 
@@ -7,6 +8,8 @@ interface HeroProps {
 }
 
 export const Hero = ({ socialLinks }: HeroProps) => {
+  const { t } = useTranslation();
+
   return (
     <section
       id="home"
@@ -26,12 +29,10 @@ export const Hero = ({ socialLinks }: HeroProps) => {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <h3 className="text-[10px] font-bold text-[rgb(var(--text-tertiary))] uppercase tracking-[0.15em] mb-3">
-                Biography
+                {t("hero.biographyLabel")}
               </h3>
               <p className="text-sm text-[rgb(var(--text-secondary))] leading-relaxed max-w-[240px] font-serif">
-                I'm an 21-year-old guy from the Netherlands, currently studying
-                Software Engineering at the University of Applied Sciences in
-                The Hague.
+                {t("hero.biographyText")}
               </p>
             </motion.div>
 
@@ -42,18 +43,18 @@ export const Hero = ({ socialLinks }: HeroProps) => {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               <h3 className="text-[10px] font-bold text-[rgb(var(--text-tertiary))] uppercase tracking-[0.15em] mb-3">
-                Contact
+                {t("hero.contactLabel")}
               </h3>
               <div className="space-y-1 text-sm text-[rgb(var(--text-secondary))] font-serif">
                 <p>Leiden, the Netherlands</p>
                 <a
-                  href="mailto:alfa@gmail.com"
+                  href="mailto:lfatmi.ayoub@gmail.com"
                   className="block hover:text-[rgb(var(--text-primary))] transition-colors"
                 >
                   lfatmi.ayoub@gmail.com
                 </a>
                 <a
-                  href="tel:+31612345678"
+                  href="tel:+31644459521"
                   className="block hover:text-[rgb(var(--text-primary))] transition-colors"
                 >
                   +31 6 44 45 95 21
@@ -68,14 +69,14 @@ export const Hero = ({ socialLinks }: HeroProps) => {
               transition={{ duration: 0.6, delay: 0.4 }}
             >
               <h3 className="text-[10px] font-bold text-[rgb(var(--text-tertiary))] uppercase tracking-[0.15em] mb-3">
-                Projects
+                {t("hero.projectsLabel")}
               </h3>
               <div className="space-y-1 text-sm text-[rgb(var(--text-secondary))] font-serif">
-                <p>Portfolio v1/3 | 2022-2025</p>
-                <p>Oak | 2022</p>
-                <p>Stichting Accessibility | 2024</p>
-                <p>GetMore Systems (Internship) | 2024</p>
-                <p>Minecraft Portfolio Project | 2025</p>
+                {(t("hero.projectsList", { returnObjects: true }) as string[]).map(
+                  (item) => (
+                    <p key={item}>{item}</p>
+                  )
+                )}
               </div>
             </motion.div>
           </div>
@@ -90,16 +91,16 @@ export const Hero = ({ socialLinks }: HeroProps) => {
               className="mb-6 md:mb-8"
             >
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-serif text-[rgb(var(--text-primary))] leading-[1.15] tracking-tight mb-2">
-                Hi, I'm A
+                {t("hero.headline1")}
               </h1>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-serif text-[rgb(var(--text-primary))] leading-[1.15] tracking-tight mb-2">
-                Software Engineer
+                {t("hero.headline2")}
               </h2>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-serif text-[rgb(var(--text-primary))] leading-[1.15] tracking-tight mb-4">
-                and Web developer
+                {t("hero.headline3")}
               </h2>
               <p className="text-lg sm:text-xl md:text-2xl font-normal font-serif text-[rgb(var(--text-secondary))] leading-relaxed">
-                Based in the Netherlands
+                {t("hero.location")}
               </p>
             </motion.div>
 
@@ -174,7 +175,7 @@ export const Hero = ({ socialLinks }: HeroProps) => {
               ))}
             </motion.div>
 
-            {/* Scroll indicator - High z-index ensures visibility above background lines */}
+            {/* Scroll indicator */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -213,7 +214,7 @@ export const Hero = ({ socialLinks }: HeroProps) => {
               className="text-center lg:text-left"
             >
               <h3 className="text-[10px] font-bold text-[rgb(var(--text-tertiary))] uppercase tracking-[0.15em] mb-2">
-                Graduating In
+                {t("hero.graduatingIn")}
               </h3>
               <p className="text-4xl md:text-5xl lg:text-4xl font-black text-[rgb(var(--text-primary))] leading-none">
                 2026
@@ -228,7 +229,7 @@ export const Hero = ({ socialLinks }: HeroProps) => {
               className="text-center lg:text-left"
             >
               <h3 className="text-[10px] font-bold text-[rgb(var(--text-tertiary))] uppercase tracking-[0.15em] mb-2">
-                Completed Projects
+                {t("hero.completedProjects")}
               </h3>
               <p className="text-4xl md:text-5xl lg:text-4xl font-black text-[rgb(var(--text-primary))] leading-none">
                 10+
@@ -243,7 +244,7 @@ export const Hero = ({ socialLinks }: HeroProps) => {
               className="text-center lg:text-left"
             >
               <h3 className="text-[10px] font-bold text-[rgb(var(--text-tertiary))] uppercase tracking-[0.15em] mb-2">
-                Companies Worked For
+                {t("hero.companiesWorkedFor")}
               </h3>
               <p className="text-4xl md:text-5xl lg:text-4xl font-black text-[rgb(var(--text-primary))] leading-none">
                 3

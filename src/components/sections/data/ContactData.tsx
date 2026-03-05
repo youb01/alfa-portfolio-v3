@@ -1,3 +1,8 @@
+/**
+ * Non-translatable contact data (icons, hrefs, IDs).
+ * All user-visible labels and text live in
+ * src/i18n/locales/{lang}/translation.json under contact.
+ */
 import { Mail, MapPin, Phone, Linkedin, Github, Twitter } from "lucide-react";
 
 export interface ContactMethod {
@@ -7,19 +12,9 @@ export interface ContactMethod {
     strokeWidth?: number;
     className?: string;
   }>;
-  label: string;
   value: string;
   href: string;
   type: "email" | "phone" | "location" | "social";
-}
-
-export interface ContactLink {
-  id: string;
-  label: string;
-  href: string;
-  icon:
-    | React.ReactNode
-    | React.ComponentType<{ size?: number; strokeWidth?: number }>;
 }
 
 export interface SocialLink {
@@ -33,7 +28,6 @@ export const contactMethods: ContactMethod[] = [
   {
     id: "email",
     icon: Mail,
-    label: "Email",
     value: "lfatmi.ayoub@gmail.com",
     href: "mailto:lfatmi.ayoub@gmail.com",
     type: "email",
@@ -41,7 +35,6 @@ export const contactMethods: ContactMethod[] = [
   {
     id: "phone",
     icon: Phone,
-    label: "Phone",
     value: "+31 6 44 45 95 21",
     href: "tel:+31644459521",
     type: "phone",
@@ -49,8 +42,7 @@ export const contactMethods: ContactMethod[] = [
   {
     id: "location",
     icon: MapPin,
-    label: "Location",
-    value: "Leiden, Netherlands",
+    value: "#location",
     href: "#",
     type: "location",
   },
@@ -76,20 +68,3 @@ export const socialLinks: SocialLink[] = [
     icon: <Twitter size={20} strokeWidth={1.5} />,
   },
 ];
-
-export const contactContent = {
-  meta: {
-    id: "contact",
-    label: "Get in Touch",
-  },
-  heading: {
-    title: "Let's",
-    titleMuted: "Work Together",
-  },
-  subtitle:
-    "I'm always interested in hearing about new projects and opportunities. Whether you have a question or just want to say hi, feel free to get in touch!",
-  cta: {
-    text: "Send me an email",
-    href: "mailto:lfatmi.ayoub@gmail.com",
-  },
-};

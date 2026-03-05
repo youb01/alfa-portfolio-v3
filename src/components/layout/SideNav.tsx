@@ -1,5 +1,6 @@
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { NavItem, SocialLink } from "../../types";
 import { SocialLinks } from "../ui/SocialLink";
 import { useState } from "react";
@@ -17,6 +18,7 @@ export const SideNav = ({
   navItems,
   socialLinks,
 }: SideNavProps) => {
+  const { t } = useTranslation();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [mousePosition, setMousePosition] = useState<{
     [key: number]: { x: number; y: number };
@@ -111,7 +113,7 @@ export const SideNav = ({
                 className="mb-10 md:mb-12 text-center"
               >
                 <h2 className="text-[16px] md:text-xs font-semibold text-[rgb(var(--text-tertiary))] uppercase tracking-mega mb-4 md:mb-6">
-                  Navigation
+                  {t("nav.navigation")}
                 </h2>
                 <div className="h-px bg-gradient-to-r from-transparent via-[rgb(var(--border-primary))] to-transparent" />
               </motion.div>

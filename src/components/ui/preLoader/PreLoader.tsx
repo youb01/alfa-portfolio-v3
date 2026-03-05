@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface PreloaderProps {
   isLoading: boolean;
@@ -7,6 +8,7 @@ interface PreloaderProps {
 }
 
 export const Preloader = ({ isLoading, onComplete }: PreloaderProps) => {
+  const { t } = useTranslation();
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -104,7 +106,7 @@ export const Preloader = ({ isLoading, onComplete }: PreloaderProps) => {
                   }}
                   className="text-xs md:text-sm font-medium text-[rgb(var(--text-tertiary))] uppercase tracking-[0.2em]"
                 >
-                  Loading
+                  {t("preloader.loading")}
                 </motion.span>
 
                 <motion.span
@@ -185,10 +187,10 @@ export const Preloader = ({ isLoading, onComplete }: PreloaderProps) => {
                 }}
                 className="text-xs md:text-sm font-medium text-[rgb(var(--text-secondary))] uppercase tracking-[0.15em] mt-2"
               >
-                {progress < 30 && "Initializing"}
-                {progress >= 30 && progress < 90 && "Loading Assets"}
-                {progress >= 90 && progress < 100 && "Almost Ready"}
-                {progress === 100 && "Complete"}
+                {progress < 30 && t("preloader.initializing")}
+                {progress >= 30 && progress < 90 && t("preloader.loadingAssets")}
+                {progress >= 90 && progress < 100 && t("preloader.almostReady")}
+                {progress === 100 && t("preloader.complete")}
               </motion.p>
             </motion.div>
           </div>

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { projectsData } from "../../sections/data/ProjectsData";
 import { projectDetails } from "../../sections/data/ProjectDetailData";
 import { ProjectCard } from "./ProjectCard";
@@ -17,6 +18,7 @@ interface OtherProjectsProps {
 export const OtherProjects: React.FC<OtherProjectsProps> = ({
   currentSlug,
 }) => {
+  const { t } = useTranslation();
   // Only surface projects that have a detail page
   const available = projectsData.filter(
     (p) => p.slug !== currentSlug && !!projectDetails[p.id],
@@ -42,13 +44,13 @@ export const OtherProjects: React.FC<OtherProjectsProps> = ({
               className="block text-[10px] font-bold uppercase tracking-[0.18em] mb-4"
               style={{ color: "rgb(var(--text-tertiary))" }}
             >
-              Continue exploring
+              {t("otherProjects.continueExploring")}
             </span>
             <h2
               className="text-4xl md:text-5xl font-extrabold leading-tight flex items-center gap-4"
               style={{ color: "rgb(var(--text-primary))" }}
             >
-              Find another project
+              {t("otherProjects.findAnother")}
               <ArrowRight
                 size={32}
                 style={{ color: "rgb(var(--text-tertiary))" }}

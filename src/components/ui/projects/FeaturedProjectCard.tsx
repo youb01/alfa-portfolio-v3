@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import React from "react";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import type { Project } from "../../sections/data/ProjectsData";
 import { Tag } from "../skills/Tag";
 import { ProjectThumbnail } from "./ProjectThumbnail";
@@ -12,6 +14,7 @@ interface FeaturedProjectCardProps {
 export const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({
   project,
 }) => {
+  const { t } = useTranslation();
   const [isDark, setIsDark] = React.useState(
     document.documentElement.classList.contains("dark"),
   );
@@ -38,6 +41,7 @@ export const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({
     : "0 40px 100px -20px rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.07)";
 
   return (
+    <Link to={`/projects/${project.slug}`} style={{ textDecoration: "none", color: "inherit" }}>
     <motion.div
       className="relative w-full group cursor-pointer"
       initial={{ opacity: 0, y: 50 }}
@@ -100,7 +104,7 @@ export const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({
                 color: isDark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.65)",
               }}
             >
-              Featured
+              {t("projects.featuredLabel")}
             </span>
           </motion.div>
         </div>
@@ -246,7 +250,7 @@ export const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({
                 color: isDark ? "rgba(255,255,255,0.95)" : "rgba(0,0,0,0.88)",
               }}
             >
-              {project.title}
+              {t(`projects.items.${project.id}.title`)}
             </motion.h3>
 
             {/* Subtitle */}
@@ -260,7 +264,7 @@ export const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({
                 color: isDark ? "rgba(255,255,255,0.28)" : "rgba(0,0,0,0.28)",
               }}
             >
-              {project.subtitle}
+              {t(`projects.items.${project.id}.subtitle`)}
             </motion.p>
 
             {/* Description */}
@@ -278,7 +282,7 @@ export const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({
                 color: isDark ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0.55)",
               }}
             >
-              {project.description}
+              {t(`projects.items.${project.id}.description`)}
             </motion.p>
 
             {/* Tech stack */}
@@ -314,7 +318,7 @@ export const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({
                       : "rgba(0,0,0,0.35)",
                 }}
               >
-                <span>View Details</span>
+                <span>{t("projects.viewDetails")}</span>
                 <motion.div
                   animate={{ x: isHovered ? 3 : 0, y: isHovered ? -3 : 0 }}
                   transition={{ duration: 0.25 }}
@@ -337,5 +341,6 @@ export const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({
         </div>
       </motion.div>
     </motion.div>
+    </Link>
   );
 };

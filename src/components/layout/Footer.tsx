@@ -1,14 +1,16 @@
 import { motion } from "framer-motion";
 import React from "react";
-
-const NAV_LINKS = [
-  { label: "Home", href: "/" },
-  { label: "Projects", href: "/#projects" },
-  { label: "Contact", href: "/#contact" },
-] as const;
+import { useTranslation } from "react-i18next";
 
 export const Footer: React.FC = () => {
+  const { t } = useTranslation();
   const year = new Date().getFullYear();
+
+  const NAV_LINKS = [
+    { labelKey: "footer.links.home", href: "/" },
+    { labelKey: "footer.links.projects", href: "/#projects" },
+    { labelKey: "footer.links.contact", href: "/#contact" },
+  ];
 
   return (
     <footer
@@ -45,7 +47,7 @@ export const Footer: React.FC = () => {
             aria-label="Footer navigation"
           >
             {NAV_LINKS.map((link, i) => (
-              <React.Fragment key={link.label}>
+              <React.Fragment key={link.labelKey}>
                 {i > 0 && (
                   <span
                     className="mx-3 text-[rgb(var(--border-primary))] select-none text-[11px]"
@@ -60,7 +62,7 @@ export const Footer: React.FC = () => {
                   whileHover={{ y: -1 }}
                   transition={{ duration: 0.15 }}
                 >
-                  {link.label}
+                  {t(link.labelKey)}
                 </motion.a>
               </React.Fragment>
             ))}

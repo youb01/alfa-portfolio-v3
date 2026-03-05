@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { MapPin } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import type { TimelineEvent } from "../../sections/data/QualificationsData";
 import { useTheme } from "../../../hooks/useTheme";
 
@@ -104,7 +105,13 @@ function TimelineCard({
   event: TimelineEvent;
   isDark: boolean;
 }) {
+  const { t } = useTranslation();
   const isWork = event.type === "work";
+  const title = t(`qualifications.events.${event.id}.title`);
+  const description = t(`qualifications.events.${event.id}.description`);
+  const badgeLabel = isWork
+    ? t("qualifications.workBadge")
+    : t("qualifications.educationBadge");
 
   return (
     /*
@@ -155,7 +162,7 @@ function TimelineCard({
               border: "1px solid rgb(var(--border-secondary))",
             }}
           >
-            {isWork ? "Work" : "Education"}
+            {badgeLabel}
           </span>
         </div>
 
@@ -164,7 +171,7 @@ function TimelineCard({
           className="text-lg md:text-xl font-extrabold leading-tight mb-1"
           style={{ color: "rgb(var(--text-primary))" }}
         >
-          {event.title}
+          {title}
         </h3>
 
         {/* ── Institution / company ────────────────────────────────── */}
@@ -195,7 +202,7 @@ function TimelineCard({
           className="text-sm leading-relaxed"
           style={{ color: "rgb(var(--text-secondary))" }}
         >
-          {event.description}
+          {description}
         </p>
       </div>
     </div>
