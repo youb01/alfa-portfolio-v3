@@ -1,132 +1,212 @@
 import { motion } from "framer-motion";
-import { AnimatedHeading } from "../../ui/about/AnimatedHeading";
+import { ArrowRight } from "lucide-react";
 import { BackgroundLines } from "../../ui/backgrounds/BackgroundLines";
-import { CTAButton } from "../../ui/about/CTAButton";
-import { HighlightCard } from "../../ui/about/HighlightCardProps";
-import { Tagline } from "../../ui/about/Tagline";
-import { aboutData } from "../data/AboutData";
+
+// ─── Content ──────────────────────────────────────────────────────────────────
+
+const BIO_PARAGRAPHS = [
+  "I'm an eager Software Engineering student with a genuine passion for building effective solutions. What drives me isn't just writing code — it's understanding a problem deeply and crafting something that actually works and fits the needs. During my internship at GetMore Systems I developed features independently inside a professional Agile Scrum team, shipping real work in a live TypeScript and .NET codebase.",
+  "Outside of university I spend a lot of time in the gym, doing powerlifting and weightlifting. That same discipline and focus carries directly into how I work. I love tinkering with small projects too, whether it's a home IT setup, a practical fix around the house, or a side idea I want to build out. And when I'm not doing any of that, I'm catching up with friends.",
+];
+
+const FACTS = [
+  { label: "Degree", value: "BSc Software Engineering" },
+  { label: "School", value: "The Hague University" },
+  { label: "Based in", value: "Leiden, Netherlands" },
+  { label: "Experience", value: "GetMore Systems · Oadsy" },
+];
+
+const INTERESTS = [
+  "Powerlifting & weightlifting",
+  "Home IT tinkering",
+  "Personal side projects",
+  "Time with friends",
+];
+
+const PILLARS = [
+  {
+    label: "How I engineer",
+    text: "I care about understanding problems before writing a single line of code. Clean, purposeful solutions over clever ones — maintainable always wins.",
+  },
+  {
+    label: "How I work",
+    text: "Self-directed and team-oriented. I've worked on different projects and I know that good code review and honest communication matter as much as the code or product itself.",
+  },
+  {
+    label: "How I stay sharp",
+    text: "Discipline and focus translates into everything. Whether it's a workout, a project, or a hard problem — I show up consistently and push through.",
+  },
+];
+
+// ─── Animation helpers ────────────────────────────────────────────────────────
+
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  transition: { duration: 0.85, delay, ease: [0.22, 1, 0.36, 1] as const },
+  viewport: { once: true, margin: "-60px" as const },
+});
+
+// ─── Component ────────────────────────────────────────────────────────────────
 
 export const AboutSection = () => {
-  const { meta, content, highlights, cta } = aboutData;
+  const border = "1px solid rgb(var(--border-primary))";
 
   return (
     <section
-      id={meta.id}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[rgb(var(--bg-primary))] py-20 md:py-28 lg:py-36"
+      id="about"
+      className="relative bg-[rgb(var(--bg-primary))] py-24 md:py-32 overflow-hidden"
     >
-      {/* Background lines for depth */}
       <BackgroundLines />
 
-      {/* Main content */}
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
-        <div className="flex flex-col items-center">
-          {/* Section label */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="mb-12 md:mb-16 relative"
-          >
-            <div className="flex items-center gap-4">
-              <motion.div
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                transition={{
-                  duration: 1,
-                  delay: 0.3,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                viewport={{ once: true }}
-                className="h-[2px] w-12 bg-gradient-to-r from-transparent to-[rgb(var(--border-hover))] origin-right"
-              />
-              <span className="text-xs md:text-sm font-bold text-[rgb(var(--text-tertiary))] uppercase tracking-[0.3em]">
-                {meta.label}
-              </span>
-              <motion.div
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                transition={{
-                  duration: 1,
-                  delay: 0.3,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                viewport={{ once: true }}
-                className="h-[2px] w-12 bg-gradient-to-l from-transparent to-[rgb(var(--border-hover))] origin-left"
-              />
-            </div>
-          </motion.div>
-
-          {/* Main text */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="max-w-[950px] text-center mb-20 md:mb-24"
-          >
-            <AnimatedHeading parts={content.heading.parts} />
-            <div className="mt-8">
-              <Tagline parts={content.tagline.parts} />
-            </div>
-          </motion.div>
-
-          {/* Highlights grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 w-full max-w-[1200px] mb-20 md:mb-24"
-          >
-            {highlights.map((highlight, index) => (
-              <HighlightCard
-                key={highlight.id}
-                icon={highlight.icon}
-                iconSize={highlight.iconSize}
-                title={highlight.title}
-                description={highlight.description}
-                index={index}
-              />
-            ))}
-          </motion.div>
-
-          {/* CTA Button */}
-          <CTAButton
-            text={cta.text}
-            href={cta.href}
-            showArrow={cta.showArrow}
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
+        {/* ── Section header ── */}
+        <motion.div
+          className="flex items-center gap-6 mb-16 md:mb-20"
+          {...fadeUp()}
+        >
+          <span className="shrink-0 text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--text-tertiary))]">
+            About Me
+          </span>
+          <div
+            className="flex-1 h-[1px]"
+            style={{ background: "rgb(var(--border-primary))" }}
           />
+        </motion.div>
 
-          {/* Scroll indicator */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.6, ease: "easeOut" }}
-            viewport={{ once: true }}
-            className="mt-16 md:mt-20"
-          >
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="w-6 h-10 border-2 border-[rgb(var(--border-secondary))] rounded-full flex items-start justify-center p-2 cursor-hover"
+        {/* ── Main grid: bio left · facts right ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] xl:grid-cols-[1fr_340px] gap-14 xl:gap-24 mb-16 md:mb-20 items-start">
+          {/* Left: headline + bio */}
+          <div>
+            <motion.h2
+              className="text-4xl sm:text-5xl lg:text-[3.25rem] xl:text-[3.75rem] font-extrabold leading-[1.08] tracking-tight text-[rgb(var(--text-primary))] mb-10"
+              style={{ maxWidth: "18ch" }}
+              {...fadeUp(0)}
             >
-              <motion.div
-                animate={{ opacity: [0, 1, 0], y: [0, 12, 0] }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="w-1.5 h-1.5 bg-[rgb(var(--text-tertiary))] rounded-full"
-              />
-            </motion.div>
+              Disciplined engineer,{" "}
+              <span className="text-[rgb(var(--text-tertiary))] font-light">
+                curious by nature.
+              </span>
+            </motion.h2>
+
+            <div className="space-y-5 max-w-[62ch]">
+              {BIO_PARAGRAPHS.map((para, i) => (
+                <motion.p
+                  key={i}
+                  className="font-lora text-[1.05rem] leading-[1.85] text-[rgb(var(--text-secondary))]"
+                  {...fadeUp(0.1 + i * 0.1)}
+                >
+                  {para}
+                </motion.p>
+              ))}
+            </div>
+          </div>
+
+          {/* Right: facts + interests + CTA */}
+          <motion.div className="flex flex-col gap-9 lg:pt-2" {...fadeUp(0.18)}>
+            {/* Currently */}
+            <div>
+              <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--text-tertiary))] mb-5">
+                Currently
+              </span>
+              <ul className="space-y-3.5">
+                {FACTS.map(({ label, value }) => (
+                  <li
+                    key={label}
+                    className="grid items-baseline gap-x-4 gap-y-0.5"
+                    style={{ gridTemplateColumns: "72px 1fr" }}
+                  >
+                    <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-[rgb(var(--text-tertiary))]">
+                      {label}
+                    </span>
+                    <span className="text-sm font-semibold text-[rgb(var(--text-primary))]">
+                      {value}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Thin rule */}
+            <div
+              className="h-[1px]"
+              style={{ background: "rgb(var(--border-primary))" }}
+            />
+
+            {/* Beyond the code */}
+            <div>
+              <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--text-tertiary))] mb-5">
+                Beyond the code
+              </span>
+              <ul className="space-y-2.5">
+                {INTERESTS.map((item) => (
+                  <li key={item} className="flex items-center gap-3">
+                    <div
+                      className="w-1 h-1 rounded-full shrink-0"
+                      style={{ background: "rgb(var(--text-tertiary))" }}
+                    />
+                    <span className="text-sm text-[rgb(var(--text-secondary))]">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Thin rule */}
+            <div
+              className="h-[1px]"
+              style={{ background: "rgb(var(--border-primary))" }}
+            />
+
+            {/* CTA */}
+            <motion.a
+              href="#contact"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-[rgb(var(--text-primary))] w-fit"
+              whileHover={{ x: 3 }}
+              transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Get in touch
+              <ArrowRight size={14} strokeWidth={2.5} />
+            </motion.a>
           </motion.div>
         </div>
+
+        {/* ── Pillars row — three editorial tiles ── */}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-px rounded-2xl overflow-hidden"
+          style={{ background: "rgb(var(--border-primary))" }}
+          {...fadeUp(0.1)}
+        >
+          {PILLARS.map(({ label, text }, i) => (
+            <motion.div
+              key={label}
+              className="flex flex-col gap-4 px-7 py-9 md:px-8 md:py-10"
+              style={{ background: "rgb(var(--bg-primary))" }}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: i * 0.08,
+                duration: 0.7,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              viewport={{ once: true, margin: "-40px" }}
+            >
+              <span
+                className="text-[10px] font-bold uppercase tracking-[0.18em]"
+                style={{ color: "rgb(var(--text-tertiary))" }}
+              >
+                {label}
+              </span>
+              <p
+                className="text-sm leading-relaxed"
+                style={{ color: "rgb(var(--text-secondary))" }}
+              >
+                {text}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
