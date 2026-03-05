@@ -5,8 +5,8 @@ import { BackgroundLines } from "../../ui/backgrounds/BackgroundLines";
 // ─── Content ──────────────────────────────────────────────────────────────────
 
 const BIO_PARAGRAPHS = [
-  "I'm an eager Software Engineering student with a genuine passion for building effective solutions. What drives me isn't just writing code — it's understanding a problem deeply and crafting something that actually works. During my internship at GetMore Systems I developed features independently inside a professional Agile Scrum team, shipping real work in a live TypeScript and React codebase from day one.",
-  "Outside of university I spend a lot of time in the gym — powerlifting and weightlifting. That same discipline and focus carries directly into how I work. I love tinkering with small projects too, whether it's a home IT setup, a practical fix around the house, or a side idea I want to build out. And when I'm not doing any of that, I'm catching up with friends.",
+  "I'm an eager Software Engineering student with a genuine passion for building effective solutions. What drives me isn't just writing code — it's understanding a problem deeply and crafting something that actually works and fits the needs. During my internship at GetMore Systems I developed features independently inside a professional Agile Scrum team, shipping real work in a live TypeScript and .NET codebase.",
+  "Outside of university I spend a lot of time in the gym, doing powerlifting and weightlifting. That same discipline and focus carries directly into how I work. I love tinkering with small projects too, whether it's a home IT setup, a practical fix around the house, or a side idea I want to build out. And when I'm not doing any of that, I'm catching up with friends.",
 ];
 
 const FACTS = [
@@ -30,11 +30,11 @@ const PILLARS = [
   },
   {
     label: "How I work",
-    text: "Self-directed and team-oriented. I've shipped in live Agile codebases and I know that good code review and honest communication matter as much as the code itself.",
+    text: "Self-directed and team-oriented. I've worked on different projects and I know that good code review and honest communication matter as much as the code or product itself.",
   },
   {
     label: "How I stay sharp",
-    text: "Discipline from the gym translates into everything. Whether it's a workout, a project, or a hard problem — I show up consistently and push through.",
+    text: "Discipline and focus translates into everything. Whether it's a workout, a project, or a hard problem — I show up consistently and push through.",
   },
 ];
 
@@ -60,7 +60,6 @@ export const AboutSection = () => {
       <BackgroundLines />
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
-
         {/* ── Section header ── */}
         <motion.div
           className="flex items-center gap-6 mb-16 md:mb-20"
@@ -69,12 +68,14 @@ export const AboutSection = () => {
           <span className="shrink-0 text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--text-tertiary))]">
             About Me
           </span>
-          <div className="flex-1 h-[1px]" style={{ background: "rgb(var(--border-primary))" }} />
+          <div
+            className="flex-1 h-[1px]"
+            style={{ background: "rgb(var(--border-primary))" }}
+          />
         </motion.div>
 
         {/* ── Main grid: bio left · facts right ── */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] xl:grid-cols-[1fr_340px] gap-14 xl:gap-24 mb-16 md:mb-20 items-start">
-
           {/* Left: headline + bio */}
           <div>
             <motion.h2
@@ -102,10 +103,7 @@ export const AboutSection = () => {
           </div>
 
           {/* Right: facts + interests + CTA */}
-          <motion.div
-            className="flex flex-col gap-9 lg:pt-2"
-            {...fadeUp(0.18)}
-          >
+          <motion.div className="flex flex-col gap-9 lg:pt-2" {...fadeUp(0.18)}>
             {/* Currently */}
             <div>
               <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--text-tertiary))] mb-5">
@@ -130,7 +128,10 @@ export const AboutSection = () => {
             </div>
 
             {/* Thin rule */}
-            <div className="h-[1px]" style={{ background: "rgb(var(--border-primary))" }} />
+            <div
+              className="h-[1px]"
+              style={{ background: "rgb(var(--border-primary))" }}
+            />
 
             {/* Beyond the code */}
             <div>
@@ -153,7 +154,10 @@ export const AboutSection = () => {
             </div>
 
             {/* Thin rule */}
-            <div className="h-[1px]" style={{ background: "rgb(var(--border-primary))" }} />
+            <div
+              className="h-[1px]"
+              style={{ background: "rgb(var(--border-primary))" }}
+            />
 
             {/* CTA */}
             <motion.a
@@ -203,7 +207,6 @@ export const AboutSection = () => {
             </motion.div>
           ))}
         </motion.div>
-
       </div>
     </section>
   );
