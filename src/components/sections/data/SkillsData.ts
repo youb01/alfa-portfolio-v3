@@ -29,6 +29,7 @@ export const skillRows: SkillRow[] = [
       "Three.js",
       "HTML",
       "CSS",
+      "Liquid",
     ],
   },
   {
@@ -43,7 +44,7 @@ export const skillRows: SkillRow[] = [
     number: "04",
     category: "No Code",
     tagline: "Production sites, fast",
-    tools: ["Webflow", "WordPress"],
+    tools: ["Webflow", "WordPress", "Shopify"],
   },
   {
     id: "row-05",
@@ -53,10 +54,12 @@ export const skillRows: SkillRow[] = [
     tools: [
       "Git",
       "GitHub",
+      "GitLab",
       "Agile methodologies",
       "CI/CD pipelines",
       "Docker",
       "Azure DevOps",
+      "SquareSpace",
     ],
   },
 ];

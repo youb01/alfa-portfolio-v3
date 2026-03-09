@@ -27,6 +27,9 @@ import {
   SiDocker,
   SiBootstrap,
   SiMiro,
+  SiShopify,
+  SiGitlab,
+  SiSquarespace,
 } from "react-icons/si";
 import { VscAzureDevops } from "react-icons/vsc";
 import { DiJava, DiSqllite, DiHtml5, DiCss3, DiScrum } from "react-icons/di";
@@ -68,6 +71,9 @@ const iconMap: Record<
   css: DiCss3,
   Miro: SiMiro,
   "Agile methodologies": DiScrum,
+  Shopify: SiShopify,
+  GitLab: SiGitlab,
+  SquareSpace: SiSquarespace,
 };
 
 export const getTechIcon = (
