@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import type { SocialLink } from "../../../types";
 import { BackgroundLines } from "../../ui/backgrounds/BackgroundLines";
+import heroThumbnail from "../../../assets/hero/hero-thumbnail.png";
 
 interface HeroProps {
   socialLinks: SocialLink[];
@@ -140,9 +141,10 @@ export const Hero = ({ socialLinks }: HeroProps) => {
                   </div>
 
                   <img
-                    src="https://i.pinimg.com/736x/b0/20/a4/b020a4bfad3576bac831fc283b5c9f83.jpg"
+                    src={heroThumbnail}
                     alt="Profile"
                     className="w-full h-full object-cover"
+                    style={{ filter: "grayscale(100%) contrast(1.1)" }}
                   />
                 </div>
               </div>
