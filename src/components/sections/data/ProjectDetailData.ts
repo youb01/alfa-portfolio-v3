@@ -33,43 +33,43 @@ export interface ProjectDetail {
 }
 
 export const projectDetails: Record<string, ProjectDetail> = {
-  "project-01": {
-    projectId: "project-01",
-    // client: "Personal",
-    // service: "Design & Frontend Engineering",
-    // heroImage:
-    //   "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1600&auto=format&fit=crop&q=80",
-    // introduction:
-    //   "Three iterations of the same idea — each built as my understanding of design and engineering deepened. The portfolio became a living document of growth: from static HTML to a fully animated, TypeScript-first system with a custom design language.",
-    // wideImage:
-    //   "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1920&auto=format&fit=crop&q=80",
-    // caseStudy: {
-    //   title: "Designing in public, building in real time",
-    //   body: [
-    //     "Version one was a lesson in restraint. Built with plain HTML and CSS, it forced me to understand the fundamentals before reaching for a framework. Every layout decision was deliberate — there were no shortcuts.",
-    //     "Version two introduced React and a design system I built from scratch. I spent weeks on type scales, spacing rhythms, and interaction patterns before writing a single component. The result felt more intentional, but the codebase was brittle.",
-    //     "Version three — this one — is the synthesis. TypeScript throughout, Framer Motion for orchestrated animation, and a component architecture that scales. Every section was designed to feel editorial: generous whitespace, typographic hierarchy, and motion that adds meaning rather than noise.",
-    //   ],
-    //   images: [
-    //     "https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=900&auto=format&fit=crop&q=80",
-    //     "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=80",
-    //     "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=80",
-    //     "https://images.unsplash.com/photo-1547658719-da2b51169166?w=900&auto=format&fit=crop&q=80",
-    //   ],
-    // },
-    // outcomes: [
-    //   "Three complete redesigns shipped across three years of continuous growth",
-    //   "Achieved a Lighthouse performance score of 98 / 100 on desktop",
-    //   "Component architecture adopted across subsequent client projects",
-    //   "Open-sourced on GitHub as a reference for other developers",
-    // ],
-    // stats: [
-    //   { label: "Versions", value: "03" },
-    //   { label: "Years active", value: "03" },
-    //   { label: "Components", value: "40+" },
-    //   { label: "Perf. score", value: "98" },
-    // ],
-  },
+  // "project-01": {
+  //   projectId: "project-01",
+  //   // client: "Personal",
+  //   // service: "Design & Frontend Engineering",
+  //   // heroImage:
+  //   //   "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1600&auto=format&fit=crop&q=80",
+  //   // introduction:
+  //   //   "Three iterations of the same idea — each built as my understanding of design and engineering deepened. The portfolio became a living document of growth: from static HTML to a fully animated, TypeScript-first system with a custom design language.",
+  //   // wideImage:
+  //   //   "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1920&auto=format&fit=crop&q=80",
+  //   // caseStudy: {
+  //   //   title: "Designing in public, building in real time",
+  //   //   body: [
+  //   //     "Version one was a lesson in restraint. Built with plain HTML and CSS, it forced me to understand the fundamentals before reaching for a framework. Every layout decision was deliberate — there were no shortcuts.",
+  //   //     "Version two introduced React and a design system I built from scratch. I spent weeks on type scales, spacing rhythms, and interaction patterns before writing a single component. The result felt more intentional, but the codebase was brittle.",
+  //   //     "Version three — this one — is the synthesis. TypeScript throughout, Framer Motion for orchestrated animation, and a component architecture that scales. Every section was designed to feel editorial: generous whitespace, typographic hierarchy, and motion that adds meaning rather than noise.",
+  //   //   ],
+  //   //   images: [
+  //   //     "https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=900&auto=format&fit=crop&q=80",
+  //   //     "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=80",
+  //   //     "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=80",
+  //   //     "https://images.unsplash.com/photo-1547658719-da2b51169166?w=900&auto=format&fit=crop&q=80",
+  //   //   ],
+  //   // },
+  //   // outcomes: [
+  //   //   "Three complete redesigns shipped across three years of continuous growth",
+  //   //   "Achieved a Lighthouse performance score of 98 / 100 on desktop",
+  //   //   "Component architecture adopted across subsequent client projects",
+  //   //   "Open-sourced on GitHub as a reference for other developers",
+  //   // ],
+  //   // stats: [
+  //   //   { label: "Versions", value: "03" },
+  //   //   { label: "Years active", value: "03" },
+  //   //   { label: "Components", value: "40+" },
+  //   //   { label: "Perf. score", value: "98" },
+  //   // ],
+  // },
 
   "project-02": {
     projectId: "project-02",
