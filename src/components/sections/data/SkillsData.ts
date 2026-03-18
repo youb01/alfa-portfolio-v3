@@ -37,7 +37,16 @@ export const skillRows: SkillRow[] = [
     number: "03",
     category: "Backend",
     tagline: "APIs, databases & server-side",
-    tools: ["Node.js", "Python", "C#", ".NET", "Java", "SQL"],
+    tools: [
+      "Node.js",
+      "Python",
+      "C#",
+      ".NET",
+      "Java",
+      "SQL",
+      "Spring Boot",
+      "PostgreSQL",
+    ],
   },
   {
     id: "row-04",
