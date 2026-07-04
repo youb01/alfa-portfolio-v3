@@ -1,5 +1,5 @@
 import React from "react";
-import type { ContactMethod } from "../../sections/data/ContactData";
+import type { ContactMethod } from "../../../data/contact";
 
 interface ContactCardProps {
   method: ContactMethod;
