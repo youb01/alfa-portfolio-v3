@@ -1,5 +1,9 @@
 import { motion } from "framer-motion";
 import { EASE_SMOOTH } from "../../../constants/animations";
+import { BIRTH_YEAR } from "../../../data/about";
+import { projectsData } from "../../../data/projects";
+
+const age = new Date().getFullYear() - BIRTH_YEAR;
 
 export const HeroBio = () => (
   <div className="hidden lg:block lg:col-span-3 space-y-10 lg:pr-8 xl:pr-10">
@@ -12,7 +16,7 @@ export const HeroBio = () => (
         Biography
       </h3>
       <p className="text-sm text-[rgb(var(--text-secondary))] leading-relaxed max-w-[240px] font-serif">
-        I'm a 21-year-old guy from the Netherlands, currently studying
+        I'm a {age}-year-old guy from the Netherlands, currently studying
         Software Engineering at the University of Applied Sciences in
         The Hague.
       </p>
@@ -34,12 +38,6 @@ export const HeroBio = () => (
         >
           lfatmi.ayoub@gmail.com
         </a>
-        <a
-          href="tel:+31644459521"
-          className="block hover:text-[rgb(var(--text-primary))] transition-colors"
-        >
-          +31 6 44 45 95 21
-        </a>
       </div>
     </motion.div>
 
@@ -52,11 +50,11 @@ export const HeroBio = () => (
         Projects
       </h3>
       <div className="space-y-1 text-sm text-[rgb(var(--text-secondary))] font-serif">
-        <p>Portfolio v1/3 | 2022-2025</p>
-        <p>Oak | 2022</p>
-        <p>Stichting Accessibility | 2024</p>
-        <p>GetMore Systems (Internship) | 2024</p>
-        <p>Minecraft Portfolio Project | 2025</p>
+        {projectsData.map((p) => (
+          <p key={p.id}>
+            {p.title} | {p.year}
+          </p>
+        ))}
       </div>
     </motion.div>
   </div>

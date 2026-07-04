@@ -4,7 +4,7 @@ import { HomePage } from "./pages/HomePage";
 import { ProjectDetailPage } from "./pages/ProjectDetailPage";
 import { ComingSoonPage } from "./pages/ComingSoonPage";
 
-const COMING_SOON = import.meta.env.VITE_COMING_SOON !== "false";
+const COMING_SOON = import.meta.env.VITE_COMING_SOON === "true";
 
 function App() {
   if (COMING_SOON) {

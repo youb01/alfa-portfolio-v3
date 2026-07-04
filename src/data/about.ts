@@ -1,3 +1,6 @@
+/** Year of birth — used to compute age dynamically across the UI. */
+export const BIRTH_YEAR = 2003;
+
 export const BIO_PARAGRAPHS = [
   "I'm an eager Software Engineering student with a genuine passion for building effective solutions. What drives me isn't just writing code — it's understanding a problem deeply and crafting something that actually works and fits the needs. During my internship at GetMore Systems I developed features independently inside a professional Agile Scrum team, shipping real work in a live TypeScript and .NET codebase.",
   "Outside of university I spend a lot of time in the gym, doing powerlifting and weightlifting. That same discipline and focus carries directly into how I work. I love tinkering with small projects too, whether it's a home IT setup, a practical fix around the house, or a side idea I want to build out. And when I'm not doing any of that, I'm catching up with friends.",

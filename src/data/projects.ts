@@ -132,7 +132,7 @@ export const projectsData: Project[] = [
     category: "Fullstack",
     year: "2025",
     featured: false,
-    thumbnailVariant: 1,
+    thumbnailVariant: 5,
   },
   {
     id: "project-06",
@@ -159,7 +159,7 @@ export const projectsData: Project[] = [
     category: "Backend",
     year: "2025",
     featured: false,
-    thumbnailVariant: 2,
+    thumbnailVariant: 6,
   },
   {
     id: "project-07",

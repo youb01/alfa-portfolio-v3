@@ -543,11 +543,311 @@ const DesignThumbnail: React.FC<ThumbnailProps> = ({ isDark }) => (
   </div>
 );
 
-const thumbnailComponents = [
-  PortfolioEvolutionThumbnail,
-  DashboardThumbnail,
-  AccessibilityThumbnail,
-  DesignThumbnail,
+// Variant 4: Minecraft Portfolio — blocky voxel grid
+const MinecraftThumbnail: React.FC<ThumbnailProps> = ({ isDark }) => (
+  <div className="absolute inset-0 overflow-hidden">
+    <div
+      className="absolute inset-0"
+      style={{
+        background: isDark
+          ? "linear-gradient(145deg, #0a1008 0%, #0f1a0c 100%)"
+          : "linear-gradient(145deg, #f0f7ee 0%, #e8f5e4 100%)",
+      }}
+    />
+    <svg
+      className="absolute inset-0 w-full h-full"
+      viewBox="0 0 420 280"
+      preserveAspectRatio="xMidYMid slice"
+    >
+      {/* Pixel/block grid */}
+      {[...Array(10)].map((_, row) =>
+        [...Array(15)].map((_, col) => (
+          <rect
+            key={`${row}-${col}`}
+            x={col * 28}
+            y={row * 28}
+            width="27"
+            height="27"
+            fill="none"
+            stroke={isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)"}
+            strokeWidth="0.5"
+          />
+        )),
+      )}
+
+      {/* Voxel blocks — isometric-style stacked cubes */}
+      {[
+        { x: 120, y: 160, s: 40 },
+        { x: 160, y: 140, s: 40 },
+        { x: 200, y: 120, s: 40 },
+        { x: 160, y: 180, s: 40 },
+        { x: 200, y: 160, s: 40 },
+        { x: 240, y: 140, s: 40 },
+        { x: 200, y: 200, s: 40 },
+        { x: 240, y: 180, s: 40 },
+        { x: 280, y: 160, s: 40 },
+      ].map(({ x, y, s }, i) => {
+        const top = isDark ? `rgba(255,255,255,${0.08 + i * 0.01})` : `rgba(0,0,0,${0.07 + i * 0.008})`;
+        const left = isDark ? `rgba(255,255,255,${0.04 + i * 0.005})` : `rgba(0,0,0,${0.04 + i * 0.004})`;
+        const right = isDark ? `rgba(255,255,255,${0.06 + i * 0.008})` : `rgba(0,0,0,${0.055 + i * 0.006})`;
+        const hs = s / 2;
+        return (
+          <g key={i}>
+            {/* Top face */}
+            <polygon
+              points={`${x},${y - hs} ${x + s},${y} ${x},${y + hs} ${x - s},${y}`}
+              fill={top}
+              stroke={isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}
+              strokeWidth="0.5"
+            />
+            {/* Left face */}
+            <polygon
+              points={`${x - s},${y} ${x},${y + hs} ${x},${y + hs + s * 0.6} ${x - s},${y + s * 0.6}`}
+              fill={left}
+              stroke={isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)"}
+              strokeWidth="0.5"
+            />
+            {/* Right face */}
+            <polygon
+              points={`${x},${y + hs} ${x + s},${y} ${x + s},${y + s * 0.6} ${x},${y + hs + s * 0.6}`}
+              fill={right}
+              stroke={isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)"}
+              strokeWidth="0.5"
+            />
+          </g>
+        );
+      })}
+
+      {/* Label */}
+      <g transform="translate(20, 230)">
+        <rect x="0" y="0" width="110" height="22" rx="3"
+          fill={isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)"}
+          stroke={isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}
+          strokeWidth="0.8"
+        />
+        <text x="55" y="15" fontSize="8" fontWeight="700" fontFamily="monospace"
+          fill={isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.3)"}
+          textAnchor="middle"
+        >
+          React Three Fiber
+        </text>
+      </g>
+    </svg>
+  </div>
+);
+
+// Variant 5: Social Supermarket — event-driven message flow
+const EventDrivenThumbnail: React.FC<ThumbnailProps> = ({ isDark }) => (
+  <div className="absolute inset-0 overflow-hidden">
+    <div
+      className="absolute inset-0"
+      style={{
+        background: isDark
+          ? "linear-gradient(145deg, #0d0f1a 0%, #111827 100%)"
+          : "linear-gradient(145deg, #f5f5ff 0%, #f0f2ff 100%)",
+      }}
+    />
+    <svg
+      className="absolute inset-0 w-full h-full"
+      viewBox="0 0 420 280"
+      preserveAspectRatio="xMidYMid slice"
+    >
+      {/* Background node grid */}
+      {[...Array(6)].map((_, row) =>
+        [...Array(9)].map((_, col) => (
+          <circle
+            key={`${row}-${col}`}
+            cx={25 + col * 46}
+            cy={25 + row * 46}
+            r="1.5"
+            fill={isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"}
+          />
+        )),
+      )}
+
+      {/* Service nodes */}
+      {[
+        { x: 80,  y: 140, label: "Producer" },
+        { x: 210, y: 80,  label: "Kafka" },
+        { x: 210, y: 200, label: "Axon" },
+        { x: 340, y: 140, label: "Consumer" },
+      ].map(({ x, y, label }, i) => (
+        <g key={i}>
+          <circle cx={x} cy={y} r="28"
+            fill={isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)"}
+            stroke={isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.1)"}
+            strokeWidth="1"
+          />
+          <text x={x} y={y + 4} fontSize="8" fontWeight="700" fontFamily="monospace"
+            fill={isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.35)"}
+            textAnchor="middle"
+          >
+            {label}
+          </text>
+        </g>
+      ))}
+
+      {/* Flow arrows */}
+      {[
+        { x1: 108, y1: 132, x2: 182, y2: 96 },
+        { x1: 108, y1: 148, x2: 182, y2: 184 },
+        { x1: 238, y1: 96,  x2: 312, y2: 132 },
+        { x1: 238, y1: 184, x2: 312, y2: 148 },
+      ].map((line, i) => (
+        <line key={i}
+          x1={line.x1} y1={line.y1} x2={line.x2} y2={line.y2}
+          stroke={isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.12)"}
+          strokeWidth="1.5"
+          strokeDasharray="6 4"
+          strokeLinecap="round"
+          markerEnd="url(#arrow)"
+        />
+      ))}
+
+      {/* Event packets on lines */}
+      {[
+        { x: 148, y: 112 },
+        { x: 148, y: 168 },
+        { x: 274, y: 112 },
+        { x: 274, y: 168 },
+      ].map(({ x, y }, i) => (
+        <rect key={i} x={x - 12} y={y - 7} width="24" height="14" rx="3"
+          fill={isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)"}
+          stroke={isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.12)"}
+          strokeWidth="0.8"
+        />
+      ))}
+
+      {/* CQRS label */}
+      <g transform="translate(310, 30)">
+        <rect x="0" y="0" width="88" height="22" rx="3"
+          fill={isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)"}
+          stroke={isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}
+          strokeWidth="0.8"
+        />
+        <text x="44" y="15" fontSize="8" fontWeight="700" fontFamily="monospace"
+          fill={isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.3)"}
+          textAnchor="middle"
+        >
+          CQRS / Kafka
+        </text>
+      </g>
+    </svg>
+  </div>
+);
+
+// Variant 6: Gatekeeper — security auth grid with lock motif
+const SecurityThumbnail: React.FC<ThumbnailProps> = ({ isDark }) => (
+  <div className="absolute inset-0 overflow-hidden">
+    <div
+      className="absolute inset-0"
+      style={{
+        background: isDark
+          ? "linear-gradient(145deg, #0f0d14 0%, #120f1e 100%)"
+          : "linear-gradient(145deg, #faf8ff 0%, #f4f0ff 100%)",
+      }}
+    />
+    <svg
+      className="absolute inset-0 w-full h-full"
+      viewBox="0 0 420 280"
+      preserveAspectRatio="xMidYMid slice"
+    >
+      {/* Hexagonal grid background */}
+      {[...Array(5)].map((_, row) =>
+        [...Array(7)].map((_, col) => {
+          const hx = 30 + col * 60 + (row % 2 === 0 ? 0 : 30);
+          const hy = 30 + row * 52;
+          const pts = Array.from({ length: 6 }, (_, k) => {
+            const a = (Math.PI / 180) * (60 * k - 30);
+            return `${hx + 22 * Math.cos(a)},${hy + 22 * Math.sin(a)}`;
+          }).join(" ");
+          return (
+            <polygon key={`${row}-${col}`} points={pts}
+              fill="none"
+              stroke={isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)"}
+              strokeWidth="0.6"
+            />
+          );
+        }),
+      )}
+
+      {/* Central shield */}
+      <path
+        d="M210,60 L270,90 L270,155 Q210,195 210,195 Q150,195 150,155 L150,90 Z"
+        fill={isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.03)"}
+        stroke={isDark ? "rgba(255,255,255,0.14)" : "rgba(0,0,0,0.12)"}
+        strokeWidth="1.5"
+      />
+
+      {/* Lock body */}
+      <rect x="193" y="128" width="34" height="28" rx="4"
+        fill={isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.07)"}
+        stroke={isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)"}
+        strokeWidth="1.2"
+      />
+      {/* Lock shackle */}
+      <path d="M200,128 L200,118 Q210,108 220,118 L220,128"
+        fill="none"
+        stroke={isDark ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.2)"}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+      {/* Keyhole */}
+      <circle cx="210" cy="140" r="4"
+        fill={isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)"}
+      />
+      <rect x="208" y="140" width="4" height="8" rx="1"
+        fill={isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)"}
+      />
+
+      {/* JWT / token badges */}
+      {[
+        { x: 20,  y: 40,  label: "JWT" },
+        { x: 320, y: 40,  label: "OAuth" },
+        { x: 20,  y: 210, label: "RBAC" },
+        { x: 320, y: 210, label: "Axon" },
+      ].map(({ x, y, label }, i) => (
+        <g key={i} transform={`translate(${x}, ${y})`}>
+          <rect x="0" y="0" width="60" height="22" rx="4"
+            fill={isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)"}
+            stroke={isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}
+            strokeWidth="0.8"
+          />
+          <text x="30" y="15" fontSize="8" fontWeight="700" fontFamily="monospace"
+            fill={isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.3)"}
+            textAnchor="middle"
+          >
+            {label}
+          </text>
+        </g>
+      ))}
+
+      {/* Connection lines from badges to shield */}
+      {[
+        { x1: 80, y1: 51, x2: 155, y2: 110 },
+        { x1: 320, y1: 51, x2: 265, y2: 110 },
+        { x1: 80, y1: 221, x2: 155, y2: 175 },
+        { x1: 320, y1: 221, x2: 265, y2: 175 },
+      ].map((l, i) => (
+        <line key={i}
+          x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2}
+          stroke={isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)"}
+          strokeWidth="1"
+          strokeDasharray="5 4"
+        />
+      ))}
+    </svg>
+  </div>
+);
+
+const thumbnailComponents: React.FC<ThumbnailProps>[] = [
+  PortfolioEvolutionThumbnail, // 0
+  DashboardThumbnail,          // 1
+  AccessibilityThumbnail,      // 2
+  DesignThumbnail,             // 3
+  MinecraftThumbnail,          // 4
+  EventDrivenThumbnail,        // 5
+  SecurityThumbnail,           // 6
 ];
 
 interface ProjectThumbnailProps {
@@ -562,7 +862,7 @@ export const ProjectThumbnail: React.FC<ProjectThumbnailProps> = ({
   className = "",
 }) => {
   const ThumbnailContent =
-    thumbnailComponents[variant % thumbnailComponents.length];
+    thumbnailComponents[variant] ?? thumbnailComponents[0];
   return (
     <div className={`relative overflow-hidden ${className}`}>
       <ThumbnailContent isDark={isDark} />
