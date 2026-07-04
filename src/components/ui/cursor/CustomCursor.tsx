@@ -1,92 +1,95 @@
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useTheme } from "../../../hooks/useTheme";
+
+/* Concrete RGB values — never use CSS variable syntax in Framer Motion animate props */
+const COLORS = {
+  light: "rgb(17, 17, 17)",
+  dark:  "rgb(245, 245, 247)",
+};
 
 export const CustomCursor = () => {
+  const { theme } = useTheme();
+  const color = theme === "dark" ? COLORS.dark : COLORS.light;
+
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
   const [isHovering, setIsHovering] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible]   = useState(false);
 
   const springConfig = { damping: 30, stiffness: 500, mass: 0.5 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
-    const moveCursor = (e: MouseEvent) => {
+    const onMove = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
       if (!isVisible) setIsVisible(true);
     };
 
-    const handleMouseEnter = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (
-        target.tagName === "A" ||
-        target.tagName === "BUTTON" ||
-        target.closest("a") ||
-        target.closest("button") ||
-        target.classList.contains("cursor-hover") ||
-        target.closest(".cursor-hover")
-      ) {
+    const onOver = (e: MouseEvent) => {
+      const t = e.target as HTMLElement;
+      if (t.tagName === "A" || t.tagName === "BUTTON" || t.closest("a") || t.closest("button") || t.classList.contains("cursor-hover") || t.closest(".cursor-hover")) {
         setIsHovering(true);
       }
     };
 
-    const handleMouseLeave = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (
-        target.tagName === "A" ||
-        target.tagName === "BUTTON" ||
-        target.closest("a") ||
-        target.closest("button") ||
-        target.classList.contains("cursor-hover") ||
-        target.closest(".cursor-hover")
-      ) {
+    const onOut = (e: MouseEvent) => {
+      const t = e.target as HTMLElement;
+      if (t.tagName === "A" || t.tagName === "BUTTON" || t.closest("a") || t.closest("button") || t.classList.contains("cursor-hover") || t.closest(".cursor-hover")) {
         setIsHovering(false);
       }
     };
 
-    const handleMouseOut = () => {
-      setIsVisible(false);
-    };
+    const onLeave = () => setIsVisible(false);
 
-    window.addEventListener("mousemove", moveCursor);
-    window.addEventListener("mouseout", handleMouseOut);
-    document.addEventListener("mouseover", handleMouseEnter);
-    document.addEventListener("mouseout", handleMouseLeave);
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseout", onLeave);
+    document.addEventListener("mouseover", onOver);
+    document.addEventListener("mouseout", onOut);
 
     return () => {
-      window.removeEventListener("mousemove", moveCursor);
-      window.removeEventListener("mouseout", handleMouseOut);
-      document.removeEventListener("mouseover", handleMouseEnter);
-      document.removeEventListener("mouseout", handleMouseLeave);
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseout", onLeave);
+      document.removeEventListener("mouseover", onOver);
+      document.removeEventListener("mouseout", onOut);
     };
   }, [cursorX, cursorY, isVisible]);
 
   return (
     <motion.div
-      className="fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block"
+      className="hidden md:block pointer-events-none"
       style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
         x: cursorXSpring,
         y: cursorYSpring,
         translateX: "-50%",
         translateY: "-50%",
+        zIndex: 9999,
       }}
     >
-      {/* Main cursor dot */}
       <motion.div
         animate={{
-          width: isHovering ? 32 : 16,
-          height: isHovering ? 32 : 16,
-          opacity: isVisible ? (isHovering ? 0.25 : 0.8) : 0,
+          scale:   isHovering ? 2.2 : 1,
+          opacity: isVisible  ? (isHovering ? 0.22 : 0.75) : 0,
         }}
         transition={{
-          type: "spring",
+          type:      "spring",
           stiffness: 500,
-          damping: 28,
-          mass: 0.5,
+          damping:   28,
+          mass:      0.5,
         }}
-        className="rounded-full bg-[rgb(var(--text-primary))] mix-blend-difference"
+        style={{
+          width:           16,
+          height:          16,
+          borderRadius:    "50%",
+          backgroundColor: color,
+          mixBlendMode:    "difference",
+          willChange:      "transform, opacity",
+        }}
       />
     </motion.div>
   );
