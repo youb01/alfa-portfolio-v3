@@ -4,7 +4,7 @@ import {
   contactMethods,
   socialLinks,
   contactContent,
-} from "../data/ContactData";
+} from "../../../data/contact";
 import { ContactCard } from "../../ui/contact/ContactCard";
 import { SocialLinks } from "../../ui/SocialLink";
 import { ContactForm } from "../../ui/contact/ContactForm";

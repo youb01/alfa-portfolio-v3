@@ -82,7 +82,7 @@
     transition: none !important;
   }
 
-  /* Hide default cursor on desktop */
+  /* Hide default cursor on desktop — keep native cursor for text/form inputs */
   @media (min-width: 768px) {
     * {
       cursor: none !important;
@@ -90,12 +90,18 @@
 
     a,
     button,
-    input,
-    textarea,
-    select,
     [role="button"],
     .cursor-hover {
       cursor: none !important;
+    }
+
+    input,
+    textarea {
+      cursor: text !important;
+    }
+
+    select {
+      cursor: default !important;
     }
   }
 
@@ -185,5 +191,17 @@
 @media (prefers-reduced-motion: no-preference) {
   .horizontal-scroll-section {
     scroll-behavior: smooth;
+  }
+}
+
+/* Respect user's reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

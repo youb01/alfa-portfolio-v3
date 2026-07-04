@@ -1,257 +1,248 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 interface PreloaderProps {
   isLoading: boolean;
   onComplete: () => void;
 }
 
+const PANELS  = 12;
+const LETTERS = ["A", "L", "F", "A"] as const;
+const EASE_IN:  [number, number, number, number] = [0.22, 1, 0.36, 1];
+const EASE_OUT: [number, number, number, number] = [0.76, 0, 0.24, 1];
+const DURATION = 2200;
+const YEAR = new Date().getFullYear();
+
+const wrapperVariants = {
+  show: {},
+  hide: {
+    transition: {
+      when: "afterChildren",
+      staggerChildren: 0.06,
+      delayChildren: 0,
+    },
+  },
+};
+
+const panelVariants = {
+  show: { y: "0%" },
+  hide: { y: "-102%", transition: { duration: 1.0, ease: EASE_OUT } },
+};
+
+const CORNERS = [
+  { cls: "top-7 left-7",     rotate: "0deg"   },
+  { cls: "top-7 right-7",    rotate: "90deg"  },
+  { cls: "bottom-7 right-7", rotate: "180deg" },
+  { cls: "bottom-7 left-7",  rotate: "270deg" },
+] as const;
+
+const CornerMark = ({ cls, rotate }: { cls: string; rotate: string }) => (
+  <motion.div
+    className={`absolute ${cls} w-6 h-6`}
+    style={{ transform: `rotate(${rotate})` }}
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 0.4 }}
+    transition={{ delay: 0.35, duration: 0.5 }}
+  >
+    <div className="absolute top-0 left-0 w-full h-px" style={{ background: "rgb(var(--text-tertiary))" }} />
+    <div className="absolute top-0 left-0 h-full w-px" style={{ background: "rgb(var(--text-tertiary))" }} />
+  </motion.div>
+);
+
 export const Preloader = ({ isLoading, onComplete }: PreloaderProps) => {
-  const [progress, setProgress] = useState(0);
+  /*
+   * Progress bar fill and counter text are driven via direct DOM refs.
+   * Zero React re-renders per animation frame — all composited on the GPU.
+   */
+  const fillRef    = useRef<HTMLDivElement>(null);
+  const counterRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     if (!isLoading) return;
 
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setTimeout(() => {
-            onComplete();
-          }, 600);
-          return 100;
-        }
-        const increment = prev < 50 ? 3 : prev < 80 ? 2 : prev < 95 ? 1 : 0.5;
-        return Math.min(prev + increment, 100);
-      });
-    }, 35);
+    let raf: number;
+    let startTime: number | null = null;
 
-    return () => clearInterval(interval);
+    const tick = (ts: number) => {
+      if (!startTime) startTime = ts;
+      const p = Math.min((ts - startTime) / DURATION, 1);
+
+      if (fillRef.current)    fillRef.current.style.transform = `scaleX(${p})`;
+      if (counterRef.current) counterRef.current.textContent  = `${Math.round(p * 100).toString().padStart(3, "0")}%`;
+
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+
+    raf = requestAnimationFrame(tick);
+    const t = setTimeout(onComplete, DURATION + 100);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(t);
+    };
   }, [isLoading, onComplete]);
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence>
       {isLoading && (
         <motion.div
-          initial={{ opacity: 1 }}
-          exit={{
-            y: "-100%",
-            transition: {
-              duration: 1.2,
-              ease: [0.76, 0, 0.24, 1],
-            },
-          }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-[rgb(var(--bg-primary))] overflow-hidden"
+          className="fixed inset-0 z-[9999] overflow-hidden"
+          variants={wrapperVariants}
+          initial="show"
+          animate="show"
+          exit="hide"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{
-              opacity: 0.02,
-              scale: 1.2,
-              transition: {
-                duration: 1.5,
-                ease: "easeOut",
-              },
-            }}
-            className="absolute inset-0 bg-gradient-radial from-[rgb(var(--text-primary)/0.08)] via-transparent to-transparent"
-          />
-
-          <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-6">
+          {/* Staggered vertical panels — slide up on exit */}
+          {Array.from({ length: PANELS }).map((_, i) => (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                transition: {
-                  duration: 0.8,
-                  ease: [0.22, 1, 0.36, 1],
-                },
+              key={i}
+              className="absolute top-0 bottom-0 bg-[rgb(var(--bg-secondary))]"
+              style={{
+                left:       `${(i / PANELS) * 100}%`,
+                width:      `${100 / PANELS + 0.25}%`,
+                willChange: "transform",
               }}
-              exit={{
-                opacity: 0,
-                scale: 0.8,
-                y: -50,
-                transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] },
-              }}
-              className="mb-20 md:mb-24"
-            >
-              <h1 className="text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] font-black text-[rgb(var(--text-primary))] tracking-tighter leading-none">
-                ALFA
-              </h1>
-            </motion.div>
+              variants={panelVariants}
+            />
+          ))}
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                transition: { delay: 0.3, duration: 0.6 },
-              }}
-              exit={{
-                opacity: 0,
-                y: 20,
-                transition: { duration: 0.6 },
-              }}
-              className="flex flex-col items-center gap-6 w-full max-w-md"
-            >
-              <div className="flex items-baseline justify-between w-full px-1">
-                <motion.span
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{
-                    opacity: 1,
-                    x: 0,
-                    transition: { delay: 0.5, duration: 0.5 },
-                  }}
-                  className="text-xs md:text-sm font-medium text-[rgb(var(--text-tertiary))] uppercase tracking-[0.2em]"
-                >
-                  Loading
-                </motion.span>
-
-                <motion.span
-                  key={Math.floor(progress)}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.2 }}
-                  className="text-2xl md:text-3xl font-bold font-mono text-[rgb(var(--text-primary))] tabular-nums"
-                >
-                  {Math.floor(progress)}
-                  <span className="text-lg md:text-xl text-[rgb(var(--text-secondary))]">
-                    %
-                  </span>
-                </motion.span>
-              </div>
-
-              <div className="relative w-full h-1.5 md:h-2 bg-[rgb(var(--bg-tertiary))] rounded-full overflow-hidden shadow-inner">
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-[rgb(var(--text-primary)/0.1)] to-transparent"
-                  animate={{
-                    x: ["-100%", "200%"],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                />
-
-                <motion.div
-                  initial={{ width: "0%" }}
-                  animate={{ width: `${progress}%` }}
-                  transition={{
-                    duration: 0.3,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="absolute inset-y-0 left-0 bg-gradient-to-r from-[rgb(var(--text-primary))] to-[rgb(var(--text-primary)/0.9)] rounded-full shadow-lg"
-                  style={{
-                    boxShadow: `0 0 20px rgb(var(--text-primary) / 0.3)`,
-                  }}
-                />
-
-                <motion.div
-                  initial={{ left: "0%" }}
-                  animate={{ left: `${progress}%` }}
-                  transition={{
-                    duration: 0.3,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-4 h-4 md:w-5 md:h-5 bg-[rgb(var(--text-primary))] rounded-full shadow-xl"
-                  style={{
-                    boxShadow: `0 0 16px rgb(var(--text-primary) / 0.6), 0 0 4px rgb(var(--text-primary))`,
-                  }}
-                >
-                  <motion.div
-                    animate={{
-                      scale: [1, 1.3, 1],
-                      opacity: [0.5, 0, 0.5],
-                    }}
-                    transition={{
-                      duration: 1.5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                    className="absolute inset-0 bg-[rgb(var(--text-primary))] rounded-full"
-                  />
-                </motion.div>
-              </div>
-
-              <motion.p
-                animate={{
-                  opacity: progress < 100 ? [0.5, 1, 0.5] : 1,
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: progress < 100 ? Infinity : 0,
-                  ease: "easeInOut",
-                }}
-                className="text-xs md:text-sm font-medium text-[rgb(var(--text-secondary))] uppercase tracking-[0.15em] mt-2"
-              >
-                {progress < 30 && "Initializing"}
-                {progress >= 30 && progress < 90 && "Loading Assets"}
-                {progress >= 90 && progress < 100 && "Almost Ready"}
-                {progress === 100 && "Complete"}
-              </motion.p>
-            </motion.div>
-          </div>
-
+          {/* Content layer — fades out before panels start */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-              transition: { delay: 0.6, duration: 0.5 },
-            }}
-            exit={{
-              opacity: 0,
-              scale: 0.8,
-              transition: { duration: 0.4 },
-            }}
-            className="absolute top-6 left-6 md:top-8 md:left-8 w-12 h-12 md:w-16 md:h-16"
+            className="absolute inset-0 z-10 pointer-events-none"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0, transition: { duration: 0.15, ease: "easeIn" } }}
           >
-            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-[rgb(var(--border-secondary))] to-transparent" />
-            <div className="absolute top-0 left-0 w-[2px] h-full bg-gradient-to-b from-[rgb(var(--border-secondary))] to-transparent" />
-          </motion.div>
+            {/* Dot-grid texture */}
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: "radial-gradient(circle, rgb(var(--text-tertiary)) 1px, transparent 1px)",
+                backgroundSize:  "44px 44px",
+                opacity:         0.07,
+              }}
+            />
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-              transition: { delay: 0.7, duration: 0.5 },
-            }}
-            exit={{
-              opacity: 0,
-              scale: 0.8,
-              transition: { duration: 0.4 },
-            }}
-            className="absolute bottom-6 right-6 md:bottom-8 md:right-8 w-12 h-12 md:w-16 md:h-16"
-          >
-            <div className="absolute bottom-0 right-0 w-full h-[2px] bg-gradient-to-l from-[rgb(var(--border-secondary))] to-transparent" />
-            <div className="absolute bottom-0 right-0 w-[2px] h-full bg-gradient-to-t from-[rgb(var(--border-secondary))] to-transparent" />
-          </motion.div>
-
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {[...Array(8)].map((_, i) => (
-              <motion.div
-                key={i}
-                initial={{
-                  x: `${Math.random() * 100}%`,
-                  y: `${Math.random() * 100}%`,
-                  opacity: 0,
-                }}
-                animate={{
-                  y: [`${Math.random() * 100}%`, `${Math.random() * 100}%`],
-                  opacity: [0, 0.4, 0],
-                }}
-                transition={{
-                  duration: 4 + Math.random() * 4,
-                  repeat: Infinity,
-                  delay: i * 0.4,
-                  ease: "easeInOut",
-                }}
-                className="absolute w-1 h-1 bg-[rgb(var(--text-tertiary))] rounded-full"
-              />
+            {/* Corner marks */}
+            {CORNERS.map(({ cls, rotate }, i) => (
+              <CornerMark key={i} cls={cls} rotate={rotate} />
             ))}
-          </div>
+
+            {/* Top rule */}
+            <motion.div
+              className="absolute top-[72px] left-12 right-12 h-px"
+              style={{ background: "rgb(var(--border-primary))", transformOrigin: "left" }}
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ delay: 0.4, duration: 0.6, ease: EASE_IN }}
+            />
+
+            {/* Bottom rule */}
+            <motion.div
+              className="absolute bottom-[72px] left-12 right-12 h-px"
+              style={{ background: "rgb(var(--border-primary))", transformOrigin: "left" }}
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ delay: 0.4, duration: 0.6, ease: EASE_IN }}
+            />
+
+            {/* Top label row */}
+            <motion.div
+              className="absolute top-8 left-12 right-12 flex items-center justify-between"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.4 }}
+            >
+              <span className="text-[9px] font-bold uppercase tracking-[0.28em]" style={{ color: "rgb(var(--text-tertiary))" }}>
+                Ayoub Lfatmi
+              </span>
+              <span className="text-[9px] font-bold uppercase tracking-[0.28em]" style={{ color: "rgb(var(--text-tertiary))" }}>
+                {YEAR}
+              </span>
+            </motion.div>
+
+            {/* Center wordmark */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <div className="flex flex-col items-start">
+
+                {/* Letters clip up */}
+                <div className="flex items-baseline">
+                  {LETTERS.map((letter, i) => (
+                    <div key={i} className="overflow-hidden">
+                      <motion.span
+                        initial={{ y: "110%" }}
+                        animate={{ y: 0 }}
+                        transition={{ delay: 0.08 + i * 0.09, duration: 0.78, ease: EASE_IN }}
+                        className="block font-black tracking-tighter leading-none select-none"
+                        style={{
+                          fontSize:   "clamp(4.5rem, 14vw, 10rem)",
+                          color:      "rgb(var(--text-primary))",
+                          willChange: "transform",
+                        }}
+                      >
+                        {letter}
+                      </motion.span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Underline */}
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ delay: 0.58, duration: 0.5, ease: EASE_IN }}
+                  style={{ transformOrigin: "left", height: "1px", width: "100%", background: "rgb(var(--text-primary))" }}
+                />
+
+                {/* Descriptor row */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.85, duration: 0.4 }}
+                  className="mt-3 flex w-full items-center justify-between"
+                >
+                  <span className="text-[9px] font-bold uppercase tracking-[0.28em]" style={{ color: "rgb(var(--text-tertiary))" }}>
+                    Portfolio
+                  </span>
+                  <span className="text-[9px] font-bold uppercase tracking-[0.28em]" style={{ color: "rgb(var(--text-tertiary))" }}>
+                    Software Engineer
+                  </span>
+                </motion.div>
+
+              </div>
+            </div>
+
+            {/* Progress bar + counter */}
+            <motion.div
+              className="absolute bottom-8 left-12 right-12"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.55, duration: 0.4 }}
+            >
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[9px] font-bold uppercase tracking-[0.22em]" style={{ color: "rgb(var(--text-tertiary))" }}>
+                  Loading
+                </span>
+                <span ref={counterRef} className="text-[9px] font-bold tabular-nums" style={{ color: "rgb(var(--text-tertiary))" }}>
+                  000%
+                </span>
+              </div>
+
+              {/* Track */}
+              <div className="relative h-px w-full overflow-hidden" style={{ background: "rgb(var(--border-primary))" }}>
+                {/* Fill — scaleX via DOM ref, GPU composited, no re-renders */}
+                <div
+                  ref={fillRef}
+                  className="absolute inset-0"
+                  style={{
+                    background:      "rgb(var(--text-primary))",
+                    transform:       "scaleX(0)",
+                    transformOrigin: "left",
+                    willChange:      "transform",
+                  }}
+                />
+              </div>
+            </motion.div>
+
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>

@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import React from "react";
-import { projectsData } from "../../sections/data/ProjectsData";
-import { projectDetails } from "../../sections/data/ProjectDetailData";
+import { projectsData } from "../../../data/projects";
+import { projectDetails } from "../../../data/projectDetails";
 import { ProjectCard } from "./ProjectCard";
 
 interface OtherProjectsProps {

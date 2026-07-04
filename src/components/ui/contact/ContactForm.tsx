@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Send } from "lucide-react";
 import emailjs from "@emailjs/browser";
 
@@ -10,9 +10,9 @@ interface FormData {
   message: string;
 }
 
-const EMAILJS_SERVICE_ID = "service_your_service_id";
-const EMAILJS_TEMPLATE_ID = "template_your_template_id";
-const EMAILJS_PUBLIC_KEY = "your_public_key";
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID as string;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string;
 
 export const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
@@ -24,6 +24,21 @@ export const ContactForm: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const resetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    if (EMAILJS_PUBLIC_KEY) {
+      emailjs.init(EMAILJS_PUBLIC_KEY);
+    }
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (resetTimerRef.current) {
+        clearTimeout(resetTimerRef.current);
+      }
+    };
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -39,7 +54,6 @@ export const ContactForm: React.FC = () => {
     setError(null);
 
     try {
-      emailjs.init(EMAILJS_PUBLIC_KEY);
       await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
         from_name: formData.name,
         from_email: formData.email,
@@ -49,7 +63,7 @@ export const ContactForm: React.FC = () => {
       });
       setIsSubmitted(true);
       setFormData({ name: "", email: "", subject: "", message: "" });
-      setTimeout(() => setIsSubmitted(false), 5000);
+      resetTimerRef.current = setTimeout(() => setIsSubmitted(false), 5000);
     } catch (err) {
       console.error(err);
       setError("Something went wrong. Please try again later.");

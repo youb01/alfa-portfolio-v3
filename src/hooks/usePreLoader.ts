@@ -19,10 +19,10 @@ export const usePreloader = () => {
 
   const handleComplete = () => {
     setIsLoading(false);
-    // Small delay before marking as complete to ensure smooth transition
+    // Tiny delay so Navbar doesn't flash before panels finish sliding
     setTimeout(() => {
       setIsComplete(true);
-    }, 1000);
+    }, 900);
   };
 
   return {

@@ -15,30 +15,32 @@ export const ToolBadge: React.FC<ToolBadgeProps> = ({ tool, index }) => {
 
   return (
     <motion.span
-      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[12px] font-semibold tracking-wide cursor-default"
+      className="inline-flex items-center gap-2 px-3.5 py-2 text-[12px] font-semibold tracking-wide cursor-default select-none"
       style={{
-        color: isDark ? "rgba(255,255,255,0.58)" : "rgba(0,0,0,0.55)",
-        background: isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)",
-        border: `1px solid ${
-          isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.07)"
-        }`,
+        border: "1px solid rgb(var(--border-primary))",
+        borderRadius: "6px",
+        color: "rgb(var(--text-secondary))",
+        background: isDark ? "rgba(255,255,255,0.02)" : "rgba(0,0,0,0.01)",
+        willChange: "transform",
       }}
-      initial={{ opacity: 0, y: 8 }}
+      initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true, margin: "-40px" }}
       transition={{
         duration: 0.4,
-        delay: 0.12 + index * 0.05,
+        delay: 0.08 + index * 0.035,
         ease: [0.22, 1, 0.36, 1],
       }}
       whileHover={{
-        background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)",
-        color: isDark ? "rgba(255,255,255,0.85)" : "rgba(0,0,0,0.78)",
+        y: -3,
+        borderColor: "rgb(var(--text-primary))",
+        color: "rgb(var(--text-primary))",
+        background: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.03)",
         transition: { duration: 0.15 },
       }}
     >
       {IconComp && (
-        <IconComp size={20} style={{ flexShrink: 0, opacity: 0.7 }} />
+        <IconComp size={13} style={{ flexShrink: 0, opacity: 0.75 }} />
       )}
       {tool}
     </motion.span>

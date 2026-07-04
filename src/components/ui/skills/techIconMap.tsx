@@ -30,19 +30,28 @@ import {
   SiShopify,
   SiGitlab,
   SiSquarespace,
+  SiApachekafka,
+  SiUbuntu,
+  SiThreedotjs,
+  SiSharp,
 } from "react-icons/si";
 import { VscAzureDevops } from "react-icons/vsc";
-import { DiJava, DiSqllite, DiHtml5, DiCss3, DiScrum } from "react-icons/di";
+import { DiJava, DiSqllite, DiScrum } from "react-icons/di";
+
 const iconMap: Record<
   string,
   React.ComponentType<{ size?: number; style?: React.CSSProperties }>
 > = {
+  // Design
   Figma: SiFigma,
   "Adobe XD": SiAdobexd,
   Framer: SiFramer,
   Notion: SiNotion,
   Hotjar: SiHotjar,
   ChatGPT: SiOpenai,
+  Miro: SiMiro,
+
+  // Frontend
   React: SiReact,
   TypeScript: SiTypescript,
   JavaScript: SiJavascript,
@@ -50,30 +59,39 @@ const iconMap: Record<
   "Tailwind CSS": SiTailwindcss,
   HTML: SiHtml5,
   CSS: SiCss3,
+  "Framer Motion": SiFramer,
+  "Three.js": SiThreedotjs,
+  Vite: SiVite,
+  "Next.js": SiNextdotjs,
+
+  // Backend
   "Node.js": SiNodedotjs,
   Python: SiPython,
   ".NET": SiDotnet,
+  "C#": SiSharp,
   "Spring Boot": SiSpringboot,
-  WordPress: SiWordpress,
-  Webflow: SiWebflow,
-  Vite: SiVite,
-  "Next.js": SiNextdotjs,
-  "Framer Motion": SiFramer,
-  "Azure DevOps": VscAzureDevops,
-  Git: SiGit,
-  GitHub: SiGithub,
-  Docker: SiDocker,
   Java: DiJava,
   SQL: DiSqllite,
   PostgreSQL: SiPostgresql,
-  Bootstrap: SiBootstrap,
-  html: DiHtml5,
-  css: DiCss3,
-  Miro: SiMiro,
-  "Agile methodologies": DiScrum,
+
+  // Architecture
+  Kafka: SiApachekafka,
+
+  // No Code
+  WordPress: SiWordpress,
+  Webflow: SiWebflow,
   Shopify: SiShopify,
-  GitLab: SiGitlab,
   SquareSpace: SiSquarespace,
+
+  // Tools & DevOps
+  Git: SiGit,
+  GitHub: SiGithub,
+  GitLab: SiGitlab,
+  Docker: SiDocker,
+  "Azure DevOps": VscAzureDevops,
+  Ubuntu: SiUbuntu,
+  Bootstrap: SiBootstrap,
+  "Agile methodologies": DiScrum,
 };
 
 export const getTechIcon = (

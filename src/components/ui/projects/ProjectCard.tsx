@@ -7,9 +7,10 @@ import {
 import { ArrowUpRight } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
-import type { Project } from "../../sections/data/ProjectsData";
+import type { Project } from "../../../data/projects";
 import { Tag } from "../skills/Tag";
 import { ProjectThumbnail } from "./ProjectThumbnail";
+import { useTheme } from "../../../hooks/useTheme";
 
 interface ProjectCardProps {
   project: Project;
@@ -40,26 +41,14 @@ const getCategoryColors = (isDark: boolean) => ({
 });
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
-  const [isDark, setIsDark] = React.useState(
-    document.documentElement.classList.contains("dark"),
-  );
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
   const [isHovered, setIsHovered] = React.useState(false);
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const rotateX = useTransform(mouseY, [-0.5, 0.5], [4, -4]);
   const rotateY = useTransform(mouseX, [-0.5, 0.5], [-4, 4]);
-
-  React.useEffect(() => {
-    const observer = new MutationObserver(() => {
-      setIsDark(document.documentElement.classList.contains("dark"));
-    });
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-    return () => observer.disconnect();
-  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();

@@ -2,7 +2,6 @@ import { Navbar } from "../components/layout/Navbar";
 import { Preloader } from "../components/ui/preLoader/PreLoader";
 import { Hero } from "../components/sections/hero/HeroSection";
 import { Linkedin, Github, Mail, Twitter } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import { usePreloader } from "../hooks/usePreLoader";
 import type { NavItem, SocialLink } from "../types";
 import { AboutSection } from "../components/sections/about/AboutSection";
@@ -51,25 +50,16 @@ export const HomePage: React.FC = () => {
 
       {isComplete && <Navbar navItems={navItems} socialLinks={socialLinks} />}
 
-      <AnimatePresence>
-        {isComplete && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="min-h-screen bg-[rgb(var(--bg-primary))]"
-          >
-            <Hero socialLinks={socialLinks} />
-            <AboutSection />
-            <SkillsSection />
-            <QualificationsSection />
-
-            <ProjectsSection />
-            <ContactSection />
-            <Footer />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Always fully rendered and opaque — panels peel away to reveal it */}
+      <div className="min-h-screen bg-[rgb(var(--bg-primary))]">
+        <Hero socialLinks={socialLinks} />
+        <AboutSection />
+        <SkillsSection />
+        <QualificationsSection />
+        <ProjectsSection />
+        <ContactSection />
+        <Footer />
+      </div>
     </>
   );
 };

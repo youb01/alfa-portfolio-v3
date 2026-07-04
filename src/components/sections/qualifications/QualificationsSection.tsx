@@ -1,6 +1,6 @@
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import React, { useRef } from "react";
-import { timelineEvents } from "../data/QualificationsData";
+import { timelineEvents } from "../../../data/qualifications";
 import { SectionHeader } from "../../ui/SectionHeader";
 import { TimelineItem } from "../../ui/timeline/TimelineItem";
 import { BackgroundLines } from "../../ui/backgrounds/BackgroundLines";
@@ -62,8 +62,8 @@ export const QualificationsSection: React.FC = () => {
             <div
               aria-hidden
               className="
-                absolute top-[56px] bottom-[56px] w-[6px]
-                left-[10px]
+                absolute top-14 bottom-14 w-px
+                left-[12px]
                 md:left-1/2 md:-translate-x-1/2
                 pointer-events-none
               "
@@ -76,7 +76,7 @@ export const QualificationsSection: React.FC = () => {
                   transformOrigin: "center top",
                   height: "100%",
                   background: "rgb(var(--text-primary))",
-                  opacity: 0.65,
+                  opacity: 0.55,
                 }}
               />
             </div>

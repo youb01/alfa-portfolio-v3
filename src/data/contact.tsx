@@ -13,16 +13,7 @@ export interface ContactMethod {
   type: "email" | "phone" | "location" | "social";
 }
 
-export interface ContactLink {
-  id: string;
-  label: string;
-  href: string;
-  icon:
-    | React.ReactNode
-    | React.ComponentType<{ size?: number; strokeWidth?: number }>;
-}
-
-export interface SocialLink {
+export interface ContactSocialLink {
   id: string;
   label: string;
   href: string;
@@ -56,7 +47,7 @@ export const contactMethods: ContactMethod[] = [
   },
 ];
 
-export const socialLinks: SocialLink[] = [
+export const socialLinks: ContactSocialLink[] = [
   {
     id: "linkedin",
     label: "LinkedIn",

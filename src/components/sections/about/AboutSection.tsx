@@ -1,53 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { BackgroundLines } from "../../ui/backgrounds/BackgroundLines";
-
-// ─── Content ──────────────────────────────────────────────────────────────────
-
-const BIO_PARAGRAPHS = [
-  "I'm an eager Software Engineering student with a genuine passion for building effective solutions. What drives me isn't just writing code — it's understanding a problem deeply and crafting something that actually works and fits the needs. During my internship at GetMore Systems I developed features independently inside a professional Agile Scrum team, shipping real work in a live TypeScript and .NET codebase.",
-  "Outside of university I spend a lot of time in the gym, doing powerlifting and weightlifting. That same discipline and focus carries directly into how I work. I love tinkering with small projects too, whether it's a home IT setup, a practical fix around the house, or a side idea I want to build out. And when I'm not doing any of that, I'm catching up with friends.",
-];
-
-const FACTS = [
-  { label: "Degree", value: "BSc Software Engineering" },
-  { label: "School", value: "The Hague University" },
-  { label: "Based in", value: "Leiden, Netherlands" },
-  { label: "Experience", value: "GetMore Systems · Oadsy" },
-];
-
-const INTERESTS = [
-  "Powerlifting & weightlifting",
-  "Home IT tinkering",
-  "Personal side projects",
-  "Time with friends",
-];
-
-const PILLARS = [
-  {
-    label: "How I engineer",
-    text: "I care about understanding problems before writing a single line of code. Clean, purposeful solutions over clever ones — maintainable always wins.",
-  },
-  {
-    label: "How I work",
-    text: "Self-directed and team-oriented. I've worked on different projects and I know that good code review and honest communication matter as much as the code or product itself.",
-  },
-  {
-    label: "How I stay sharp",
-    text: "Discipline and focus translates into everything. Whether it's a workout, a project, or a hard problem — I show up consistently and push through.",
-  },
-];
-
-// ─── Animation helpers ────────────────────────────────────────────────────────
-
-const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  transition: { duration: 0.85, delay, ease: [0.22, 1, 0.36, 1] as const },
-  viewport: { once: true, margin: "-60px" as const },
-});
-
-// ─── Component ────────────────────────────────────────────────────────────────
+import { BIO_PARAGRAPHS, FACTS, INTERESTS, PILLARS } from "../../../data/about";
+import { fadeUp } from "../../../constants/animations";
 
 export const AboutSection = () => {
   return (

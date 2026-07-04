@@ -1,10 +1,11 @@
 import { motion, AnimatePresence } from "framer-motion";
 import React from "react";
-import { projectsData, type ProjectCategory } from "../data/ProjectsData";
+import { projectsData, type ProjectCategory } from "../../../data/projects";
 import { FeaturedProjectCard } from "../../ui/projects/FeaturedProjectCard";
 import { ProjectCard } from "../../ui/projects/ProjectCard";
 import { BackgroundLines } from "../../ui/backgrounds/BackgroundLines";
 import { SectionHeader } from "../../ui/SectionHeader";
+import { useTheme } from "../../../hooks/useTheme";
 
 type FilterOption = "All" | ProjectCategory;
 
@@ -17,20 +18,8 @@ const filterOptions: FilterOption[] = [
 
 export const ProjectsSection: React.FC = () => {
   const [activeFilter, setActiveFilter] = React.useState<FilterOption>("All");
-  const [isDark, setIsDark] = React.useState(
-    document.documentElement.classList.contains("dark"),
-  );
-
-  React.useEffect(() => {
-    const observer = new MutationObserver(() => {
-      setIsDark(document.documentElement.classList.contains("dark"));
-    });
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-    return () => observer.disconnect();
-  }, []);
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
 
   const featuredProject = projectsData.find((p) => p.featured);
   const regularProjects = projectsData.filter((p) => !p.featured);
