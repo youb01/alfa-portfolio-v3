@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ayoub Lfatmi</title>
+    <script>
+      // GitHub Pages SPA redirect trick.
+      // Encodes the requested path into the query string and redirects to index.html.
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.host + '/' +
+        '?p=/' + l.pathname.slice(1).replace(/&/g, '~and~') +
+        (l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body></body>
+</html>
