@@ -26,6 +26,13 @@ export const ProjectDetailPage: React.FC = () => {
   const project = projectsData.find((p) => p.slug === slug);
   const detail  = project ? projectDetails[project.id] : null;
 
+  useEffect(() => {
+    if (project) {
+      document.title = `${project.title} — Ayoub Lfatmi`;
+    }
+    return () => { document.title = "Ayoub Lfatmi — Software Developer"; };
+  }, [project]);
+
   if (!project || !detail) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[rgb(var(--bg-primary))]">

@@ -29,13 +29,13 @@ export const TechStackSection = ({ techStack }: TechStackSectionProps) => (
           {techStack.map((tech, i) => (
             <motion.div
               key={tech}
-              className="flex items-center gap-4 px-5 py-4 rounded-xl border border-[rgb(var(--border-primary))] cursor-default"
+              className="flex items-center gap-4 px-5 py-4 border border-[rgb(var(--border-primary))] cursor-default"
               style={{ background: "rgb(var(--bg-primary))" }}
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.04, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               viewport={{ once: true, margin: "-40px" }}
-              whileHover={{ y: -2, transition: { duration: 0.18 } }}
+              whileHover={{ borderColor: "rgb(var(--border-secondary))", transition: { duration: 0.15 } }}
             >
               <span className="text-[10px] font-bold tabular-nums text-[rgb(var(--text-tertiary))] shrink-0 w-6">
                 {String(i + 1).padStart(2, "0")}

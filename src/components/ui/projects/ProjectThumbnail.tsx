@@ -840,6 +840,190 @@ const SecurityThumbnail: React.FC<ThumbnailProps> = ({ isDark }) => (
   </div>
 );
 
+// Variant 7: Noveliya — Shopify storefront / e-commerce
+const ShopifyThumbnail: React.FC<ThumbnailProps> = ({ isDark }) => (
+  <div className="absolute inset-0 overflow-hidden">
+    <div
+      className="absolute inset-0"
+      style={{
+        background: isDark
+          ? "linear-gradient(145deg, #100e0c 0%, #1a1510 100%)"
+          : "linear-gradient(145deg, #fdfaf7 0%, #f7f2ec 100%)",
+      }}
+    />
+    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 420 280" preserveAspectRatio="xMidYMid slice">
+      {/* Fine dot grid */}
+      {[...Array(7)].map((_, row) =>
+        [...Array(11)].map((_, col) => (
+          <circle key={`${row}-${col}`} cx={20 + col * 38} cy={20 + row * 40} r="1"
+            fill={isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"} />
+        ))
+      )}
+      {/* Product cards — 3 col grid */}
+      {[
+        { x: 30,  y: 40 },
+        { x: 165, y: 40 },
+        { x: 300, y: 40 },
+      ].map(({ x, y }, i) => (
+        <g key={i}>
+          {/* Card */}
+          <rect x={x} y={y} width="115" height="155"
+            fill={isDark ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.85)"}
+            stroke={isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)"}
+            strokeWidth="0.8"
+          />
+          {/* Image area */}
+          <rect x={x} y={y} width="115" height="90"
+            fill={isDark ? `rgba(255,255,255,${0.04 + i * 0.02})` : `rgba(0,0,0,${0.03 + i * 0.015})`}
+          />
+          {/* Product name line */}
+          <rect x={x + 8} y={y + 98} width="70" height="4" rx="1"
+            fill={isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.13)"}
+          />
+          {/* Price line */}
+          <rect x={x + 8} y={y + 108} width="40" height="3" rx="1"
+            fill={isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.07)"}
+          />
+          {/* Add to cart button */}
+          <rect x={x + 8} y={y + 130} width="99" height="16"
+            fill={isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.07)"}
+            stroke={isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.1)"}
+            strokeWidth="0.6"
+          />
+          <text x={x + 57} y={y + 141} fontSize="7" fontWeight="700" fontFamily="sans-serif"
+            fill={isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.3)"}
+            textAnchor="middle"
+          >
+            Add to cart
+          </text>
+        </g>
+      ))}
+      {/* Nav bar suggestion */}
+      <rect x="0" y="0" width="420" height="28"
+        fill={isDark ? "rgba(255,255,255,0.02)" : "rgba(0,0,0,0.02)"}
+        stroke={isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}
+        strokeWidth="0.5"
+      />
+      <text x="210" y="18" fontSize="9" fontWeight="800" fontFamily="sans-serif"
+        fill={isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.25)"}
+        textAnchor="middle" letterSpacing="3"
+      >
+        NOVELIYA
+      </text>
+      {/* Shopify badge */}
+      <g transform="translate(310, 218)">
+        <rect x="0" y="0" width="80" height="22"
+          fill={isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)"}
+          stroke={isDark ? "rgba(255,255,255,0.09)" : "rgba(0,0,0,0.07)"}
+          strokeWidth="0.8"
+        />
+        <text x="40" y="15" fontSize="8" fontWeight="700" fontFamily="monospace"
+          fill={isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.25)"}
+          textAnchor="middle"
+        >
+          Shopify · Liquid
+        </text>
+      </g>
+    </svg>
+  </div>
+);
+
+// Variant 8: Fysiotherapie Wennekers — healthcare / practice website
+const PhysioThumbnail: React.FC<ThumbnailProps> = ({ isDark }) => (
+  <div className="absolute inset-0 overflow-hidden">
+    <div
+      className="absolute inset-0"
+      style={{
+        background: isDark
+          ? "linear-gradient(145deg, #0d1117 0%, #0f1520 100%)"
+          : "linear-gradient(145deg, #f7f9fc 0%, #eef3f8 100%)",
+      }}
+    />
+    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 420 280" preserveAspectRatio="xMidYMid slice">
+      {/* Subtle grid */}
+      {[...Array(10)].map((_, i) => (
+        <line key={`v${i}`} x1={i * 47} y1="0" x2={i * 47} y2="280"
+          stroke={isDark ? "rgba(255,255,255,0.025)" : "rgba(0,0,0,0.025)"} strokeWidth="0.5" />
+      ))}
+      {[...Array(7)].map((_, i) => (
+        <line key={`h${i}`} x1="0" y1={i * 47} x2="420" y2={i * 47}
+          stroke={isDark ? "rgba(255,255,255,0.025)" : "rgba(0,0,0,0.025)"} strokeWidth="0.5" />
+      ))}
+      {/* Hero section mock */}
+      <rect x="30" y="30" width="240" height="110"
+        fill={isDark ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.8)"}
+        stroke={isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}
+        strokeWidth="0.8"
+      />
+      <rect x="44" y="50" width="130" height="8" rx="1"
+        fill={isDark ? "rgba(255,255,255,0.18)" : "rgba(0,0,0,0.15)"}
+      />
+      <rect x="44" y="64" width="90" height="5" rx="1"
+        fill={isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.09)"}
+      />
+      <rect x="44" y="74" width="110" height="5" rx="1"
+        fill={isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)"}
+      />
+      {/* CTA button */}
+      <rect x="44" y="96" width="88" height="20"
+        fill={isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}
+        stroke={isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.1)"}
+        strokeWidth="0.8"
+      />
+      <text x="88" y="110" fontSize="7" fontWeight="700" fontFamily="sans-serif"
+        fill={isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.3)"}
+        textAnchor="middle"
+      >
+        Maak een afspraak
+      </text>
+      {/* Practitioner cards */}
+      {[0, 1].map((i) => (
+        <g key={i} transform={`translate(${30 + i * 130}, 162)`}>
+          <rect x="0" y="0" width="115" height="90"
+            fill={isDark ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.8)"}
+            stroke={isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}
+            strokeWidth="0.8"
+          />
+          <circle cx="57" cy="28" r="18"
+            fill={isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)"}
+            stroke={isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}
+            strokeWidth="0.8"
+          />
+          <rect x="20" y="54" width="75" height="4" rx="1"
+            fill={isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.1)"}
+          />
+          <rect x="30" y="64" width="55" height="3" rx="1"
+            fill={isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)"}
+          />
+        </g>
+      ))}
+      {/* Medical cross */}
+      <g transform="translate(355, 50)" opacity={isDark ? 0.25 : 0.18}>
+        <rect x="8" y="0" width="8" height="24"
+          fill={isDark ? "rgba(255,255,255,0.9)" : "rgba(0,0,0,0.8)"}
+        />
+        <rect x="0" y="8" width="24" height="8"
+          fill={isDark ? "rgba(255,255,255,0.9)" : "rgba(0,0,0,0.8)"}
+        />
+      </g>
+      {/* Next.js badge */}
+      <g transform="translate(310, 218)">
+        <rect x="0" y="0" width="80" height="22"
+          fill={isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)"}
+          stroke={isDark ? "rgba(255,255,255,0.09)" : "rgba(0,0,0,0.07)"}
+          strokeWidth="0.8"
+        />
+        <text x="40" y="15" fontSize="8" fontWeight="700" fontFamily="monospace"
+          fill={isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.25)"}
+          textAnchor="middle"
+        >
+          Next.js · i18n
+        </text>
+      </g>
+    </svg>
+  </div>
+);
+
 const thumbnailComponents: React.FC<ThumbnailProps>[] = [
   PortfolioEvolutionThumbnail, // 0
   DashboardThumbnail,          // 1
@@ -848,6 +1032,8 @@ const thumbnailComponents: React.FC<ThumbnailProps>[] = [
   MinecraftThumbnail,          // 4
   EventDrivenThumbnail,        // 5
   SecurityThumbnail,           // 6
+  ShopifyThumbnail,            // 7
+  PhysioThumbnail,             // 8
 ];
 
 interface ProjectThumbnailProps {

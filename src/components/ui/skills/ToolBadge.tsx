@@ -18,7 +18,6 @@ export const ToolBadge: React.FC<ToolBadgeProps> = ({ tool, index }) => {
       className="inline-flex items-center gap-2 px-3.5 py-2 text-[12px] font-semibold tracking-wide cursor-default select-none"
       style={{
         border: "1px solid rgb(var(--border-primary))",
-        borderRadius: "6px",
         color: "rgb(var(--text-secondary))",
         background: isDark ? "rgba(255,255,255,0.02)" : "rgba(0,0,0,0.01)",
         willChange: "transform",

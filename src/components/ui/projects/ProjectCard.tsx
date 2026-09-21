@@ -1,14 +1,7 @@
-import {
-  motion,
-  useMotionValue,
-  useTransform,
-  AnimatePresence,
-} from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import React from "react";
 import { Link } from "react-router-dom";
 import type { Project } from "../../../data/projects";
-import { Tag } from "../skills/Tag";
 import { ProjectThumbnail } from "./ProjectThumbnail";
 import { useTheme } from "../../../hooks/useTheme";
 
@@ -17,276 +10,98 @@ interface ProjectCardProps {
   index: number;
 }
 
-const getCategoryColors = (isDark: boolean) => ({
-  Frontend: {
-    bg: isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.05)",
-    border: isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.09)",
-    text: isDark ? "rgba(255,255,255,0.75)" : "rgba(0,0,0,0.6)",
-  },
-  Backend: {
-    bg: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)",
-    border: isDark ? "rgba(255,255,255,0.09)" : "rgba(0,0,0,0.07)",
-    text: isDark ? "rgba(255,255,255,0.65)" : "rgba(0,0,0,0.55)",
-  },
-  Fullstack: {
-    bg: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.055)",
-    border: isDark ? "rgba(255,255,255,0.13)" : "rgba(0,0,0,0.1)",
-    text: isDark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.65)",
-  },
-  "UI/UX Design": {
-    bg: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.045)",
-    border: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)",
-    text: isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.58)",
-  },
-});
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   const { theme } = useTheme();
   const isDark = theme === "dark";
-  const [isHovered, setIsHovered] = React.useState(false);
-
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const rotateX = useTransform(mouseY, [-0.5, 0.5], [4, -4]);
-  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-4, 4]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    mouseX.set((e.clientX - (rect.left + rect.width / 2)) / rect.width);
-    mouseY.set((e.clientY - (rect.top + rect.height / 2)) / rect.height);
-  };
-
-  const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-    setIsHovered(false);
-  };
-
-  const cardBg = isDark ? "rgba(18, 18, 18, 0.85)" : "rgba(255, 255, 255, 0.9)";
-  const cardBorder = isDark ? "rgba(60, 60, 60, 0.5)" : "rgba(0, 0, 0, 0.08)";
-  const cardShadow = isDark
-    ? "0 20px 60px -15px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04)"
-    : "0 20px 60px -15px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.04)";
-  const cardShadowHover = isDark
-    ? "0 30px 80px -15px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.07)"
-    : "0 30px 80px -15px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.06)";
-
-  const categoryColors = getCategoryColors(isDark);
-  const catColor =
-    categoryColors[project.category] ?? categoryColors["Frontend"];
 
   return (
-    <Link
-      to={`/projects/${project.slug}`}
-      className="block h-full"
-      style={{ textDecoration: "none", color: "inherit" }}
-    >
+    <Link to={`/projects/${project.slug}`} style={{ textDecoration: "none", color: "inherit", display: "block" }}>
       <motion.div
-        className="relative group cursor-pointer h-full"
-        initial={{ opacity: 0, y: 40 }}
+        className="group border border-[rgb(var(--border-primary))] cursor-pointer flex flex-col h-full transition-colors duration-200"
+        style={{ background: "rgb(var(--bg-primary))" }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: index * 0.1,
-          duration: 0.7,
-          ease: [0.22, 1, 0.36, 1],
-        }}
-        viewport={{ once: true, margin: "-60px" }}
-        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={handleMouseLeave}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 0.5, delay: index * 0.05, ease: EASE }}
+        whileHover={{ borderColor: "rgb(var(--border-secondary))" }}
       >
-        <motion.div
-          className="absolute -inset-2 rounded-2xl blur-2xl pointer-events-none"
-          animate={{ opacity: isHovered ? 1 : 0 }}
-          transition={{ duration: 0.4 }}
-          style={{
-            background: isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)",
-          }}
-        />
-
-        {/* Card */}
-        <motion.div
-          className="relative flex flex-col h-full rounded-2xl overflow-hidden backdrop-blur-xl"
-          style={{
-            background: cardBg,
-            border: `1px solid ${cardBorder}`,
-            boxShadow: isHovered ? cardShadowHover : cardShadow,
-          }}
-          animate={{
-            scale: isHovered ? 1.015 : 1,
-            y: isHovered ? -4 : 0,
-          }}
-          transition={{ duration: 0.35, ease: "easeOut" }}
-        >
-          {/* Thumbnail */}
-          <div className="relative h-52 overflow-hidden">
-            <motion.div
-              className="absolute inset-0"
-              animate={{ scale: isHovered ? 1.04 : 1 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-            >
-              <ProjectThumbnail
-                variant={project.thumbnailVariant}
-                isDark={isDark}
-                className="h-full"
-              />
-            </motion.div>
-
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background: `linear-gradient(to bottom, transparent 55%, ${
-                  isDark ? "rgba(18,18,18,0.9)" : "rgba(255,255,255,0.9)"
-                } 100%)`,
-              }}
-            />
-
-            {/* Category badge */}
-            <div className="absolute top-3 left-3">
-              <span
-                className="text-[10px] font-bold uppercase tracking-[0.15em] px-3 py-1 rounded-full backdrop-blur-md"
-                style={{
-                  background: catColor.bg,
-                  border: `1px solid ${catColor.border}`,
-                  color: catColor.text,
-                }}
-              >
-                {project.category}
-              </span>
-            </div>
-
-            {/* Year badge */}
-            <div className="absolute top-3 right-3">
-              <span
-                className="text-[10px] font-medium tracking-wide px-2.5 py-1 rounded-full backdrop-blur-md"
-                style={{
-                  background: isDark
-                    ? "rgba(0,0,0,0.4)"
-                    : "rgba(255,255,255,0.7)",
-                  border: `1px solid ${cardBorder}`,
-                  color: isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.4)",
-                }}
-              >
-                {project.year}
-              </span>
-            </div>
-
-            {/* Project number */}
-            <motion.div
-              className="absolute bottom-3 right-3 text-[10px] font-black tracking-widest"
-              style={{
-                color: isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)",
-              }}
-            >
-              {project.number}
-            </motion.div>
-          </div>
-
-          {/* Content */}
-          <div className="flex flex-col flex-1 p-6">
-            <div
-              className="h-[1px] mb-5"
-              style={{
-                background: isDark
-                  ? "rgba(255,255,255,0.06)"
-                  : "rgba(0,0,0,0.06)",
-              }}
-            />
-
-            {/* Title + subtitle */}
-            <div className="mb-3">
-              <h3
-                className="text-xl font-black leading-tight tracking-tight mb-1"
-                style={{
-                  color: isDark ? "rgba(255,255,255,0.95)" : "rgba(0,0,0,0.88)",
-                }}
-              >
-                {project.title}
-              </h3>
-              <p
-                className="text-[11px] font-semibold uppercase tracking-[0.15em]"
-                style={{
-                  color: isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)",
-                }}
-              >
-                {project.subtitle}
-              </p>
-            </div>
-
-            {/* Description */}
-            <p
-              className="text-sm leading-relaxed mb-5 flex-1"
-              style={{
-                color: isDark ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0.55)",
-              }}
-            >
-              {project.description}
-            </p>
-
-            {/* Tech stack */}
-            <div className="flex flex-wrap gap-1.5 mb-5">
-              {project.techStack.slice(0, 4).map((tech, i) => (
-                <Tag key={tech} label={tech} index={i} />
-              ))}
-              {project.techStack.length > 4 && (
-                <span
-                  className="text-[11px] font-semibold px-3 py-1.5 rounded-full"
-                  style={{
-                    color: isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)",
-                    background: isDark
-                      ? "rgba(255,255,255,0.04)"
-                      : "rgba(0,0,0,0.03)",
-                    border: `1px solid ${cardBorder}`,
-                  }}
-                >
-                  +{project.techStack.length - 4}
-                </span>
-              )}
-            </div>
-
-            {/* View Details */}
-            <div
-              className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.15em] mt-auto"
-              style={{
-                color: isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.35)",
-              }}
-            >
-              <AnimatePresence>
-                {isHovered && (
-                  <motion.span
-                    initial={{ opacity: 0, x: -6 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -6 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    View Details
-                  </motion.span>
-                )}
-              </AnimatePresence>
-              <motion.div
-                animate={{
-                  x: isHovered ? 0 : 0,
-                  rotate: isHovered ? 0 : 45,
-                  opacity: isHovered ? 1 : 0.4,
-                }}
-                transition={{ duration: 0.25 }}
-              >
-                <ArrowUpRight size={14} />
-              </motion.div>
-            </div>
-          </div>
-
-          <motion.div
-            className="absolute inset-0 pointer-events-none rounded-2xl"
-            style={{
-              background:
-                "linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.04) 50%, transparent 70%)",
-            }}
-            animate={{ x: isHovered ? "200%" : "-200%" }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
+        {/* Thumbnail */}
+        <div className="relative h-48 overflow-hidden border-b border-[rgb(var(--border-primary))]">
+          <ProjectThumbnail
+            variant={project.thumbnailVariant}
+            isDark={isDark}
+            className="h-full w-full"
           />
-        </motion.div>
+          {/* Project number — bottom right of thumbnail */}
+          <span
+            className="absolute bottom-3 right-4 text-[9px] font-bold uppercase tracking-[0.28em]"
+            style={{ color: "rgb(var(--text-tertiary))" }}
+          >
+            {project.number}
+          </span>
+        </div>
+
+        {/* Content */}
+        <div className="flex flex-col flex-1 p-6">
+
+          {/* Meta: category · year */}
+          <div className="flex items-center gap-2 mb-4">
+            <span className="text-[9px] font-bold uppercase tracking-[0.22em] text-[rgb(var(--text-tertiary))]">
+              {project.category}
+            </span>
+            <span style={{ color: "rgb(var(--border-secondary))" }}>·</span>
+            <span className="text-[9px] font-medium tabular-nums text-[rgb(var(--text-tertiary))]">
+              {project.year}
+            </span>
+          </div>
+
+          {/* Title */}
+          <h3
+            className="font-extrabold uppercase leading-tight text-[rgb(var(--text-primary))] mb-1.5"
+            style={{ fontSize: "clamp(0.88rem, 1.5vw, 1.05rem)", letterSpacing: "-0.01em" }}
+          >
+            {project.title}
+          </h3>
+
+          {/* Subtitle */}
+          <p className="text-[11px] font-medium text-[rgb(var(--text-tertiary))] mb-4">
+            {project.subtitle}
+          </p>
+
+          {/* Divider */}
+          <div className="h-px bg-[rgb(var(--border-primary))] mb-4" />
+
+          {/* Description */}
+          <p className="text-sm leading-relaxed text-[rgb(var(--text-secondary))] mb-5 flex-1 line-clamp-3">
+            {project.description}
+          </p>
+
+          {/* Tech stack */}
+          <div className="flex flex-wrap gap-1.5 mb-5">
+            {project.techStack.slice(0, 4).map((tech) => (
+              <span
+                key={tech}
+                className="text-[10px] font-medium px-2 py-0.5 border border-[rgb(var(--border-primary))] text-[rgb(var(--text-tertiary))]"
+              >
+                {tech}
+              </span>
+            ))}
+            {project.techStack.length > 4 && (
+              <span className="text-[10px] font-medium px-2 py-0.5 border border-[rgb(var(--border-primary))] text-[rgb(var(--text-tertiary))]">
+                +{project.techStack.length - 4}
+              </span>
+            )}
+          </div>
+
+          {/* CTA */}
+          <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[rgb(var(--text-tertiary))] group-hover:text-[rgb(var(--text-primary))] transition-colors duration-200">
+            View Project
+            <ArrowUpRight size={11} strokeWidth={2.5} />
+          </div>
+
+        </div>
       </motion.div>
     </Link>
   );

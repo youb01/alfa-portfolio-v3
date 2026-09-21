@@ -1,6 +1,17 @@
 import project02Hero from "../assets/project-media/project-02/project-02-hero.png";
 
 import project04Hero from "../assets/project-media/project-04/project-04-hero.png";
+
+import project08Hero   from "../assets/project-media/project-08/hero.png";
+import project08Wide   from "../assets/project-media/project-08/image.png";
+import project08Img1   from "../assets/project-media/project-08/image copy.png";
+import project08Img2   from "../assets/project-media/project-08/image copy 2.png";
+import project08Img3   from "../assets/project-media/project-08/image copy 3.png";
+
+import project09Hero       from "../assets/project-media/project-09/hero.png";
+import project09Appointment from "../assets/project-media/project-09/appointment.png";
+import project09Chat        from "../assets/project-media/project-09/chat.png";
+import project09Treatment   from "../assets/project-media/project-09/treatment-detail.png";
 import project04Hero2 from "../assets/project-media/project-04/project-04-hero-2.png";
 import project04Gallery1 from "../assets/project-media/project-04/project-04-case-1.png";
 import project04Gallery2 from "../assets/project-media/project-04/project-04-case-2.png";
@@ -33,6 +44,70 @@ export interface ProjectDetail {
 
 export const projectDetails: Record<string, ProjectDetail> = {
   // "project-01": { ... },  // uncomment and fill when ready
+
+  "project-08": {
+    projectId: "project-08",
+    client: "Noveliya",
+    service: "Shopify Theme Development",
+    heroImage: project08Hero,
+    introduction:
+      "A custom Shopify theme built entirely from scratch for a makeup table startup. No off-the-shelf template — every section, interaction and conversion touchpoint was designed and coded to match the brand's identity and product experience.",
+    wideImage: project08Wide,
+    caseStudy: {
+      title: "Building a brand experience, not just a storefront",
+      body: [
+        "Noveliya came to us with a clear vision: a minimal, elegant online store that felt premium without being cold. The brief was to build a fully custom Shopify theme — not a modified Dawn — so we had full control over every pixel of the shopping experience.",
+        "We started with a thorough design phase, defining the visual language: typography scale, spacing system, and a soft monochrome palette anchored by warm tones. Every section was sketched first and translated into Shopify Liquid components only once the design was locked.",
+        "The product pages received the most attention. We built a custom variant picker, a sticky add-to-cart bar, and an image gallery with smooth transitions — all in vanilla JavaScript without any third-party dependencies that would slow down page load.",
+        "Performance and mobile experience were non-negotiable. The theme scores 95+ on Lighthouse for mobile, with lazy-loaded images, critical CSS inlined, and a minimal JavaScript footprint. On mobile, the navigation collapses into a clean overlay drawer and the checkout flow was validated across multiple devices.",
+      ],
+      images: [project08Wide, project08Img1, project08Img2, project08Img3],
+    },
+    outcomes: [
+      "Delivered a fully custom Shopify theme with no off-the-shelf base — every section hand-coded in Liquid",
+      "Custom variant picker, sticky cart bar, and smooth image gallery built in vanilla JavaScript",
+      "Lighthouse mobile score 95+ — optimised images, inlined critical CSS, minimal JS footprint",
+      "Responsive across all breakpoints with a validated mobile checkout flow",
+    ],
+    stats: [
+      { label: "Team", value: "02" },
+      { label: "Technologies", value: "05" },
+      { label: "Year", value: "2025" },
+      { label: "Platform", value: "Shopify" },
+    ],
+  },
+
+  "project-09": {
+    projectId: "project-09",
+    client: "Fysiotherapie Wennekers",
+    service: "Web Design & Development",
+    heroImage: project09Hero,
+    introduction:
+      "A modern practice website that makes it easy for new patients to understand who Fysiotherapie Wennekers are, what they treat, and how to book an appointment — all before ever walking through the door.",
+    wideImage: project09Appointment,
+    caseStudy: {
+      title: "Modernising a physiotherapy practice's digital presence",
+      body: [
+        "The existing digital footprint was minimal — the practice relied entirely on word-of-mouth and an outdated web presence. The goal was to build something that clearly communicated the practice's identity, made treatments easy to find, and lowered the barrier to booking for new patients.",
+        "We started by inventorising the client's needs: which treatments to highlight, how many practitioners to feature, what information new patients typically ask about, and what tone of voice suited the practice. This research shaped the site architecture and copy direction before a single line of code was written.",
+        "The site was built with Next.js and TypeScript, with multilingual support via i18n for Dutch and English. The content is structured around three pillars: the practice itself, the practitioners, and the available treatments — each with its own dedicated section and clear information hierarchy.",
+        "A clean, calm visual language was chosen to reflect the practice's professional yet approachable character. The colour palette, typography and spacing were carefully tuned to communicate trust and clarity — essential for a healthcare context where first impressions matter.",
+      ],
+      images: [project09Hero, project09Chat, project09Treatment, project09Appointment],
+    },
+    outcomes: [
+      "Designed and built a full practice website presenting practitioners, treatments and contact information clearly",
+      "Implemented multilingual support (NL / EN) via i18n for Dutch and international patients",
+      "Structured content around three pillars: practice, practitioners, treatments — with clear information hierarchy",
+      "Responsive and performant across all devices, optimised for patient discovery and appointment booking",
+    ],
+    stats: [
+      { label: "Year", value: "2026" },
+      { label: "Languages", value: "NL/EN" },
+      { label: "Technologies", value: "05" },
+      { label: "Platform", value: "Next.js" },
+    ],
+  },
 
   "project-02": {
     projectId: "project-02",

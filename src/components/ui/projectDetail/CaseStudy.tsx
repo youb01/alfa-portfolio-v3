@@ -67,7 +67,7 @@ export const CaseStudy = ({ project, detail }: CaseStudyProps) => {
             {body.map((para, i) => (
               <p
                 key={i}
-                className="mb-7 last:mb-0 break-inside-avoid font-lora text-[1.0rem] md:text-[1.05rem] leading-[1.9] text-[rgb(var(--text-secondary))]"
+                className="mb-7 last:mb-0 break-inside-avoid text-[1.0rem] md:text-[1.05rem] leading-[1.9] text-[rgb(var(--text-secondary))]"
               >
                 {para}
               </p>
@@ -99,9 +99,9 @@ export const CaseStudy = ({ project, detail }: CaseStudyProps) => {
             {/* Featured image — full width */}
             {featured && (
               <motion.div
-                className="relative overflow-hidden rounded-2xl group mb-3 md:mb-4"
-                initial={{ opacity: 0, scale: 0.98 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                className="relative overflow-hidden group mb-3 md:mb-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.0, ease: EASE }}
                 viewport={{ once: true, margin: "-80px" }}
               >
@@ -113,16 +113,12 @@ export const CaseStudy = ({ project, detail }: CaseStudyProps) => {
                     loading="lazy"
                   />
                 </div>
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{ background: "linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.2) 100%)" }}
-                />
                 <span
-                  className="absolute bottom-4 left-5 h-6 px-2.5 flex items-center rounded-full text-[9px] font-bold tabular-nums backdrop-blur-md"
+                  className="absolute bottom-4 left-5 h-6 px-2.5 flex items-center text-[9px] font-bold tabular-nums"
                   style={{
-                    background: "rgba(var(--bg-primary), 0.72)",
-                    border:     "1px solid rgba(var(--border-primary), 0.5)",
-                    color:      "rgb(var(--text-primary))",
+                    background: "rgb(var(--bg-primary))",
+                    border:     "1px solid rgb(var(--border-primary))",
+                    color:      "rgb(var(--text-tertiary))",
                   }}
                 >
                   01
@@ -140,11 +136,9 @@ export const CaseStudy = ({ project, detail }: CaseStudyProps) => {
                   return (
                     <motion.div
                       key={idx}
-                      className={`relative overflow-hidden rounded-2xl group ${
-                        isLastOdd ? "sm:col-span-2" : ""
-                      }`}
-                      initial={{ opacity: 0, y: 24, scale: 0.98 }}
-                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                      className={`relative overflow-hidden group ${isLastOdd ? "sm:col-span-2" : ""}`}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
                       transition={{ delay: i * 0.07, duration: 0.85, ease: EASE }}
                       viewport={{ once: true, margin: "-60px" }}
                     >
@@ -159,16 +153,12 @@ export const CaseStudy = ({ project, detail }: CaseStudyProps) => {
                           loading="lazy"
                         />
                       </div>
-                      <div
-                        className="absolute inset-0 pointer-events-none"
-                        style={{ background: "linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.2) 100%)" }}
-                      />
                       <span
-                        className="absolute bottom-4 left-5 h-6 px-2.5 flex items-center rounded-full text-[9px] font-bold tabular-nums backdrop-blur-md"
+                        className="absolute bottom-4 left-5 h-6 px-2.5 flex items-center text-[9px] font-bold tabular-nums"
                         style={{
-                          background: "rgba(var(--bg-primary), 0.72)",
-                          border:     "1px solid rgba(var(--border-primary), 0.5)",
-                          color:      "rgb(var(--text-primary))",
+                          background: "rgb(var(--bg-primary))",
+                          border:     "1px solid rgb(var(--border-primary))",
+                          color:      "rgb(var(--text-tertiary))",
                         }}
                       >
                         {String(idx).padStart(2, "0")}

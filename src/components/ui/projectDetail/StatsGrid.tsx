@@ -18,7 +18,7 @@ export const StatsGrid = ({ stats }: StatsGridProps) => {
     <section className="py-16 md:py-20" style={{ borderTop: BORDER }}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
         <div
-          className="grid grid-cols-2 md:grid-cols-4 gap-px rounded-2xl overflow-hidden"
+          className="grid grid-cols-2 md:grid-cols-4 gap-px"
           style={{ background: "rgb(var(--border-primary))" }}
         >
           {stats.map((stat, i) => (

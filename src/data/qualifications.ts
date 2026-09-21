@@ -3,7 +3,6 @@ export interface TimelineEvent {
   dateFrom: string;
   dateTo: string;
   title: string;
-  /** Institution or company name */
   subtitle: string;
   location: string;
   description: string;
@@ -11,15 +10,16 @@ export interface TimelineEvent {
 }
 
 export const timelineEvents: TimelineEvent[] = [
+  // ─── Education ────────────────────────────────────────────────────────────
   {
     id: "01",
     dateFrom: "Sep 2016",
     dateTo: "Jun 2022",
     title: "Secondary Education",
     subtitle: "Bonaventura College Burggravenlaan",
-    location: "Leiden, the Netherlands",
+    location: "Leiden, Netherlands",
     description:
-      "Completed secondary education with a focus on beta relevant subjects like mathematics, physics, science and biology. Developed a strong foundation in problem-solving and analytical thinking, which sparked my interest in software development.",
+      "Completed secondary education with a focus on mathematics, physics and sciences. Built a strong analytical foundation that sparked my interest in software development.",
     type: "education",
   },
   {
@@ -30,9 +30,11 @@ export const timelineEvents: TimelineEvent[] = [
     subtitle: "The Hague University of Applied Sciences",
     location: "The Hague, Netherlands",
     description:
-      "Studying computer science with a specialisation in software engineering. Coursework spans algorithms, data structures, software architecture, and cloud development. The program emphasizes practical, project-based learning, allowing me to apply theoretical concepts to real-world software development challenges.",
+      "Studying computer science with a specialisation in software engineering. Coursework spans algorithms, data structures, software architecture and cloud development, with an emphasis on practical, project-based learning.",
     type: "education",
   },
+
+  // ─── Work ─────────────────────────────────────────────────────────────────
   {
     id: "03",
     dateFrom: "Sep 2024",
@@ -41,18 +43,40 @@ export const timelineEvents: TimelineEvent[] = [
     subtitle: "GetMore Systems",
     location: "Barendrecht, Netherlands",
     description:
-      "Worked as a software developer intern at GetMore Systems, a company specializing in software solutions for the financial industry. Contributed to the development of a client dashboard application using Angular and .NET, improving user experience and functionality. Collaborated with a team of 3 to implement new features, fix bugs, and optimize performance, gaining valuable hands-on experience in a professional software development environment.",
+      "Contributed to a client dashboard application for a fintech software company, using Angular and .NET. Worked in a team of three — delivering new features, fixing bugs and improving performance.",
     type: "work",
   },
   {
-    id: "04",
-    dateFrom: "Feb 2025",
-    dateTo: "Present",
-    title: "Web Developer — Part-time",
-    subtitle: "Oadsy",
+    id: "05",
+    dateFrom: "2025",
+    dateTo: "2025",
+    title: "Shopify Developer — Freelance",
+    subtitle: "Noveliya",
     location: "Remote",
     description:
-      "Currently working as a part-time web developer for Oadsy, a startup focused on selling car parfums online. Responsible for maintaining and enhancing the company's e-commerce website built on Shopify, including implementing custom features using Liquid and JavaScript. Collaborate with the owner to optimize the user interface and improve conversion rates, while also ensuring the website's performance and security are up to industry standards.",
+      "Teamed up with a friend to build a custom Shopify webshop for a makeup table startup. Designed and developed a fully custom theme from scratch, tailored to the brand's identity and product experience.",
+    type: "work",
+  },
+  {
+    id: "06",
+    dateFrom: "May 2026",
+    dateTo: "Present",
+    title: "Web Developer — Freelance",
+    subtitle: "Fysiotherapie Wennekers",
+    location: "Netherlands",
+    description:
+      "Helping a physiotherapy practice modernise its digital presence. Inventorised the client's needs and designed a brand new website to improve the online onboarding of new patients — clearly presenting the practice, practitioners and available treatments.",
+    type: "work",
+  },
+  {
+    id: "07",
+    dateFrom: "Sep 2026",
+    dateTo: "Present",
+    title: "Software Engineering Intern — Afstudeerstage",
+    subtitle: "Interpulse",
+    location: "Leiden, Netherlands",
+    description:
+      "Graduation internship at a software consultancy. Running two parallel projects: a full research study on the responsible use of AI within the development process — producing guidelines and advisory output for the team — and the design and development of a Microsoft Teams application to solve an existing organisational problem.",
     type: "work",
   },
 ];

@@ -8,24 +8,12 @@ export const ThemeToggle = () => {
 
   return (
     <motion.button
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
       onClick={toggleTheme}
       aria-pressed={isDark}
       aria-label="Toggle theme"
-      className="
-        relative flex items-center justify-center
-        w-10 h-10 rounded-lg
-        bg-[rgb(var(--bg-tertiary))]
-        hover:bg-[rgb(var(--bg-elevated))]
-        text-[rgb(var(--text-primary))]
-        transition-colors duration-200
-        focus:outline-none
-        focus-visible:ring-2 
-        focus-visible:ring-[rgb(var(--interactive-default)/0.3)]
-        focus-visible:ring-offset-2
-        focus-visible:ring-offset-[rgb(var(--bg-primary))]
-      "
+      className="relative flex items-center justify-center w-9 h-9 text-[rgb(var(--text-primary))] transition-colors duration-150 focus:outline-none"
+      style={{ border: "1px solid rgb(var(--border-primary))", background: "rgb(var(--bg-primary))" }}
+      whileHover={{ borderColor: "rgb(var(--text-primary))" }}
     >
       <motion.div
         initial={false}

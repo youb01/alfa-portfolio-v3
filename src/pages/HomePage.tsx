@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Navbar } from "../components/layout/Navbar";
 import { Preloader } from "../components/ui/preLoader/PreLoader";
 import { Hero } from "../components/sections/hero/HeroSection";
@@ -11,7 +12,11 @@ import { Footer } from "../components/layout/Footer";
 import { navItems, socialLinks } from "../data/navigation";
 
 export const HomePage: React.FC = () => {
-  const { isLoading, isComplete, handleComplete } = usePreloader();
+  const { isLoading, isComplete, isRevealed, handleComplete } = usePreloader();
+
+  useEffect(() => {
+    document.title = "Ayoub Lfatmi — Software Developer";
+  }, []);
 
   return (
     <>
@@ -21,7 +26,7 @@ export const HomePage: React.FC = () => {
 
       {/* Always fully rendered and opaque — panels peel away to reveal it */}
       <div className="min-h-screen bg-[rgb(var(--bg-primary))]">
-        <Hero socialLinks={socialLinks} />
+        <Hero socialLinks={socialLinks} isRevealed={isRevealed} />
         <AboutSection />
         <SkillsSection />
         <QualificationsSection />
