@@ -167,15 +167,6 @@ export const Preloader = ({ isLoading, onComplete }: PreloaderProps) => {
             }}
           />
 
-          {/* ── Scanlines ── */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              backgroundImage:
-                "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.012) 2px, rgba(255,255,255,0.012) 4px)",
-            }}
-          />
-
           {/* ── Inset border frame ── */}
           <div
             className="absolute pointer-events-none"
