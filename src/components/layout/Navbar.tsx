@@ -1,5 +1,6 @@
 import { Menu } from "lucide-react";
 import { useNavigation } from "../../hooks/useNavigation";
+import { useActiveSection } from "../../hooks/useActiveSection";
 import { ThemeToggle } from "../ui/ThemeToggle";
 import { SideNav } from "./SideNav";
 import type { NavItem, SocialLink } from "../../types";
@@ -11,6 +12,8 @@ interface NavbarProps {
 
 export const Navbar = ({ navItems, socialLinks }: NavbarProps) => {
   const { isMenuOpen, setIsMenuOpen, isScrolled } = useNavigation();
+  const sectionIds = navItems.map((item) => item.href.replace("#", ""));
+  const activeSection = useActiveSection(sectionIds);
 
   return (
     <>
@@ -39,15 +42,26 @@ export const Navbar = ({ navItems, socialLinks }: NavbarProps) => {
 
           {/* Desktop nav links */}
           <div className="hidden md:flex items-center gap-8">
-            {navItems.slice(1).map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-[11px] font-bold uppercase tracking-[0.2em] text-[rgb(var(--text-tertiary))] hover:text-[rgb(var(--text-primary))] transition-colors duration-150"
-              >
-                {item.label}
-              </a>
-            ))}
+            {navItems.slice(1).map((item) => {
+              const isActive = activeSection === item.href.replace("#", "");
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="relative text-[11px] font-bold uppercase tracking-[0.2em] transition-colors duration-150 pb-0.5"
+                  style={{ color: isActive ? "rgb(var(--text-primary))" : "rgb(var(--text-tertiary))" }}
+                >
+                  {item.label}
+                  <span
+                    className="absolute bottom-0 left-0 right-0 h-px transition-transform duration-300 origin-left"
+                    style={{
+                      background: "rgb(var(--text-primary))",
+                      transform: isActive ? "scaleX(1)" : "scaleX(0)",
+                    }}
+                  />
+                </a>
+              );
+            })}
             <ThemeToggle />
           </div>
 

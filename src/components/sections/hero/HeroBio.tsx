@@ -29,10 +29,17 @@ export const HeroBio = ({ isRevealed }: HeroBioProps) => (
       animate={isRevealed ? visO(0.05) : hidO()}
       className="flex items-center gap-2"
     >
-      <span
-        className="w-1.5 h-1.5 rounded-full animate-pulse"
-        style={{ background: "rgb(var(--text-tertiary))" }}
-      />
+      {/* Ping ring */}
+      <span className="relative flex items-center justify-center w-3 h-3 flex-shrink-0">
+        <span
+          className="absolute inline-flex rounded-full animate-ping"
+          style={{ width: "10px", height: "10px", background: "rgb(var(--text-tertiary))", opacity: 0.45 }}
+        />
+        <span
+          className="relative inline-flex rounded-full"
+          style={{ width: "6px", height: "6px", background: "rgb(var(--text-tertiary))" }}
+        />
+      </span>
       <span
         className="text-[10px] font-bold uppercase tracking-[0.18em]"
         style={{ color: "rgb(var(--text-tertiary))" }}

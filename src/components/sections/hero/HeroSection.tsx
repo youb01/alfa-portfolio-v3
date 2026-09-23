@@ -11,7 +11,23 @@ interface HeroProps {
   isRevealed: boolean;
 }
 
-// Shared animation helpers — all hero elements use these
+// ─── Ping dot ─────────────────────────────────────────────────────────────────
+
+const PingDot = () => (
+  <span className="relative flex items-center justify-center w-3 h-3 flex-shrink-0">
+    <span
+      className="absolute inline-flex rounded-full animate-ping"
+      style={{ width: "10px", height: "10px", background: "rgb(var(--text-tertiary))", opacity: 0.45 }}
+    />
+    <span
+      className="relative inline-flex rounded-full"
+      style={{ width: "6px", height: "6px", background: "rgb(var(--text-tertiary))" }}
+    />
+  </span>
+);
+
+// ─── Animation helpers ────────────────────────────────────────────────────────
+
 const vis = (delay = 0) => ({
   opacity: 1,
   y: 0,
@@ -73,7 +89,6 @@ export const Hero = ({ socialLinks, isRevealed }: HeroProps) => (
                 className="w-full h-full object-cover"
                 style={{ filter: "grayscale(100%) contrast(1.08)" }}
               />
-              {/* Inset frame decoration */}
               <div
                 className="absolute pointer-events-none"
                 style={{
@@ -137,24 +152,19 @@ export const Hero = ({ socialLinks, isRevealed }: HeroProps) => (
             ))}
           </motion.div>
 
-          {/* Mobile info block — availability + stats */}
+          {/* Mobile info block */}
           <motion.div
             initial={hidO()}
             animate={isRevealed ? visO(0.38) : hidO()}
             className="flex lg:hidden flex-col items-center gap-5 w-full pt-5 border-t border-[rgb(var(--border-primary))]"
           >
-            {/* Availability */}
             <div className="flex items-center gap-2">
-              <span
-                className="w-1.5 h-1.5 rounded-full animate-pulse"
-                style={{ background: "rgb(var(--text-tertiary))" }}
-              />
+              <PingDot />
               <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[rgb(var(--text-tertiary))]">
                 Available for work
               </span>
             </div>
 
-            {/* Stats row */}
             <div className="grid grid-cols-3 w-full">
               {[
                 { value: "7",   label: "Months to\nGraduation" },
@@ -188,11 +198,7 @@ export const Hero = ({ socialLinks, isRevealed }: HeroProps) => (
           >
             <motion.div
               animate={{ y: [0, 5, 0], opacity: [0.4, 1, 0.4] }}
-              transition={{
-                duration: 1.6,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
               className="w-1.5 h-1.5 bg-[rgb(var(--text-tertiary))] rounded-full"
             />
           </motion.div>

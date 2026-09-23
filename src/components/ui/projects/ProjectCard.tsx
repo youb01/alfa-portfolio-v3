@@ -25,14 +25,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-40px" }}
         transition={{ duration: 0.5, delay: index * 0.05, ease: EASE }}
-        whileHover={{ borderColor: "rgb(var(--border-secondary))" }}
+        whileHover={{ y: -6, borderColor: "rgb(var(--text-secondary))", transition: { duration: 0.3, ease: EASE } }}
       >
         {/* Thumbnail */}
         <div className="relative h-48 overflow-hidden border-b border-[rgb(var(--border-primary))]">
           <ProjectThumbnail
             variant={project.thumbnailVariant}
             isDark={isDark}
-            className="h-full w-full"
+            className="h-full w-full transition-transform duration-500 ease-out group-hover:scale-105"
           />
           {/* Project number — bottom right of thumbnail */}
           <span
@@ -98,7 +98,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           {/* CTA */}
           <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[rgb(var(--text-tertiary))] group-hover:text-[rgb(var(--text-primary))] transition-colors duration-200">
             View Project
-            <ArrowUpRight size={11} strokeWidth={2.5} />
+            <ArrowUpRight
+              size={11}
+              strokeWidth={2.5}
+              className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
           </div>
 
         </div>

@@ -10,7 +10,9 @@ interface SkillRowProps {
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 export const SkillRow: React.FC<SkillRowProps> = ({ row }) => (
-  <div className="relative grid grid-cols-1 md:grid-cols-[4rem_220px_1fr] py-8 md:py-10 gap-5 md:gap-0 overflow-hidden">
+  <div
+    className="relative grid grid-cols-1 md:grid-cols-[4rem_220px_1fr] py-8 md:py-10 gap-5 md:gap-0 overflow-hidden transition-colors duration-300 hover:bg-[rgb(var(--bg-2))]"
+  >
 
     {/* ── Col 1: Index ── */}
     <motion.span

@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { CustomCursor } from "./components/ui/cursor/CustomCursor";
+import { GrainOverlay } from "./components/ui/GrainOverlay";
 import { ScrollToTop } from "./components/ui/ScrollToTop";
 import { HomePage } from "./pages/HomePage";
 import { ProjectDetailPage } from "./pages/ProjectDetailPage";
@@ -39,6 +40,7 @@ function App() {
 
   return (
     <BrowserRouter basename="/">
+      <GrainOverlay />
       <CustomCursor />
       <ScrollToTop />
       <AnimatedRoutes />

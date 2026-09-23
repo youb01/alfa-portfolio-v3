@@ -70,9 +70,14 @@ export const QualificationsSection: React.FC = () => {
               transition={{ duration: 0.3, ease: EASE }}
             >
               {filtered.map((event, i) => (
-                <TimelineItem key={event.id} event={event} index={i} />
+                <TimelineItem
+                  key={event.id}
+                  event={event}
+                  index={i}
+                  isLast={i === filtered.length - 1}
+                  isCurrent={i === filtered.length - 1}
+                />
               ))}
-              <div className="h-px bg-[rgb(var(--border-primary))]" />
             </motion.div>
           </AnimatePresence>
 

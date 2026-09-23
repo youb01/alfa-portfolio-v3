@@ -118,15 +118,16 @@ export const AboutSection = () => {
         </div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-px rounded-2xl overflow-hidden"
+          className="grid grid-cols-1 md:grid-cols-3 gap-4"
           {...fadeUp(0.1)}
         >
           {PILLARS.map(({ label, text }, i) => (
             <motion.div
               key={label}
-              className="flex flex-col gap-4 px-7 py-9 md:px-8 md:py-10"
+              className="flex flex-col gap-4 px-7 py-9 md:px-8 md:py-10 border border-[rgb(var(--border-primary))] cursor-default"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -5, borderColor: "rgb(var(--text-secondary))", transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } }}
               transition={{
                 delay: i * 0.08,
                 duration: 0.7,
